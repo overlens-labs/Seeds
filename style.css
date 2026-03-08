@@ -79,7 +79,7 @@ body {
     color: var(--color-text-muted);
     border: none;
     padding: 0.55rem 0.75rem;
-    border-radius: var(--border-radius-sm);
+    border-radius: 999px;
     cursor: pointer;
     font-family: var(--font-title);
     font-size: 0.82rem;
@@ -204,8 +204,8 @@ body {
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.15);
     color: white;
-    padding: 0.6rem 1rem;
-    border-radius: var(--border-radius-sm);
+    padding: 0.6rem 1.1rem;
+    border-radius: 999px;
     font-family: var(--font-title);
     font-size: 0.78rem;
     font-weight: 500;
@@ -340,7 +340,7 @@ body {
     color: var(--color-bg);
     border: none;
     padding: 0.75rem 1.5rem;
-    border-radius: var(--border-radius-sm);
+    border-radius: 999px;
     font-family: var(--font-title);
     font-size: 0.82rem;
     font-weight: 600;
