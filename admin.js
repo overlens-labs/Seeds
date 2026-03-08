@@ -61,7 +61,14 @@ function saveCustomSeeds(seeds) {
 }
 
 // ─── Auth ──────────────────────────────────────────────────
-const CREDS = { user: 'admin', pass: 'seeds2026' };
+const ADMIN_USER  = 'admin';
+// SHA-256 of 'seeds2026' — never store plaintext passwords in source
+const PASS_HASH   = 'd2990e0040f6c89527a596afa3535dd2f89f886de43ec409b869d72a0b030f7b';
+
+async function hashStr(str) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+    return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+}
 
 function checkAuth() {
     if (sessionStorage.getItem('sl_auth')) {
@@ -71,12 +78,18 @@ function checkAuth() {
     }
 }
 
-document.getElementById('admin-login-form').addEventListener('submit', (e) => {
+document.getElementById('admin-login-form').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const user = document.getElementById('admin-login-user').value.trim();
-    const pass = document.getElementById('admin-login-pass').value;
-    const errEl = document.getElementById('admin-login-error');
-    if (user === CREDS.user && pass === CREDS.pass) {
+    const user    = document.getElementById('admin-login-user').value.trim();
+    const pass    = document.getElementById('admin-login-pass').value;
+    const errEl   = document.getElementById('admin-login-error');
+    const submitBtn = e.target.querySelector('[type="submit"]');
+
+    submitBtn.disabled = true;
+    const hash = await hashStr(pass);
+    submitBtn.disabled = false;
+
+    if (user === ADMIN_USER && hash === PASS_HASH) {
         sessionStorage.setItem('sl_auth', '1');
         document.getElementById('login-overlay').classList.add('hidden');
         document.getElementById('admin-app').style.display = 'flex';
@@ -710,29 +723,79 @@ adminFormCat.addEventListener('change', () => {
     }
 });
 
-adminFormImage.addEventListener('change', () => {
+// ─── Image Compression ─────────────────────────────────────
+function compressImage(file, maxDim = 1200, quality = 0.82) {
+    return new Promise((resolve) => {
+        const img = new Image();
+        const url = URL.createObjectURL(file);
+        img.onload = () => {
+            const ratio  = Math.min(maxDim / img.width, maxDim / img.height, 1);
+            const w      = Math.round(img.width * ratio);
+            const h      = Math.round(img.height * ratio);
+            const canvas = document.createElement('canvas');
+            canvas.width  = w;
+            canvas.height = h;
+            canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+            URL.revokeObjectURL(url);
+            resolve(canvas.toDataURL('image/jpeg', quality));
+        };
+        img.onerror = () => { URL.revokeObjectURL(url); resolve(null); };
+        img.src = url;
+    });
+}
+
+// ─── Storage Health ─────────────────────────────────────────
+function storageUsedPercent() {
+    try {
+        let total = 0;
+        for (const key in localStorage) {
+            if (Object.prototype.hasOwnProperty.call(localStorage, key)) {
+                total += localStorage[key].length;
+            }
+        }
+        return (total / (5 * 1024 * 1024)) * 100;
+    } catch { return 0; }
+}
+
+function warnIfStorageFull() {
+    const used = storageUsedPercent();
+    if (used > 80) {
+        showToast(`Armazenamento ${Math.round(used)}% cheio — exporte um backup!`);
+    }
+}
+
+adminFormImage.addEventListener('change', async () => {
     const file = adminFormImage.files[0];
     if (!file) { adminImgPreview.innerHTML = ''; return; }
-    const reader = new FileReader();
-    reader.onload = (e) => {
-        adminImgPreview.innerHTML = `<img src="${e.target.result}" alt="preview">`;
-    };
-    reader.readAsDataURL(file);
+    const dataUrl = await compressImage(file);
+    if (dataUrl) adminImgPreview.innerHTML = `<img src="${dataUrl}" alt="preview">`;
 });
 
-adminAddSeedForm.addEventListener('submit', (e) => {
+adminAddSeedForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const file = adminFormImage.files[0];
+    const file      = adminFormImage.files[0];
+    const submitBtn = e.target.querySelector('[type="submit"]');
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-        const tagVal = adminFormTag.value;
+
+    submitBtn.disabled    = true;
+    submitBtn.textContent = 'Comprimindo…';
+
+    const dataUrl = await compressImage(file);
+    if (!dataUrl) {
+        showToast('Erro ao processar imagem.');
+        submitBtn.disabled    = false;
+        submitBtn.textContent = 'Adicionar';
+        return;
+    }
+
+    try {
+        const tagVal  = adminFormTag.value;
         const newSeed = {
             id:       Date.now(),
             title:    document.getElementById('admin-form-title').value.trim(),
             category: adminFormCat.value,
             tag:      tagVal || undefined,
-            url:      ev.target.result,
+            url:      dataUrl,
             seed:     document.getElementById('admin-form-seed').value.trim(),
         };
         const seeds = getCustomSeeds();
@@ -741,8 +804,17 @@ adminAddSeedForm.addEventListener('submit', (e) => {
         closeAddSeedModal();
         renderCustomSeeds();
         showToast('Seed adicionada!');
-    };
-    reader.readAsDataURL(file);
+        warnIfStorageFull();
+    } catch (err) {
+        if (err.name === 'QuotaExceededError') {
+            showToast('Armazenamento cheio! Exporte um backup e remova seeds antigas.');
+        } else {
+            showToast('Erro ao salvar seed.');
+        }
+    } finally {
+        submitBtn.disabled    = false;
+        submitBtn.textContent = 'Adicionar';
+    }
 });
 
 document.addEventListener('keydown', (e) => {
