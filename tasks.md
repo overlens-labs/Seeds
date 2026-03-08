@@ -1,11 +1,11 @@
 # Tasks — Biblioteca de Seeds (MVP HTML)
 
-## Fase 1: Design System
-- [ ] Mudar fundo para `#000000` (preto absoluto)
-- [ ] Adicionar fonte **Outfit** (Google Fonts) para títulos e botões
-- [ ] Manter **Inter** para prompts e textos de apoio
-- [ ] Criar variáveis CSS globais: `--color-bg`, `--color-surface`, `--color-text`, `--color-accent`, `--font-title`, `--font-body`
-- [ ] Revisar contrastes, paddings e espaçamentos gerais
+## Fase 1: Design System ✅
+- [x] Mudar fundo para `#000000` (preto absoluto)
+- [x] Adicionar fonte **Outfit** (Google Fonts) para títulos e botões
+- [x] Manter **Inter** para prompts e textos de apoio
+- [x] Criar variáveis CSS globais: `--color-bg`, `--color-surface`, `--color-text`, `--color-accent`, `--font-title`, `--font-body`
+- [x] Revisar contrastes, paddings e espaçamentos gerais
 
 ## Fase 2: Categorias e Dados
 - [ ] Atualizar filtros com as categorias reais:
