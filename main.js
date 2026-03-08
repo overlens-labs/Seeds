@@ -566,6 +566,26 @@ function showToast(msg = 'Seed copied!') {
     }, 2000);
 }
 
+// ─── Sidebar Toggle ───────────────────────────────────────
+(function () {
+    const btn = document.getElementById('sidebar-toggle');
+    if (!btn) return;
+    const STORAGE_KEY = 'sl_sidebar_collapsed';
+
+    const apply = (collapsed) => {
+        document.body.classList.toggle('sidebar-collapsed', collapsed);
+        btn.textContent = collapsed ? '›' : '‹';
+    };
+
+    apply(localStorage.getItem(STORAGE_KEY) === '1');
+
+    btn.addEventListener('click', () => {
+        const collapsed = !document.body.classList.contains('sidebar-collapsed');
+        apply(collapsed);
+        localStorage.setItem(STORAGE_KEY, collapsed ? '1' : '0');
+    });
+})();
+
 // ─── Real-time sync between tabs ──────────────────────────
 window.addEventListener('storage', (e) => {
     if (e.key === SL_KEYS.LOGO) {
