@@ -92,9 +92,17 @@
             <section class="admin-section" id="section-seeds">
                 <div class="section-header">
                     <h2 class="section-title">Seeds Customizadas</h2>
-                    <button class="btn-primary" id="open-admin-add-modal">+ Adicionar Seed</button>
+                    <div class="section-header-actions">
+                        <button class="btn-secondary" id="import-seeds-btn">↑ Importar</button>
+                        <button class="btn-secondary" id="export-seeds-btn">↓ Exportar</button>
+                        <button class="btn-primary" id="open-admin-add-modal">+ Adicionar Seed</button>
+                    </div>
+                </div>
+                <div class="seeds-search-bar">
+                    <input type="text" id="seeds-search" placeholder="Buscar por título...">
                 </div>
                 <div id="admin-seeds-grid" class="admin-gallery"></div>
+                <input type="file" id="import-file-input" accept=".json" style="display:none">
             </section>
 
         </main>
@@ -138,6 +146,57 @@
                     <button type="submit" class="btn-primary">Adicionar</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Modal: Editar Seed -->
+    <div id="admin-edit-modal" class="modal" aria-hidden="true">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2>Editar Seed</h2>
+                <button class="modal-close" id="close-admin-edit-modal">✕</button>
+            </div>
+            <form id="admin-edit-seed-form" class="modal-form">
+                <input type="hidden" id="edit-form-id">
+                <div class="form-group">
+                    <label for="edit-form-title">Título</label>
+                    <input type="text" id="edit-form-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-form-category">Categoria</label>
+                    <select id="edit-form-category" required>
+                        <option value="" disabled selected>Selecione...</option>
+                    </select>
+                </div>
+                <div class="form-group" id="edit-form-tag-group" style="display:none">
+                    <label for="edit-form-tag">Tag (opcional)</label>
+                    <select id="edit-form-tag">
+                        <option value="">Sem tag</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="edit-form-seed">Prompt / Seed</label>
+                    <textarea id="edit-form-seed" rows="3" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="cancel-admin-edit-modal">Cancelar</button>
+                    <button type="submit" class="btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Preview de Seed -->
+    <div id="admin-preview-modal" class="modal" aria-hidden="true">
+        <div class="modal-box modal-box--preview">
+            <div class="modal-header">
+                <h2 id="preview-modal-title"></h2>
+                <button class="modal-close" id="close-admin-preview-modal">✕</button>
+            </div>
+            <img id="preview-modal-img" src="" alt="" class="preview-modal-img">
+            <div class="preview-modal-meta" id="preview-modal-meta"></div>
+            <div class="preview-modal-prompt" id="preview-modal-prompt"></div>
+            <button class="btn-primary" id="preview-modal-copy">Copiar Prompt</button>
         </div>
     </div>
 

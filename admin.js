@@ -421,11 +421,13 @@ document.getElementById('save-appearance-btn').addEventListener('click', () => {
 });
 
 // ─── Seeds ─────────────────────────────────────────────────
-function renderCustomSeeds() {
-    const seeds = getCustomSeeds();
-    const grid  = document.getElementById('admin-seeds-grid');
+function renderCustomSeeds(query = '') {
+    const allSeeds = getCustomSeeds();
+    const grid     = document.getElementById('admin-seeds-grid');
+    const q        = query.toLowerCase().trim();
+    const seeds    = q ? allSeeds.filter(s => s.title.toLowerCase().includes(q)) : allSeeds;
 
-    if (seeds.length === 0) {
+    if (allSeeds.length === 0) {
         grid.innerHTML = `
             <div class="empty-state">
                 <div style="font-size:2rem">🌱</div>
@@ -435,19 +437,52 @@ function renderCustomSeeds() {
         return;
     }
 
+    if (seeds.length === 0) {
+        grid.innerHTML = `
+            <div class="empty-state">
+                <p>Nenhum resultado para "<strong>${query}</strong>".</p>
+            </div>
+        `;
+        return;
+    }
+
     grid.innerHTML = seeds.map(seed => `
         <div class="admin-card" data-id="${seed.id}">
-            <img src="${seed.url}" alt="${seed.title}" loading="lazy">
+            <img src="${seed.url}" alt="${seed.title}" loading="lazy" class="admin-card-img">
             <div class="admin-card-info">
                 <div class="admin-card-title">${seed.title}</div>
                 <div class="admin-card-meta">${seed.category}${seed.tag ? ' · ' + seed.tag : ''}</div>
             </div>
-            <button class="admin-card-delete" data-id="${seed.id}" title="Remover">✕</button>
+            <div class="admin-card-actions">
+                <button class="admin-card-btn admin-card-edit" data-id="${seed.id}" title="Editar">✎</button>
+                <button class="admin-card-btn admin-card-delete" data-id="${seed.id}" title="Remover">✕</button>
+            </div>
         </div>
     `).join('');
 
+    // Click on card image → preview
+    grid.querySelectorAll('.admin-card-img').forEach(img => {
+        img.addEventListener('click', () => {
+            const id   = Number(img.closest('.admin-card').dataset.id);
+            const seed = getCustomSeeds().find(s => s.id === id);
+            if (seed) openSeedPreview(seed);
+        });
+    });
+
+    // Edit button
+    grid.querySelectorAll('.admin-card-edit').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const id   = Number(btn.dataset.id);
+            const seed = getCustomSeeds().find(s => s.id === id);
+            if (seed) openEditSeedModal(seed);
+        });
+    });
+
+    // Delete button
     grid.querySelectorAll('.admin-card-delete').forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
             if (confirm('Remover esta seed?')) {
                 deleteCustomSeed(Number(btn.dataset.id));
             }
@@ -458,9 +493,165 @@ function renderCustomSeeds() {
 function deleteCustomSeed(id) {
     const seeds = getCustomSeeds();
     saveCustomSeeds(seeds.filter(s => s.id !== id));
-    renderCustomSeeds();
+    renderCustomSeeds(document.getElementById('seeds-search').value);
     showToast('Seed removida!');
 }
+
+// ─── Seed Preview Modal ────────────────────────────────────
+function openSeedPreview(seed) {
+    document.getElementById('preview-modal-title').textContent  = seed.title;
+    document.getElementById('preview-modal-img').src            = seed.url;
+    document.getElementById('preview-modal-img').alt            = seed.title;
+    document.getElementById('preview-modal-meta').textContent   = seed.category + (seed.tag ? ' · ' + seed.tag : '');
+    document.getElementById('preview-modal-prompt').textContent = seed.seed;
+
+    const modal = document.getElementById('admin-preview-modal');
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeSeedPreview() {
+    const modal = document.getElementById('admin-preview-modal');
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+}
+
+document.getElementById('close-admin-preview-modal').addEventListener('click', closeSeedPreview);
+document.getElementById('admin-preview-modal').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('admin-preview-modal')) closeSeedPreview();
+});
+document.getElementById('preview-modal-copy').addEventListener('click', () => {
+    const prompt = document.getElementById('preview-modal-prompt').textContent;
+    navigator.clipboard.writeText(prompt).then(() => showToast('Prompt copiado!'));
+});
+
+// ─── Edit Seed Modal ───────────────────────────────────────
+const adminEditModal     = document.getElementById('admin-edit-modal');
+const adminEditSeedForm  = document.getElementById('admin-edit-seed-form');
+const editFormCat        = document.getElementById('edit-form-category');
+const editFormTag        = document.getElementById('edit-form-tag');
+const editFormTagGrp     = document.getElementById('edit-form-tag-group');
+
+function openEditSeedModal(seed) {
+    const categories = getCategories();
+    document.getElementById('edit-form-id').value    = seed.id;
+    document.getElementById('edit-form-title').value = seed.title;
+    document.getElementById('edit-form-seed').value  = seed.seed;
+
+    editFormCat.innerHTML = '<option value="" disabled>Selecione...</option>' +
+        categories.map(c => `<option value="${c.slug}"${c.slug === seed.category ? ' selected' : ''}>${c.label}</option>`).join('');
+
+    // Populate tags for current category
+    const tags = getAllTags()[seed.category] || [];
+    if (tags.length > 0) {
+        editFormTag.innerHTML = '<option value="">Sem tag</option>' +
+            tags.map(t => `<option value="${t.toLowerCase()}"${t.toLowerCase() === seed.tag ? ' selected' : ''}>${t}</option>`).join('');
+        editFormTagGrp.style.display = 'flex';
+    } else {
+        editFormTagGrp.style.display = 'none';
+    }
+
+    adminEditModal.classList.add('open');
+    adminEditModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeEditSeedModal() {
+    adminEditModal.classList.remove('open');
+    adminEditModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    adminEditSeedForm.reset();
+}
+
+editFormCat.addEventListener('change', () => {
+    const tags = getAllTags()[editFormCat.value] || [];
+    if (tags.length > 0) {
+        editFormTag.innerHTML = '<option value="">Sem tag</option>' +
+            tags.map(t => `<option value="${t.toLowerCase()}">${t}</option>`).join('');
+        editFormTagGrp.style.display = 'flex';
+    } else {
+        editFormTagGrp.style.display = 'none';
+    }
+});
+
+document.getElementById('close-admin-edit-modal').addEventListener('click', closeEditSeedModal);
+document.getElementById('cancel-admin-edit-modal').addEventListener('click', closeEditSeedModal);
+adminEditModal.addEventListener('click', (e) => { if (e.target === adminEditModal) closeEditSeedModal(); });
+
+adminEditSeedForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const id      = Number(document.getElementById('edit-form-id').value);
+    const seeds   = getCustomSeeds();
+    const index   = seeds.findIndex(s => s.id === id);
+    if (index === -1) return;
+
+    seeds[index] = {
+        ...seeds[index],
+        title:    document.getElementById('edit-form-title').value.trim(),
+        category: editFormCat.value,
+        tag:      editFormTag.value || undefined,
+        seed:     document.getElementById('edit-form-seed').value.trim(),
+    };
+    saveCustomSeeds(seeds);
+    closeEditSeedModal();
+    renderCustomSeeds(document.getElementById('seeds-search').value);
+    showToast('Seed atualizada!');
+});
+
+// ─── Export / Import ───────────────────────────────────────
+document.getElementById('export-seeds-btn').addEventListener('click', () => {
+    const backup = {
+        version:    1,
+        exportedAt: new Date().toISOString(),
+        categories: getCategories(),
+        tags:       getAllTags(),
+        logo:       getLogo(),
+        seeds:      getCustomSeeds(),
+    };
+    const blob  = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+    const url   = URL.createObjectURL(blob);
+    const a     = document.createElement('a');
+    a.href      = url;
+    a.download  = `seed-library-backup-${new Date().toISOString().slice(0,10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Backup exportado!');
+});
+
+document.getElementById('import-seeds-btn').addEventListener('click', () => {
+    document.getElementById('import-file-input').click();
+});
+
+document.getElementById('import-file-input').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+        try {
+            const data = JSON.parse(ev.target.result);
+            if (!data.seeds || !Array.isArray(data.seeds)) throw new Error('Formato inválido');
+            if (!confirm(`Importar ${data.seeds.length} seeds? Isso substituirá as categorias e tags atuais.`)) return;
+            if (data.categories) saveCategories(data.categories);
+            if (data.tags)       saveTags(data.tags);
+            if (data.logo)       saveLogo(data.logo);
+            saveCustomSeeds(data.seeds);
+            renderCategories();
+            renderCustomSeeds();
+            showToast(`${data.seeds.length} seeds importadas!`);
+        } catch {
+            showToast('Erro ao importar JSON!');
+        }
+        e.target.value = '';
+    };
+    reader.readAsText(file);
+});
+
+// ─── Seeds Search ──────────────────────────────────────────
+document.getElementById('seeds-search').addEventListener('input', (e) => {
+    renderCustomSeeds(e.target.value);
+});
 
 // ─── Add Seed Modal ────────────────────────────────────────
 const adminAddModal    = document.getElementById('admin-add-modal');
@@ -546,7 +737,11 @@ adminAddSeedForm.addEventListener('submit', (e) => {
 });
 
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeAddSeedModal();
+    if (e.key === 'Escape') {
+        closeAddSeedModal();
+        closeEditSeedModal();
+        closeSeedPreview();
+    }
 });
 
 // ─── Toast ─────────────────────────────────────────────────
