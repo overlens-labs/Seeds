@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria de Seeds IA</title>
+    <!-- Google Fonts for typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="logo">
+            <h1>Seed Library</h1>
+            <p>Descubra e copie prompts incríveis.</p>
+        </div>
+        
+        <nav class="filter-nav">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="cinematic">Cinematic</button>
+            <button class="filter-btn" data-filter="anime">Anime</button>
+            <button class="filter-btn" data-filter="fantasy">Fantasy</button>
+            <button class="filter-btn" data-filter="photography">Photography</button>
+        </nav>
+    </header>
+
+    <!-- Main Gallery Container -->
+    <main class="gallery-container" id="gallery">
+        <!-- Images will be injected here via JavaScript -->
+    </main>
+
+    <!-- Toast Notification for "Copied!" -->
+    <div id="toast" class="toast">
+        <span class="toast-icon">✓</span>
+        <span class="toast-message">Seed copied to clipboard!</span>
+    </div>
+
+    <!-- Script references -->
+    <script src="main.js"></script>
+</body>
+</html>

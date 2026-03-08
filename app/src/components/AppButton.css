@@ -1,0 +1,52 @@
+.app-button {
+  border-radius: var(--radius-full);
+  padding: 0.8em 1.6em;
+  font-size: 0.9em;
+  font-weight: 600;
+  font-family: var(--font-outfit);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 140px; /* Prevent jitter when text changes */
+}
+
+.app-button.primary {
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  border: 1px solid var(--text-primary);
+}
+
+.app-button.primary:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.02);
+}
+
+.app-button.primary:active {
+  transform: scale(0.98);
+}
+
+.app-button.secondary {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.app-button.secondary:hover {
+  background-color: var(--bg-hover);
+  border-color: var(--text-muted);
+}
+
+.app-button.copied {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+  transform: none !important;
+}
+
+.app-button.copied svg {
+  color: #4CAF50;
+}
