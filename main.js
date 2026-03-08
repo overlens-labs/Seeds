@@ -41,7 +41,7 @@ const imagesData = [
     {
         id: 6,
         url: 'https://images.unsplash.com/photo-1578301978018-3005759f48f7?auto=format&fit=crop&q=80&w=800',
-        title: 'Pintura a Óleo Retrô',
+        title: 'Óleo Clássico',
         category: 'pintura',
         seed: 'classical oil painting, renaissance style, dramatic chiaroscuro, portrait --ar 3:4 --stylize 300 --v 6.0 --seed 55190283'
     },
@@ -87,7 +87,7 @@ const imagesData = [
     {
         id: 12,
         url: 'https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&q=80&w=800',
-        title: 'Arquitetura 3D Futurista',
+        title: 'Arquitetura Futurista',
         category: 'fotografia-3d',
         seed: 'architectural 3D visualization, futuristic building, unreal engine 5, photorealistic --ar 16:9 --stylize 400 --v 6.0 --seed 90127364'
     },
@@ -155,28 +155,40 @@ const imagesData = [
     }
 ];
 
+// ─── DOM refs ────────────────────────────────────────────
 const galleryContainer = document.getElementById('gallery');
-const filterBtns = document.querySelectorAll('.filter-btn');
-const toast = document.getElementById('toast');
-let toastTimeout;
+const filterBtns       = document.querySelectorAll('.filter-btn');
+const toast            = document.getElementById('toast');
+const lightbox         = document.getElementById('lightbox');
+const lightboxImg      = document.getElementById('lightbox-img');
+const lightboxTitle    = document.getElementById('lightbox-title');
+const lightboxCategory = document.getElementById('lightbox-category');
+const lightboxPrompt   = document.getElementById('lightbox-prompt');
+const lightboxCopyBtn  = document.getElementById('lightbox-copy-btn');
+const lightboxClose    = document.getElementById('lightbox-close');
 
+let toastTimeout;
+let currentSeed = '';
+
+// ─── Render ───────────────────────────────────────────────
 function renderGallery(filter = 'all') {
     galleryContainer.innerHTML = '';
 
-    const filteredData = filter === 'all'
+    const data = filter === 'all'
         ? imagesData
         : imagesData.filter(item => item.category === filter);
 
-    filteredData.forEach(item => {
+    data.forEach(item => {
         const card = document.createElement('div');
         card.className = 'card';
+        card.dataset.id = item.id;
         card.innerHTML = `
             <img src="${item.url}" alt="${item.title}" loading="lazy">
             <div class="card-overlay">
                 <h3 class="card-title">${item.title}</h3>
                 <span class="card-category">${item.category.replace(/-/g, ' ')}</span>
                 <button class="copy-btn" data-seed="${item.seed}">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                         <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                     </svg>
@@ -184,18 +196,21 @@ function renderGallery(filter = 'all') {
                 </button>
             </div>
         `;
-        galleryContainer.appendChild(card);
-    });
 
-    document.querySelectorAll('.copy-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
+        // Open lightbox on image click
+        card.querySelector('img').addEventListener('click', () => openLightbox(item));
+
+        // Copy seed on button click
+        card.querySelector('.copy-btn').addEventListener('click', (e) => {
             e.stopPropagation();
-            const seed = btn.getAttribute('data-seed');
-            copyToClipboard(seed, btn);
+            copyToClipboard(item.seed, e.currentTarget);
         });
+
+        galleryContainer.appendChild(card);
     });
 }
 
+// ─── Filters ──────────────────────────────────────────────
 filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
@@ -204,32 +219,71 @@ filterBtns.forEach(btn => {
     });
 });
 
-async function copyToClipboard(text, btn) {
+// ─── Lightbox ─────────────────────────────────────────────
+function openLightbox(item) {
+    lightboxImg.src      = item.url;
+    lightboxImg.alt      = item.title;
+    lightboxTitle.textContent    = item.title;
+    lightboxCategory.textContent = item.category.replace(/-/g, ' ');
+    lightboxPrompt.textContent   = item.seed;
+    currentSeed = item.seed;
+    resetCopyBtn(lightboxCopyBtn);
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    setTimeout(() => { lightboxImg.src = ''; }, 300);
+}
+
+lightboxClose.addEventListener('click', closeLightbox);
+
+lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+});
+
+lightboxCopyBtn.addEventListener('click', () => {
+    copyToClipboard(currentSeed, lightboxCopyBtn, true);
+});
+
+// ─── Copy to clipboard ────────────────────────────────────
+async function copyToClipboard(text, btn, isLightbox = false) {
     try {
         await navigator.clipboard.writeText(text);
         btn.innerHTML = `
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="20 6 9 17 4 12"></polyline>
             </svg>
             Copied!
         `;
-        btn.style.background = 'rgba(255,255,255,0.25)';
+        if (!isLightbox) btn.style.background = 'rgba(255,255,255,0.25)';
         showToast();
-        setTimeout(() => {
-            btn.innerHTML = `
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                </svg>
-                Copy Seed
-            `;
-            btn.style.background = '';
-        }, 2000);
+        setTimeout(() => resetCopyBtn(btn, isLightbox), 2000);
     } catch (err) {
-        console.error('Failed to copy:', err);
+        console.error('Copy failed:', err);
     }
 }
 
+function resetCopyBtn(btn, isLightbox = false) {
+    btn.innerHTML = `
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+        Copy Seed
+    `;
+    if (!isLightbox) btn.style.background = '';
+}
+
+// ─── Toast ────────────────────────────────────────────────
 function showToast() {
     if (toastTimeout) {
         clearTimeout(toastTimeout);
@@ -247,6 +301,5 @@ function showToast() {
     }, 2000);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    renderGallery('all');
-});
+// ─── Init ─────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => renderGallery('all'));

@@ -19,20 +19,21 @@
 - [x] Adicionar seeds reais para cada categoria em `main.js` (20 seeds no total)
 - [x] Estrutura de dados com: `título`, `categoria`, `prompt completo`, `imagem`
 
-## Fase 3: Componentes Interativos
-- [ ] Botão "Copy" muda para "Copied ✅" após clicar (feedback visual)
-- [ ] Hover na imagem: leve zoom + overlay escuro
-- [ ] Sidebar fixa à esquerda com lista de categorias (navegação por scroll)
-- [ ] Filtro ativo com destaque visual na sidebar
+## Fase 3: Componentes Interativos ✅
+- [x] Botão Copy muda para "Copied!" com ícone de check após clicar
+- [x] Hover na imagem: zoom + overlay com gradiente
+- [x] Sidebar fixa à esquerda com lista de categorias
+- [x] Filtro ativo com destaque visual na sidebar
 
-## Fase 4: Lightbox (Visualização Imersiva)
-- [ ] Ao clicar na imagem, abrir em tela cheia (overlay)
-- [ ] Mostrar prompt completo no lightbox
-- [ ] Botão "Copy" dentro do lightbox
-- [ ] Fechar com ESC ou clique fora
+## Fase 4: Lightbox ✅
+- [x] Clicar na imagem abre overlay fullscreen com blur de fundo
+- [x] Prompt completo visível no lightbox
+- [x] Botão Copy dentro do lightbox
+- [x] Fechar com ESC ou clique fora
 
-## Fase 5: Fator WOW
-- [ ] Transições suaves entre filtros (fade in dos cards)
-- [ ] Animação de entrada dos cards ao carregar
-- [ ] Refinamentos finais: sombras, glassmorphism no botão, bordas sutis
-- [ ] Testar responsividade mobile / tablet
+## Fase 5: Fator WOW ✅
+- [x] Animação de entrada dos cards (fadeUp com stagger)
+- [x] Transição suave ao abrir/fechar lightbox (scale + opacity)
+- [x] Glassmorphism no botão Copy
+- [x] Responsividade completa: sidebar vira scroll horizontal no mobile
+- [x] Layout mobile (1 coluna), tablet (2 colunas), desktop (3 colunas)

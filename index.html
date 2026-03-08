@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galeria de Seeds IA</title>
-    <!-- Google Fonts for typography -->
+    <title>Seed Library</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -12,37 +11,57 @@
 </head>
 <body>
 
-    <!-- Navigation Header -->
-    <header class="header">
-        <div class="logo">
-            <h1>Seed Library</h1>
-            <p>Descubra e copie prompts incríveis.</p>
-        </div>
-        
-        <nav class="filter-nav">
-            <button class="filter-btn active" data-filter="all">Todos</button>
-            <button class="filter-btn" data-filter="ilustracao">Ilustração</button>
-            <button class="filter-btn" data-filter="pintura">Pintura</button>
-            <button class="filter-btn" data-filter="cinematografico">Cinematográfico</button>
-            <button class="filter-btn" data-filter="fotografia-3d">Fotografia 3D</button>
-            <button class="filter-btn" data-filter="fotografia-abstrata">Fotografia Abstrata</button>
-            <button class="filter-btn" data-filter="fotografia-retro">Fotografia Rêtro</button>
-            <button class="filter-btn" data-filter="fotografia-estilizada">Fotografia Estilizada</button>
-        </nav>
-    </header>
+    <div class="app-layout">
 
-    <!-- Main Gallery Container -->
-    <main class="gallery-container" id="gallery">
-        <!-- Images will be injected here via JavaScript -->
-    </main>
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <h1>Seed<br>Library</h1>
+                <p>Descubra e copie prompts incríveis.</p>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="ilustracao">Ilustração</button>
+                <button class="filter-btn" data-filter="pintura">Pintura</button>
+                <button class="filter-btn" data-filter="cinematografico">Cinematográfico</button>
+                <button class="filter-btn" data-filter="fotografia-3d">Fotografia 3D</button>
+                <button class="filter-btn" data-filter="fotografia-abstrata">Fotografia Abstrata</button>
+                <button class="filter-btn" data-filter="fotografia-retro">Fotografia Rêtro</button>
+                <button class="filter-btn" data-filter="fotografia-estilizada">Fotografia Estilizada</button>
+            </nav>
+        </aside>
 
-    <!-- Toast Notification for "Copied!" -->
-    <div id="toast" class="toast">
-        <span class="toast-icon">✓</span>
-        <span class="toast-message">Seed copied to clipboard!</span>
+        <!-- Main Content -->
+        <main class="gallery-container" id="gallery"></main>
+
     </div>
 
-    <!-- Script references -->
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" aria-hidden="true">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Fechar">✕</button>
+        <div class="lightbox-inner">
+            <img class="lightbox-img" id="lightbox-img" src="" alt="">
+            <div class="lightbox-info">
+                <h2 class="lightbox-title" id="lightbox-title"></h2>
+                <span class="lightbox-category" id="lightbox-category"></span>
+                <p class="lightbox-prompt" id="lightbox-prompt"></p>
+                <button class="lightbox-copy-btn" id="lightbox-copy-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    Copy Seed
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast">
+        <span class="toast-icon">✓</span>
+        <span class="toast-message">Seed copied!</span>
+    </div>
+
     <script src="main.js"></script>
 </body>
 </html>
