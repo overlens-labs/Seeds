@@ -11,6 +11,28 @@
 </head>
 <body>
 
+    <!-- Login Overlay -->
+    <div id="login-overlay">
+        <div class="login-box">
+            <div class="login-logo">
+                <h1>Seed Library</h1>
+                <p>Acesso restrito</p>
+            </div>
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <label for="login-user">Usuário</label>
+                    <input type="text" id="login-user" placeholder="admin" autocomplete="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-pass">Senha</label>
+                    <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password" required>
+                </div>
+                <p class="login-error" id="login-error"></p>
+                <button type="submit" class="btn-primary login-submit">Entrar</button>
+            </form>
+        </div>
+    </div>
+
     <div class="app-layout">
 
         <!-- Sidebar -->
@@ -24,11 +46,9 @@
                 <button class="filter-btn" data-filter="ilustracao">Ilustração</button>
                 <button class="filter-btn" data-filter="pintura">Pintura</button>
                 <button class="filter-btn" data-filter="cinematografico">Cinematográfico</button>
-                <button class="filter-btn" data-filter="fotografia-3d">Fotografia 3D</button>
-                <button class="filter-btn" data-filter="fotografia-abstrata">Fotografia Abstrata</button>
-                <button class="filter-btn" data-filter="fotografia-retro">Fotografia Rêtro</button>
-                <button class="filter-btn" data-filter="fotografia-estilizada">Fotografia Estilizada</button>
+                <button class="filter-btn" data-filter="fotografia">Fotografia</button>
             </nav>
+            <div id="sidebar-tags" class="sidebar-tags"></div>
             <button class="add-btn" id="open-add-modal">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -36,6 +56,9 @@
                 </svg>
                 Adicionar Seed
             </button>
+            <div class="sidebar-footer">
+                <button class="logout-btn" id="logout-btn">Sair</button>
+            </div>
         </aside>
 
         <!-- Main Content -->
@@ -82,15 +105,18 @@
                         <option value="ilustracao">Ilustração</option>
                         <option value="pintura">Pintura</option>
                         <option value="cinematografico">Cinematográfico</option>
-                        <option value="fotografia-3d">Fotografia 3D</option>
-                        <option value="fotografia-abstrata">Fotografia Abstrata</option>
-                        <option value="fotografia-retro">Fotografia Rêtro</option>
-                        <option value="fotografia-estilizada">Fotografia Estilizada</option>
+                        <option value="fotografia">Fotografia</option>
+                    </select>
+                </div>
+                <div class="form-group" id="form-tag-group" style="display:none">
+                    <label for="form-tag">Tag (opcional)</label>
+                    <select id="form-tag">
+                        <option value="">Sem tag</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="form-url">URL da Imagem</label>
-                    <input type="url" id="form-url" placeholder="https://..." required>
+                    <label for="form-image">Imagem</label>
+                    <input type="file" id="form-image" accept="image/*" required>
                     <div class="img-preview" id="img-preview"></div>
                 </div>
                 <div class="form-group">

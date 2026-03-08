@@ -1,0 +1,33 @@
+.seed-card {
+  margin-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.prompt-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 0 12px;
+}
+
+.prompt-text {
+  font-family: var(--font-inter);
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  font-weight: 400;
+  word-wrap: break-word; /* Handle unusually long parameter strings */
+}
+
+.prompt-prefix {
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}

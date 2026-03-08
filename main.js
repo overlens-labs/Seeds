@@ -3,157 +3,315 @@ const imagesData = [
     // --- ILUSTRAÇÃO ---
     {
         id: 1,
-        url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=800',
-        title: 'Ilustração Digital Surreal',
+        url: 'Imagens/moogle_white_soul_floating_on_dark_sky_--ar_916_--sref_69840188_5145f60c-5046-498b-ae68-66530d2ea65a.png',
+        title: 'Alma no Céu Negro',
         category: 'ilustracao',
-        seed: 'digital illustration, surreal dreamscape, vibrant colors, intricate details --ar 2:3 --stylize 750 --v 6.1 --seed 33291847'
+        seed: 'white soul floating on dark sky --ar 9:16 --sref 69840188 --v 6.1'
     },
     {
         id: 2,
-        url: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&q=80&w=800',
-        title: 'Character Design Fantasia',
+        url: 'Imagens/4spaceszzz_a_surreal_fine_art_portrait_of_a_person_standing_sti_bc81e0f2-9b75-4650-a1e9-98a8b2d3d0d9.png',
+        title: 'Retrato Surrealista',
         category: 'ilustracao',
-        seed: 'fantasy character design, concept art, soft lighting, detailed linework --ar 3:4 --stylize 600 --v 6.1 --seed 48271935'
+        seed: 'surreal fine art portrait of a person standing still, dreamlike atmosphere --ar 2:3 --stylize 750 --v 6.1'
     },
     {
         id: 3,
-        url: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&q=80&w=800',
-        title: 'Arte Abstrata Colorida',
+        url: 'Imagens/albania_person_entering_a_circular_portal_minimal__gradient_--a_3de1ecc2-4b62-4b7e-9b39-c922785a476e.png',
+        title: 'Portal Circular',
         category: 'ilustracao',
-        seed: 'abstract digital art, fluid shapes, neon palette, generative patterns --ar 1:1 --stylize 1000 --chaos 20 --v 6.1 --seed 91023847'
+        seed: 'person entering a circular portal, minimal gradient, surreal atmosphere --ar 1:1 --stylize 500 --v 6.1'
+    },
+    {
+        id: 4,
+        url: 'Imagens/u2852775127_female_elven_knight_lying_in_a_meadow_the_armor_i_504d3e27-9889-4251-ad80-e4bf81c8dc88_3.png',
+        title: 'Cavaleira Élfica',
+        category: 'ilustracao',
+        tag: 'fantasia',
+        seed: 'female elven knight lying in a meadow, intricate iridescent armor, soft natural light --ar 3:4 --stylize 600 --v 6.1'
+    },
+    {
+        id: 5,
+        url: 'Imagens/u2852775127_half-body_shot_of_a_soldier_from_cyberpunk_urban__af5d58fa-c4e0-45fc-92bf-00e7d8b7f280_2.png',
+        title: 'Soldado Cyberpunk',
+        category: 'ilustracao',
+        tag: 'sci-fi',
+        seed: 'half-body shot of a soldier from cyberpunk urban setting, neon lights, detailed armor --ar 2:3 --stylize 700 --v 6.1'
     },
 
     // --- PINTURA ---
     {
-        id: 4,
-        url: 'https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?auto=format&fit=crop&q=80&w=800',
-        title: 'Óleo Impressionista',
-        category: 'pintura',
-        seed: 'oil painting, impressionist style, thick brushstrokes, natural light, landscape --ar 3:2 --stylize 500 --v 6.0 --seed 77281934'
-    },
-    {
-        id: 5,
-        url: 'https://images.unsplash.com/photo-1471897488648-5eae4ac6686b?auto=format&fit=crop&q=80&w=800',
-        title: 'Aquarela Floral',
-        category: 'pintura',
-        seed: 'watercolor painting, delicate flowers, soft washes, paper texture, botanical --ar 2:3 --stylize 400 --v 6.0 --seed 62837401'
-    },
-    {
         id: 6,
-        url: 'https://images.unsplash.com/photo-1578301978018-3005759f48f7?auto=format&fit=crop&q=80&w=800',
-        title: 'Óleo Clássico',
+        url: 'Imagens/baptiste.thomann_mystical_1980s_style_surreal_minimalist_landsc_b0d22370-25cd-4093-aa4a-93122265d08d.png',
+        title: 'Paisagem Mística Anos 80',
         category: 'pintura',
-        seed: 'classical oil painting, renaissance style, dramatic chiaroscuro, portrait --ar 3:4 --stylize 300 --v 6.0 --seed 55190283'
+        seed: 'mystical 1980s style surreal minimalist landscape, retro palette, ethereal atmosphere --ar 16:9 --stylize 500 --v 6.1'
+    },
+    {
+        id: 7,
+        url: 'Imagens/u6897795911_sacred_feminine_--ar_23_--profile_pwbd446_4tk3ns6_d1978d28-d68f-4fc2-a9b2-49af716141a3_3.png',
+        title: 'Feminino Sagrado',
+        category: 'pintura',
+        seed: 'sacred feminine, fine art illustration, divine feminine energy --ar 2:3 --stylize 800 --v 6.1'
+    },
+    {
+        id: 8,
+        url: 'Imagens/u6897795911_blocks_on_top_of_blocks_--ar_23_--raw_--profile_7_cfc0dc44-beb9-4494-b87b-c32947550753_1.png',
+        title: 'Blocos Empilhados',
+        category: 'pintura',
+        seed: 'blocks on top of blocks, abstract composition, bold colors --ar 2:3 --style raw --v 6.1'
+    },
+    {
+        id: 9,
+        url: 'Imagens/u2852775127_black_swan_feather_fallingNight_Velvet_Blackpaint_cf7d1ef8-9ae8-4189-8ca1-4dd5fbfc49e2_2.png',
+        title: 'Pena de Cisne Negro',
+        category: 'pintura',
+        seed: 'black swan feather falling, night velvet, black paint, ethereal painting --ar 2:3 --stylize 900 --v 6.1'
     },
 
     // --- CINEMATOGRÁFICO ---
     {
-        id: 7,
-        url: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=800',
-        title: 'Cena Noir Urbana',
-        category: 'cinematografico',
-        seed: 'cinematic noir, urban street, rain reflection, anamorphic lens flare, moody --ar 2.39:1 --style raw --v 6.1 --seed 84920193'
-    },
-    {
-        id: 8,
-        url: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&q=80&w=800',
-        title: 'Golden Hour Cinemático',
-        category: 'cinematografico',
-        seed: 'cinematic golden hour, shallow depth of field, 35mm film, warm tones, epic --ar 16:9 --style raw --s 250 --v 6.1 --seed 19283746'
-    },
-    {
-        id: 9,
-        url: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&q=80&w=800',
-        title: 'Drama Sci-Fi',
-        category: 'cinematografico',
-        seed: 'cinematic sci-fi scene, volumetric light, fog, epic scale, IMAX quality --ar 2.39:1 --chaos 10 --stylize 800 --v 6.1 --seed 73829104'
-    },
-
-    // --- FOTOGRAFIA 3D ---
-    {
         id: 10,
-        url: 'https://images.unsplash.com/photo-1616499370260-485b3e5ed653?auto=format&fit=crop&q=80&w=800',
-        title: 'Render 3D Minimalista',
-        category: 'fotografia-3d',
-        seed: '3D render, octane render, minimalist product shot, studio lighting, soft shadows --ar 1:1 --stylize 250 --v 6.0 --seed 55123489'
+        url: 'Imagens/Sammie_Sam_cinematic_mood_low_aperture_mid_afternoon_sunlight_c_e0f65214-ca25-49e7-b5e1-caaab385392e.png',
+        title: 'Mood Cinemático',
+        category: 'cinematografico',
+        seed: 'cinematic mood, low aperture, mid afternoon sunlight, shallow depth of field --ar 16:9 --style raw --v 6.1'
     },
     {
         id: 11,
-        url: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=800',
-        title: 'Escultura Digital',
-        category: 'fotografia-3d',
-        seed: 'digital sculpture, Zbrush style, hyper-realistic render, caustic lighting --ar 3:4 --stylize 500 --v 6.0 --seed 38201947'
+        url: 'Imagens/opensession_A_silhouetted_figure_from_behind_sitting_at_a_wide__8bc4546b-3824-4445-9b3f-a960a8abe4f2.png',
+        title: 'Silhueta à Janela',
+        category: 'cinematografico',
+        seed: 'silhouetted figure from behind sitting at a wide window, cinematic moody atmosphere --ar 16:9 --style raw --v 6.1'
     },
     {
         id: 12,
-        url: 'https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&q=80&w=800',
-        title: 'Arquitetura Futurista',
-        category: 'fotografia-3d',
-        seed: 'architectural 3D visualization, futuristic building, unreal engine 5, photorealistic --ar 16:9 --stylize 400 --v 6.0 --seed 90127364'
+        url: 'Imagens/hassankhan_321_cinematic_close-up_of_a_human_eye_glowing_with_s_7955d55d-ea05-434f-a93a-d564f7a90f5a.png',
+        title: 'Olho Cinemático',
+        category: 'cinematografico',
+        seed: 'cinematic close-up of a human eye glowing with supernatural light, macro lens --ar 2:3 --style raw --chaos 10 --v 6.1'
     },
-
-    // --- FOTOGRAFIA ABSTRATA ---
     {
         id: 13,
-        url: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&q=80&w=800',
-        title: 'Macro Abstrato',
-        category: 'fotografia-abstrata',
-        seed: 'abstract macro photography, extreme close-up, bokeh, vibrant colors, organic forms --ar 1:1 --chaos 30 --stylize 1000 --v 6.1 --seed 91827364'
+        url: 'Imagens/u6897795911_conductor_--chaos_10_--ar_916_--raw_--profile_p5h_0651a536-c36b-4e45-b091-2827c6a5101e_3.png',
+        title: 'Maestro',
+        category: 'cinematografico',
+        seed: 'conductor, dramatic lighting, cinematic composition --chaos 10 --ar 9:16 --style raw --v 6.1'
     },
     {
         id: 14,
-        url: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800',
-        title: 'Formas Geométricas',
-        category: 'fotografia-abstrata',
-        seed: 'abstract geometric shapes, neon lights, long exposure, symmetry, dark background --ar 1:1 --chaos 15 --stylize 900 --v 6.1 --seed 20938471'
+        url: 'Imagens/u2852775127_A_lone_human_silhouette_seated_in_a_grassy_field_at_b5df0723-73ef-4e6c-94c6-701f8a8856e4.png',
+        title: 'Solidão no Campo',
+        category: 'cinematografico',
+        seed: 'lone human silhouette seated in a grassy field at twilight, cinematic, vast landscape --ar 16:9 --style raw --s 250 --v 6.1'
     },
-
-    // --- FOTOGRAFIA RÊTRO ---
     {
         id: 15,
-        url: 'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&q=80&w=800',
-        title: 'Kodak 35mm Street',
-        category: 'fotografia-retro',
-        seed: 'analog film photography, Kodak Portra 400, street scene, grain, warm tones, 1980s --ar 3:2 --style raw --v 6.0 --seed 12837465'
+        url: 'Imagens/u2852775127_A_lone_figure_seated_at_a_minimalist_wooden_desk_in_6720fef2-5610-4105-9043-7581aff8453a.png',
+        title: 'Figura na Escrivaninha',
+        category: 'cinematografico',
+        seed: 'lone figure seated at a minimalist wooden desk in the dark, single light source, cinematic --ar 16:9 --style raw --v 6.1'
     },
     {
         id: 16,
-        url: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&q=80&w=800',
-        title: 'Polaroid Vintage',
-        category: 'fotografia-retro',
-        seed: 'polaroid photo style, vintage 70s, faded colors, light leak, nostalgic mood --ar 1:1 --style raw --s 150 --v 6.0 --seed 84726510'
-    },
-    {
-        id: 17,
-        url: 'https://images.unsplash.com/photo-1495121605193-b116b5b9c343?auto=format&fit=crop&q=80&w=800',
-        title: 'Cinema Grão 16mm',
-        category: 'fotografia-retro',
-        seed: '16mm film, heavy grain, high contrast, black and white, 1960s documentary style --ar 3:2 --style raw --chaos 5 --v 6.0 --seed 30918247'
+        url: 'Imagens/u6897795911_a_woman_and_a_figure_behind_her_--ar_5191_--sref__6b1f9af3-f60b-4aed-b474-220edd434b87_3.png',
+        title: 'Presença',
+        category: 'cinematografico',
+        seed: 'a woman and a figure behind her, mysterious atmosphere, cinematic tension --ar 51:91 --sref 20066 --v 6.1'
     },
 
-    // --- FOTOGRAFIA ESTILIZADA ---
+    // --- FOTOGRAFIA — 3D ---
+    {
+        id: 17,
+        url: 'Imagens/freepik__a-sculptural-ceramic-vase-with-a-ribbed-white-cyli__11405.png',
+        title: 'Vaso Cerâmico',
+        category: 'fotografia',
+        tag: '3d',
+        seed: 'sculptural ceramic vase, ribbed white cylinder, studio lighting, octane render, product shot --ar 1:1 --stylize 300 --v 6.0'
+    },
     {
         id: 18,
-        url: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&q=80&w=800',
-        title: 'Editorial Fashion',
-        category: 'fotografia-estilizada',
-        seed: 'editorial fashion photography, high contrast, dramatic lighting, Vogue style --ar 2:3 --stylize 500 --v 6.1 --seed 66534821'
+        url: 'Imagens/u2852775127_ultra-futuristic_memory_card_with_data_hologram_t_3f357495-2089-4cab-b6cd-7119a7abb10e_0.png',
+        title: 'Memory Card Holográfico',
+        category: 'fotografia',
+        tag: '3d',
+        seed: 'ultra-futuristic memory card with data hologram, glowing circuitry, 3D render --ar 1:1 --stylize 500 --v 6.0'
     },
     {
         id: 19,
-        url: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&q=80&w=800',
-        title: 'Retrato Artístico',
-        category: 'fotografia-estilizada',
-        seed: 'artistic portrait, studio lighting, color gel, fine art photography, moody --ar 3:4 --stylize 600 --v 6.1 --seed 44821093'
+        url: 'Imagens/u2852775127_A_translucent_glass-like_Earth_sphere_floating_agai_65119bf2-ac76-4787-a0c5-663eeca7cae6.png',
+        title: 'Esfera Terrestre',
+        category: 'fotografia',
+        tag: '3d',
+        seed: 'translucent glass-like Earth sphere floating against dark cosmos, 3D render, photorealistic --ar 1:1 --stylize 400 --v 6.0'
     },
     {
         id: 20,
-        url: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&q=80&w=800',
-        title: 'Landscape Estilizado',
-        category: 'fotografia-estilizada',
-        seed: 'stylized landscape, long exposure, vibrant sky, teal and orange grade, epic --ar 16:9 --stylize 700 --v 6.1 --seed 57392018'
-    }
+        url: 'Imagens/u6897795911_futuristic_golden_silicon_chip_cpu_with_a_grid_of_368e7d42-f999-4f95-b02e-73928d2a123e_2.png',
+        title: 'Chip Dourado Futurista',
+        category: 'fotografia',
+        tag: '3d',
+        seed: 'futuristic golden silicon chip CPU with a grid of glowing circuits, 3D macro render --ar 1:1 --stylize 600 --v 6.0'
+    },
+    {
+        id: 21,
+        url: 'Imagens/davidogilvy_close_shot._Smooth_bright_fresh_light_blue_backgrou_2a4fbed0-6e1e-4a84-8ac9-262f9a5b5100.png',
+        title: 'Product Shot Minimalista',
+        category: 'fotografia',
+        tag: '3d',
+        seed: 'close shot, smooth bright fresh light blue background, product photography, studio lighting --ar 1:1 --stylize 250 --v 6.0'
+    },
+    {
+        id: 22,
+        url: 'Imagens/aldenhuschle_Two_hands_on_opposite_sides_of_a_transparent_phone_b02ee977-24b3-4dfb-ab9c-871372eb38f4.png',
+        title: 'Phone Transparente',
+        category: 'fotografia',
+        tag: '3d',
+        seed: 'two hands on opposite sides of a transparent phone, glass material, studio 3D render --ar 2:3 --stylize 400 --v 6.0'
+    },
+
+    // --- FOTOGRAFIA — ABSTRATA ---
+    {
+        id: 23,
+        url: 'Imagens/dixienormous8206_circle_with_vhs_gradient_to_black_background_v_fa9c8106-ec5d-4abb-ac12-e62b0cfd0ec2.png',
+        title: 'Círculo VHS',
+        category: 'fotografia',
+        tag: 'abstrata',
+        seed: 'circle with VHS gradient to black background, retro analog distortion --ar 1:1 --chaos 20 --stylize 800 --v 6.1'
+    },
+    {
+        id: 24,
+        url: 'Imagens/u6897795911_An_abstract_luminous_helix_of_fine_glowing_strand_2d33f5e2-1670-4f45-9085-8dcd5dc86b30_2.png',
+        title: 'Hélice Luminosa',
+        category: 'fotografia',
+        tag: 'abstrata',
+        seed: 'abstract luminous helix of fine glowing strands, bioluminescent, dark background --ar 2:3 --chaos 15 --stylize 900 --v 6.1'
+    },
+    {
+        id: 25,
+        url: 'Imagens/u6897795911_Abstract_golden_bokeh_lights_floating_against_a_sof_3319ada2-403b-46b0-8398-499290b1520f.png',
+        title: 'Bokeh Dourado',
+        category: 'fotografia',
+        tag: 'abstrata',
+        seed: 'abstract golden bokeh lights floating against a soft dark background, dreamy --ar 16:9 --chaos 10 --stylize 700 --v 6.1'
+    },
+    {
+        id: 26,
+        url: 'Imagens/u6897795911_Three_sleek_vertical_abstract_monoliths_with_glossy_d324ef7b-68e6-40f5-b965-b51c0dd61c4e.png',
+        title: 'Monólitos Abstratos',
+        category: 'fotografia',
+        tag: 'abstrata',
+        seed: 'three sleek vertical abstract monoliths with glossy surface, dramatic lighting --ar 9:16 --stylize 600 --v 6.1'
+    },
+    {
+        id: 27,
+        url: 'Imagens/u6897795911_Arrow_in_the_center_of_the_target_--chaos_10_--ar_8ca26830-2541-42d7-826b-a55089fb6058_1.png',
+        title: 'Flecha no Alvo',
+        category: 'fotografia',
+        tag: 'abstrata',
+        seed: 'arrow in the center of the target, abstract minimal composition --chaos 10 --stylize 500 --v 6.1'
+    },
+
+    // --- FOTOGRAFIA — RÊTRO ---
+    {
+        id: 28,
+        url: 'Imagens/bsphxy466_a_high_school_year_book_and_photo_of_a_man_with_a_mul_aa561162-013f-45ae-ba1e-9f75b0f1af1e.png',
+        title: 'Yearbook Anos 80',
+        category: 'fotografia',
+        tag: 'rêtro',
+        seed: 'high school year book photo, 1980s style, warm tones, film grain, vintage flash --ar 3:4 --style raw --v 6.0'
+    },
+    {
+        id: 29,
+        url: 'Imagens/Ajith_face_spiral_blur_from_the_eye_--chaos_30_--ar_56_--profil_f50ed95f-9685-4c04-ad83-8079afbef011.png',
+        title: 'Espiral no Olho',
+        category: 'fotografia',
+        tag: 'rêtro',
+        seed: 'face spiral blur from the eye, experimental analog photography --chaos 30 --ar 5:6 --v 6.0'
+    },
+    {
+        id: 30,
+        url: 'Imagens/u6897795911_A_serene_young_woman_with_indigenous_features_her_f0826d90-34ed-4336-8096-37e491ab5e8f_1.png',
+        title: 'Retrato Étnico',
+        category: 'fotografia',
+        tag: 'rêtro',
+        seed: 'serene young woman with indigenous features, natural light portrait, analog film photography --ar 2:3 --style raw --v 6.0'
+    },
+
+    // --- FOTOGRAFIA — ESTILIZADA ---
+    {
+        id: 31,
+        url: 'Imagens/aldognocchi._Brand_Editorial_Photography_eine_isolierte_schwe_f86beb95-c5bf-477d-98b4-b42b03c8dcbf_0.png',
+        title: 'Editorial Flutuante',
+        category: 'fotografia',
+        tag: 'estilizada',
+        seed: 'brand editorial photography, isolated object floating, clean background, dramatic shadows --ar 2:3 --stylize 500 --v 6.1'
+    },
+    {
+        id: 32,
+        url: 'Imagens/aldognocchi._Brand_Editorial_Photography_moderner_Zauberer_mi_32987a47-1bc4-4ff7-8e1d-31027b7dad9d_0.png',
+        title: 'Mago Moderno',
+        category: 'fotografia',
+        tag: 'estilizada',
+        seed: 'brand editorial photography, modern wizard, minimalist aesthetic, dramatic lighting --ar 2:3 --stylize 500 --v 6.1'
+    },
+    {
+        id: 33,
+        url: 'Imagens/u4659487385_The_image_shows_a_young_Asian_woman_in_a_white_dres_764aee2f-71b3-4bcd-9f2b-c5198c669bf8.png',
+        title: 'Editorial Branco',
+        category: 'fotografia',
+        tag: 'estilizada',
+        seed: 'young Asian woman in a white dress, editorial photography, soft pastel tones --ar 2:3 --stylize 400 --v 6.1'
+    },
+    {
+        id: 34,
+        url: 'Imagens/u5251865684_an_analog_side_profile_photo_of_a_female_model_in_w_2fc49d74-1d89-4c22-9260-f737bc838564.png',
+        title: 'Perfil Analógico',
+        category: 'fotografia',
+        tag: 'estilizada',
+        seed: 'analog side profile photo of a female model in white, editorial fashion, soft light --ar 2:3 --style raw --v 6.1'
+    },
+    {
+        id: 35,
+        url: 'Imagens/u6897795911_A_solemn_black_female_figure_enveloped_in_a_sheer_054e73dd-479c-4399-9ec6-1e9465705b68_2.png',
+        title: 'Figura Solene',
+        category: 'fotografia',
+        tag: 'estilizada',
+        seed: 'solemn black female figure enveloped in a sheer fabric, fine art fashion photography --ar 2:3 --stylize 600 --v 6.1'
+    },
+    {
+        id: 36,
+        url: 'Imagens/u3797252819_close-up_of_two_feminine_hands_intertwined_and_rais_ab91ed84-0c22-488e-9fc2-f8f925549919.png',
+        title: 'Mãos Entrelaçadas',
+        category: 'fotografia',
+        tag: 'estilizada',
+        seed: 'close-up of two feminine hands intertwined and raised, fine art photography --ar 2:3 --stylize 500 --v 6.1'
+    },
+    {
+        id: 37,
+        url: 'Imagens/u6897795911_Two_feminine_hands_reaching_toward_each_other_in__a2864eea-534a-4484-a503-5f5dc64fa6b1_2.png',
+        title: 'Mãos que se Alcançam',
+        category: 'fotografia',
+        tag: 'estilizada',
+        seed: 'two feminine hands reaching toward each other in dark space, fine art --ar 2:3 --stylize 700 --v 6.1'
+    },
 ];
+
+// ─── Category Tags ────────────────────────────────────────
+const CATEGORY_TAGS = {
+    'ilustracao':      ['Anime', 'Fantasia', 'Sci-Fi', 'Retrato'],
+    'pintura':         ['Aquarela', 'Óleo', 'Digital', 'Acrílico'],
+    'cinematografico': ['Noir', 'Sci-Fi', 'Drama', 'Terror'],
+    'fotografia':      ['3D', 'Abstrata', 'Rêtro', 'Estilizada'],
+};
+
+// Maps fotografia tag → legacy category value (existing seeds)
+const FOTO_TAG_MAP = {
+    '3d':        'fotografia-3d',
+    'abstrata':  'fotografia-abstrata',
+    'rêtro':     'fotografia-retro',
+    'estilizada':'fotografia-estilizada',
+};
 
 // ─── LocalStorage: merge default + user seeds ────────────
 const STORAGE_KEY = 'seedlibrary_custom';
@@ -200,23 +358,68 @@ const openAddBtn       = document.getElementById('open-add-modal');
 const closeAddBtn      = document.getElementById('close-add-modal');
 const cancelAddBtn     = document.getElementById('cancel-add-modal');
 const addSeedForm      = document.getElementById('add-seed-form');
-const formUrl          = document.getElementById('form-url');
+const formImage        = document.getElementById('form-image');
 const imgPreview       = document.getElementById('img-preview');
+const sidebarTags      = document.getElementById('sidebar-tags');
+const loginOverlay     = document.getElementById('login-overlay');
 
 let toastTimeout;
-let currentSeed = '';
+let currentSeed  = '';
+let activeFilter = 'all';
+let activeTag    = null;
+
+// ─── Auth ─────────────────────────────────────────────────
+const CREDS = { user: 'admin', pass: 'seeds2026' };
+
+function checkAuth() {
+    if (sessionStorage.getItem('sl_auth')) {
+        loginOverlay.classList.add('hidden');
+    }
+}
+
+document.getElementById('login-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const user  = document.getElementById('login-user').value.trim();
+    const pass  = document.getElementById('login-pass').value;
+    const errEl = document.getElementById('login-error');
+    if (user === CREDS.user && pass === CREDS.pass) {
+        sessionStorage.setItem('sl_auth', '1');
+        loginOverlay.classList.add('hidden');
+        errEl.textContent = '';
+    } else {
+        errEl.textContent = 'Usuário ou senha incorretos.';
+    }
+});
+
+document.getElementById('logout-btn').addEventListener('click', () => {
+    sessionStorage.removeItem('sl_auth');
+    loginOverlay.classList.remove('hidden');
+});
 
 // ─── Render ───────────────────────────────────────────────
-let activeFilter = 'all';
-
-function renderGallery(filter = 'all') {
+function renderGallery(filter = 'all', tag = null) {
     activeFilter = filter;
     galleryContainer.innerHTML = '';
 
     const all = loadAllSeeds();
-    const data = filter === 'all'
-        ? all
-        : all.filter(item => item.category === filter);
+    let data;
+    if (filter === 'all') {
+        data = all;
+    } else if (filter === 'fotografia') {
+        data = all.filter(item =>
+            item.category === 'fotografia' || item.category.startsWith('fotografia-')
+        );
+        if (tag) {
+            data = data.filter(item =>
+                item.tag === tag || item.category === FOTO_TAG_MAP[tag]
+            );
+        }
+    } else {
+        data = all.filter(item => item.category === filter);
+        if (tag) {
+            data = data.filter(item => item.tag === tag);
+        }
+    }
 
     data.forEach(item => {
         const card = document.createElement('div');
@@ -227,7 +430,7 @@ function renderGallery(filter = 'all') {
             <div class="card-overlay">
                 <h3 class="card-title">${item.title}</h3>
                 <span class="card-category">${item.category.replace(/-/g, ' ')}</span>
-                <button class="copy-btn" data-seed="${item.seed}">
+                <button class="copy-btn">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                         <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
@@ -246,15 +449,12 @@ function renderGallery(filter = 'all') {
             delBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 deleteCustomSeed(item.id);
-                renderGallery(activeFilter);
+                renderGallery(activeFilter, activeTag);
             });
             card.appendChild(delBtn);
         }
 
-        // Open lightbox on image click
         card.querySelector('img').addEventListener('click', () => openLightbox(item));
-
-        // Copy seed on button click
         card.querySelector('.copy-btn').addEventListener('click', (e) => {
             e.stopPropagation();
             copyToClipboard(item.seed, e.currentTarget);
@@ -264,22 +464,53 @@ function renderGallery(filter = 'all') {
     });
 }
 
+// ─── Tags ─────────────────────────────────────────────────
+function renderTags(category) {
+    const tags = CATEGORY_TAGS[category];
+    if (!tags) { sidebarTags.innerHTML = ''; return; }
+
+    // Reposiciona o bloco de tags logo abaixo do botão ativo
+    const activeBtn = document.querySelector(`.filter-btn[data-filter="${category}"]`);
+    activeBtn.insertAdjacentElement('afterend', sidebarTags);
+
+    sidebarTags.innerHTML = tags.map(tag =>
+        `<button class="tag-btn${activeTag === tag.toLowerCase() ? ' active' : ''}" data-tag="${tag.toLowerCase()}">${tag}</button>`
+    ).join('');
+
+    sidebarTags.querySelectorAll('.tag-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const tag = btn.getAttribute('data-tag');
+            activeTag = activeTag === tag ? null : tag;
+            renderTags(category);
+            renderGallery(category, activeTag);
+        });
+    });
+}
+
 // ─── Filters ──────────────────────────────────────────────
 filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        renderGallery(btn.getAttribute('data-filter'));
+        activeTag = null;
+        const filter = btn.getAttribute('data-filter');
+        if (filter !== 'all') {
+            renderTags(filter);
+        } else {
+            sidebarTags.innerHTML = '';
+        }
+        renderGallery(filter);
     });
 });
 
 // ─── Lightbox ─────────────────────────────────────────────
 function openLightbox(item) {
-    lightboxImg.src      = item.url;
-    lightboxImg.alt      = item.title;
-    lightboxTitle.textContent    = item.title;
-    lightboxCategory.textContent = item.category.replace(/-/g, ' ');
-    lightboxPrompt.textContent   = item.seed;
+    lightboxImg.src                  = item.url;
+    lightboxImg.alt                  = item.title;
+    lightboxTitle.textContent        = item.title;
+    lightboxCategory.textContent     = item.category.replace(/-/g, ' ');
+    lightboxPrompt.textContent       = item.seed;
     currentSeed = item.seed;
     resetCopyBtn(lightboxCopyBtn);
     lightbox.classList.add('open');
@@ -298,10 +529,6 @@ lightboxClose.addEventListener('click', closeLightbox);
 
 lightbox.addEventListener('click', (e) => {
     if (e.target === lightbox) closeLightbox();
-});
-
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeLightbox();
 });
 
 lightboxCopyBtn.addEventListener('click', () => {
@@ -369,6 +596,7 @@ function closeModal() {
     document.body.style.overflow = '';
     addSeedForm.reset();
     imgPreview.innerHTML = '';
+    document.getElementById('form-tag-group').style.display = 'none';
 }
 
 openAddBtn.addEventListener('click', openModal);
@@ -383,35 +611,61 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') { closeLightbox(); closeModal(); }
 });
 
-// Image URL preview
-formUrl.addEventListener('input', () => {
-    const url = formUrl.value.trim();
-    if (url) {
-        imgPreview.innerHTML = `<img src="${url}" alt="preview" onerror="this.style.display='none'">`;
+// Category → populate tag select
+document.getElementById('form-category').addEventListener('change', () => {
+    const cat      = document.getElementById('form-category').value;
+    const tagGroup = document.getElementById('form-tag-group');
+    const tagSelect = document.getElementById('form-tag');
+    const tags     = CATEGORY_TAGS[cat];
+    if (tags) {
+        tagSelect.innerHTML = '<option value="">Sem tag</option>' +
+            tags.map(t => `<option value="${t.toLowerCase()}">${t}</option>`).join('');
+        tagGroup.style.display = 'flex';
     } else {
-        imgPreview.innerHTML = '';
+        tagGroup.style.display = 'none';
     }
 });
 
-// Form submit
+// Image file → FileReader preview
+formImage.addEventListener('change', () => {
+    const file = formImage.files[0];
+    if (!file) { imgPreview.innerHTML = ''; return; }
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        imgPreview.innerHTML = `<img src="${e.target.result}" alt="preview">`;
+    };
+    reader.readAsDataURL(file);
+});
+
+// Form submit → save with base64 image
 addSeedForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const newSeed = {
-        id: Date.now(),
-        title:    document.getElementById('form-title').value.trim(),
-        category: document.getElementById('form-category').value,
-        url:      document.getElementById('form-url').value.trim(),
-        seed:     document.getElementById('form-seed').value.trim(),
+    const file = formImage.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+        const tagVal = document.getElementById('form-tag').value;
+        const newSeed = {
+            id:       Date.now(),
+            title:    document.getElementById('form-title').value.trim(),
+            category: document.getElementById('form-category').value,
+            tag:      tagVal || undefined,
+            url:      ev.target.result,
+            seed:     document.getElementById('form-seed').value.trim(),
+        };
+        saveCustomSeed(newSeed);
+        closeModal();
+        activeTag = null;
+        renderGallery(newSeed.category);
+        renderTags(newSeed.category);
+        filterBtns.forEach(b => {
+            b.classList.toggle('active', b.getAttribute('data-filter') === newSeed.category);
+        });
+        showToast('Seed adicionado!');
     };
-    saveCustomSeed(newSeed);
-    closeModal();
-    renderGallery(newSeed.category);
-    // activate the matching filter button
-    filterBtns.forEach(b => {
-        b.classList.toggle('active', b.getAttribute('data-filter') === newSeed.category);
-    });
-    showToast('Seed adicionado!');
+    reader.readAsDataURL(file);
 });
 
 // ─── Init ─────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => renderGallery('all'));
+checkAuth();
+renderGallery('all');

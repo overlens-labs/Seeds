@@ -1,10 +1,15 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from 'react';
+import { seedCategories, categoriesList } from './data/mockData';
+import SeedCard from './components/SeedCard';
+import './App.css';
 
 function App() {
   const [activeCategory, setActiveCategory] = useState('All');
   
-  const categories = ['All', 'Cinematic', '3D', 'Anime', 'Photography', 'Abstract'];
+  // Filter logic: if 'All', flatten all items, else find the specific category
+  const displayedItems = activeCategory === 'All' 
+    ? seedCategories.flatMap(c => c.items)
+    : seedCategories.find(c => c.category === activeCategory)?.items || [];
 
   return (
     <div className="app-container">
@@ -15,7 +20,7 @@ function App() {
         </div>
         <nav className="sidebar-nav">
           <ul className="category-list">
-            {categories.map(cat => (
+            {categoriesList.map(cat => (
               <li key={cat}>
                 <button 
                   className={`category-btn ${activeCategory === cat ? 'active' : ''}`}
@@ -36,14 +41,24 @@ function App() {
           <p className="subtitle">Explore curated Midjourney seeds for {activeCategory.toLowerCase()} generation.</p>
         </header>
         
-        <div className="gallery-placeholder">
-          <div className="empty-state">
-            <p>Gallery content for {activeCategory} will appear here.</p>
-          </div>
+        <div className="seed-feed" key={activeCategory}>
+          {displayedItems.length > 0 ? (
+            displayedItems.map(item => (
+              <SeedCard 
+                key={item.id} 
+                prompt={item.prompt} 
+                images={item.images} 
+              />
+            ))
+          ) : (
+            <div className="empty-state">
+              <p>No seeds available for {activeCategory} yet.</p>
+            </div>
+          )}
         </div>
       </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
