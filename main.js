@@ -561,6 +561,20 @@ function showToast(msg = 'Seed copied!') {
     }, 2000);
 }
 
+// ─── Real-time sync between tabs ──────────────────────────
+window.addEventListener('storage', (e) => {
+    if (e.key === SL_KEYS.LOGO) {
+        const logo = JSON.parse(e.newValue || JSON.stringify(DEFAULT_LOGO));
+        document.getElementById('logo-title').textContent = logo.title;
+        document.getElementById('logo-subtitle').textContent = logo.subtitle;
+    } else if (e.key === SL_KEYS.CATEGORIES) {
+        renderFilterButtons();
+        renderGallery(activeFilter, activeTag);
+    } else if (e.key === SL_KEYS.TAGS || e.key === SL_KEYS.SEEDS) {
+        renderGallery(activeFilter, activeTag);
+    }
+});
+
 // ─── Init ─────────────────────────────────────────────────
 function init() {
     const logo = getLogo();

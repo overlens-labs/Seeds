@@ -135,6 +135,8 @@ function renderCategories() {
                 <button class="category-toggle icon-btn" data-action="toggle">▶</button>
                 <span class="category-name">${cat.label}</span>
                 <div class="category-actions">
+                    ${index > 0 ? `<button class="icon-btn" data-action="move-up" title="Mover para cima">↑</button>` : '<span style="width:24px;"></span>'}
+                    ${index < categories.length - 1 ? `<button class="icon-btn" data-action="move-down" title="Mover para baixo">↓</button>` : '<span style="width:24px;"></span>'}
                     <button class="icon-btn" data-action="rename" title="Renomear">✎</button>
                     <button class="icon-btn danger" data-action="delete" title="Deletar">🗑</button>
                 </div>
@@ -215,6 +217,24 @@ function renderCategories() {
         });
     });
 
+    // Move category up/down
+    list.querySelectorAll('[data-action="move-up"]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = btn.closest('.category-item');
+            const index = parseInt(item.dataset.index);
+            if (index > 0) moveCategory(index, index - 1);
+        });
+    });
+
+    list.querySelectorAll('[data-action="move-down"]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = btn.closest('.category-item');
+            const index = parseInt(item.dataset.index);
+            const cats = getCategories();
+            if (index < cats.length - 1) moveCategory(index, index + 1);
+        });
+    });
+
     // Remove tag pill
     list.querySelectorAll('.tag-pill-remove').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -275,6 +295,16 @@ function renameCategory(index, newLabel) {
     saveCategories(cats);
     renderCategories();
     showToast('Categoria renomeada!');
+}
+
+function moveCategory(fromIndex, toIndex) {
+    const cats = getCategories();
+    if (fromIndex < 0 || fromIndex >= cats.length || toIndex < 0 || toIndex >= cats.length) return;
+
+    const [moved] = cats.splice(fromIndex, 1);
+    cats.splice(toIndex, 0, moved);
+    saveCategories(cats);
+    renderCategories();
 }
 
 function addTag(categorySlug, label) {
@@ -365,12 +395,29 @@ function initAppearanceForm() {
 }
 
 document.getElementById('save-appearance-btn').addEventListener('click', () => {
+    const btn = event.currentTarget;
     const logo = {
         title:    document.getElementById('appearance-title').value.trim() || DEFAULT_LOGO.title,
         subtitle: document.getElementById('appearance-subtitle').value.trim() || DEFAULT_LOGO.subtitle,
     };
     saveLogo(logo);
+
+    // Update page title
+    document.title = `${logo.title} — Admin`;
+
+    // Visual feedback on button
+    btn.disabled = true;
+    const originalText = btn.textContent;
+    btn.textContent = '✓ Salvo!';
+    btn.style.backgroundColor = '#4ade80';
+
     showToast('Aparência salva!');
+
+    setTimeout(() => {
+        btn.disabled = false;
+        btn.textContent = originalText;
+        btn.style.backgroundColor = '';
+    }, 1000);
 });
 
 // ─── Seeds ─────────────────────────────────────────────────
