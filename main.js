@@ -155,6 +155,35 @@ const imagesData = [
     }
 ];
 
+// ─── LocalStorage: merge default + user seeds ────────────
+const STORAGE_KEY = 'seedlibrary_custom';
+
+function loadAllSeeds() {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    const custom = stored ? JSON.parse(stored) : [];
+    return [...imagesData, ...custom];
+}
+
+function saveCustomSeed(seed) {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    const custom = stored ? JSON.parse(stored) : [];
+    custom.push(seed);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(custom));
+}
+
+function deleteCustomSeed(id) {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    const custom = stored ? JSON.parse(stored) : [];
+    const updated = custom.filter(s => s.id !== id);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+}
+
+function isCustomSeed(id) {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    const custom = stored ? JSON.parse(stored) : [];
+    return custom.some(s => s.id === id);
+}
+
 // ─── DOM refs ────────────────────────────────────────────
 const galleryContainer = document.getElementById('gallery');
 const filterBtns       = document.querySelectorAll('.filter-btn');
@@ -166,17 +195,28 @@ const lightboxCategory = document.getElementById('lightbox-category');
 const lightboxPrompt   = document.getElementById('lightbox-prompt');
 const lightboxCopyBtn  = document.getElementById('lightbox-copy-btn');
 const lightboxClose    = document.getElementById('lightbox-close');
+const addModal         = document.getElementById('add-modal');
+const openAddBtn       = document.getElementById('open-add-modal');
+const closeAddBtn      = document.getElementById('close-add-modal');
+const cancelAddBtn     = document.getElementById('cancel-add-modal');
+const addSeedForm      = document.getElementById('add-seed-form');
+const formUrl          = document.getElementById('form-url');
+const imgPreview       = document.getElementById('img-preview');
 
 let toastTimeout;
 let currentSeed = '';
 
 // ─── Render ───────────────────────────────────────────────
+let activeFilter = 'all';
+
 function renderGallery(filter = 'all') {
+    activeFilter = filter;
     galleryContainer.innerHTML = '';
 
+    const all = loadAllSeeds();
     const data = filter === 'all'
-        ? imagesData
-        : imagesData.filter(item => item.category === filter);
+        ? all
+        : all.filter(item => item.category === filter);
 
     data.forEach(item => {
         const card = document.createElement('div');
@@ -196,6 +236,20 @@ function renderGallery(filter = 'all') {
                 </button>
             </div>
         `;
+
+        // Delete button (only for custom seeds)
+        if (isCustomSeed(item.id)) {
+            const delBtn = document.createElement('button');
+            delBtn.className = 'delete-btn';
+            delBtn.title = 'Remover';
+            delBtn.innerHTML = '✕';
+            delBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                deleteCustomSeed(item.id);
+                renderGallery(activeFilter);
+            });
+            card.appendChild(delBtn);
+        }
 
         // Open lightbox on image click
         card.querySelector('img').addEventListener('click', () => openLightbox(item));
@@ -284,7 +338,8 @@ function resetCopyBtn(btn, isLightbox = false) {
 }
 
 // ─── Toast ────────────────────────────────────────────────
-function showToast() {
+function showToast(msg = 'Seed copied!') {
+    toast.querySelector('.toast-message').textContent = msg;
     if (toastTimeout) {
         clearTimeout(toastTimeout);
         toast.classList.remove('show');
@@ -300,6 +355,63 @@ function showToast() {
         toastTimeout = null;
     }, 2000);
 }
+
+// ─── Modal: Adicionar Seed ────────────────────────────────
+function openModal() {
+    addModal.classList.add('open');
+    addModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    addModal.classList.remove('open');
+    addModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    addSeedForm.reset();
+    imgPreview.innerHTML = '';
+}
+
+openAddBtn.addEventListener('click', openModal);
+closeAddBtn.addEventListener('click', closeModal);
+cancelAddBtn.addEventListener('click', closeModal);
+
+addModal.addEventListener('click', (e) => {
+    if (e.target === addModal) closeModal();
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { closeLightbox(); closeModal(); }
+});
+
+// Image URL preview
+formUrl.addEventListener('input', () => {
+    const url = formUrl.value.trim();
+    if (url) {
+        imgPreview.innerHTML = `<img src="${url}" alt="preview" onerror="this.style.display='none'">`;
+    } else {
+        imgPreview.innerHTML = '';
+    }
+});
+
+// Form submit
+addSeedForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const newSeed = {
+        id: Date.now(),
+        title:    document.getElementById('form-title').value.trim(),
+        category: document.getElementById('form-category').value,
+        url:      document.getElementById('form-url').value.trim(),
+        seed:     document.getElementById('form-seed').value.trim(),
+    };
+    saveCustomSeed(newSeed);
+    closeModal();
+    renderGallery(newSeed.category);
+    // activate the matching filter button
+    filterBtns.forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-filter') === newSeed.category);
+    });
+    showToast('Seed adicionado!');
+});
 
 // ─── Init ─────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => renderGallery('all'));

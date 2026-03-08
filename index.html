@@ -29,6 +29,13 @@
                 <button class="filter-btn" data-filter="fotografia-retro">Fotografia Rêtro</button>
                 <button class="filter-btn" data-filter="fotografia-estilizada">Fotografia Estilizada</button>
             </nav>
+            <button class="add-btn" id="open-add-modal">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Adicionar Seed
+            </button>
         </aside>
 
         <!-- Main Content -->
@@ -53,6 +60,48 @@
                     Copy Seed
                 </button>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal: Adicionar Seed -->
+    <div id="add-modal" class="modal" aria-hidden="true">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2>Adicionar Seed</h2>
+                <button class="modal-close" id="close-add-modal">✕</button>
+            </div>
+            <form id="add-seed-form" class="modal-form">
+                <div class="form-group">
+                    <label for="form-title">Título</label>
+                    <input type="text" id="form-title" placeholder="Ex: Retrato Cinemático" required>
+                </div>
+                <div class="form-group">
+                    <label for="form-category">Categoria</label>
+                    <select id="form-category" required>
+                        <option value="" disabled selected>Selecione...</option>
+                        <option value="ilustracao">Ilustração</option>
+                        <option value="pintura">Pintura</option>
+                        <option value="cinematografico">Cinematográfico</option>
+                        <option value="fotografia-3d">Fotografia 3D</option>
+                        <option value="fotografia-abstrata">Fotografia Abstrata</option>
+                        <option value="fotografia-retro">Fotografia Rêtro</option>
+                        <option value="fotografia-estilizada">Fotografia Estilizada</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="form-url">URL da Imagem</label>
+                    <input type="url" id="form-url" placeholder="https://..." required>
+                    <div class="img-preview" id="img-preview"></div>
+                </div>
+                <div class="form-group">
+                    <label for="form-seed">Prompt / Seed</label>
+                    <textarea id="form-seed" rows="3" placeholder="--v 6.1 --ar 2:3 --stylize 500 --seed 12345678" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="cancel-add-modal">Cancelar</button>
+                    <button type="submit" class="btn-primary">Adicionar</button>
+                </div>
+            </form>
         </div>
     </div>
 
