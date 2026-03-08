@@ -455,6 +455,9 @@ function renderGallery(filter = 'all', tag = null) {
         card.dataset.id = item.id;
         card.innerHTML = `
             <img src="${item.url}" alt="${item.title}" loading="lazy">
+            <div class="card-prompt-strip">
+                <p class="card-prompt-preview">${item.seed}</p>
+            </div>
             <div class="card-overlay">
                 <h3 class="card-title">${item.title}</h3>
                 <span class="card-category">${item.category.replace(/-/g, ' ')}</span>
@@ -486,6 +489,8 @@ function openLightbox(item) {
     lightboxCategory.textContent = item.category.replace(/-/g, ' ');
     lightboxPrompt.textContent   = item.seed;
     currentSeed = item.seed;
+    // blurred image background via CSS custom property
+    lightbox.style.setProperty('--lb-bg', `url("${item.url.replace(/"/g, '\\"')}")`);
     resetCopyBtn(lightboxCopyBtn);
     lightbox.classList.add('open');
     lightbox.setAttribute('aria-hidden', 'false');
