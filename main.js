@@ -459,8 +459,6 @@ function renderGallery(filter = 'all', tag = null) {
                 <p class="card-prompt-preview">${item.seed}</p>
             </div>
             <div class="card-overlay">
-                <h3 class="card-title">${item.title}</h3>
-                <span class="card-category">${item.category.replace(/-/g, ' ')}</span>
                 <button class="copy-btn">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -471,7 +469,7 @@ function renderGallery(filter = 'all', tag = null) {
             </div>
         `;
 
-        card.querySelector('img').addEventListener('click', () => openLightbox(item));
+        card.addEventListener('click', () => openLightbox(item));
         card.querySelector('.copy-btn').addEventListener('click', (e) => {
             e.stopPropagation();
             copyToClipboard(item.seed, e.currentTarget);
