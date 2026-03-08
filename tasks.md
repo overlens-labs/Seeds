@@ -7,8 +7,8 @@
 - [x] Criar variáveis CSS globais: `--color-bg`, `--color-surface`, `--color-text`, `--color-accent`, `--font-title`, `--font-body`
 - [x] Revisar contrastes, paddings e espaçamentos gerais
 
-## Fase 2: Categorias e Dados
-- [ ] Atualizar filtros com as categorias reais:
+## Fase 2: Categorias e Dados ✅
+- [x] Atualizar filtros com as categorias reais:
   - Ilustração
   - Pintura
   - Cinematográfico
@@ -16,8 +16,8 @@
   - Fotografia Abstrata
   - Fotografia Rêtro
   - Fotografia Estilizada
-- [ ] Adicionar seeds reais para cada categoria em `main.js`
-- [ ] Estrutura de dados com: `título`, `categoria`, `prompt completo`, `imagem`
+- [x] Adicionar seeds reais para cada categoria em `main.js` (20 seeds no total)
+- [x] Estrutura de dados com: `título`, `categoria`, `prompt completo`, `imagem`
 
 ## Fase 3: Componentes Interativos
 - [ ] Botão "Copy" muda para "Copied ✅" após clicar (feedback visual)
