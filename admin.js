@@ -126,14 +126,21 @@ function slugify(str) {
 
 function renderCategories() {
     const categories = getCategories();
-    const allTags = getAllTags();
+    const allTags    = getAllTags();
+    const customSeeds = getCustomSeeds();
     const list = document.getElementById('categories-list');
 
-    list.innerHTML = categories.map((cat, index) => `
+    list.innerHTML = categories.map((cat, index) => {
+        const count = customSeeds.filter(s => s.category === cat.slug).length;
+        const countBadge = count > 0
+            ? `<span class="category-count">${count}</span>`
+            : '';
+        return `
         <div class="category-item" data-slug="${cat.slug}" data-index="${index}">
             <div class="category-row">
                 <button class="category-toggle icon-btn" data-action="toggle">▶</button>
                 <span class="category-name">${cat.label}</span>
+                ${countBadge}
                 <div class="category-actions">
                     ${index > 0 ? `<button class="icon-btn" data-action="move-up" title="Mover para cima">↑</button>` : '<span style="width:24px;"></span>'}
                     ${index < categories.length - 1 ? `<button class="icon-btn" data-action="move-down" title="Mover para baixo">↓</button>` : '<span style="width:24px;"></span>'}
@@ -157,7 +164,8 @@ function renderCategories() {
                 </div>
             </div>
         </div>
-    `).join('');
+    `;
+    }).join('');
 
     // Toggle expand/collapse
     list.querySelectorAll('[data-action="toggle"]').forEach(btn => {
@@ -212,7 +220,8 @@ function renderCategories() {
                 item.querySelector('.category-name').textContent :
                 slug;
             if (confirm(`Deletar a categoria "${label}" e todas as suas tags?`)) {
-                deleteCategory(slug);
+                item.classList.add('removing');
+                item.addEventListener('animationend', () => deleteCategory(slug), { once: true });
             }
         });
     });
