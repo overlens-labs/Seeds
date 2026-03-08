@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seed Library — Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Login Overlay -->
+    <div id="login-overlay">
+        <div class="login-box">
+            <div class="login-logo">
+                <h1>Seed Library</h1>
+                <p>Acesso restrito</p>
+            </div>
+            <form id="admin-login-form" class="login-form">
+                <div class="form-group">
+                    <label for="admin-login-user">Usuário</label>
+                    <input type="text" id="admin-login-user" placeholder="admin" autocomplete="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="admin-login-pass">Senha</label>
+                    <input type="password" id="admin-login-pass" placeholder="••••••••" autocomplete="current-password" required>
+                </div>
+                <p class="login-error" id="admin-login-error"></p>
+                <button type="submit" class="btn-primary login-submit">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin App -->
+    <div class="admin-layout" id="admin-app" style="display:none">
+
+        <!-- Admin Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <h1>Seed Library</h1>
+                <p>Painel Admin</p>
+            </div>
+            <nav class="admin-nav">
+                <button class="admin-nav-btn active" data-section="categories">Categorias</button>
+                <button class="admin-nav-btn" data-section="appearance">Aparência</button>
+                <button class="admin-nav-btn" data-section="seeds">Seeds</button>
+            </nav>
+            <div class="admin-sidebar-footer">
+                <a href="index.html" class="admin-back-link">← Ver Galeria</a>
+                <button class="admin-logout-btn" id="admin-logout-btn">Sair</button>
+            </div>
+        </aside>
+
+        <!-- Admin Content -->
+        <main class="admin-content">
+
+            <!-- Categorias -->
+            <section class="admin-section active" id="section-categories">
+                <div class="section-header">
+                    <h2 class="section-title">Categorias</h2>
+                </div>
+                <div id="categories-list"></div>
+                <div class="add-category-form">
+                    <input type="text" id="new-category-input" placeholder="Nome da nova categoria...">
+                    <button class="btn-primary" id="add-category-btn">+ Categoria</button>
+                </div>
+            </section>
+
+            <!-- Aparência -->
+            <section class="admin-section" id="section-appearance">
+                <div class="section-header">
+                    <h2 class="section-title">Aparência</h2>
+                </div>
+                <div class="form-group">
+                    <label for="appearance-title">Título da galeria</label>
+                    <input type="text" id="appearance-title" placeholder="Seed Library">
+                </div>
+                <div class="form-group" style="margin-top:1rem">
+                    <label for="appearance-subtitle">Subtítulo</label>
+                    <input type="text" id="appearance-subtitle" placeholder="Descubra e copie prompts incríveis.">
+                </div>
+                <div class="appearance-preview">
+                    <div class="prev-title" id="preview-title">Seed Library</div>
+                    <div class="prev-subtitle" id="preview-subtitle">Descubra e copie prompts incríveis.</div>
+                </div>
+                <button class="btn-primary" id="save-appearance-btn">Salvar</button>
+            </section>
+
+            <!-- Seeds -->
+            <section class="admin-section" id="section-seeds">
+                <div class="section-header">
+                    <h2 class="section-title">Seeds Customizadas</h2>
+                    <button class="btn-primary" id="open-admin-add-modal">+ Adicionar Seed</button>
+                </div>
+                <div id="admin-seeds-grid" class="admin-gallery"></div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Modal: Adicionar Seed -->
+    <div id="admin-add-modal" class="modal" aria-hidden="true">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2>Adicionar Seed</h2>
+                <button class="modal-close" id="close-admin-add-modal">✕</button>
+            </div>
+            <form id="admin-add-seed-form" class="modal-form">
+                <div class="form-group">
+                    <label for="admin-form-title">Título</label>
+                    <input type="text" id="admin-form-title" placeholder="Ex: Retrato Cinemático" required>
+                </div>
+                <div class="form-group">
+                    <label for="admin-form-category">Categoria</label>
+                    <select id="admin-form-category" required>
+                        <option value="" disabled selected>Selecione...</option>
+                    </select>
+                </div>
+                <div class="form-group" id="admin-form-tag-group" style="display:none">
+                    <label for="admin-form-tag">Tag (opcional)</label>
+                    <select id="admin-form-tag">
+                        <option value="">Sem tag</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="admin-form-image">Imagem</label>
+                    <input type="file" id="admin-form-image" accept="image/*" required>
+                    <div class="img-preview" id="admin-img-preview"></div>
+                </div>
+                <div class="form-group">
+                    <label for="admin-form-seed">Prompt / Seed</label>
+                    <textarea id="admin-form-seed" rows="3" placeholder="--v 6.1 --ar 2:3 --stylize 500 --seed 12345678" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="cancel-admin-add-modal">Cancelar</button>
+                    <button type="submit" class="btn-primary">Adicionar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="admin-toast" class="toast">
+        <span class="toast-icon">✓</span>
+        <span class="toast-message">Salvo!</span>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

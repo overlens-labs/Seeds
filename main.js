@@ -297,15 +297,32 @@ const imagesData = [
     },
 ];
 
-// ─── Category Tags ────────────────────────────────────────
-const CATEGORY_TAGS = {
+// ─── Storage Keys ──────────────────────────────────────────
+const SL_KEYS = {
+    SEEDS:      'seedlibrary_custom',
+    CATEGORIES: 'sl_categories',
+    TAGS:       'sl_tags',
+    LOGO:       'sl_logo',
+};
+
+// ─── Defaults ──────────────────────────────────────────────
+const DEFAULT_CATEGORIES = [
+    { slug: 'ilustracao',      label: 'Ilustração' },
+    { slug: 'pintura',         label: 'Pintura' },
+    { slug: 'cinematografico', label: 'Cinematográfico' },
+    { slug: 'fotografia',      label: 'Fotografia' },
+];
+
+const DEFAULT_TAGS = {
     'ilustracao':      ['Anime', 'Fantasia', 'Sci-Fi', 'Retrato'],
     'pintura':         ['Aquarela', 'Óleo', 'Digital', 'Acrílico'],
     'cinematografico': ['Noir', 'Sci-Fi', 'Drama', 'Terror'],
     'fotografia':      ['3D', 'Abstrata', 'Rêtro', 'Estilizada'],
 };
 
-// Maps fotografia tag → legacy category value (existing seeds)
+const DEFAULT_LOGO = { title: 'Seed Library', subtitle: 'Descubra e copie prompts incríveis.' };
+
+// Maps fotografia tag → legacy category value (backward compat)
 const FOTO_TAG_MAP = {
     '3d':        'fotografia-3d',
     'abstrata':  'fotografia-abstrata',
@@ -313,38 +330,30 @@ const FOTO_TAG_MAP = {
     'estilizada':'fotografia-estilizada',
 };
 
-// ─── LocalStorage: merge default + user seeds ────────────
-const STORAGE_KEY = 'seedlibrary_custom';
+// ─── Storage Helpers ───────────────────────────────────────
+function getCategories() {
+    const stored = localStorage.getItem(SL_KEYS.CATEGORIES);
+    return stored ? JSON.parse(stored) : DEFAULT_CATEGORIES;
+}
+
+function getAllTags() {
+    const stored = localStorage.getItem(SL_KEYS.TAGS);
+    return stored ? JSON.parse(stored) : DEFAULT_TAGS;
+}
+
+function getLogo() {
+    const stored = localStorage.getItem(SL_KEYS.LOGO);
+    return stored ? JSON.parse(stored) : DEFAULT_LOGO;
+}
 
 function loadAllSeeds() {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    const stored = localStorage.getItem(SL_KEYS.SEEDS);
     const custom = stored ? JSON.parse(stored) : [];
     return [...imagesData, ...custom];
 }
 
-function saveCustomSeed(seed) {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    const custom = stored ? JSON.parse(stored) : [];
-    custom.push(seed);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(custom));
-}
-
-function deleteCustomSeed(id) {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    const custom = stored ? JSON.parse(stored) : [];
-    const updated = custom.filter(s => s.id !== id);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-}
-
-function isCustomSeed(id) {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    const custom = stored ? JSON.parse(stored) : [];
-    return custom.some(s => s.id === id);
-}
-
-// ─── DOM refs ────────────────────────────────────────────
+// ─── DOM refs ─────────────────────────────────────────────
 const galleryContainer = document.getElementById('gallery');
-const filterBtns       = document.querySelectorAll('.filter-btn');
 const toast            = document.getElementById('toast');
 const lightbox         = document.getElementById('lightbox');
 const lightboxImg      = document.getElementById('lightbox-img');
@@ -353,50 +362,67 @@ const lightboxCategory = document.getElementById('lightbox-category');
 const lightboxPrompt   = document.getElementById('lightbox-prompt');
 const lightboxCopyBtn  = document.getElementById('lightbox-copy-btn');
 const lightboxClose    = document.getElementById('lightbox-close');
-const addModal         = document.getElementById('add-modal');
-const openAddBtn       = document.getElementById('open-add-modal');
-const closeAddBtn      = document.getElementById('close-add-modal');
-const cancelAddBtn     = document.getElementById('cancel-add-modal');
-const addSeedForm      = document.getElementById('add-seed-form');
-const formImage        = document.getElementById('form-image');
-const imgPreview       = document.getElementById('img-preview');
 const sidebarTags      = document.getElementById('sidebar-tags');
-const loginOverlay     = document.getElementById('login-overlay');
 
 let toastTimeout;
 let currentSeed  = '';
 let activeFilter = 'all';
 let activeTag    = null;
 
-// ─── Auth ─────────────────────────────────────────────────
-const CREDS = { user: 'admin', pass: 'seeds2026' };
+// ─── Filter Buttons (dynamic) ─────────────────────────────
+function renderFilterButtons() {
+    const nav = document.getElementById('sidebar-nav');
+    nav.innerHTML = '';
 
-function checkAuth() {
-    if (sessionStorage.getItem('sl_auth')) {
-        loginOverlay.classList.add('hidden');
-    }
+    const categories = getCategories();
+    const allItems = [{ slug: 'all', label: 'Todos' }, ...categories];
+
+    allItems.forEach(({ slug, label }) => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn' + (activeFilter === slug ? ' active' : '');
+        btn.dataset.filter = slug;
+        btn.textContent = label;
+        btn.addEventListener('click', () => {
+            nav.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeTag = null;
+            activeFilter = slug;
+            if (slug !== 'all') {
+                renderTags(slug);
+            } else {
+                sidebarTags.innerHTML = '';
+            }
+            renderGallery(slug);
+        });
+        nav.appendChild(btn);
+    });
 }
 
-document.getElementById('login-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const user  = document.getElementById('login-user').value.trim();
-    const pass  = document.getElementById('login-pass').value;
-    const errEl = document.getElementById('login-error');
-    if (user === CREDS.user && pass === CREDS.pass) {
-        sessionStorage.setItem('sl_auth', '1');
-        loginOverlay.classList.add('hidden');
-        errEl.textContent = '';
-    } else {
-        errEl.textContent = 'Usuário ou senha incorretos.';
-    }
-});
+// ─── Tags ─────────────────────────────────────────────────
+function renderTags(category) {
+    const allTags = getAllTags();
+    const tags = allTags[category];
+    if (!tags || tags.length === 0) { sidebarTags.innerHTML = ''; return; }
 
-document.getElementById('logout-btn').addEventListener('click', () => {
-    sessionStorage.removeItem('sl_auth');
-    loginOverlay.classList.remove('hidden');
-});
+    const activeBtn = document.querySelector(`#sidebar-nav .filter-btn[data-filter="${category}"]`);
+    if (activeBtn) activeBtn.insertAdjacentElement('afterend', sidebarTags);
 
-// ─── Render ───────────────────────────────────────────────
+    sidebarTags.innerHTML = tags.map(tag =>
+        `<button class="tag-btn${activeTag === tag.toLowerCase() ? ' active' : ''}" data-tag="${tag.toLowerCase()}">${tag}</button>`
+    ).join('');
+
+    sidebarTags.querySelectorAll('.tag-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const tag = btn.getAttribute('data-tag');
+            activeTag = activeTag === tag ? null : tag;
+            renderTags(category);
+            renderGallery(category, activeTag);
+        });
+    });
+}
+
+// ─── Render Gallery ───────────────────────────────────────
 function renderGallery(filter = 'all', tag = null) {
     activeFilter = filter;
     galleryContainer.innerHTML = '';
@@ -415,7 +441,9 @@ function renderGallery(filter = 'all', tag = null) {
             );
         }
     } else {
-        data = all.filter(item => item.category === filter);
+        data = all.filter(item =>
+            item.category === filter || item.category.startsWith(filter + '-')
+        );
         if (tag) {
             data = data.filter(item => item.tag === tag);
         }
@@ -440,20 +468,6 @@ function renderGallery(filter = 'all', tag = null) {
             </div>
         `;
 
-        // Delete button (only for custom seeds)
-        if (isCustomSeed(item.id)) {
-            const delBtn = document.createElement('button');
-            delBtn.className = 'delete-btn';
-            delBtn.title = 'Remover';
-            delBtn.innerHTML = '✕';
-            delBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                deleteCustomSeed(item.id);
-                renderGallery(activeFilter, activeTag);
-            });
-            card.appendChild(delBtn);
-        }
-
         card.querySelector('img').addEventListener('click', () => openLightbox(item));
         card.querySelector('.copy-btn').addEventListener('click', (e) => {
             e.stopPropagation();
@@ -464,53 +478,13 @@ function renderGallery(filter = 'all', tag = null) {
     });
 }
 
-// ─── Tags ─────────────────────────────────────────────────
-function renderTags(category) {
-    const tags = CATEGORY_TAGS[category];
-    if (!tags) { sidebarTags.innerHTML = ''; return; }
-
-    // Reposiciona o bloco de tags logo abaixo do botão ativo
-    const activeBtn = document.querySelector(`.filter-btn[data-filter="${category}"]`);
-    activeBtn.insertAdjacentElement('afterend', sidebarTags);
-
-    sidebarTags.innerHTML = tags.map(tag =>
-        `<button class="tag-btn${activeTag === tag.toLowerCase() ? ' active' : ''}" data-tag="${tag.toLowerCase()}">${tag}</button>`
-    ).join('');
-
-    sidebarTags.querySelectorAll('.tag-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const tag = btn.getAttribute('data-tag');
-            activeTag = activeTag === tag ? null : tag;
-            renderTags(category);
-            renderGallery(category, activeTag);
-        });
-    });
-}
-
-// ─── Filters ──────────────────────────────────────────────
-filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        activeTag = null;
-        const filter = btn.getAttribute('data-filter');
-        if (filter !== 'all') {
-            renderTags(filter);
-        } else {
-            sidebarTags.innerHTML = '';
-        }
-        renderGallery(filter);
-    });
-});
-
 // ─── Lightbox ─────────────────────────────────────────────
 function openLightbox(item) {
-    lightboxImg.src                  = item.url;
-    lightboxImg.alt                  = item.title;
-    lightboxTitle.textContent        = item.title;
-    lightboxCategory.textContent     = item.category.replace(/-/g, ' ');
-    lightboxPrompt.textContent       = item.seed;
+    lightboxImg.src              = item.url;
+    lightboxImg.alt              = item.title;
+    lightboxTitle.textContent    = item.title;
+    lightboxCategory.textContent = item.category.replace(/-/g, ' ');
+    lightboxPrompt.textContent   = item.seed;
     currentSeed = item.seed;
     resetCopyBtn(lightboxCopyBtn);
     lightbox.classList.add('open');
@@ -533,6 +507,10 @@ lightbox.addEventListener('click', (e) => {
 
 lightboxCopyBtn.addEventListener('click', () => {
     copyToClipboard(currentSeed, lightboxCopyBtn, true);
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
 });
 
 // ─── Copy to clipboard ────────────────────────────────────
@@ -583,89 +561,13 @@ function showToast(msg = 'Seed copied!') {
     }, 2000);
 }
 
-// ─── Modal: Adicionar Seed ────────────────────────────────
-function openModal() {
-    addModal.classList.add('open');
-    addModal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-    addModal.classList.remove('open');
-    addModal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-    addSeedForm.reset();
-    imgPreview.innerHTML = '';
-    document.getElementById('form-tag-group').style.display = 'none';
-}
-
-openAddBtn.addEventListener('click', openModal);
-closeAddBtn.addEventListener('click', closeModal);
-cancelAddBtn.addEventListener('click', closeModal);
-
-addModal.addEventListener('click', (e) => {
-    if (e.target === addModal) closeModal();
-});
-
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') { closeLightbox(); closeModal(); }
-});
-
-// Category → populate tag select
-document.getElementById('form-category').addEventListener('change', () => {
-    const cat      = document.getElementById('form-category').value;
-    const tagGroup = document.getElementById('form-tag-group');
-    const tagSelect = document.getElementById('form-tag');
-    const tags     = CATEGORY_TAGS[cat];
-    if (tags) {
-        tagSelect.innerHTML = '<option value="">Sem tag</option>' +
-            tags.map(t => `<option value="${t.toLowerCase()}">${t}</option>`).join('');
-        tagGroup.style.display = 'flex';
-    } else {
-        tagGroup.style.display = 'none';
-    }
-});
-
-// Image file → FileReader preview
-formImage.addEventListener('change', () => {
-    const file = formImage.files[0];
-    if (!file) { imgPreview.innerHTML = ''; return; }
-    const reader = new FileReader();
-    reader.onload = (e) => {
-        imgPreview.innerHTML = `<img src="${e.target.result}" alt="preview">`;
-    };
-    reader.readAsDataURL(file);
-});
-
-// Form submit → save with base64 image
-addSeedForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const file = formImage.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-        const tagVal = document.getElementById('form-tag').value;
-        const newSeed = {
-            id:       Date.now(),
-            title:    document.getElementById('form-title').value.trim(),
-            category: document.getElementById('form-category').value,
-            tag:      tagVal || undefined,
-            url:      ev.target.result,
-            seed:     document.getElementById('form-seed').value.trim(),
-        };
-        saveCustomSeed(newSeed);
-        closeModal();
-        activeTag = null;
-        renderGallery(newSeed.category);
-        renderTags(newSeed.category);
-        filterBtns.forEach(b => {
-            b.classList.toggle('active', b.getAttribute('data-filter') === newSeed.category);
-        });
-        showToast('Seed adicionado!');
-    };
-    reader.readAsDataURL(file);
-});
-
 // ─── Init ─────────────────────────────────────────────────
-checkAuth();
-renderGallery('all');
+function init() {
+    const logo = getLogo();
+    document.getElementById('logo-title').textContent = logo.title;
+    document.getElementById('logo-subtitle').textContent = logo.subtitle;
+    renderFilterButtons();
+    renderGallery('all');
+}
+
+init();

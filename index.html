@@ -11,53 +11,23 @@
 </head>
 <body>
 
-    <!-- Login Overlay -->
-    <div id="login-overlay">
-        <div class="login-box">
-            <div class="login-logo">
-                <h1>Seed Library</h1>
-                <p>Acesso restrito</p>
-            </div>
-            <form id="login-form" class="login-form">
-                <div class="form-group">
-                    <label for="login-user">Usuário</label>
-                    <input type="text" id="login-user" placeholder="admin" autocomplete="username" required>
-                </div>
-                <div class="form-group">
-                    <label for="login-pass">Senha</label>
-                    <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password" required>
-                </div>
-                <p class="login-error" id="login-error"></p>
-                <button type="submit" class="btn-primary login-submit">Entrar</button>
-            </form>
-        </div>
-    </div>
-
     <div class="app-layout">
 
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-logo">
-                <h1>Seed Library</h1>
-                <p>Descubra e copie prompts incríveis.</p>
+                <h1 id="logo-title">Seed Library</h1>
+                <p id="logo-subtitle">Descubra e copie prompts incríveis.</p>
             </div>
-            <nav class="sidebar-nav">
-                <button class="filter-btn active" data-filter="all">Todos</button>
-                <button class="filter-btn" data-filter="ilustracao">Ilustração</button>
-                <button class="filter-btn" data-filter="pintura">Pintura</button>
-                <button class="filter-btn" data-filter="cinematografico">Cinematográfico</button>
-                <button class="filter-btn" data-filter="fotografia">Fotografia</button>
-            </nav>
+            <nav id="sidebar-nav" class="sidebar-nav"></nav>
             <div id="sidebar-tags" class="sidebar-tags"></div>
-            <button class="add-btn" id="open-add-modal">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
-                Adicionar Seed
-            </button>
-            <div class="sidebar-footer">
-                <button class="logout-btn" id="logout-btn">Sair</button>
+            <div class="sidebar-public-footer">
+                <a href="admin.html" class="admin-gear-link" title="Administração">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                </a>
             </div>
         </aside>
 
@@ -83,51 +53,6 @@
                     Copy Seed
                 </button>
             </div>
-        </div>
-    </div>
-
-    <!-- Modal: Adicionar Seed -->
-    <div id="add-modal" class="modal" aria-hidden="true">
-        <div class="modal-box">
-            <div class="modal-header">
-                <h2>Adicionar Seed</h2>
-                <button class="modal-close" id="close-add-modal">✕</button>
-            </div>
-            <form id="add-seed-form" class="modal-form">
-                <div class="form-group">
-                    <label for="form-title">Título</label>
-                    <input type="text" id="form-title" placeholder="Ex: Retrato Cinemático" required>
-                </div>
-                <div class="form-group">
-                    <label for="form-category">Categoria</label>
-                    <select id="form-category" required>
-                        <option value="" disabled selected>Selecione...</option>
-                        <option value="ilustracao">Ilustração</option>
-                        <option value="pintura">Pintura</option>
-                        <option value="cinematografico">Cinematográfico</option>
-                        <option value="fotografia">Fotografia</option>
-                    </select>
-                </div>
-                <div class="form-group" id="form-tag-group" style="display:none">
-                    <label for="form-tag">Tag (opcional)</label>
-                    <select id="form-tag">
-                        <option value="">Sem tag</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="form-image">Imagem</label>
-                    <input type="file" id="form-image" accept="image/*" required>
-                    <div class="img-preview" id="img-preview"></div>
-                </div>
-                <div class="form-group">
-                    <label for="form-seed">Prompt / Seed</label>
-                    <textarea id="form-seed" rows="3" placeholder="--v 6.1 --ar 2:3 --stylize 500 --seed 12345678" required></textarea>
-                </div>
-                <div class="form-actions">
-                    <button type="button" class="btn-secondary" id="cancel-add-modal">Cancelar</button>
-                    <button type="submit" class="btn-primary">Adicionar</button>
-                </div>
-            </form>
         </div>
     </div>
 
