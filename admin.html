@@ -50,6 +50,15 @@
                 <button class="admin-nav-btn" data-section="seeds">Seeds</button>
             </nav>
             <div class="admin-sidebar-footer">
+                <div class="storage-bar-wrap">
+                    <div class="storage-bar-header">
+                        <span>Storage</span>
+                        <span id="storage-bar-pct">–</span>
+                    </div>
+                    <div class="storage-bar-track">
+                        <div class="storage-bar-fill" id="storage-bar-fill"></div>
+                    </div>
+                </div>
                 <a href="index.html" class="admin-back-link">← Ver Galeria</a>
                 <button class="admin-logout-btn" id="admin-logout-btn">Sair</button>
             </div>
@@ -97,6 +106,7 @@
                     <div class="section-header-actions">
                         <button class="btn-secondary" id="import-seeds-btn">↑ Importar</button>
                         <button class="btn-secondary" id="export-seeds-btn">↓ Exportar</button>
+                        <button class="btn-secondary" id="restore-backup-btn">↺ Restaurar</button>
                         <button class="btn-primary" id="open-admin-add-modal">+ Adicionar Seed</button>
                     </div>
                 </div>
@@ -105,6 +115,7 @@
                 </div>
                 <div id="admin-seeds-grid" class="admin-gallery"></div>
                 <input type="file" id="import-file-input" accept="image/*" multiple style="display:none">
+                <input type="file" id="restore-file-input" accept=".json" style="display:none">
             </section>
 
         </main>

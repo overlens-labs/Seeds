@@ -303,6 +303,7 @@ const SL_KEYS = {
     CATEGORIES: 'sl_categories',
     TAGS:       'sl_tags',
     LOGO:       'sl_logo',
+    FAVS:       'sl_favorites',
 };
 
 // ─── Defaults ──────────────────────────────────────────────
@@ -355,52 +356,132 @@ function shuffle(arr) {
     return a;
 }
 
+// ─── Seeds cache (shuffled once, preserved across filters) ─
+let _seedsCache = null;
+
+function resetSeedsCache() { _seedsCache = null; }
+
 function loadAllSeeds() {
-    const stored = localStorage.getItem(SL_KEYS.SEEDS);
-    const custom = stored ? JSON.parse(stored) : [];
-    return shuffle([...custom, ...imagesData]);
+    if (!_seedsCache) {
+        const stored = localStorage.getItem(SL_KEYS.SEEDS);
+        const custom = stored ? JSON.parse(stored) : [];
+        _seedsCache = shuffle([...custom, ...imagesData]);
+    }
+    return _seedsCache;
+}
+
+// ─── Favorites ─────────────────────────────────────────────
+function getFavorites() {
+    const stored = localStorage.getItem(SL_KEYS.FAVS);
+    return stored ? JSON.parse(stored) : [];
+}
+
+function isFavorite(id) {
+    return getFavorites().includes(id);
+}
+
+function toggleFavorite(id) {
+    const favs = getFavorites();
+    const idx = favs.indexOf(id);
+    if (idx === -1) favs.push(id);
+    else favs.splice(idx, 1);
+    localStorage.setItem(SL_KEYS.FAVS, JSON.stringify(favs));
+    return idx === -1; // true = added
+}
+
+// ─── Seed Param Parser ─────────────────────────────────────
+function parseSeedParams(seed) {
+    const patterns = [
+        { regex: /--v\s+([\d.]+)/i,        label: 'v' },
+        { regex: /--ar\s+([\d:]+)/i,        label: 'ar' },
+        { regex: /--stylize\s+(\d+)/i,      label: 's' },
+        { regex: /\s--s\s+(\d+)/i,          label: 's' },
+        { regex: /--chaos\s+(\d+)/i,        label: 'chaos' },
+        { regex: /--sref\s+(\d+)/i,         label: 'sref' },
+        { regex: /--style\s+([\w-]+)/i,     label: 'style' },
+        { regex: /--seed\s+(\d+)/i,         label: 'seed' },
+        { regex: /--profile\s+([\w-]+)/i,   label: 'profile' },
+        { regex: /--iw\s+([\d.]+)/i,        label: 'iw' },
+    ];
+    const seen = new Set();
+    return patterns.reduce((acc, { regex, label }) => {
+        if (seen.has(label)) return acc;
+        const m = seed.match(regex);
+        if (m) { seen.add(label); acc.push({ label, value: m[1] }); }
+        return acc;
+    }, []);
 }
 
 // ─── DOM refs ─────────────────────────────────────────────
-const galleryContainer = document.getElementById('gallery');
-const toast            = document.getElementById('toast');
-const lightbox         = document.getElementById('lightbox');
-const lightboxImg      = document.getElementById('lightbox-img');
+const galleryContainer    = document.getElementById('gallery');
+const toast               = document.getElementById('toast');
+const lightbox            = document.getElementById('lightbox');
+const lightboxImg         = document.getElementById('lightbox-img');
 const lightboxCategory    = document.getElementById('lightbox-category');
+const lightboxParams      = document.getElementById('lightbox-params');
 const lightboxPrompt      = document.getElementById('lightbox-prompt');
 const lightboxCopyBtn     = document.getElementById('lightbox-copy-btn');
 const lightboxDownloadBtn = document.getElementById('lightbox-download-btn');
+const lightboxFavBtn      = document.getElementById('lightbox-fav-btn');
+const lightboxShareBtn    = document.getElementById('lightbox-share-btn');
 const lightboxClose       = document.getElementById('lightbox-close');
 const lightboxPrev        = document.getElementById('lightbox-prev');
 const lightboxNext        = document.getElementById('lightbox-next');
-const sidebarTags      = document.getElementById('sidebar-tags');
+const sidebarTags         = document.getElementById('sidebar-tags');
 
 let toastTimeout;
-let currentSeed  = '';
-let activeFilter = 'all';
-let activeTag    = null;
-let currentData  = [];
-let currentIndex = 0;
+let currentSeed    = '';
+let currentItemId  = null;
+let activeFilter   = 'all';
+let activeTag      = null;
+let currentData    = [];
+let currentIndex   = 0;
+let searchQuery    = '';
 
 // ─── Filter Buttons (dynamic) ─────────────────────────────
+function countForCategory(all, slug) {
+    if (slug === 'all') return all.length;
+    if (slug === 'favorites') return all.filter(s => isFavorite(s.id)).length;
+    return all.filter(item =>
+        item.category === slug || item.category.startsWith(slug + '-')
+    ).length;
+}
+
 function renderFilterButtons() {
     const nav = document.getElementById('sidebar-nav');
     nav.innerHTML = '';
 
     const categories = getCategories();
-    const allItems = [{ slug: 'all', label: 'Todos' }, ...categories];
+    const all = loadAllSeeds();
+    const allItems = [
+        { slug: 'all',       label: 'Todos' },
+        { slug: 'favorites', label: 'Favoritos' },
+        ...categories,
+    ];
 
     allItems.forEach(({ slug, label }) => {
+        const count = countForCategory(all, slug);
         const btn = document.createElement('button');
         btn.className = 'filter-btn' + (activeFilter === slug ? ' active' : '');
         btn.dataset.filter = slug;
-        btn.textContent = label;
+
+        const labelSpan = document.createElement('span');
+        labelSpan.textContent = label;
+        btn.appendChild(labelSpan);
+
+        if (count > 0) {
+            const badge = document.createElement('span');
+            badge.className = 'filter-count';
+            badge.textContent = count;
+            btn.appendChild(badge);
+        }
+
         btn.addEventListener('click', () => {
             nav.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             activeTag = null;
             activeFilter = slug;
-            if (slug !== 'all') {
+            if (slug !== 'all' && slug !== 'favorites') {
                 renderTags(slug);
             } else {
                 sidebarTags.innerHTML = '';
@@ -441,8 +522,12 @@ function renderGallery(filter = 'all', tag = null) {
     galleryContainer.innerHTML = '';
 
     const all = loadAllSeeds();
+    const favs = getFavorites();
     let data;
-    if (filter === 'all') {
+
+    if (filter === 'favorites') {
+        data = all.filter(item => favs.includes(item.id));
+    } else if (filter === 'all') {
         data = all;
     } else if (filter === 'fotografia') {
         data = all.filter(item =>
@@ -462,13 +547,29 @@ function renderGallery(filter = 'all', tag = null) {
         }
     }
 
+    // Apply search filter
+    if (searchQuery) {
+        const q = searchQuery.toLowerCase();
+        data = data.filter(item => item.seed.toLowerCase().includes(q));
+    }
+
     currentData = data;
 
+    if (data.length === 0) {
+        galleryContainer.innerHTML = `
+            <div style="grid-column:1/-1;text-align:center;padding:4rem 1rem;color:#555;font-family:var(--font-title);font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em;">
+                ${searchQuery ? `Nenhum resultado para "<strong style="color:#777">${searchQuery}</strong>"` : 'Nenhuma seed aqui ainda.'}
+            </div>`;
+        return;
+    }
+
     data.forEach(item => {
+        const isFav = favs.includes(item.id);
         const card = document.createElement('div');
-        card.className = 'card';
+        card.className = 'card' + (isFav ? ' favorited' : '');
         card.dataset.id = item.id;
         card.innerHTML = `
+            <span class="card-heart">♥</span>
             <img src="${item.url}" alt="${item.title}" loading="lazy">
             <div class="card-overlay">
                 <button class="copy-btn">
@@ -506,9 +607,24 @@ function showLightboxItem(item) {
     lightboxPrompt.textContent   = item.seed;
     lightboxDownloadBtn.dataset.url      = item.url;
     lightboxDownloadBtn.dataset.filename = item.title || 'seed';
-    currentSeed = item.seed;
+    currentSeed   = item.seed;
+    currentItemId = item.id;
     lightbox.style.setProperty('--lb-bg', `url("${item.url.replace(/"/g, '\\"')}")`);
     resetCopyBtn(lightboxCopyBtn);
+
+    // Param badges
+    const params = parseSeedParams(item.seed);
+    lightboxParams.innerHTML = params
+        .map(p => `<span class="param-badge">${p.label}<b>${p.value}</b></span>`)
+        .join('');
+
+    // Fav button state
+    const faved = isFavorite(item.id);
+    lightboxFavBtn.classList.toggle('active', faved);
+    lightboxFavBtn.querySelector('.fav-btn-text').textContent = faved ? 'Favoritado' : 'Favoritar';
+
+    // Update URL hash
+    history.replaceState(null, '', '#seed-' + item.id);
 }
 
 function openLightbox(item) {
@@ -528,6 +644,7 @@ function closeLightbox() {
     lightbox.classList.remove('open');
     lightbox.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    history.replaceState(null, '', location.pathname);
     setTimeout(() => { lightboxImg.src = ''; }, 300);
 }
 
@@ -566,6 +683,53 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape')     closeLightbox();
     if (e.key === 'ArrowLeft')  navigateLightbox(-1);
     if (e.key === 'ArrowRight') navigateLightbox(1);
+});
+
+// ─── Swipe mobile ──────────────────────────────────────────
+let _touchX = 0, _touchY = 0;
+lightbox.addEventListener('touchstart', (e) => {
+    _touchX = e.touches[0].clientX;
+    _touchY = e.touches[0].clientY;
+}, { passive: true });
+
+lightbox.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - _touchX;
+    const dy = e.changedTouches[0].clientY - _touchY;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 48) {
+        navigateLightbox(dx < 0 ? 1 : -1);
+    }
+}, { passive: true });
+
+// ─── Favorite ──────────────────────────────────────────────
+lightboxFavBtn.addEventListener('click', () => {
+    if (currentItemId === null) return;
+    const added = toggleFavorite(currentItemId);
+    lightboxFavBtn.classList.toggle('active', added);
+    lightboxFavBtn.querySelector('.fav-btn-text').textContent = added ? 'Favoritado' : 'Favoritar';
+    // Update card heart in gallery
+    const card = galleryContainer.querySelector(`.card[data-id="${currentItemId}"]`);
+    if (card) card.classList.toggle('favorited', added);
+    // Update sidebar counts
+    renderFilterButtons();
+    showToast(added ? 'Adicionado aos favoritos!' : 'Removido dos favoritos!');
+});
+
+// ─── Share ─────────────────────────────────────────────────
+lightboxShareBtn.addEventListener('click', () => {
+    const url = location.origin + location.pathname + '#seed-' + currentItemId;
+    navigator.clipboard.writeText(url).then(() => showToast('Link copiado!')).catch(() => {
+        prompt('Copie o link:', url);
+    });
+});
+
+// ─── Gallery Search ────────────────────────────────────────
+let _searchDebounce;
+document.getElementById('gallery-search').addEventListener('input', (e) => {
+    clearTimeout(_searchDebounce);
+    _searchDebounce = setTimeout(() => {
+        searchQuery = e.target.value.trim().toLowerCase();
+        renderGallery(activeFilter, activeTag);
+    }, 220);
 });
 
 // ─── Copy to clipboard ────────────────────────────────────
@@ -645,10 +809,28 @@ window.addEventListener('storage', (e) => {
     } else if (e.key === SL_KEYS.CATEGORIES) {
         renderFilterButtons();
         renderGallery(activeFilter, activeTag);
-    } else if (e.key === SL_KEYS.TAGS || e.key === SL_KEYS.SEEDS) {
+    } else if (e.key === SL_KEYS.SEEDS) {
+        resetSeedsCache();
+        renderFilterButtons();
+        renderGallery(activeFilter, activeTag);
+    } else if (e.key === SL_KEYS.TAGS) {
+        renderGallery(activeFilter, activeTag);
+    } else if (e.key === SL_KEYS.FAVS) {
+        renderFilterButtons();
         renderGallery(activeFilter, activeTag);
     }
 });
+
+// ─── Hash Navigation ───────────────────────────────────────
+function checkHashNavigation() {
+    const hash = location.hash;
+    if (!hash.startsWith('#seed-')) return;
+    const rawId = hash.replace('#seed-', '');
+    const numId = Number(rawId);
+    const all = loadAllSeeds();
+    const item = all.find(s => s.id === numId || String(s.id) === rawId);
+    if (item) setTimeout(() => openLightbox(item), 80);
+}
 
 // ─── Init ─────────────────────────────────────────────────
 function init() {
@@ -657,6 +839,11 @@ function init() {
     document.getElementById('logo-subtitle').textContent = logo.subtitle;
     renderFilterButtons();
     renderGallery('all');
+    checkHashNavigation();
+
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+    }
 }
 
 init();

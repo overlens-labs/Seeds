@@ -108,11 +108,25 @@ document.getElementById('admin-logout-btn').addEventListener('click', () => {
     document.getElementById('admin-login-error').textContent = '';
 });
 
+// ─── Storage Bar ───────────────────────────────────────────
+function updateStorageBar() {
+    const pct  = Math.min(100, storageUsedPercent());
+    const fill = document.getElementById('storage-bar-fill');
+    const label = document.getElementById('storage-bar-pct');
+    if (!fill || !label) return;
+    fill.style.width = pct + '%';
+    label.textContent = Math.round(pct) + '%';
+    fill.classList.remove('warn', 'danger');
+    if (pct > 80)      fill.classList.add('danger');
+    else if (pct > 60) fill.classList.add('warn');
+}
+
 // ─── Init Admin ────────────────────────────────────────────
 function initAdmin() {
     renderCategories();
     initAppearanceForm();
     renderCustomSeeds();
+    updateStorageBar();
 }
 
 // ─── Navigation ────────────────────────────────────────────
@@ -639,6 +653,41 @@ document.getElementById('export-seeds-btn').addEventListener('click', () => {
     showToast('Backup exportado!');
 });
 
+// ─── Restore Backup (JSON) ─────────────────────────────────
+document.getElementById('restore-backup-btn').addEventListener('click', () => {
+    document.getElementById('restore-file-input').click();
+});
+
+document.getElementById('restore-file-input').addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    e.target.value = '';
+
+    let backup;
+    try {
+        backup = JSON.parse(await file.text());
+    } catch {
+        showToast('Arquivo JSON inválido!');
+        return;
+    }
+
+    if (!backup.version || !Array.isArray(backup.seeds)) {
+        showToast('Formato de backup inválido!');
+        return;
+    }
+
+    const dateStr = backup.exportedAt ? backup.exportedAt.slice(0, 10) : 'data desconhecida';
+    if (!confirm(`Restaurar backup de ${dateStr}?\n\nIsso substituirá categorias, tags, aparência e seeds atuais.`)) return;
+
+    if (Array.isArray(backup.categories)) saveCategories(backup.categories);
+    if (backup.tags && typeof backup.tags === 'object') saveTags(backup.tags);
+    if (backup.logo && backup.logo.title) saveLogo(backup.logo);
+    if (Array.isArray(backup.seeds)) saveCustomSeeds(backup.seeds);
+
+    initAdmin();
+    showToast(`Backup restaurado! ${backup.seeds.length} seed(s).`);
+});
+
 // ─── Import Images ──────────────────────────────────────────
 let pendingImports = [];
 
@@ -755,6 +804,7 @@ document.getElementById('save-import-btn').addEventListener('click', () => {
         closeImportModal();
         renderCustomSeeds();
         showToast(`${saved} imagem(ns) importada(s)!`);
+        updateStorageBar();
         warnIfStorageFull();
     } catch (err) {
         if (err.name === 'QuotaExceededError') {
@@ -900,6 +950,7 @@ adminAddSeedForm.addEventListener('submit', async (e) => {
         closeAddSeedModal();
         renderCustomSeeds();
         showToast('Seed adicionada!');
+        updateStorageBar();
         warnIfStorageFull();
     } catch (err) {
         if (err.name === 'QuotaExceededError') {

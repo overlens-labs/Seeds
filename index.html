@@ -13,6 +13,8 @@
     <meta name="twitter:title" content="Seed Library">
     <meta name="twitter:description" content="Descubra e copie prompts incríveis para geração de imagens com IA.">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -27,6 +29,9 @@
             <div class="sidebar-logo">
                 <h1 id="logo-title">Seed Library</h1>
                 <p id="logo-subtitle">Descubra e copie prompts incríveis.</p>
+            </div>
+            <div class="sidebar-search">
+                <input type="text" id="gallery-search" placeholder="Buscar prompt..." autocomplete="off">
             </div>
             <nav id="sidebar-nav" class="sidebar-nav"></nav>
             <div id="sidebar-tags" class="sidebar-tags"></div>
@@ -69,6 +74,7 @@
                 <div class="lightbox-meta">
                     <span class="lightbox-category" id="lightbox-category"></span>
                 </div>
+                <div class="lightbox-params" id="lightbox-params"></div>
                 <p class="lightbox-prompt" id="lightbox-prompt"></p>
                 <div class="lightbox-actions">
                     <button class="lightbox-copy-btn" id="lightbox-copy-btn">
@@ -85,6 +91,22 @@
                             <line x1="12" y1="15" x2="12" y2="3"></line>
                         </svg>
                         Download
+                    </button>
+                    <button class="lightbox-fav-btn" id="lightbox-fav-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                        <span class="fav-btn-text">Favoritar</span>
+                    </button>
+                    <button class="lightbox-share-btn" id="lightbox-share-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="18" cy="5" r="3"></circle>
+                            <circle cx="6" cy="12" r="3"></circle>
+                            <circle cx="18" cy="19" r="3"></circle>
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                        </svg>
+                        Compartilhar
                     </button>
                 </div>
             </div>
