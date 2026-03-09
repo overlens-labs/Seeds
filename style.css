@@ -231,19 +231,31 @@ body.sidebar-collapsed .sidebar-toggle {
 /* ─── Card Favorited ─────────────────────────────────────── */
 .card-heart {
     position: absolute;
-    top: 0.6rem;
-    right: 0.6rem;
-    color: #ef4444;
-    font-size: 1.15rem;
-    line-height: 1;
-    z-index: 3;
+    top: 0.55rem;
+    right: 0.55rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.22);
     display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
     pointer-events: none;
-    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.6));
 }
 
 .card.favorited .card-heart {
-    display: block;
+    display: flex;
+}
+
+.card-heart .material-symbols-rounded {
+    font-size: 1.35rem;
+    color: #fff;
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    line-height: 1;
 }
 
 /* ─── Card Overlay ───────────────────────────────────────── */

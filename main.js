@@ -593,7 +593,7 @@ function renderGallery(filter = 'all', tag = null) {
         card.className = 'card' + (isFav ? ' favorited' : '');
         card.dataset.id = item.id;
         card.innerHTML = `
-            <span class="card-heart">♥</span>
+            <span class="card-heart"><span class="material-symbols-rounded">favorite</span></span>
             <img src="${item.url}" alt="${item.title}" loading="lazy">
             <div class="card-overlay">
                 <button class="copy-btn">
