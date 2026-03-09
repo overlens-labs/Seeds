@@ -346,10 +346,19 @@ function getLogo() {
     return stored ? JSON.parse(stored) : DEFAULT_LOGO;
 }
 
+function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
 function loadAllSeeds() {
     const stored = localStorage.getItem(SL_KEYS.SEEDS);
     const custom = stored ? JSON.parse(stored) : [];
-    return [...imagesData, ...custom];
+    return shuffle([...custom, ...imagesData]);
 }
 
 // ─── DOM refs ─────────────────────────────────────────────
@@ -357,17 +366,21 @@ const galleryContainer = document.getElementById('gallery');
 const toast            = document.getElementById('toast');
 const lightbox         = document.getElementById('lightbox');
 const lightboxImg      = document.getElementById('lightbox-img');
-const lightboxTitle    = document.getElementById('lightbox-title');
-const lightboxCategory = document.getElementById('lightbox-category');
-const lightboxPrompt   = document.getElementById('lightbox-prompt');
-const lightboxCopyBtn  = document.getElementById('lightbox-copy-btn');
-const lightboxClose    = document.getElementById('lightbox-close');
+const lightboxCategory    = document.getElementById('lightbox-category');
+const lightboxPrompt      = document.getElementById('lightbox-prompt');
+const lightboxCopyBtn     = document.getElementById('lightbox-copy-btn');
+const lightboxDownloadBtn = document.getElementById('lightbox-download-btn');
+const lightboxClose       = document.getElementById('lightbox-close');
+const lightboxPrev        = document.getElementById('lightbox-prev');
+const lightboxNext        = document.getElementById('lightbox-next');
 const sidebarTags      = document.getElementById('sidebar-tags');
 
 let toastTimeout;
 let currentSeed  = '';
 let activeFilter = 'all';
 let activeTag    = null;
+let currentData  = [];
+let currentIndex = 0;
 
 // ─── Filter Buttons (dynamic) ─────────────────────────────
 function renderFilterButtons() {
@@ -449,15 +462,14 @@ function renderGallery(filter = 'all', tag = null) {
         }
     }
 
+    currentData = data;
+
     data.forEach(item => {
         const card = document.createElement('div');
         card.className = 'card';
         card.dataset.id = item.id;
         card.innerHTML = `
             <img src="${item.url}" alt="${item.title}" loading="lazy">
-            <div class="card-prompt-strip">
-                <p class="card-prompt-preview">${item.seed}</p>
-            </div>
             <div class="card-overlay">
                 <button class="copy-btn">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -479,20 +491,37 @@ function renderGallery(filter = 'all', tag = null) {
     });
 }
 
+// ─── Category Label ────────────────────────────────────────
+function getCategoryLabel(slug) {
+    const cats = getCategories();
+    const cat = cats.find(c => slug === c.slug || slug.startsWith(c.slug + '-'));
+    return cat ? cat.label : slug.replace(/-/g, ' ');
+}
+
 // ─── Lightbox ─────────────────────────────────────────────
-function openLightbox(item) {
+function showLightboxItem(item) {
     lightboxImg.src              = item.url;
     lightboxImg.alt              = item.title;
-    lightboxTitle.textContent    = item.title;
-    lightboxCategory.textContent = item.category.replace(/-/g, ' ');
+    lightboxCategory.textContent = getCategoryLabel(item.category);
     lightboxPrompt.textContent   = item.seed;
+    lightboxDownloadBtn.dataset.url      = item.url;
+    lightboxDownloadBtn.dataset.filename = item.title || 'seed';
     currentSeed = item.seed;
-    // blurred image background via CSS custom property
     lightbox.style.setProperty('--lb-bg', `url("${item.url.replace(/"/g, '\\"')}")`);
     resetCopyBtn(lightboxCopyBtn);
+}
+
+function openLightbox(item) {
+    currentIndex = currentData.findIndex(d => d.id === item.id);
+    showLightboxItem(item);
     lightbox.classList.add('open');
     lightbox.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+}
+
+function navigateLightbox(dir) {
+    currentIndex = (currentIndex + dir + currentData.length) % currentData.length;
+    showLightboxItem(currentData[currentIndex]);
 }
 
 function closeLightbox() {
@@ -512,8 +541,31 @@ lightboxCopyBtn.addEventListener('click', () => {
     copyToClipboard(currentSeed, lightboxCopyBtn, true);
 });
 
+lightboxDownloadBtn.addEventListener('click', () => {
+    const filename = lightboxDownloadBtn.dataset.filename;
+    try {
+        const canvas = document.createElement('canvas');
+        canvas.width  = lightboxImg.naturalWidth;
+        canvas.height = lightboxImg.naturalHeight;
+        canvas.getContext('2d').drawImage(lightboxImg, 0, 0);
+        const dataUrl = canvas.toDataURL('image/png');
+        const a = document.createElement('a');
+        a.href = dataUrl;
+        a.download = filename + '.png';
+        a.click();
+    } catch (e) {
+        window.open(lightboxDownloadBtn.dataset.url);
+    }
+});
+
+lightboxPrev.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(-1); });
+lightboxNext.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(1); });
+
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeLightbox();
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape')     closeLightbox();
+    if (e.key === 'ArrowLeft')  navigateLightbox(-1);
+    if (e.key === 'ArrowRight') navigateLightbox(1);
 });
 
 // ─── Copy to clipboard ────────────────────────────────────

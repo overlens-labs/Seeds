@@ -447,7 +447,7 @@ function renderCustomSeeds(query = '') {
     const allSeeds = getCustomSeeds();
     const grid     = document.getElementById('admin-seeds-grid');
     const q        = query.toLowerCase().trim();
-    const seeds    = q ? allSeeds.filter(s => s.title.toLowerCase().includes(q)) : allSeeds;
+    const seeds    = q ? allSeeds.filter(s => s.seed.toLowerCase().includes(q)) : allSeeds;
 
     if (allSeeds.length === 0) {
         grid.innerHTML = `
@@ -470,9 +470,8 @@ function renderCustomSeeds(query = '') {
 
     grid.innerHTML = seeds.map(seed => `
         <div class="admin-card" data-id="${seed.id}">
-            <img src="${seed.url}" alt="${seed.title}" loading="lazy" class="admin-card-img">
+            <img src="${seed.url}" alt="" loading="lazy" class="admin-card-img">
             <div class="admin-card-info">
-                <div class="admin-card-title">${seed.title}</div>
                 <div class="admin-card-meta">${seed.category}${seed.tag ? ' · ' + seed.tag : ''}</div>
             </div>
             <div class="admin-card-actions">
@@ -558,9 +557,8 @@ const editFormTagGrp     = document.getElementById('edit-form-tag-group');
 
 function openEditSeedModal(seed) {
     const categories = getCategories();
-    document.getElementById('edit-form-id').value    = seed.id;
-    document.getElementById('edit-form-title').value = seed.title;
-    document.getElementById('edit-form-seed').value  = seed.seed;
+    document.getElementById('edit-form-id').value   = seed.id;
+    document.getElementById('edit-form-seed').value = seed.seed;
 
     editFormCat.innerHTML = '<option value="" disabled>Selecione...</option>' +
         categories.map(c => `<option value="${c.slug}"${c.slug === seed.category ? ' selected' : ''}>${c.label}</option>`).join('');
@@ -611,7 +609,6 @@ adminEditSeedForm.addEventListener('submit', (e) => {
 
     seeds[index] = {
         ...seeds[index],
-        title:    document.getElementById('edit-form-title').value.trim(),
         category: editFormCat.value,
         tag:      editFormTag.value || undefined,
         seed:     document.getElementById('edit-form-seed').value.trim(),
@@ -642,32 +639,130 @@ document.getElementById('export-seeds-btn').addEventListener('click', () => {
     showToast('Backup exportado!');
 });
 
+// ─── Import Images ──────────────────────────────────────────
+let pendingImports = [];
+
 document.getElementById('import-seeds-btn').addEventListener('click', () => {
     document.getElementById('import-file-input').click();
 });
 
-document.getElementById('import-file-input').addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-        try {
-            const data = JSON.parse(ev.target.result);
-            if (!data.seeds || !Array.isArray(data.seeds)) throw new Error('Formato inválido');
-            if (!confirm(`Importar ${data.seeds.length} seeds? Isso substituirá as categorias e tags atuais.`)) return;
-            if (data.categories) saveCategories(data.categories);
-            if (data.tags)       saveTags(data.tags);
-            if (data.logo)       saveLogo(data.logo);
-            saveCustomSeeds(data.seeds);
-            renderCategories();
-            renderCustomSeeds();
-            showToast(`${data.seeds.length} seeds importadas!`);
-        } catch {
-            showToast('Erro ao importar JSON!');
+document.getElementById('import-file-input').addEventListener('change', async (e) => {
+    const files = Array.from(e.target.files);
+    if (!files.length) return;
+    e.target.value = '';
+    openImportModal(files);
+});
+
+async function openImportModal(files) {
+    const modal = document.getElementById('admin-import-modal');
+    const list  = document.getElementById('import-images-list');
+    list.innerHTML = '<div style="padding:1rem;color:#666;font-size:0.85rem">Processando imagens…</div>';
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+
+    const cats = getCategories();
+    const catOptions = cats.map(c => `<option value="${c.slug}">${c.label}</option>`).join('');
+
+    const dataUrls = await Promise.all(files.map(f => compressImage(f)));
+    pendingImports = dataUrls.map((url, i) => ({ dataUrl: url, name: files[i].name }));
+
+    list.innerHTML = pendingImports.map((item, i) => `
+        <div class="import-item" data-index="${i}">
+            <img src="${item.dataUrl}" class="import-item-thumb" alt="">
+            <div class="import-item-fields">
+                <div class="import-item-row">
+                    <div class="form-group">
+                        <label>Categoria</label>
+                        <select class="import-cat-select">
+                            <option value="" disabled selected>Selecione…</option>
+                            ${catOptions}
+                        </select>
+                    </div>
+                    <div class="form-group import-tag-group" style="display:none">
+                        <label>Tag</label>
+                        <select class="import-tag-select">
+                            <option value="">Sem tag</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Seed / Prompt</label>
+                    <textarea class="import-seed-input" rows="2" placeholder="--v 6.1 --ar 2:3 …"></textarea>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    list.querySelectorAll('.import-cat-select').forEach(select => {
+        select.addEventListener('change', () => {
+            const item   = select.closest('.import-item');
+            const tagGrp = item.querySelector('.import-tag-group');
+            const tagSel = item.querySelector('.import-tag-select');
+            const tags   = getAllTags()[select.value] || [];
+            if (tags.length > 0) {
+                tagSel.innerHTML = '<option value="">Sem tag</option>' +
+                    tags.map(t => `<option value="${t.toLowerCase()}">${t}</option>`).join('');
+                tagGrp.style.display = 'flex';
+            } else {
+                tagGrp.style.display = 'none';
+            }
+        });
+    });
+}
+
+function closeImportModal() {
+    const modal = document.getElementById('admin-import-modal');
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    pendingImports = [];
+}
+
+document.getElementById('close-import-modal').addEventListener('click', closeImportModal);
+document.getElementById('cancel-import-modal').addEventListener('click', closeImportModal);
+document.getElementById('admin-import-modal').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('admin-import-modal')) closeImportModal();
+});
+
+document.getElementById('save-import-btn').addEventListener('click', () => {
+    const items  = document.querySelectorAll('.import-item');
+    const seeds  = getCustomSeeds();
+    let saved    = 0;
+
+    items.forEach((item, i) => {
+        const catSel  = item.querySelector('.import-cat-select');
+        const tagSel  = item.querySelector('.import-tag-select');
+        const seedInp = item.querySelector('.import-seed-input');
+        if (!catSel.value) return;
+
+        const seedText = seedInp.value.trim();
+        seeds.push({
+            id:       Date.now() + i,
+            title:    seedText.split(' ').slice(0, 4).join(' ') || 'seed',
+            category: catSel.value,
+            tag:      tagSel.value || undefined,
+            url:      pendingImports[i].dataUrl,
+            seed:     seedText,
+        });
+        saved++;
+    });
+
+    if (saved === 0) { showToast('Selecione ao menos uma categoria!'); return; }
+
+    try {
+        saveCustomSeeds(seeds);
+        closeImportModal();
+        renderCustomSeeds();
+        showToast(`${saved} imagem(ns) importada(s)!`);
+        warnIfStorageFull();
+    } catch (err) {
+        if (err.name === 'QuotaExceededError') {
+            showToast('Armazenamento cheio! Exporte um backup.');
+        } else {
+            showToast('Erro ao salvar.');
         }
-        e.target.value = '';
-    };
-    reader.readAsText(file);
+    }
 });
 
 // ─── Seeds Search ──────────────────────────────────────────
@@ -790,13 +885,14 @@ adminAddSeedForm.addEventListener('submit', async (e) => {
 
     try {
         const tagVal  = adminFormTag.value;
+        const seedText = document.getElementById('admin-form-seed').value.trim();
         const newSeed = {
             id:       Date.now(),
-            title:    document.getElementById('admin-form-title').value.trim(),
+            title:    seedText.split(' ').slice(0, 4).join(' ') || 'seed',
             category: adminFormCat.value,
             tag:      tagVal || undefined,
             url:      dataUrl,
-            seed:     document.getElementById('admin-form-seed').value.trim(),
+            seed:     seedText,
         };
         const seeds = getCustomSeeds();
         seeds.push(newSeed);
@@ -822,6 +918,7 @@ document.addEventListener('keydown', (e) => {
         closeAddSeedModal();
         closeEditSeedModal();
         closeSeedPreview();
+        closeImportModal();
     }
 });
 

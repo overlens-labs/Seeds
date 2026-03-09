@@ -51,21 +51,34 @@
     <!-- Lightbox -->
     <div id="lightbox" class="lightbox" aria-hidden="true">
         <button class="lightbox-close" id="lightbox-close" aria-label="Fechar">✕</button>
+        <button class="lightbox-nav lightbox-nav--prev" id="lightbox-prev">&#8249;</button>
+        <button class="lightbox-nav lightbox-nav--next" id="lightbox-next">&#8250;</button>
         <div class="lightbox-inner">
-            <img class="lightbox-img" id="lightbox-img" src="" alt="">
+            <div class="lightbox-img-wrap">
+                <img class="lightbox-img" id="lightbox-img" src="" alt="">
+            </div>
             <div class="lightbox-info">
                 <div class="lightbox-meta">
-                    <h2 class="lightbox-title" id="lightbox-title"></h2>
                     <span class="lightbox-category" id="lightbox-category"></span>
                 </div>
                 <p class="lightbox-prompt" id="lightbox-prompt"></p>
-                <button class="lightbox-copy-btn" id="lightbox-copy-btn">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                    Copy Seed
-                </button>
+                <div class="lightbox-actions">
+                    <button class="lightbox-copy-btn" id="lightbox-copy-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Copy Seed
+                    </button>
+                    <button class="lightbox-download-btn" id="lightbox-download-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download
+                    </button>
+                </div>
             </div>
         </div>
     </div>
