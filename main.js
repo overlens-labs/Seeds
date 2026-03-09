@@ -682,20 +682,44 @@ lightboxCopyBtn.addEventListener('click', () => {
     copyToClipboard(currentSeed, lightboxCopyBtn, true);
 });
 
-lightboxDownloadBtn.addEventListener('click', () => {
-    const filename = lightboxDownloadBtn.dataset.filename;
-    try {
-        const canvas = document.createElement('canvas');
-        canvas.width  = lightboxImg.naturalWidth;
-        canvas.height = lightboxImg.naturalHeight;
-        canvas.getContext('2d').drawImage(lightboxImg, 0, 0);
-        const dataUrl = canvas.toDataURL('image/png');
+lightboxDownloadBtn.addEventListener('click', async () => {
+    const url      = lightboxDownloadBtn.dataset.url;
+    const filename = (lightboxDownloadBtn.dataset.filename || 'seed');
+
+    // Base64 data URL (seeds customizadas) — download direto
+    if (url.startsWith('data:')) {
         const a = document.createElement('a');
-        a.href = dataUrl;
-        a.download = filename + '.png';
+        a.href = url;
+        a.download = filename;
         a.click();
-    } catch (e) {
-        window.open(lightboxDownloadBtn.dataset.url);
+        return;
+    }
+
+    // URL normal — fetch como blob e força download
+    try {
+        const res  = await fetch(url);
+        const blob = await res.blob();
+        const ext  = blob.type.includes('png') ? 'png' : blob.type.includes('webp') ? 'webp' : 'jpg';
+        const blobUrl = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = blobUrl;
+        a.download = filename + '.' + ext;
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
+    } catch {
+        // Fallback: canvas
+        try {
+            const canvas = document.createElement('canvas');
+            canvas.width  = lightboxImg.naturalWidth;
+            canvas.height = lightboxImg.naturalHeight;
+            canvas.getContext('2d').drawImage(lightboxImg, 0, 0);
+            const a = document.createElement('a');
+            a.href = canvas.toDataURL('image/png');
+            a.download = filename + '.png';
+            a.click();
+        } catch {
+            window.open(url);
+        }
     }
 });
 
