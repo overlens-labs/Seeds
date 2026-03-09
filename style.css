@@ -1727,6 +1727,7 @@ body.sidebar-collapsed .sidebar-toggle {
 /* ─── Responsive ─────────────────────────────────────────── */
 @media (max-width: 1100px) {
     .gallery-container { columns: 2; }
+    .sidebar-toggle { display: none; }
 }
 
 @media (max-width: 768px) {
