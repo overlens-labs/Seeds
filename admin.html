@@ -50,15 +50,6 @@
                 <button class="admin-nav-btn" data-section="seeds">Seeds</button>
             </nav>
             <div class="admin-sidebar-footer">
-                <div class="storage-bar-wrap">
-                    <div class="storage-bar-header">
-                        <span>Storage</span>
-                        <span id="storage-bar-pct">–</span>
-                    </div>
-                    <div class="storage-bar-track">
-                        <div class="storage-bar-fill" id="storage-bar-fill"></div>
-                    </div>
-                </div>
                 <a href="index.html" class="admin-back-link">← Ver Galeria</a>
                 <button class="admin-logout-btn" id="admin-logout-btn">Sair</button>
             </div>
@@ -66,6 +57,16 @@
 
         <!-- Admin Content -->
         <main class="admin-content">
+
+            <!-- Storage Bar (full width) -->
+            <div class="admin-storage-bar">
+                <div class="admin-storage-bar-inner">
+                    <div class="admin-storage-bar-fill" id="storage-bar-fill"></div>
+                </div>
+                <span class="admin-storage-bar-label">
+                    Storage <strong id="storage-bar-pct">–</strong>
+                </span>
+            </div>
 
             <!-- Categorias -->
             <section class="admin-section active" id="section-categories">

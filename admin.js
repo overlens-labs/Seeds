@@ -110,15 +110,15 @@ document.getElementById('admin-logout-btn').addEventListener('click', () => {
 
 // ─── Storage Bar ───────────────────────────────────────────
 function updateStorageBar() {
-    const pct  = Math.min(100, storageUsedPercent());
-    const fill = document.getElementById('storage-bar-fill');
+    const pct   = Math.min(100, storageUsedPercent());
+    const fill  = document.getElementById('storage-bar-fill');
     const label = document.getElementById('storage-bar-pct');
     if (!fill || !label) return;
-    fill.style.width = pct + '%';
-    label.textContent = Math.round(pct) + '%';
+    fill.style.width       = pct + '%';
+    label.textContent      = Math.round(pct) + '%';
     fill.classList.remove('warn', 'danger');
-    if (pct > 80)      fill.classList.add('danger');
-    else if (pct > 60) fill.classList.add('warn');
+    if (pct > 80)       fill.classList.add('danger');
+    else if (pct > 60)  fill.classList.add('warn');
 }
 
 // ─── Init Admin ────────────────────────────────────────────

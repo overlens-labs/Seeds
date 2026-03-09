@@ -304,6 +304,7 @@ const SL_KEYS = {
     TAGS:       'sl_tags',
     LOGO:       'sl_logo',
     FAVS:       'sl_favorites',
+    SEEN:       'sl_seen_counts',
 };
 
 // ─── Defaults ──────────────────────────────────────────────
@@ -368,6 +369,27 @@ function loadAllSeeds() {
         _seedsCache = shuffle([...custom, ...imagesData]);
     }
     return _seedsCache;
+}
+
+// ─── Seen Counts (new-content badge) ──────────────────────
+function getSeenCounts() {
+    const stored = localStorage.getItem(SL_KEYS.SEEN);
+    return stored ? JSON.parse(stored) : {};
+}
+
+function markCategoryAsSeen(slug) {
+    const all   = loadAllSeeds();
+    const seen  = getSeenCounts();
+    seen[slug]  = countForCategory(all, slug);
+    localStorage.setItem(SL_KEYS.SEEN, JSON.stringify(seen));
+}
+
+function getNewCount(all, slug) {
+    const seen  = getSeenCounts();
+    const current = countForCategory(all, slug);
+    const prev    = seen[slug];
+    if (prev === undefined) return 0; // first visit: no badge
+    return Math.max(0, current - prev);
 }
 
 // ─── Favorites ─────────────────────────────────────────────
@@ -460,7 +482,7 @@ function renderFilterButtons() {
     ];
 
     allItems.forEach(({ slug, label }) => {
-        const count = countForCategory(all, slug);
+        const newCount = getNewCount(all, slug);
         const btn = document.createElement('button');
         btn.className = 'filter-btn' + (activeFilter === slug ? ' active' : '');
         btn.dataset.filter = slug;
@@ -469,10 +491,10 @@ function renderFilterButtons() {
         labelSpan.textContent = label;
         btn.appendChild(labelSpan);
 
-        if (count > 0) {
+        if (newCount > 0) {
             const badge = document.createElement('span');
-            badge.className = 'filter-count';
-            badge.textContent = count;
+            badge.className = 'filter-new-badge';
+            badge.textContent = '+' + newCount;
             btn.appendChild(badge);
         }
 
@@ -481,12 +503,14 @@ function renderFilterButtons() {
             btn.classList.add('active');
             activeTag = null;
             activeFilter = slug;
+            markCategoryAsSeen(slug);
             if (slug !== 'all' && slug !== 'favorites') {
                 renderTags(slug);
             } else {
                 sidebarTags.innerHTML = '';
             }
             renderGallery(slug);
+            renderFilterButtons(); // refresh badges
         });
         nav.appendChild(btn);
     });
