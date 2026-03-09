@@ -1751,6 +1751,8 @@ body.sidebar-collapsed .sidebar-toggle {
         padding: 1.25rem 1rem 3rem;
     }
 
+    .sidebar-toggle { display: none; }
+
     .sidebar-logo { margin-bottom: 0.75rem; }
     .sidebar-logo h1 { font-size: 1.3rem; }
     .sidebar-logo p { display: none; }
