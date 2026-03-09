@@ -232,14 +232,7 @@ body.sidebar-collapsed .sidebar-toggle {
 .card-heart {
     position: absolute;
     top: 0.55rem;
-    right: 0.55rem;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.22);
+    right: 0.6rem;
     display: none;
     align-items: center;
     justify-content: center;
