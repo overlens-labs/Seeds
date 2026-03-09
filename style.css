@@ -53,7 +53,7 @@ body {
     z-index: 100;
     flex-shrink: 0;
     overflow: hidden;
-    transition: width 0.35s ease, padding 0.35s ease;
+    transition: transform 0.35s ease;
 }
 
 /* ─── Sidebar Toggle ─────────────────────────────────────── */
@@ -86,9 +86,7 @@ body {
 
 /* Collapsed state */
 body.sidebar-collapsed .sidebar {
-    width: 0;
-    padding-left: 0;
-    padding-right: 0;
+    transform: translateX(-100%);
 }
 
 body.sidebar-collapsed .gallery-container {
