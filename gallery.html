@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seed Lib — Gallery</title>
+    <meta name="description" content="Explore curated Midjourney seeds for AI image generation.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+
+    <div class="app-container">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>SEED LIB</h2>
+                <p>Curated Midjourney seeds.</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul class="category-list" id="category-list"></ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="index.html">← Classic View</a>
+                <a href="admin.html">Admin</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1 id="category-title">All Styles</h1>
+                <p class="subtitle" id="category-subtitle">Explore curated Midjourney seeds and copy them instantly.</p>
+            </header>
+            <div class="seed-feed" id="seed-feed"></div>
+        </main>
+
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="gl-lightbox" aria-hidden="true">
+        <button class="gl-lightbox-close" id="gl-lb-close">✕</button>
+        <button class="gl-lightbox-nav gl-lightbox-prev" id="gl-lb-prev">&#8249;</button>
+        <button class="gl-lightbox-nav gl-lightbox-next" id="gl-lb-next">&#8250;</button>
+        <div class="gl-lightbox-img-wrap">
+            <img id="gl-lb-img" src="" alt="">
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="gl-toast" class="gl-toast">Seed copied!</div>
+
+    <script src="gallery.js"></script>
+</body>
+</html>
