@@ -1,4 +1,4 @@
-// ─── Storage Keys (espelhado de main.js) ──────────────────
+// ─── Storage Keys ─────────────────────────────────────────
 const GL_KEYS = {
     SEEDS:      'seedlibrary_custom',
     CATEGORIES: 'sl_categories',
@@ -13,14 +13,27 @@ const GL_DEFAULT_CATEGORIES = [
     { slug: 'fotografia',      label: 'Fotografia' },
 ];
 
+// ─── SVG Icon Library ──────────────────────────────────────
+const ICON = {
+    copy:     `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`,
+    check:    `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
+    heart:    `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
+    heartFill:`<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
+    download: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`,
+    plant:    `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 1 1.1 4.8c-1.9 0-3.4-.3-4.8-1.2-.7-.5-1.4-1.4-1.9-2.8 1.9-1 4.4-.4 5.6-.8z"/></svg>`,
+    search:   `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>`,
+};
+
 // ─── State ────────────────────────────────────────────────
 let activeCategory = 'all';
+let searchQuery    = '';
 let allSeeds       = [];
+let favs           = [];
 let lightboxImages = [];
 let lightboxIndex  = 0;
 let toastTimeout   = null;
 
-// ─── Load data ────────────────────────────────────────────
+// ─── Data helpers ─────────────────────────────────────────
 function getCategories() {
     const stored = localStorage.getItem(GL_KEYS.CATEGORIES);
     return stored ? JSON.parse(stored) : GL_DEFAULT_CATEGORIES;
@@ -29,6 +42,14 @@ function getCategories() {
 function loadSeeds() {
     const stored = localStorage.getItem(GL_KEYS.SEEDS);
     return stored ? JSON.parse(stored) : [];
+}
+
+function loadFavs() {
+    return JSON.parse(localStorage.getItem(GL_KEYS.FAVS) || '[]');
+}
+
+function saveFavs() {
+    localStorage.setItem(GL_KEYS.FAVS, JSON.stringify(favs));
 }
 
 // ─── Param parser ─────────────────────────────────────────
@@ -53,8 +74,16 @@ function parseSeedParams(seed) {
     }, []);
 }
 
+// ─── Escape HTML ──────────────────────────────────────────
+function escHtml(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+
 // ─── Group seeds by prompt ────────────────────────────────
-// Seeds with the same prompt string become one SeedCard with multiple images
 function groupByPrompt(seeds) {
     const map = new Map();
     seeds.forEach(seed => {
@@ -65,23 +94,56 @@ function groupByPrompt(seeds) {
                 category: seed.category,
                 tag:      seed.tag,
                 images:   [],
+                ids:      [],
             });
         }
         map.get(key).images.push({ id: seed.id, url: seed.url, title: seed.title });
+        map.get(key).ids.push(seed.id);
     });
     return Array.from(map.values());
 }
 
 // ─── Filter seeds ─────────────────────────────────────────
 function getFilteredSeeds() {
-    const favs = JSON.parse(localStorage.getItem(GL_KEYS.FAVS) || '[]');
+    let filtered = allSeeds;
+
     if (activeCategory === 'favorites') {
-        return allSeeds.filter(s => favs.includes(s.id));
+        filtered = filtered.filter(s => favs.includes(s.id));
+    } else if (activeCategory !== 'all') {
+        filtered = filtered.filter(s =>
+            s.category === activeCategory || s.category.startsWith(activeCategory + '-')
+        );
     }
-    if (activeCategory === 'all') return allSeeds;
-    return allSeeds.filter(s =>
-        s.category === activeCategory || s.category.startsWith(activeCategory + '-')
-    );
+
+    if (searchQuery) {
+        const q = searchQuery.toLowerCase();
+        filtered = filtered.filter(s =>
+            s.seed.toLowerCase().includes(q) ||
+            (s.category || '').toLowerCase().includes(q) ||
+            (s.tag || '').toLowerCase().includes(q)
+        );
+    }
+
+    return filtered;
+}
+
+// ─── Storage Progress Component ───────────────────────────
+function updateStorageBar() {
+    try {
+        let total = 0;
+        for (const key in localStorage) {
+            if (Object.prototype.hasOwnProperty.call(localStorage, key)) {
+                total += (localStorage.getItem(key) || '').length * 2;
+            }
+        }
+        const maxBytes = 5 * 1024 * 1024;
+        const pct      = Math.min(100, (total / maxBytes) * 100);
+        const kb       = (total / 1024).toFixed(0);
+        const fill     = document.getElementById('storage-bar-fill');
+        const label    = document.getElementById('storage-label');
+        if (fill)  fill.style.width  = pct.toFixed(1) + '%';
+        if (label) label.textContent = `Storage: ${kb}KB / 5MB`;
+    } catch (_) { /* ignore */ }
 }
 
 // ─── Render sidebar ───────────────────────────────────────
@@ -99,8 +161,10 @@ function renderSidebar() {
         const count = slug === 'all'
             ? allSeeds.length
             : slug === 'favorites'
-                ? JSON.parse(localStorage.getItem(GL_KEYS.FAVS) || '[]').length
-                : allSeeds.filter(s => s.category === slug || s.category.startsWith(slug + '-')).length;
+                ? favs.length
+                : allSeeds.filter(s =>
+                    s.category === slug || s.category.startsWith(slug + '-')
+                  ).length;
 
         const badge = count > 0 ? `<span class="category-count-badge">${count}</span>` : '';
 
@@ -120,9 +184,11 @@ function renderSidebar() {
             renderSidebar();
         });
     });
+
+    updateStorageBar();
 }
 
-// ─── Update header title ──────────────────────────────────
+// ─── Update header ────────────────────────────────────────
 function updateCategoryTitle() {
     const categories = getCategories();
     const titleEl    = document.getElementById('category-title');
@@ -135,7 +201,7 @@ function updateCategoryTitle() {
         titleEl.textContent = 'Favorites';
         subEl.textContent   = 'Your saved seeds.';
     } else {
-        const cat = categories.find(c => c.slug === activeCategory);
+        const cat   = categories.find(c => c.slug === activeCategory);
         const label = cat ? cat.label : activeCategory;
         titleEl.textContent = label + ' Styles';
         subEl.textContent   = `Explore ${label.toLowerCase()} Midjourney seeds.`;
@@ -144,86 +210,209 @@ function updateCategoryTitle() {
 
 // ─── Render feed ──────────────────────────────────────────
 function renderFeed() {
-    const feed    = document.getElementById('seed-feed');
-    const filtered = getFilteredSeeds();
-    const grouped  = groupByPrompt(filtered);
+    const skeletonEl = document.getElementById('skeleton-feed');
+    const feed       = document.getElementById('seed-feed');
 
-    // Re-trigger animation
+    if (skeletonEl) skeletonEl.style.display = 'none';
+    feed.style.display = '';
+
+    const grouped = groupByPrompt(getFilteredSeeds());
+
     feed.style.animation = 'none';
-    feed.offsetHeight; // reflow
+    feed.offsetHeight;
     feed.style.animation = '';
 
     if (grouped.length === 0) {
+        const isSearch = searchQuery.length > 0;
         feed.innerHTML = `
             <div class="empty-feed">
-                <div style="font-size:2rem;margin-bottom:1rem">🌱</div>
-                <p>No seeds here yet.</p>
-                <p style="margin-top:0.5rem;font-size:0.72rem;opacity:0.5">Add seeds via the Admin panel.</p>
+                <div class="empty-feed-icon">${ICON.plant}</div>
+                <p class="empty-feed-title">${isSearch ? 'No results' : 'No seeds yet'}</p>
+                <p class="empty-feed-sub">${
+                    isSearch
+                        ? `No seeds match "<strong>${escHtml(searchQuery)}</strong>"`
+                        : 'Add seeds via the Admin panel to get started.'
+                }</p>
+                ${isSearch ? '' : `<a href="admin.html" class="empty-feed-cta">Open Admin</a>`}
             </div>`;
         return;
     }
 
+    window._glGroups = grouped;
+
     feed.innerHTML = grouped.map((group, gi) => {
         const params    = parseSeedParams(group.prompt);
         const paramHTML = params.length
-            ? `<div class="param-badges">${params.map(p => `<span class="param-badge">${p.label}<b>${p.value}</b></span>`).join('')}</div>`
+            ? `<div class="param-badges">${
+                params.map(p =>
+                    `<span class="param-badge">${p.label}<b>${p.value}</b></span>`
+                ).join('')
+              }</div>`
             : '';
 
-        const imagesHTML = group.images.map((img, ii) => `
-            <div class="seed-img-wrap" data-group="${gi}" data-img="${ii}">
-                <img src="${img.url}" alt="${img.title || group.prompt}" loading="lazy">
-            </div>`).join('');
-
         const categoryLabel = group.category.replace(/-/g, ' ').toUpperCase();
+        const isFaved       = group.ids.some(id => favs.includes(id));
+        const isCarousel    = group.images.length > 2;
+
+        // Build images section
+        let imagesHTML;
+
+        if (isCarousel) {
+            const imgWraps = group.images.map((img, ii) => `
+                <div class="seed-img-wrap carousel-img-wrap" data-group="${gi}" data-img="${ii}">
+                    <img src="${escHtml(img.url)}" alt="${escHtml(img.title || group.prompt)}" loading="lazy">
+                </div>`).join('');
+
+            const dots = group.images.map((_, ii) => `
+                <button class="carousel-dot${ii === 0 ? ' active' : ''}" data-carousel="${gi}" data-dot="${ii}"></button>`
+            ).join('');
+
+            imagesHTML = `
+                <div class="seed-images seed-images--carousel" data-carousel="${gi}" data-current="0">
+                    <div class="seed-imgs-track">${imgWraps}</div>
+                    <button class="carousel-nav-btn carousel-prev" data-carousel="${gi}" data-dir="-1">&#8249;</button>
+                    <button class="carousel-nav-btn carousel-next" data-carousel="${gi}" data-dir="1">&#8250;</button>
+                    <div class="carousel-dots">${dots}</div>
+                </div>`;
+        } else {
+            const imgWraps = group.images.map((img, ii) => `
+                <div class="seed-img-wrap" data-group="${gi}" data-img="${ii}">
+                    <img src="${escHtml(img.url)}" alt="${escHtml(img.title || group.prompt)}" loading="lazy">
+                </div>`).join('');
+            imagesHTML = `<div class="seed-images">${imgWraps}</div>`;
+        }
+
+        // Download button only for single images
+        const dlBtn = group.images.length === 1
+            ? `<button class="ghost-btn dl-btn" data-url="${escHtml(group.images[0].url)}" data-prompt="${escHtml(group.prompt)}">
+                ${ICON.download} Download
+               </button>`
+            : '';
 
         return `
             <article class="seed-card">
                 <div class="prompt-container">
                     <p class="prompt-text">
-                        <span class="prompt-prefix">[${categoryLabel}] </span>${group.prompt}
+                        <span class="prompt-prefix">[${categoryLabel}]&nbsp;</span>${escHtml(group.prompt)}
                     </p>
                     ${paramHTML}
                     <div class="card-actions">
-                        <button class="copy-seed-btn" data-prompt="${escHtml(group.prompt)}">Copy Seed</button>
+                        <button class="copy-seed-btn" data-prompt="${escHtml(group.prompt)}">
+                            ${ICON.copy} Copy Seed
+                        </button>
+                        <button class="ghost-btn fav-btn${isFaved ? ' fav-active' : ''}" data-ids="${group.ids.join(',')}">
+                            ${isFaved ? ICON.heartFill : ICON.heart} ${isFaved ? 'Saved' : 'Save'}
+                        </button>
+                        ${dlBtn}
                     </div>
                 </div>
-                <div class="seed-images">${imagesHTML}</div>
+                ${imagesHTML}
             </article>`;
     }).join('');
 
-    // Store grouped for lightbox navigation
-    window._glGroups = grouped;
+    attachFeedListeners(feed);
+}
 
-    // Copy buttons
+// ─── Feed event listeners ─────────────────────────────────
+function attachFeedListeners(feed) {
+    // Copy
     feed.querySelectorAll('.copy-seed-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-            const prompt = btn.dataset.prompt;
-            navigator.clipboard.writeText(prompt).then(() => {
-                btn.textContent = 'Copied!';
+            navigator.clipboard.writeText(btn.dataset.prompt).then(() => {
+                btn.innerHTML = `${ICON.check} Copied!`;
                 btn.classList.add('copied');
                 showToast('Seed copied!');
                 setTimeout(() => {
-                    btn.textContent = 'Copy Seed';
+                    btn.innerHTML = `${ICON.copy} Copy Seed`;
                     btn.classList.remove('copied');
                 }, 2000);
             }).catch(() => showToast('Copy failed'));
         });
     });
 
-    // Lightbox on image click
-    feed.querySelectorAll('.seed-img-wrap').forEach(wrap => {
+    // Favorites
+    feed.querySelectorAll('.fav-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const ids     = btn.dataset.ids.split(',');
+            const anyFaved = ids.some(id => favs.includes(id));
+            if (anyFaved) {
+                favs = favs.filter(f => !ids.includes(f));
+                btn.innerHTML = `${ICON.heart} Save`;
+                btn.classList.remove('fav-active');
+                showToast('Removed from favorites');
+            } else {
+                ids.forEach(id => { if (!favs.includes(id)) favs.push(id); });
+                btn.innerHTML = `${ICON.heartFill} Saved`;
+                btn.classList.add('fav-active');
+                showToast('Saved to favorites!');
+            }
+            saveFavs();
+            renderSidebar();
+        });
+    });
+
+    // Download
+    feed.querySelectorAll('.dl-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const a    = document.createElement('a');
+            a.href     = btn.dataset.url;
+            a.download = 'seed.jpg';
+            a.target   = '_blank';
+            a.click();
+            showToast('Downloading...');
+        });
+    });
+
+    // Carousel nav buttons
+    feed.querySelectorAll('.carousel-nav-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navigateCarousel(btn.dataset.carousel, parseInt(btn.dataset.dir));
+        });
+    });
+
+    // Carousel dots
+    feed.querySelectorAll('.carousel-dot').forEach(dot => {
+        dot.addEventListener('click', () => {
+            setCarouselIndex(dot.dataset.carousel, parseInt(dot.dataset.dot));
+        });
+    });
+
+    // Lightbox — regular images
+    feed.querySelectorAll('.seed-img-wrap:not(.carousel-img-wrap)').forEach(wrap => {
         wrap.addEventListener('click', () => {
-            const gi  = parseInt(wrap.dataset.group);
-            const ii  = parseInt(wrap.dataset.img);
-            const grp = window._glGroups[gi];
-            openLightbox(grp.images, ii);
+            const grp = window._glGroups[parseInt(wrap.dataset.group)];
+            openLightbox(grp.images, parseInt(wrap.dataset.img));
+        });
+    });
+
+    // Lightbox — carousel images
+    feed.querySelectorAll('.carousel-img-wrap').forEach(wrap => {
+        wrap.addEventListener('click', () => {
+            const grp = window._glGroups[parseInt(wrap.dataset.group)];
+            openLightbox(grp.images, parseInt(wrap.dataset.img));
         });
     });
 }
 
-// ─── Escape HTML helper ───────────────────────────────────
-function escHtml(str) {
-    return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+// ─── Carousel Component ───────────────────────────────────
+function navigateCarousel(carouselId, dir) {
+    const el = document.querySelector(`.seed-images--carousel[data-carousel="${carouselId}"]`);
+    if (!el) return;
+    const total   = el.querySelectorAll('.carousel-img-wrap').length;
+    const current = parseInt(el.dataset.current || '0');
+    setCarouselIndex(carouselId, (current + dir + total) % total);
+}
+
+function setCarouselIndex(carouselId, index) {
+    const el    = document.querySelector(`.seed-images--carousel[data-carousel="${carouselId}"]`);
+    if (!el) return;
+    const track = el.querySelector('.seed-imgs-track');
+    const dots  = el.querySelectorAll('.carousel-dot');
+
+    if (track) track.style.transform = `translateX(-${index * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === index));
+    el.dataset.current = index;
 }
 
 // ─── Lightbox ─────────────────────────────────────────────
@@ -268,10 +457,11 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight') navigateLightbox(1);
 });
 
-// ─── Toast ────────────────────────────────────────────────
+// ─── Toast Component ──────────────────────────────────────
 function showToast(msg = 'Seed copied!') {
     const toast = document.getElementById('gl-toast');
-    toast.textContent = msg;
+    const msgEl = document.getElementById('gl-toast-msg');
+    if (msgEl) msgEl.textContent = msg;
     if (toastTimeout) { clearTimeout(toastTimeout); toast.classList.remove('show'); }
     setTimeout(() => {
         toast.classList.add('show');
@@ -279,10 +469,17 @@ function showToast(msg = 'Seed copied!') {
     }, 20);
 }
 
-// ─── Realtime sync (cross-tab) ────────────────────────────
+// ─── Search Component ─────────────────────────────────────
+document.getElementById('gl-search').addEventListener('input', (e) => {
+    searchQuery = e.target.value.trim();
+    renderFeed();
+});
+
+// ─── Cross-tab sync ───────────────────────────────────────
 window.addEventListener('storage', (e) => {
     if ([GL_KEYS.SEEDS, GL_KEYS.CATEGORIES, GL_KEYS.FAVS].includes(e.key)) {
         allSeeds = loadSeeds();
+        favs     = loadFavs();
         renderSidebar();
         renderFeed();
     }
@@ -291,9 +488,11 @@ window.addEventListener('storage', (e) => {
 // ─── Init ─────────────────────────────────────────────────
 function init() {
     allSeeds = loadSeeds();
+    favs     = loadFavs();
     renderSidebar();
     updateCategoryTitle();
-    renderFeed();
+    // Show skeleton briefly, then render feed
+    setTimeout(renderFeed, 280);
 }
 
 init();
