@@ -1,13 +1,14 @@
 /* ─── Variables — Overlens foundations tokens ────────────── */
 :root {
     /* Overlens color tokens (OKLCH) */
-    --color-bg:         oklch(0 0 0);
-    --color-surface:    oklch(0.244 0 0);
-    --color-border:     oklch(1 0 0 / 10%);
-    --color-text:       oklch(0.961 0 0);
-    --color-text-muted: oklch(0.719 0 0);
-    --color-accent:     oklch(1 0 0);
-    --color-muted-bg:   oklch(0.309 0 0);
+    --color-bg:           oklch(0 0 0);
+    --color-surface:      oklch(0.09 0 0);     /* ≈ #111  — dark surface para admin/forms */
+    --color-border:       oklch(1 0 0 / 10%);  /* translucent white — Overlens component border */
+    --color-border-solid: oklch(0.16 0 0);     /* ≈ #222  — border sólida para elementos estruturais */
+    --color-text:         oklch(0.961 0 0);
+    --color-text-muted:   oklch(0.52 0 0);     /* ≈ #777  — meio-termo entre original e Overlens */
+    --color-accent:       oklch(1 0 0);
+    --color-muted-bg:     oklch(0.15 0 0);     /* ≈ #1e1e  — hover bg escuro p/ nav buttons */
 
     /* Overlens radius tokens */
     --radius-min: 0.25rem;
@@ -694,7 +695,7 @@ body.sidebar-collapsed .sidebar-toggle {
 
 .modal-box {
     background: #0f0f0f;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border-solid);
     border-radius: var(--border-radius-lg);
     width: 100%;
     max-width: 480px;
@@ -765,7 +766,7 @@ body.sidebar-collapsed .sidebar-toggle {
 .form-group select,
 .form-group textarea {
     background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border-solid);
     border-radius: var(--border-radius-sm);
     color: var(--color-text);
     font-family: var(--font-body);
@@ -826,7 +827,7 @@ body.sidebar-collapsed .sidebar-toggle {
 
 .btn-secondary {
     background: transparent;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border-solid);
     color: var(--color-text-muted);
     padding: 0.65rem 1.25rem;
     border-radius: 999px;
@@ -903,7 +904,7 @@ body.sidebar-collapsed .sidebar-toggle {
 
 .login-box {
     background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border-solid);
     border-radius: var(--border-radius-lg);
     padding: 2.5rem 2rem;
     width: 100%;
@@ -1244,7 +1245,7 @@ body.sidebar-collapsed .sidebar-toggle {
 }
 
 .category-item {
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border-solid);
     border-radius: var(--border-radius-sm);
     margin-bottom: 0.5rem;
     overflow: hidden;
@@ -1341,7 +1342,7 @@ body.sidebar-collapsed .sidebar-toggle {
 
 .category-tags-panel {
     padding: 0.5rem 1rem 1rem;
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid var(--color-border-solid);
 }
 
 .tag-pills {
@@ -1358,7 +1359,7 @@ body.sidebar-collapsed .sidebar-toggle {
     align-items: center;
     gap: 0.3rem;
     background: rgba(255,255,255,0.06);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border-solid);
     border-radius: 999px;
     padding: 0.2rem 0.5rem 0.2rem 0.75rem;
     font-size: 0.75rem;
@@ -1390,7 +1391,7 @@ body.sidebar-collapsed .sidebar-toggle {
 .add-tag-form input {
     flex: 1;
     background: rgba(255,255,255,0.04);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border-solid);
     border-radius: var(--border-radius-sm);
     color: var(--color-text);
     font-family: var(--font-body);
@@ -1406,7 +1407,7 @@ body.sidebar-collapsed .sidebar-toggle {
 
 .add-tag-form button {
     background: transparent;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border-solid);
     border-radius: 999px;
     color: var(--color-text-muted);
     cursor: pointer;
@@ -1430,7 +1431,7 @@ body.sidebar-collapsed .sidebar-toggle {
 .add-category-form input {
     flex: 1;
     background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border-solid);
     border-radius: var(--border-radius-sm);
     color: var(--color-text);
     font-family: var(--font-body);
@@ -1451,7 +1452,7 @@ body.sidebar-collapsed .sidebar-toggle {
 /* ─── Appearance Preview ─────────────────────────────────── */
 .appearance-preview {
     background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border-solid);
     border-radius: var(--border-radius-lg);
     padding: 1.5rem 2rem;
     margin: 1.5rem 0;
@@ -1485,7 +1486,7 @@ body.sidebar-collapsed .sidebar-toggle {
     border-radius: 12px;
     overflow: hidden;
     background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border-solid);
 }
 
 .admin-card-img {
@@ -1568,7 +1569,7 @@ body.sidebar-collapsed .sidebar-toggle {
 .seeds-search-bar input {
     width: 100%;
     background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border-solid);
     border-radius: var(--border-radius-sm);
     padding: 0.6rem 1rem;
     color: var(--color-text);
@@ -1603,7 +1604,7 @@ body.sidebar-collapsed .sidebar-toggle {
     display: flex;
     gap: 1.25rem;
     padding-bottom: 1.25rem;
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border-solid);
 }
 
 .import-item:last-child {
@@ -1661,7 +1662,7 @@ body.sidebar-collapsed .sidebar-toggle {
 
 .preview-modal-prompt {
     background: rgba(255,255,255,0.04);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border-solid);
     border-radius: var(--border-radius-sm);
     padding: 0.75rem 1rem;
     font-size: 0.8rem;
@@ -1791,7 +1792,7 @@ body.sidebar-collapsed .sidebar-toggle {
         position: static;
         padding: 1.25rem 1.25rem 0.75rem;
         border-right: none;
-        border-bottom: 1px solid var(--color-border);
+        border-bottom: 1px solid var(--color-border-solid);
     }
 
     .admin-layout .sidebar-logo {
@@ -1808,7 +1809,7 @@ body.sidebar-collapsed .sidebar-toggle {
     .admin-nav-btn {
         width: auto;
         padding: 0.4rem 0.9rem;
-        border: 1px solid var(--color-border);
+        border: 1px solid var(--color-border-solid);
     }
 
     .admin-sidebar-footer {
@@ -1818,7 +1819,7 @@ body.sidebar-collapsed .sidebar-toggle {
         align-items: center;
         margin-top: 0.75rem;
         padding-top: 0.75rem;
-        border-top: 1px solid var(--color-border);
+        border-top: 1px solid var(--color-border-solid);
     }
 
     .admin-content {
