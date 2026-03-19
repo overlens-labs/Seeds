@@ -484,14 +484,19 @@ function renderCustomSeeds(query = '') {
 
     grid.innerHTML = seeds.map(seed => `
         <div class="admin-card" data-id="${seed.id}">
+            <div class="admin-card-prompt">
+                <p class="admin-prompt-text">
+                    <span class="admin-prompt-prefix">[${seed.category.replace(/-/g, ' ').toUpperCase()}]&nbsp;</span>${seed.seed}
+                </p>
+                <div class="admin-card-row">
+                    <span class="admin-card-meta">${seed.category}${seed.tag ? ' · ' + seed.tag : ''}</span>
+                    <div class="admin-card-actions">
+                        <button class="admin-card-btn admin-card-edit" data-id="${seed.id}">Editar</button>
+                        <button class="admin-card-btn admin-card-delete" data-id="${seed.id}">Remover</button>
+                    </div>
+                </div>
+            </div>
             <img src="${seed.url}" alt="" loading="lazy" class="admin-card-img">
-            <div class="admin-card-info">
-                <div class="admin-card-meta">${seed.category}${seed.tag ? ' · ' + seed.tag : ''}</div>
-            </div>
-            <div class="admin-card-actions">
-                <button class="admin-card-btn admin-card-edit" data-id="${seed.id}" title="Editar">✎</button>
-                <button class="admin-card-btn admin-card-delete" data-id="${seed.id}" title="Remover">✕</button>
-            </div>
         </div>
     `).join('');
 
