@@ -6,6 +6,7 @@ const SL_KEYS = {
     LOGO:       'sl_logo',
     FAVS:       'sl_favorites',
     SEEN:       'sl_seen_counts',
+    MIGRATION:  'sl_migration_v2',
 };
 
 // ─── Defaults ──────────────────────────────────────────────
@@ -600,8 +601,18 @@ function checkHashNavigation() {
     if (item) setTimeout(() => openLightbox(item), 80);
 }
 
+// ─── Migration: limpa seeds antigos, mantém apenas legacy ─
+function applyMigrations() {
+    if (!localStorage.getItem(SL_KEYS.MIGRATION)) {
+        localStorage.removeItem(SL_KEYS.SEEDS);
+        localStorage.removeItem(SL_KEYS.SEEN);
+        localStorage.setItem(SL_KEYS.MIGRATION, '1');
+    }
+}
+
 // ─── Init ─────────────────────────────────────────────────
 function init() {
+    applyMigrations();
     const logo = getLogo();
     document.getElementById('logo-title').textContent = logo.title;
     document.getElementById('logo-subtitle').textContent = logo.subtitle;
