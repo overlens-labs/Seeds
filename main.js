@@ -26,25 +26,6 @@ const DEFAULT_TAGS = {
 
 const DEFAULT_LOGO = { title: 'Seed Library', subtitle: 'Descubra e copie prompts incríveis.' };
 
-// ─── Legacy Seeds (default content) ───────────────────────
-const DEFAULT_SEEDS = [
-    // Cinematic — --chaos 20 --ar 2:3 --sref 1335406569
-    { id: -1,  url: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=800&auto=format&fit=crop', title: 'Cinematic', category: 'cinematografico', seed: '--chaos 20 --ar 2:3 --sref 1335406569 --profile c6so3sz --sw 500 --stylize 1000 --v 6.1' },
-    { id: -2,  url: 'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=800&auto=format&fit=crop', title: 'Cinematic', category: 'cinematografico', seed: '--chaos 20 --ar 2:3 --sref 1335406569 --profile c6so3sz --sw 500 --stylize 1000 --v 6.1' },
-    { id: -3,  url: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800&auto=format&fit=crop', title: 'Cinematic', category: 'cinematografico', seed: '--chaos 20 --ar 2:3 --sref 1335406569 --profile c6so3sz --sw 500 --stylize 1000 --v 6.1' },
-    { id: -4,  url: 'https://images.unsplash.com/photo-1505686994434-e3cc5abf1330?q=80&w=800&auto=format&fit=crop', title: 'Cinematic', category: 'cinematografico', seed: '--chaos 20 --ar 2:3 --sref 1335406569 --profile c6so3sz --sw 500 --stylize 1000 --v 6.1' },
-    // Cinematic Raw — --ar 16:9 --style raw
-    { id: -5,  url: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=800&auto=format&fit=crop', title: 'Cinematic Raw', category: 'cinematografico', seed: '--ar 16:9 --style raw --sref random --v 6.1' },
-    { id: -6,  url: 'https://images.unsplash.com/photo-1533167649158-6d508895b680?q=80&w=800&auto=format&fit=crop', title: 'Cinematic Raw', category: 'cinematografico', seed: '--ar 16:9 --style raw --sref random --v 6.1' },
-    // 3D — octane render, unreal engine 5
-    { id: -7,  url: 'https://images.unsplash.com/photo-1616499370260-485b3e5ed653?q=80&w=800&auto=format&fit=crop', title: '3D Render', category: 'fotografia-3d', seed: 'octane render, unreal engine 5, --ar 1:1 --stylize 250 --v 6.0' },
-    { id: -8,  url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop', title: '3D Render', category: 'fotografia-3d', seed: 'octane render, unreal engine 5, --ar 1:1 --stylize 250 --v 6.0' },
-    { id: -9,  url: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=800&auto=format&fit=crop', title: '3D Render', category: 'fotografia-3d', seed: 'octane render, unreal engine 5, --ar 1:1 --stylize 250 --v 6.0' },
-    // Anime — studio ghibli style
-    { id: -10, url: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=800&auto=format&fit=crop', title: 'Anime Ghibli', category: 'ilustracao', seed: 'studio ghibli style, --ar 16:9 --niji 6 --s 400', tag: 'anime' },
-    { id: -11, url: 'https://images.unsplash.com/photo-1580477651156-0275815abb23?q=80&w=800&auto=format&fit=crop', title: 'Anime Ghibli', category: 'ilustracao', seed: 'studio ghibli style, --ar 16:9 --niji 6 --s 400', tag: 'anime' },
-];
-
 // Maps fotografia tag → legacy category value (backward compat)
 const FOTO_TAG_MAP = {
     '3d':        'fotografia-3d',
@@ -87,7 +68,7 @@ function loadAllSeeds() {
     if (!_seedsCache) {
         const stored = localStorage.getItem(SL_KEYS.SEEDS);
         const custom = stored ? JSON.parse(stored) : [];
-        _seedsCache = shuffle([...DEFAULT_SEEDS, ...custom]);
+        _seedsCache = shuffle([...custom]);
     }
     return _seedsCache;
 }
