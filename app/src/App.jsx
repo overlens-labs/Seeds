@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Button } from '@overlens/legacy-components';
 import { seedCategories, categoriesList } from './data/mockData';
 import SeedCard from './components/SeedCard';
 import './App.css';
@@ -22,12 +23,13 @@ function App() {
           <ul className="category-list">
             {categoriesList.map(cat => (
               <li key={cat}>
-                <button 
-                  className={`category-btn ${activeCategory === cat ? 'active' : ''}`}
+                <Button
+                  variant={activeCategory === cat ? 'secondary' : 'ghost'}
+                  className="category-btn"
                   onClick={() => setActiveCategory(cat)}
                 >
                   {cat}
-                </button>
+                </Button>
               </li>
             ))}
           </ul>

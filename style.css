@@ -1,18 +1,33 @@
-/* ─── Variables ─────────────────────────────────────────── */
+/* ─── Variables — Overlens foundations tokens ────────────── */
 :root {
-    --color-bg: #000000;
-    --color-surface: #111111;
-    --color-border: #1e1e1e;
-    --color-text: #f0f0f0;
-    --color-text-muted: #666666;
-    --color-accent: #ffffff;
+    /* Overlens color tokens (OKLCH) */
+    --color-bg:         oklch(0 0 0);
+    --color-surface:    oklch(0.244 0 0);
+    --color-border:     oklch(1 0 0 / 10%);
+    --color-text:       oklch(0.961 0 0);
+    --color-text-muted: oklch(0.719 0 0);
+    --color-accent:     oklch(1 0 0);
+    --color-muted-bg:   oklch(0.309 0 0);
+
+    /* Overlens radius tokens */
+    --radius-min: 0.25rem;
+    --radius-xs:  0.5rem;
+    --radius-sm:  0.75rem;
+    --radius-md:  1rem;
+    --radius-max: 9999px;
+
+    /* backward-compat aliases */
+    --border-radius-lg: var(--radius-md);
+    --border-radius-sm: var(--radius-sm);
+
+    /* layout */
     --hover-overlay: rgba(0, 0, 0, 0.65);
     --sidebar-width: 220px;
-    --border-radius-lg: 14px;
-    --border-radius-sm: 8px;
     --transition: 0.3s ease;
+
+    /* Overlens typography tokens */
     --font-title: 'Outfit', sans-serif;
-    --font-body: 'Inter', sans-serif;
+    --font-body:  'Inter', sans-serif;
 }
 
 /* ─── Reset ──────────────────────────────────────────────── */
@@ -66,7 +81,7 @@ body {
     white-space: nowrap;
 }
 
-/* ─── Sidebar Toggle ─────────────────────────────────────── */
+/* ─── Sidebar Toggle — Overlens Button size="icon-xs" ───────  */
 .sidebar-toggle {
     position: fixed;
     left: var(--sidebar-width);
@@ -74,12 +89,12 @@ body {
     transform: translateY(-50%) translateX(-50%);
     width: 28px;
     height: 28px;
-    background: rgba(10, 10, 10, 0.8);
+    background: oklch(0.1 0 0 / 80%);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    color: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-max);
+    color: oklch(1 0 0 / 50%);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -90,8 +105,8 @@ body {
 }
 
 .sidebar-toggle:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.12);
+    color: var(--color-text);
+    background: oklch(1 0 0 / 12%);
 }
 
 /* Collapsed state */
@@ -133,13 +148,13 @@ body.sidebar-collapsed .sidebar-toggle {
     gap: 0.25rem;
 }
 
-/* ─── Filter Buttons ─────────────────────────────────────── */
+/* ─── Filter Buttons — Overlens ghost/secondary variant ──── */
 .filter-btn {
     background: transparent;
     color: var(--color-text-muted);
     border: none;
-    padding: 0.55rem 0.75rem;
-    border-radius: 999px;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-max);
     cursor: pointer;
     font-family: var(--font-title);
     font-size: 0.82rem;
@@ -154,12 +169,13 @@ body.sidebar-collapsed .sidebar-toggle {
     gap: 0.4rem;
 }
 
+/* Overlens Badge (default variant) */
 .filter-new-badge {
     font-size: 0.6rem;
-    color: #000;
-    background: #fff;
-    border-radius: 999px;
-    padding: 0.05em 0.45em;
+    color: var(--color-bg);
+    background: var(--color-accent);
+    border-radius: var(--radius-max);
+    padding: 0.05em 0.5em;
     font-family: var(--font-body);
     font-weight: 700;
     text-transform: none;
@@ -169,14 +185,16 @@ body.sidebar-collapsed .sidebar-toggle {
     line-height: 1.5;
 }
 
+/* ghost → hover: Overlens muted bg */
 .filter-btn:hover {
     color: var(--color-text);
-    background: var(--color-surface);
+    background: var(--color-muted-bg);
 }
 
+/* secondary variant (active state) */
 .filter-btn.active {
-    color: var(--color-accent);
-    background: var(--color-surface);
+    color: var(--color-text);
+    background: var(--color-muted-bg);
 }
 
 /* ─── Gallery ────────────────────────────────────────────── */
@@ -303,18 +321,18 @@ body.sidebar-collapsed .sidebar-toggle {
     transform: translateY(0);
 }
 
-/* ─── Copy Button ────────────────────────────────────────── */
+/* ─── Copy Button — Overlens ghost/glass variant ─────────── */
 .copy-btn {
-    background: rgba(255, 255, 255, 0.1);
+    background: oklch(1 0 0 / 8%);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: white;
-    padding: 0.6rem 1.1rem;
-    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-max);
     font-family: var(--font-title);
-    font-size: 0.78rem;
-    font-weight: 500;
+    font-size: 0.75rem;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     cursor: pointer;
@@ -332,11 +350,11 @@ body.sidebar-collapsed .sidebar-toggle {
 }
 
 .copy-btn:hover {
-    background: rgba(255, 255, 255, 0.22);
+    background: oklch(1 0 0 / 18%);
 }
 
 .copy-btn:active {
-    transform: scale(0.95) !important;
+    transform: scale(0.96) !important;
 }
 
 /* ─── Lightbox ───────────────────────────────────────────── */
@@ -368,18 +386,19 @@ body.sidebar-collapsed .sidebar-toggle {
     pointer-events: all;
 }
 
+/* ─── Lightbox Close — Overlens Button size="icon" ───────── */
 .lightbox-close {
     position: absolute;
     top: 1.25rem;
     right: 1.25rem;
-    background: rgba(255, 255, 255, 0.08);
+    background: oklch(1 0 0 / 8%);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid var(--color-border);
     color: var(--color-text);
     width: 40px;
     height: 40px;
-    border-radius: 50%;
+    border-radius: var(--radius-max);
     cursor: pointer;
     font-size: 1rem;
     display: flex;
@@ -390,7 +409,7 @@ body.sidebar-collapsed .sidebar-toggle {
 }
 
 .lightbox-close:hover {
-    background: rgba(255, 255, 255, 0.18);
+    background: oklch(1 0 0 / 18%);
 }
 
 .lightbox-inner {
@@ -420,19 +439,19 @@ body.sidebar-collapsed .sidebar-toggle {
     display: block;
 }
 
-/* ─── Lightbox Nav ───────────────────────────────────────── */
+/* ─── Lightbox Nav — Overlens Button size="icon" ─────────── */
 .lightbox-nav {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.08);
+    background: oklch(1 0 0 / 8%);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: rgba(255, 255, 255, 0.65);
+    border: 1px solid var(--color-border);
+    color: oklch(1 0 0 / 65%);
     width: 44px;
     height: 44px;
-    border-radius: 50%;
+    border-radius: var(--radius-max);
     cursor: pointer;
     font-size: 1.6rem;
     line-height: 1;
@@ -447,11 +466,11 @@ body.sidebar-collapsed .sidebar-toggle {
 .lightbox-nav--next { right: calc(340px + 1.25rem); }
 
 .lightbox-nav:hover {
-    background: rgba(255, 255, 255, 0.18);
-    color: #fff;
+    background: oklch(1 0 0 / 18%);
+    color: var(--color-text);
 }
 
-/* ─── Lightbox Param Badges ──────────────────────────────── */
+/* ─── Lightbox Param Badges — Overlens Badge outline variant  */
 .lightbox-params {
     display: flex;
     flex-wrap: wrap;
@@ -467,9 +486,9 @@ body.sidebar-collapsed .sidebar-toggle {
     font-family: var(--font-body);
     font-size: 0.65rem;
     color: var(--color-text-muted);
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    border-radius: 999px;
+    background: oklch(1 0 0 / 4%);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-max);
     padding: 0.2em 0.65em;
     white-space: nowrap;
     text-transform: uppercase;
@@ -477,7 +496,7 @@ body.sidebar-collapsed .sidebar-toggle {
 }
 
 .param-badge b {
-    color: rgba(255, 255, 255, 0.5);
+    color: oklch(1 0 0 / 55%);
     font-weight: 500;
     margin-left: 0.2em;
 }
@@ -539,109 +558,19 @@ body.sidebar-collapsed .sidebar-toggle {
     align-items: flex-start;
 }
 
-.lightbox-copy-btn {
-    background: transparent;
-    color: rgba(255, 255, 255, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    padding: 0.75rem 1.5rem;
-    border-radius: 999px;
-    font-family: var(--font-title);
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: color var(--transition), border-color var(--transition), transform 0.15s;
-}
-
-.lightbox-copy-btn:hover {
-    color: rgba(255, 255, 255, 0.9);
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-.lightbox-copy-btn:active {
-    transform: scale(0.97);
-}
-
-.lightbox-download-btn {
-    background: transparent;
-    color: rgba(255, 255, 255, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    padding: 0.7rem 1.5rem;
-    border-radius: 999px;
-    font-family: var(--font-title);
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: color var(--transition), border-color var(--transition), transform 0.15s;
-}
-
-.lightbox-download-btn:hover {
-    color: rgba(255, 255, 255, 0.9);
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-.lightbox-download-btn:active {
-    transform: scale(0.97);
-}
-
-.lightbox-fav-btn {
-    background: transparent;
-    color: rgba(255, 255, 255, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    padding: 0.7rem 1.5rem;
-    border-radius: 999px;
-    font-family: var(--font-title);
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: color var(--transition), border-color var(--transition), transform 0.15s;
-}
-
-.lightbox-fav-btn:hover {
-    color: rgba(255, 255, 255, 0.9);
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-.lightbox-fav-btn:active {
-    transform: scale(0.97);
-}
-
-.lightbox-fav-btn.active {
-    color: #ef4444;
-    border-color: rgba(239, 68, 68, 0.4);
-}
-
-.lightbox-fav-btn.active svg {
-    fill: #ef4444;
-}
-
-.lightbox-fav-btn.active:hover {
-    color: #ff7070;
-    border-color: rgba(239, 68, 68, 0.65);
-}
-
+/* ─── Lightbox Action Buttons — Overlens Button outline ─────
+   Shared base for copy / download / fav / share               */
+.lightbox-copy-btn,
+.lightbox-download-btn,
+.lightbox-fav-btn,
 .lightbox-share-btn {
     background: transparent;
-    color: rgba(255, 255, 255, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    padding: 0.7rem 1.5rem;
-    border-radius: 999px;
+    color: oklch(1 0 0 / 55%);
+    border: 1px solid var(--color-border);
+    padding: 0.65rem 1.5rem;
+    border-radius: var(--radius-max);
     font-family: var(--font-title);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -652,16 +581,37 @@ body.sidebar-collapsed .sidebar-toggle {
     transition: color var(--transition), border-color var(--transition), transform 0.15s;
 }
 
+.lightbox-copy-btn:hover,
+.lightbox-download-btn:hover,
+.lightbox-fav-btn:hover,
 .lightbox-share-btn:hover {
-    color: rgba(255, 255, 255, 0.9);
-    border-color: rgba(255, 255, 255, 0.3);
+    color: var(--color-text);
+    border-color: oklch(1 0 0 / 30%);
 }
 
+.lightbox-copy-btn:active,
+.lightbox-download-btn:active,
+.lightbox-fav-btn:active,
 .lightbox-share-btn:active {
     transform: scale(0.97);
 }
 
-/* ─── Toast ──────────────────────────────────────────────── */
+/* Overlens destructive/error color for active fav */
+.lightbox-fav-btn.active {
+    color: oklch(0.586 0.154 24.476);
+    border-color: oklch(0.586 0.154 24.476 / 40%);
+}
+
+.lightbox-fav-btn.active svg {
+    fill: oklch(0.586 0.154 24.476);
+}
+
+.lightbox-fav-btn.active:hover {
+    color: oklch(0.65 0.154 24.476);
+    border-color: oklch(0.586 0.154 24.476 / 65%);
+}
+
+/* ─── Toast — Overlens Badge default variant ─────────────── */
 .toast {
     position: fixed;
     bottom: 2rem;
@@ -669,17 +619,17 @@ body.sidebar-collapsed .sidebar-toggle {
     transform: translateX(-50%) translateY(80px);
     background: var(--color-accent);
     color: var(--color-bg);
-    padding: 0.7rem 1.4rem;
-    border-radius: 30px;
+    padding: 0.65rem 1.4rem;
+    border-radius: var(--radius-max);
     display: flex;
     align-items: center;
     gap: 0.5rem;
     font-family: var(--font-title);
-    font-size: 0.82rem;
-    font-weight: 600;
+    font-size: 0.78rem;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    box-shadow: 0 8px 24px oklch(0 0 0 / 50%);
     opacity: 0;
     transition: all 0.35s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     z-index: 2000;
@@ -692,7 +642,7 @@ body.sidebar-collapsed .sidebar-toggle {
 }
 
 .toast-icon {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 /* ─── Add Button ─────────────────────────────────────────── */
@@ -999,16 +949,16 @@ body.sidebar-collapsed .sidebar-toggle {
     font-family: var(--font-body);
 }
 
-/* ─── Sidebar Search ─────────────────────────────────────── */
+/* ─── Sidebar Search — Overlens Input style ──────────────── */
 .sidebar-search {
     margin-bottom: 1.25rem;
 }
 
 .sidebar-search input {
     width: 100%;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    border-radius: 999px;
+    background: oklch(1 0 0 / 4%);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-max);
     color: var(--color-text);
     font-family: var(--font-body);
     font-size: 0.78rem;
@@ -1018,14 +968,14 @@ body.sidebar-collapsed .sidebar-toggle {
 }
 
 .sidebar-search input::placeholder {
-    color: #3a3a3a;
+    color: oklch(0.45 0 0);
 }
 
 .sidebar-search input:focus {
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: oklch(1 0 0 / 25%);
 }
 
-/* ─── Sidebar Tags ───────────────────────────────────────── */
+/* ─── Sidebar Tags — Overlens ghost variant (sm) ─────────── */
 .sidebar-tags {
     display: flex;
     flex-direction: column;
@@ -1038,8 +988,8 @@ body.sidebar-collapsed .sidebar-toggle {
     background: transparent;
     color: var(--color-text-muted);
     border: none;
-    padding: 0.45rem 0.75rem;
-    border-radius: 999px;
+    padding: 0.4rem 0.75rem;
+    border-radius: var(--radius-max);
     cursor: pointer;
     font-family: var(--font-body);
     font-size: 0.75rem;
@@ -1051,12 +1001,12 @@ body.sidebar-collapsed .sidebar-toggle {
 
 .tag-btn:hover {
     color: var(--color-text);
-    background: var(--color-surface);
+    background: var(--color-muted-bg);
 }
 
 .tag-btn.active {
-    color: var(--color-accent);
-    background: var(--color-surface);
+    color: var(--color-text);
+    background: var(--color-muted-bg);
 }
 
 /* ─── Admin gear no feed (mobile/tablet) ────────────────── */
