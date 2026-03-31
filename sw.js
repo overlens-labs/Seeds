@@ -1,9 +1,11 @@
-const CACHE_NAME = 'seed-library-v1';
+const CACHE_NAME = 'seed-library-v2';
 const PRECACHE = [
     './index.html',
     './style.css',
     './main.js',
+    './supabase-config.js',
     './favicon.svg',
+    './logo-dark.svg',
     './manifest.json',
 ];
 

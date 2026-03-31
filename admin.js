@@ -1,17 +1,9 @@
-// ─── Storage Keys ──────────────────────────────────────────
-const SL_KEYS = {
-    SEEDS:      'seedlibrary_custom',
-    CATEGORIES: 'sl_categories',
-    TAGS:       'sl_tags',
-    LOGO:       'sl_logo',
-};
-
 // ─── Defaults ──────────────────────────────────────────────
 const DEFAULT_CATEGORIES = [
-    { slug: 'ilustracao',      label: 'Ilustração' },
-    { slug: 'pintura',         label: 'Pintura' },
-    { slug: 'cinematografico', label: 'Cinematográfico' },
-    { slug: 'fotografia',      label: 'Fotografia' },
+    { slug: 'ilustracao',      label: 'Ilustração', sort_order: 0 },
+    { slug: 'pintura',         label: 'Pintura',    sort_order: 1 },
+    { slug: 'cinematografico', label: 'Cinematográfico', sort_order: 2 },
+    { slug: 'fotografia',      label: 'Fotografia', sort_order: 3 },
 ];
 
 const DEFAULT_TAGS = {
@@ -23,113 +15,128 @@ const DEFAULT_TAGS = {
 
 const DEFAULT_LOGO = { title: 'Seed Library', subtitle: 'Descubra e copie prompts incríveis.' };
 
-// ─── Storage Helpers ───────────────────────────────────────
-function getCategories() {
-    const stored = localStorage.getItem(SL_KEYS.CATEGORIES);
-    return stored ? JSON.parse(stored) : DEFAULT_CATEGORIES;
+// ─── Supabase Data Helpers ────────────────────────────────
+async function getCategories() {
+    const { data, error } = await sb
+        .from('categories')
+        .select('*')
+        .order('sort_order');
+    if (error || !data || data.length === 0) return DEFAULT_CATEGORIES;
+    return data;
 }
 
-function saveCategories(cats) {
-    localStorage.setItem(SL_KEYS.CATEGORIES, JSON.stringify(cats));
+async function saveCategories(cats) {
+    // Upsert all categories with sort_order
+    for (let i = 0; i < cats.length; i++) {
+        const cat = cats[i];
+        await sb.from('categories').upsert({
+            slug: cat.slug,
+            label: cat.label,
+            sort_order: i,
+        }, { onConflict: 'slug' });
+    }
 }
 
-function getAllTags() {
-    const stored = localStorage.getItem(SL_KEYS.TAGS);
-    return stored ? JSON.parse(stored) : DEFAULT_TAGS;
+async function getAllTags() {
+    const { data, error } = await sb.from('tags').select('*');
+    if (error || !data) return {};
+    const map = {};
+    data.forEach(t => {
+        if (!map[t.category_slug]) map[t.category_slug] = [];
+        map[t.category_slug].push(t.label);
+    });
+    return map;
 }
 
-function saveTags(tags) {
-    localStorage.setItem(SL_KEYS.TAGS, JSON.stringify(tags));
+async function getLogo() {
+    const { data, error } = await sb
+        .from('settings')
+        .select('value')
+        .eq('key', 'logo')
+        .single();
+    if (error || !data) return DEFAULT_LOGO;
+    return data.value;
 }
 
-function getLogo() {
-    const stored = localStorage.getItem(SL_KEYS.LOGO);
-    return stored ? JSON.parse(stored) : DEFAULT_LOGO;
+async function saveLogo(logo) {
+    await sb.from('settings').upsert({ key: 'logo', value: logo }, { onConflict: 'key' });
 }
 
-function saveLogo(logo) {
-    localStorage.setItem(SL_KEYS.LOGO, JSON.stringify(logo));
+async function getCustomSeeds() {
+    const { data, error } = await sb.from('seeds').select('*').order('created_at', { ascending: false });
+    return (!error && data) ? data : [];
 }
 
-function getCustomSeeds() {
-    const stored = localStorage.getItem(SL_KEYS.SEEDS);
-    return stored ? JSON.parse(stored) : [];
+async function saveNewSeed(seed) {
+    const { data, error } = await sb.from('seeds').insert(seed).select().single();
+    if (error) throw error;
+    return data;
 }
 
-function saveCustomSeeds(seeds) {
-    localStorage.setItem(SL_KEYS.SEEDS, JSON.stringify(seeds));
+async function updateSeed(id, updates) {
+    const { error } = await sb.from('seeds').update(updates).eq('id', id);
+    if (error) throw error;
 }
 
-// ─── Auth ──────────────────────────────────────────────────
-const ADMIN_USER  = 'admin';
-// SHA-256 of 'seeds2026' — never store plaintext passwords in source
-const PASS_HASH   = 'd2990e0040f6c89527a596afa3535dd2f89f886de43ec409b869d72a0b030f7b';
-
-async function hashStr(str) {
-    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-    return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+async function deleteSeed(id) {
+    const { error } = await sb.from('seeds').delete().eq('id', id);
+    if (error) throw error;
 }
 
-function checkAuth() {
-    if (sessionStorage.getItem('sl_auth')) {
+// ─── Auth (Supabase Auth) ─────────────────────────────────
+async function checkAuth() {
+    const { data: { session } } = await sb.auth.getSession();
+    if (session) {
         document.getElementById('login-overlay').classList.add('hidden');
         document.getElementById('admin-app').style.display = 'flex';
-        initAdmin();
+        await initAdmin();
     }
 }
 
 document.getElementById('admin-login-form').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const user    = document.getElementById('admin-login-user').value.trim();
+    const email   = document.getElementById('admin-login-email').value.trim();
     const pass    = document.getElementById('admin-login-pass').value;
     const errEl   = document.getElementById('admin-login-error');
     const submitBtn = e.target.querySelector('[type="submit"]');
 
     submitBtn.disabled = true;
-    const hash = await hashStr(pass);
-    submitBtn.disabled = false;
+    submitBtn.textContent = 'Entrando...';
 
-    if (user === ADMIN_USER && hash === PASS_HASH) {
-        sessionStorage.setItem('sl_auth', '1');
+    const { error } = await sb.auth.signInWithPassword({
+        email: email,
+        password: pass,
+    });
+
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Entrar';
+
+    if (error) {
+        errEl.textContent = 'Email ou senha incorretos.';
+    } else {
         document.getElementById('login-overlay').classList.add('hidden');
         document.getElementById('admin-app').style.display = 'flex';
         errEl.textContent = '';
-        initAdmin();
-    } else {
-        errEl.textContent = 'Usuário ou senha incorretos.';
+        await initAdmin();
     }
 });
 
-document.getElementById('admin-logout-btn').addEventListener('click', () => {
-    sessionStorage.removeItem('sl_auth');
+document.getElementById('admin-logout-btn').addEventListener('click', async () => {
+    await sb.auth.signOut();
     document.getElementById('admin-app').style.display = 'none';
     document.getElementById('login-overlay').classList.remove('hidden');
     document.getElementById('admin-login-form').reset();
     document.getElementById('admin-login-error').textContent = '';
 });
 
-// ─── Storage Bar ───────────────────────────────────────────
-function updateStorageBar() {
-    const pct   = Math.min(100, storageUsedPercent());
-    const fill  = document.getElementById('storage-bar-fill');
-    const label = document.getElementById('storage-bar-pct');
-    if (!fill || !label) return;
-    fill.style.width       = pct + '%';
-    label.textContent      = Math.round(pct) + '%';
-    fill.classList.remove('warn', 'danger');
-    if (pct > 80)       fill.classList.add('danger');
-    else if (pct > 60)  fill.classList.add('warn');
+// ─── Init Admin ───────────────────────────────────────────
+async function initAdmin() {
+    await renderCategories();
+    await initAppearanceForm();
+    await renderCustomSeeds();
 }
 
-// ─── Init Admin ────────────────────────────────────────────
-function initAdmin() {
-    renderCategories();
-    initAppearanceForm();
-    renderCustomSeeds();
-    updateStorageBar();
-}
-
-// ─── Navigation ────────────────────────────────────────────
+// ─── Navigation ───────────────────────────────────────────
 function showSection(id) {
     document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
     document.getElementById('section-' + id).classList.add('active');
@@ -141,7 +148,7 @@ document.querySelectorAll('.admin-nav-btn').forEach(btn => {
     btn.addEventListener('click', () => showSection(btn.dataset.section));
 });
 
-// ─── Categories ────────────────────────────────────────────
+// ─── Categories ───────────────────────────────────────────
 function slugify(str) {
     return str
         .toLowerCase()
@@ -151,10 +158,10 @@ function slugify(str) {
         .replace(/^-+|-+$/g, '');
 }
 
-function renderCategories() {
-    const categories = getCategories();
-    const allTags    = getAllTags();
-    const customSeeds = getCustomSeeds();
+async function renderCategories() {
+    const categories = await getCategories();
+    const allTags    = await getAllTags();
+    const customSeeds = await getCustomSeeds();
     const list = document.getElementById('categories-list');
 
     list.innerHTML = categories.map((cat, index) => {
@@ -221,12 +228,12 @@ function renderCategories() {
             input.focus();
             input.select();
 
-            const save = () => {
+            const save = async () => {
                 const newLabel = input.value.trim();
                 if (newLabel && newLabel !== currentLabel) {
-                    renameCategory(index, newLabel);
+                    await renameCategory(index, newLabel);
                 } else {
-                    renderCategories();
+                    await renderCategories();
                 }
             };
 
@@ -244,8 +251,7 @@ function renderCategories() {
             const item = btn.closest('.category-item');
             const slug = item.dataset.slug;
             const label = item.querySelector('.category-name') ?
-                item.querySelector('.category-name').textContent :
-                slug;
+                item.querySelector('.category-name').textContent : slug;
             if (confirm(`Deletar a categoria "${label}" e todas as suas tags?`)) {
                 item.classList.add('removing');
                 item.addEventListener('animationend', () => deleteCategory(slug), { once: true });
@@ -255,19 +261,19 @@ function renderCategories() {
 
     // Move category up/down
     list.querySelectorAll('[data-action="move-up"]').forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', async () => {
             const item = btn.closest('.category-item');
             const index = parseInt(item.dataset.index);
-            if (index > 0) moveCategory(index, index - 1);
+            if (index > 0) await moveCategory(index, index - 1);
         });
     });
 
     list.querySelectorAll('[data-action="move-down"]').forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', async () => {
             const item = btn.closest('.category-item');
             const index = parseInt(item.dataset.index);
-            const cats = getCategories();
-            if (index < cats.length - 1) moveCategory(index, index + 1);
+            const cats = await getCategories();
+            if (index < cats.length - 1) await moveCategory(index, index + 1);
         });
     });
 
@@ -286,9 +292,7 @@ function renderCategories() {
 
         const doAdd = () => {
             const label = input.value.trim();
-            if (label) {
-                addTag(category, label);
-            }
+            if (label) addTag(category, label);
         };
 
         addBtn.addEventListener('click', doAdd);
@@ -298,63 +302,59 @@ function renderCategories() {
     });
 }
 
-function addCategory(label) {
-    const cats = getCategories();
+async function addCategory(label) {
+    const cats = await getCategories();
     const slug = slugify(label);
     if (!slug) return;
     if (cats.some(c => c.slug === slug)) {
         showToast('Categoria já existe!');
         return;
     }
-    cats.push({ slug, label });
-    saveCategories(cats);
-    renderCategories();
+    const { error } = await sb.from('categories').insert({
+        slug, label, sort_order: cats.length,
+    });
+    if (error) { showToast('Erro ao criar categoria.'); return; }
+    await renderCategories();
     showToast('Categoria criada!');
 }
 
-function deleteCategory(slug) {
-    let cats = getCategories();
-    cats = cats.filter(c => c.slug !== slug);
-    saveCategories(cats);
-
-    const tags = getAllTags();
-    delete tags[slug];
-    saveTags(tags);
-
-    renderCategories();
+async function deleteCategory(slug) {
+    await sb.from('categories').delete().eq('slug', slug);
+    // Tags are deleted via CASCADE
+    await renderCategories();
     showToast('Categoria deletada!');
 }
 
-function renameCategory(index, newLabel) {
-    const cats = getCategories();
-    cats[index].label = newLabel;
-    saveCategories(cats);
-    renderCategories();
+async function renameCategory(index, newLabel) {
+    const cats = await getCategories();
+    const cat = cats[index];
+    if (!cat) return;
+    await sb.from('categories').update({ label: newLabel }).eq('slug', cat.slug);
+    await renderCategories();
     showToast('Categoria renomeada!');
 }
 
-function moveCategory(fromIndex, toIndex) {
-    const cats = getCategories();
+async function moveCategory(fromIndex, toIndex) {
+    const cats = await getCategories();
     if (fromIndex < 0 || fromIndex >= cats.length || toIndex < 0 || toIndex >= cats.length) return;
 
     const [moved] = cats.splice(fromIndex, 1);
     cats.splice(toIndex, 0, moved);
-    saveCategories(cats);
-    renderCategories();
+    await saveCategories(cats);
+    await renderCategories();
 }
 
-function addTag(categorySlug, label) {
-    const tags = getAllTags();
-    if (!tags[categorySlug]) tags[categorySlug] = [];
-    if (tags[categorySlug].includes(label)) {
-        showToast('Tag já existe!');
+async function addTag(categorySlug, label) {
+    const { error } = await sb.from('tags').insert({
+        category_slug: categorySlug,
+        label: label,
+    });
+    if (error) {
+        if (error.code === '23505') showToast('Tag já existe!');
+        else showToast('Erro ao criar tag.');
         return;
     }
-    tags[categorySlug].push(label);
-    saveTags(tags);
-    renderCategories();
-
-    // Re-open the accordion panel after re-render
+    await renderCategories();
     const item = document.querySelector(`.category-item[data-slug="${categorySlug}"]`);
     if (item) {
         const panel = item.querySelector('.category-tags-panel');
@@ -364,48 +364,44 @@ function addTag(categorySlug, label) {
     showToast('Tag adicionada!');
 }
 
-function deleteTag(categorySlug, label) {
-    const tags = getAllTags();
-    if (tags[categorySlug]) {
-        tags[categorySlug] = tags[categorySlug].filter(t => t !== label);
-        saveTags(tags);
-        renderCategories();
-
-        // Re-open panel
-        const item = document.querySelector(`.category-item[data-slug="${categorySlug}"]`);
-        if (item) {
-            const panel = item.querySelector('.category-tags-panel');
-            panel.hidden = false;
-            item.classList.add('open');
-        }
-        showToast('Tag removida!');
+async function deleteTag(categorySlug, label) {
+    await sb.from('tags').delete()
+        .eq('category_slug', categorySlug)
+        .eq('label', label);
+    await renderCategories();
+    const item = document.querySelector(`.category-item[data-slug="${categorySlug}"]`);
+    if (item) {
+        const panel = item.querySelector('.category-tags-panel');
+        panel.hidden = false;
+        item.classList.add('open');
     }
+    showToast('Tag removida!');
 }
 
 // Add category button
-document.getElementById('add-category-btn').addEventListener('click', () => {
+document.getElementById('add-category-btn').addEventListener('click', async () => {
     const input = document.getElementById('new-category-input');
     const label = input.value.trim();
     if (label) {
-        addCategory(label);
+        await addCategory(label);
         input.value = '';
     }
 });
 
-document.getElementById('new-category-input').addEventListener('keydown', (e) => {
+document.getElementById('new-category-input').addEventListener('keydown', async (e) => {
     if (e.key === 'Enter') {
         e.preventDefault();
         const label = e.target.value.trim();
         if (label) {
-            addCategory(label);
+            await addCategory(label);
             e.target.value = '';
         }
     }
 });
 
-// ─── Appearance ────────────────────────────────────────────
-function initAppearanceForm() {
-    const logo = getLogo();
+// ─── Appearance ───────────────────────────────────────────
+async function initAppearanceForm() {
+    const logo = await getLogo();
     const titleInput    = document.getElementById('appearance-title');
     const subtitleInput = document.getElementById('appearance-subtitle');
     const previewTitle  = document.getElementById('preview-title');
@@ -416,7 +412,6 @@ function initAppearanceForm() {
     previewTitle.textContent = logo.title;
     previewSub.textContent   = logo.subtitle;
 
-    // Remove old listeners by cloning
     const newTitle = titleInput.cloneNode(true);
     const newSub   = subtitleInput.cloneNode(true);
     titleInput.replaceWith(newTitle);
@@ -430,18 +425,16 @@ function initAppearanceForm() {
     });
 }
 
-document.getElementById('save-appearance-btn').addEventListener('click', () => {
-    const btn = event.currentTarget;
+document.getElementById('save-appearance-btn').addEventListener('click', async (e) => {
+    const btn = e.currentTarget;
     const logo = {
         title:    document.getElementById('appearance-title').value.trim() || DEFAULT_LOGO.title,
         subtitle: document.getElementById('appearance-subtitle').value.trim() || DEFAULT_LOGO.subtitle,
     };
-    saveLogo(logo);
+    await saveLogo(logo);
 
-    // Update page title
     document.title = `${logo.title} — Admin`;
 
-    // Visual feedback on button
     btn.disabled = true;
     const originalText = btn.textContent;
     btn.textContent = '✓ Salvo!';
@@ -456,9 +449,9 @@ document.getElementById('save-appearance-btn').addEventListener('click', () => {
     }, 1000);
 });
 
-// ─── Seeds ─────────────────────────────────────────────────
-function renderCustomSeeds(query = '') {
-    const allSeeds = getCustomSeeds();
+// ─── Seeds ────────────────────────────────────────────────
+async function renderCustomSeeds(query = '') {
+    const allSeeds = await getCustomSeeds();
     const grid     = document.getElementById('admin-seeds-grid');
     const q        = query.toLowerCase().trim();
     const seeds    = q ? allSeeds.filter(s => s.seed.toLowerCase().includes(q)) : allSeeds;
@@ -502,46 +495,54 @@ function renderCustomSeeds(query = '') {
 
     // Click on card image → preview
     grid.querySelectorAll('.admin-card-img').forEach(img => {
-        img.addEventListener('click', () => {
+        img.addEventListener('click', async () => {
             const id   = Number(img.closest('.admin-card').dataset.id);
-            const seed = getCustomSeeds().find(s => s.id === id);
+            const seeds = await getCustomSeeds();
+            const seed = seeds.find(s => s.id === id);
             if (seed) openSeedPreview(seed);
         });
     });
 
     // Edit button
     grid.querySelectorAll('.admin-card-edit').forEach(btn => {
-        btn.addEventListener('click', (e) => {
+        btn.addEventListener('click', async (e) => {
             e.stopPropagation();
             const id   = Number(btn.dataset.id);
-            const seed = getCustomSeeds().find(s => s.id === id);
-            if (seed) openEditSeedModal(seed);
+            const seeds = await getCustomSeeds();
+            const seed = seeds.find(s => s.id === id);
+            if (seed) await openEditSeedModal(seed);
         });
     });
 
     // Delete button
     grid.querySelectorAll('.admin-card-delete').forEach(btn => {
-        btn.addEventListener('click', (e) => {
+        btn.addEventListener('click', async (e) => {
             e.stopPropagation();
             if (confirm('Remover esta seed?')) {
-                deleteCustomSeed(Number(btn.dataset.id));
+                await deleteCustomSeed(Number(btn.dataset.id));
             }
         });
     });
 }
 
-function deleteCustomSeed(id) {
-    const seeds = getCustomSeeds();
-    saveCustomSeeds(seeds.filter(s => s.id !== id));
-    renderCustomSeeds(document.getElementById('seeds-search').value);
+async function deleteCustomSeed(id) {
+    // Also delete the image from storage if it's a supabase URL
+    const seeds = await getCustomSeeds();
+    const seed = seeds.find(s => s.id === id);
+    if (seed && seed.url && seed.url.includes('sb.co/storage')) {
+        const path = seed.url.split('/seed-images/')[1];
+        if (path) await sb.storage.from('seed-images').remove([path]);
+    }
+    await deleteSeed(id);
+    await renderCustomSeeds(document.getElementById('seeds-search').value);
     showToast('Seed removida!');
 }
 
-// ─── Seed Preview Modal ────────────────────────────────────
+// ─── Seed Preview Modal ───────────────────────────────────
 function openSeedPreview(seed) {
-    document.getElementById('preview-modal-title').textContent  = seed.title;
+    document.getElementById('preview-modal-title').textContent  = seed.title || '';
     document.getElementById('preview-modal-img').src            = seed.url;
-    document.getElementById('preview-modal-img').alt            = seed.title;
+    document.getElementById('preview-modal-img').alt            = seed.title || '';
     document.getElementById('preview-modal-meta').textContent   = seed.category + (seed.tag ? ' · ' + seed.tag : '');
     document.getElementById('preview-modal-prompt').textContent = seed.seed;
 
@@ -567,23 +568,23 @@ document.getElementById('preview-modal-copy').addEventListener('click', () => {
     navigator.clipboard.writeText(prompt).then(() => showToast('Prompt copiado!'));
 });
 
-// ─── Edit Seed Modal ───────────────────────────────────────
+// ─── Edit Seed Modal ──────────────────────────────────────
 const adminEditModal     = document.getElementById('admin-edit-modal');
 const adminEditSeedForm  = document.getElementById('admin-edit-seed-form');
 const editFormCat        = document.getElementById('edit-form-category');
 const editFormTag        = document.getElementById('edit-form-tag');
 const editFormTagGrp     = document.getElementById('edit-form-tag-group');
 
-function openEditSeedModal(seed) {
-    const categories = getCategories();
+async function openEditSeedModal(seed) {
+    const categories = await getCategories();
+    const allTags    = await getAllTags();
     document.getElementById('edit-form-id').value   = seed.id;
     document.getElementById('edit-form-seed').value = seed.seed;
 
     editFormCat.innerHTML = '<option value="" disabled>Selecione...</option>' +
         categories.map(c => `<option value="${c.slug}"${c.slug === seed.category ? ' selected' : ''}>${c.label}</option>`).join('');
 
-    // Populate tags for current category
-    const tags = getAllTags()[seed.category] || [];
+    const tags = allTags[seed.category] || [];
     if (tags.length > 0) {
         editFormTag.innerHTML = '<option value="">Sem tag</option>' +
             tags.map(t => `<option value="${t.toLowerCase()}"${t.toLowerCase() === seed.tag ? ' selected' : ''}>${t}</option>`).join('');
@@ -604,8 +605,9 @@ function closeEditSeedModal() {
     adminEditSeedForm.reset();
 }
 
-editFormCat.addEventListener('change', () => {
-    const tags = getAllTags()[editFormCat.value] || [];
+editFormCat.addEventListener('change', async () => {
+    const allTags = await getAllTags();
+    const tags = allTags[editFormCat.value] || [];
     if (tags.length > 0) {
         editFormTag.innerHTML = '<option value="">Sem tag</option>' +
             tags.map(t => `<option value="${t.toLowerCase()}">${t}</option>`).join('');
@@ -619,34 +621,33 @@ document.getElementById('close-admin-edit-modal').addEventListener('click', clos
 document.getElementById('cancel-admin-edit-modal').addEventListener('click', closeEditSeedModal);
 adminEditModal.addEventListener('click', (e) => { if (e.target === adminEditModal) closeEditSeedModal(); });
 
-adminEditSeedForm.addEventListener('submit', (e) => {
+adminEditSeedForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const id      = Number(document.getElementById('edit-form-id').value);
-    const seeds   = getCustomSeeds();
-    const index   = seeds.findIndex(s => s.id === id);
-    if (index === -1) return;
+    const id = Number(document.getElementById('edit-form-id').value);
 
-    seeds[index] = {
-        ...seeds[index],
-        category: editFormCat.value,
-        tag:      editFormTag.value || undefined,
-        seed:     document.getElementById('edit-form-seed').value.trim(),
-    };
-    saveCustomSeeds(seeds);
-    closeEditSeedModal();
-    renderCustomSeeds(document.getElementById('seeds-search').value);
-    showToast('Seed atualizada!');
+    try {
+        await updateSeed(id, {
+            category: editFormCat.value,
+            tag:      editFormTag.value || null,
+            seed:     document.getElementById('edit-form-seed').value.trim(),
+        });
+        closeEditSeedModal();
+        await renderCustomSeeds(document.getElementById('seeds-search').value);
+        showToast('Seed atualizada!');
+    } catch (err) {
+        showToast('Erro ao atualizar seed.');
+    }
 });
 
-// ─── Export / Import ───────────────────────────────────────
-document.getElementById('export-seeds-btn').addEventListener('click', () => {
+// ─── Export / Import ──────────────────────────────────────
+document.getElementById('export-seeds-btn').addEventListener('click', async () => {
     const backup = {
-        version:    1,
+        version:    2,
         exportedAt: new Date().toISOString(),
-        categories: getCategories(),
-        tags:       getAllTags(),
-        logo:       getLogo(),
-        seeds:      getCustomSeeds(),
+        categories: await getCategories(),
+        tags:       await getAllTags(),
+        logo:       await getLogo(),
+        seeds:      await getCustomSeeds(),
     };
     const blob  = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
     const url   = URL.createObjectURL(blob);
@@ -658,7 +659,7 @@ document.getElementById('export-seeds-btn').addEventListener('click', () => {
     showToast('Backup exportado!');
 });
 
-// ─── Restore Backup (JSON) ─────────────────────────────────
+// ─── Restore Backup (JSON) ────────────────────────────────
 document.getElementById('restore-backup-btn').addEventListener('click', () => {
     document.getElementById('restore-file-input').click();
 });
@@ -684,16 +685,46 @@ document.getElementById('restore-file-input').addEventListener('change', async (
     const dateStr = backup.exportedAt ? backup.exportedAt.slice(0, 10) : 'data desconhecida';
     if (!confirm(`Restaurar backup de ${dateStr}?\n\nIsso substituirá categorias, tags, aparência e seeds atuais.`)) return;
 
-    if (Array.isArray(backup.categories)) saveCategories(backup.categories);
-    if (backup.tags && typeof backup.tags === 'object') saveTags(backup.tags);
-    if (backup.logo && backup.logo.title) saveLogo(backup.logo);
-    if (Array.isArray(backup.seeds)) saveCustomSeeds(backup.seeds);
+    // Restore categories
+    if (Array.isArray(backup.categories)) {
+        await saveCategories(backup.categories);
+    }
 
-    initAdmin();
+    // Restore tags
+    if (backup.tags && typeof backup.tags === 'object') {
+        for (const [catSlug, tagList] of Object.entries(backup.tags)) {
+            for (const label of tagList) {
+                await sb.from('tags').upsert(
+                    { category_slug: catSlug, label },
+                    { onConflict: 'category_slug,label' }
+                );
+            }
+        }
+    }
+
+    // Restore logo
+    if (backup.logo && backup.logo.title) {
+        await saveLogo(backup.logo);
+    }
+
+    // Restore seeds
+    if (Array.isArray(backup.seeds)) {
+        for (const seed of backup.seeds) {
+            await sb.from('seeds').upsert({
+                seed: seed.seed,
+                url: seed.url,
+                title: seed.title || '',
+                category: seed.category,
+                tag: seed.tag || '',
+            });
+        }
+    }
+
+    await initAdmin();
     showToast(`Backup restaurado! ${backup.seeds.length} seed(s).`);
 });
 
-// ─── Import Images ──────────────────────────────────────────
+// ─── Import Images ─────────────────────────────────────────
 let pendingImports = [];
 
 document.getElementById('import-seeds-btn').addEventListener('click', () => {
@@ -704,7 +735,7 @@ document.getElementById('import-file-input').addEventListener('change', async (e
     const files = Array.from(e.target.files);
     if (!files.length) return;
     e.target.value = '';
-    openImportModal(files);
+    await openImportModal(files);
 });
 
 async function openImportModal(files) {
@@ -715,15 +746,18 @@ async function openImportModal(files) {
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
 
-    const cats = getCategories();
+    const cats = await getCategories();
     const catOptions = cats.map(c => `<option value="${c.slug}">${c.label}</option>`).join('');
 
-    const dataUrls = await Promise.all(files.map(f => compressImage(f)));
-    pendingImports = dataUrls.map((url, i) => ({ dataUrl: url, name: files[i].name }));
+    // Store raw files for Supabase upload
+    pendingImports = files.map(f => ({ file: f, name: f.name }));
+
+    // Create preview URLs
+    const previewUrls = files.map(f => URL.createObjectURL(f));
 
     list.innerHTML = pendingImports.map((item, i) => `
         <div class="import-item" data-index="${i}">
-            <img src="${item.dataUrl}" class="import-item-thumb" alt="">
+            <img src="${previewUrls[i]}" class="import-item-thumb" alt="">
             <div class="import-item-fields">
                 <div class="import-item-row">
                     <div class="form-group">
@@ -749,11 +783,12 @@ async function openImportModal(files) {
     `).join('');
 
     list.querySelectorAll('.import-cat-select').forEach(select => {
-        select.addEventListener('change', () => {
+        select.addEventListener('change', async () => {
             const item   = select.closest('.import-item');
             const tagGrp = item.querySelector('.import-tag-group');
             const tagSel = item.querySelector('.import-tag-select');
-            const tags   = getAllTags()[select.value] || [];
+            const allTags = await getAllTags();
+            const tags   = allTags[select.value] || [];
             if (tags.length > 0) {
                 tagSel.innerHTML = '<option value="">Sem tag</option>' +
                     tags.map(t => `<option value="${t.toLowerCase()}">${t}</option>`).join('');
@@ -779,53 +814,55 @@ document.getElementById('admin-import-modal').addEventListener('click', (e) => {
     if (e.target === document.getElementById('admin-import-modal')) closeImportModal();
 });
 
-document.getElementById('save-import-btn').addEventListener('click', () => {
+document.getElementById('save-import-btn').addEventListener('click', async () => {
     const items  = document.querySelectorAll('.import-item');
-    const seeds  = getCustomSeeds();
-    let saved    = 0;
+    const saveBtn = document.getElementById('save-import-btn');
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Salvando...';
+    let saved = 0;
 
-    items.forEach((item, i) => {
+    for (let i = 0; i < items.length; i++) {
+        const item    = items[i];
         const catSel  = item.querySelector('.import-cat-select');
         const tagSel  = item.querySelector('.import-tag-select');
         const seedInp = item.querySelector('.import-seed-input');
-        if (!catSel.value) return;
+        if (!catSel.value) continue;
 
-        const seedText = seedInp.value.trim();
-        seeds.push({
-            id:       Date.now() + i,
-            title:    seedText.split(' ').slice(0, 4).join(' ') || 'seed',
-            category: catSel.value,
-            tag:      tagSel.value || undefined,
-            url:      pendingImports[i].dataUrl,
-            seed:     seedText,
-        });
-        saved++;
-    });
+        try {
+            const file = pendingImports[i].file;
+            const imageUrl = await uploadImageToStorage(file);
+            if (!imageUrl) continue;
+
+            const seedText = seedInp.value.trim();
+            await saveNewSeed({
+                title:    seedText.split(' ').slice(0, 4).join(' ') || 'seed',
+                category: catSel.value,
+                tag:      tagSel.value || null,
+                url:      imageUrl,
+                seed:     seedText,
+            });
+            saved++;
+        } catch (err) {
+            console.error('Import error:', err);
+        }
+    }
+
+    saveBtn.disabled = false;
+    saveBtn.textContent = 'Salvar tudo';
 
     if (saved === 0) { showToast('Selecione ao menos uma categoria!'); return; }
 
-    try {
-        saveCustomSeeds(seeds);
-        closeImportModal();
-        renderCustomSeeds();
-        showToast(`${saved} imagem(ns) importada(s)!`);
-        updateStorageBar();
-        warnIfStorageFull();
-    } catch (err) {
-        if (err.name === 'QuotaExceededError') {
-            showToast('Armazenamento cheio! Exporte um backup.');
-        } else {
-            showToast('Erro ao salvar.');
-        }
-    }
+    closeImportModal();
+    await renderCustomSeeds();
+    showToast(`${saved} imagem(ns) importada(s)!`);
 });
 
-// ─── Seeds Search ──────────────────────────────────────────
+// ─── Seeds Search ─────────────────────────────────────────
 document.getElementById('seeds-search').addEventListener('input', (e) => {
     renderCustomSeeds(e.target.value);
 });
 
-// ─── Add Seed Modal ────────────────────────────────────────
+// ─── Add Seed Modal ───────────────────────────────────────
 const adminAddModal    = document.getElementById('admin-add-modal');
 const adminAddSeedForm = document.getElementById('admin-add-seed-form');
 const adminFormImage   = document.getElementById('admin-form-image');
@@ -834,8 +871,8 @@ const adminFormCat     = document.getElementById('admin-form-category');
 const adminFormTag     = document.getElementById('admin-form-tag');
 const adminFormTagGrp  = document.getElementById('admin-form-tag-group');
 
-function openAddSeedModal() {
-    const categories = getCategories();
+async function openAddSeedModal() {
+    const categories = await getCategories();
     adminFormCat.innerHTML = '<option value="" disabled selected>Selecione...</option>' +
         categories.map(c => `<option value="${c.slug}">${c.label}</option>`).join('');
     adminFormTagGrp.style.display = 'none';
@@ -861,9 +898,9 @@ adminAddModal.addEventListener('click', (e) => {
     if (e.target === adminAddModal) closeAddSeedModal();
 });
 
-adminFormCat.addEventListener('change', () => {
-    const cat  = adminFormCat.value;
-    const tags = getAllTags()[cat] || [];
+adminFormCat.addEventListener('change', async () => {
+    const allTags = await getAllTags();
+    const tags = allTags[adminFormCat.value] || [];
     if (tags.length > 0) {
         adminFormTag.innerHTML = '<option value="">Sem tag</option>' +
             tags.map(t => `<option value="${t.toLowerCase()}">${t}</option>`).join('');
@@ -873,52 +910,37 @@ adminFormCat.addEventListener('change', () => {
     }
 });
 
-// ─── Image Compression ─────────────────────────────────────
-function compressImage(file, maxDim = 1200, quality = 0.82) {
-    return new Promise((resolve) => {
-        const img = new Image();
-        const url = URL.createObjectURL(file);
-        img.onload = () => {
-            const ratio  = Math.min(maxDim / img.width, maxDim / img.height, 1);
-            const w      = Math.round(img.width * ratio);
-            const h      = Math.round(img.height * ratio);
-            const canvas = document.createElement('canvas');
-            canvas.width  = w;
-            canvas.height = h;
-            canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-            URL.revokeObjectURL(url);
-            resolve(canvas.toDataURL('image/jpeg', quality));
-        };
-        img.onerror = () => { URL.revokeObjectURL(url); resolve(null); };
-        img.src = url;
-    });
-}
+// ─── Upload Image to Supabase Storage ─────────────────────
+async function uploadImageToStorage(file) {
+    const ext      = file.name.split('.').pop() || 'jpg';
+    const filename = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+    const path     = `seeds/${filename}`;
 
-// ─── Storage Health ─────────────────────────────────────────
-function storageUsedPercent() {
-    try {
-        let total = 0;
-        for (const key in localStorage) {
-            if (Object.prototype.hasOwnProperty.call(localStorage, key)) {
-                total += localStorage[key].length;
-            }
-        }
-        return (total / (5 * 1024 * 1024)) * 100;
-    } catch { return 0; }
-}
+    const { error } = await sb.storage
+        .from('seed-images')
+        .upload(path, file, {
+            cacheControl: '31536000',
+            upsert: false,
+        });
 
-function warnIfStorageFull() {
-    const used = storageUsedPercent();
-    if (used > 80) {
-        showToast(`Armazenamento ${Math.round(used)}% cheio — exporte um backup!`);
+    if (error) {
+        console.error('Upload error:', error);
+        return null;
     }
+
+    const { data: { publicUrl } } = sb.storage
+        .from('seed-images')
+        .getPublicUrl(path);
+
+    return publicUrl;
 }
 
-adminFormImage.addEventListener('change', async () => {
+// ─── Image preview ────────────────────────────────────────
+adminFormImage.addEventListener('change', () => {
     const file = adminFormImage.files[0];
     if (!file) { adminImgPreview.innerHTML = ''; return; }
-    const dataUrl = await compressImage(file);
-    if (dataUrl) adminImgPreview.innerHTML = `<img src="${dataUrl}" alt="preview">`;
+    const url = URL.createObjectURL(file);
+    adminImgPreview.innerHTML = `<img src="${url}" alt="preview">`;
 });
 
 adminAddSeedForm.addEventListener('submit', async (e) => {
@@ -928,41 +950,32 @@ adminAddSeedForm.addEventListener('submit', async (e) => {
     if (!file) return;
 
     submitBtn.disabled    = true;
-    submitBtn.textContent = 'Comprimindo…';
-
-    const dataUrl = await compressImage(file);
-    if (!dataUrl) {
-        showToast('Erro ao processar imagem.');
-        submitBtn.disabled    = false;
-        submitBtn.textContent = 'Adicionar';
-        return;
-    }
+    submitBtn.textContent = 'Enviando...';
 
     try {
-        const tagVal  = adminFormTag.value;
+        const imageUrl = await uploadImageToStorage(file);
+        if (!imageUrl) {
+            showToast('Erro ao enviar imagem.');
+            return;
+        }
+
+        const tagVal   = adminFormTag.value;
         const seedText = document.getElementById('admin-form-seed').value.trim();
-        const newSeed = {
-            id:       Date.now(),
+
+        await saveNewSeed({
             title:    seedText.split(' ').slice(0, 4).join(' ') || 'seed',
             category: adminFormCat.value,
-            tag:      tagVal || undefined,
-            url:      dataUrl,
+            tag:      tagVal || null,
+            url:      imageUrl,
             seed:     seedText,
-        };
-        const seeds = getCustomSeeds();
-        seeds.push(newSeed);
-        saveCustomSeeds(seeds);
+        });
+
         closeAddSeedModal();
-        renderCustomSeeds();
+        await renderCustomSeeds();
         showToast('Seed adicionada!');
-        updateStorageBar();
-        warnIfStorageFull();
     } catch (err) {
-        if (err.name === 'QuotaExceededError') {
-            showToast('Armazenamento cheio! Exporte um backup e remova seeds antigas.');
-        } else {
-            showToast('Erro ao salvar seed.');
-        }
+        showToast('Erro ao salvar seed.');
+        console.error(err);
     } finally {
         submitBtn.disabled    = false;
         submitBtn.textContent = 'Adicionar';
@@ -978,7 +991,7 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// ─── Toast ─────────────────────────────────────────────────
+// ─── Toast ────────────────────────────────────────────────
 let adminToastTimeout;
 
 function showToast(msg = 'Salvo!') {
@@ -1000,5 +1013,5 @@ function showToast(msg = 'Salvo!') {
     }, 2000);
 }
 
-// ─── Init ──────────────────────────────────────────────────
+// ─── Init ─────────────────────────────────────────────────
 checkAuth();

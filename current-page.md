@@ -1,0 +1,3280 @@
+- generic [ref=e1]:
+  - generic [ref=e4]:
+    - banner [ref=e5]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - text: "skip to:"
+          - link "skip to content" [ref=e8] [cursor=pointer]:
+            - /url: "#main"
+            - text: content
+          - link "skip to package search" [ref=e9] [cursor=pointer]:
+            - /url: "#search"
+            - text: package search
+          - link "skip to sign in" [ref=e10] [cursor=pointer]:
+            - /url: "#signin"
+            - text: sign in
+        - generic [ref=e11]:
+          - generic [ref=e12]: ❤
+          - navigation "Product Navigation" [ref=e13]:
+            - list [ref=e14]:
+              - listitem [ref=e15]:
+                - link "Pro" [ref=e16] [cursor=pointer]:
+                  - /url: /products/pro
+              - listitem [ref=e17]:
+                - link "Teams" [ref=e18] [cursor=pointer]:
+                  - /url: /products/teams
+              - listitem [ref=e19]:
+                - link "Pricing" [ref=e20] [cursor=pointer]:
+                  - /url: /products
+              - listitem [ref=e21]:
+                - link "Documentation" [ref=e22] [cursor=pointer]:
+                  - /url: https://docs.npmjs.com
+      - generic [ref=e24]:
+        - generic [ref=e25]: npm
+        - link "Npm" [ref=e27] [cursor=pointer]:
+          - /url: /
+          - img [ref=e28]
+        - generic [ref=e31]:
+          - generic [ref=e33]:
+            - img [ref=e35]
+            - combobox "Search packages" [ref=e41]
+          - button "Search" [ref=e43]
+        - generic [ref=e45]:
+          - link "Sign Up" [ref=e46] [cursor=pointer]:
+            - /url: /signup
+          - link "Sign In" [ref=e47] [cursor=pointer]:
+            - /url: /login
+    - main [ref=e48]:
+      - generic [ref=e49]:
+        - generic [ref=e50]:
+          - heading "@overlens/legacy-components TypeScript icon, indicating that this package has built-in type declarations" [level=1] [ref=e51]:
+            - generic [ref=e52]: "@overlens/legacy-components"
+            - img "TypeScript icon, indicating that this package has built-in type declarations" [ref=e54]
+          - generic [ref=e55]: 1.1.3 •
+          - generic [ref=e56]: Public
+          - generic [ref=e57]:
+            - text: • Published
+            - time [ref=e58]: 3 days ago
+        - tablist [ref=e59]:
+          - tab "Readme" [ref=e60] [cursor=pointer]:
+            - generic [ref=e61]:
+              - img [ref=e62]
+              - text: Readme
+          - tab "Code Beta" [selected] [ref=e64] [cursor=pointer]:
+            - generic [ref=e65]:
+              - img [ref=e66]
+              - text: Code
+              - generic [ref=e69]: Beta
+          - tab "42 Dependencies" [ref=e70] [cursor=pointer]:
+            - generic [ref=e71]:
+              - img [ref=e72]
+              - text: 42 Dependencies
+          - tab "0 Dependents" [ref=e74] [cursor=pointer]:
+            - generic [ref=e75]:
+              - img [ref=e76]
+              - text: 0 Dependents
+          - tab "5 Versions" [ref=e78] [cursor=pointer]:
+            - generic [ref=e79]:
+              - img [ref=e80]
+              - text: 5 Versions
+        - generic [ref=e205]:
+          - tabpanel "Readme"
+          - tabpanel [ref=e206]:
+            - generic [ref=e208]:
+              - generic [ref=e209]:
+                - heading "/@overlens/legacy-components/dist/index.d.ts" [level=2] [ref=e440]
+                - generic [ref=e211]:
+                  - generic [ref=e212]: /
+                  - button "@overlens/legacy-components" [ref=e213] [cursor=pointer]
+                  - generic [ref=e214]: /
+                  - button "dist" [ref=e441] [cursor=pointer]
+                  - generic [ref=e442]: /
+                  - generic [ref=e443]: index.d.ts
+              - generic [ref=e444]:
+                - generic [ref=e445]:
+                  - button "Back" [active] [ref=e446] [cursor=pointer]:
+                    - img [ref=e448]
+                    - text: Back
+                  - generic [ref=e451]:
+                    - generic [ref=e452]: 1459 LOC
+                    - generic [ref=e453]: 110 kB
+                - code [ref=e455]:
+                  - generic [ref=e456]: "1"
+                  - text: import * as react_jsx_runtime from 'react/jsx-runtime';
+                  - generic [ref=e457]: "2"
+                  - text: import * as class_variance_authority_types from 'class-variance-authority/types';
+                  - generic [ref=e458]: "3"
+                  - text: "import { VariantProps } from 'class-variance-authority';"
+                  - generic [ref=e459]: "4"
+                  - text: import * as React$1 from 'react';
+                  - generic [ref=e460]: "5"
+                  - text: import * as AspectRatioPrimitive from '@radix-ui/react-aspect-ratio';
+                  - generic [ref=e461]: "6"
+                  - text: import * as AvatarPrimitive from '@radix-ui/react-avatar';
+                  - generic [ref=e462]: "7"
+                  - text: import * as SeparatorPrimitive from '@radix-ui/react-separator';
+                  - generic [ref=e463]: "8"
+                  - text: import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
+                  - generic [ref=e464]: "9"
+                  - text: "import { Combobox as Combobox$1 } from '@base-ui/react';"
+                  - generic [ref=e465]: "10"
+                  - text: import * as LabelPrimitive from '@radix-ui/react-label';
+                  - generic [ref=e466]: "11"
+                  - text: "import { OTPInput } from 'input-otp';"
+                  - generic [ref=e467]: "12"
+                  - text: import * as PopoverPrimitive from '@radix-ui/react-popover';
+                  - generic [ref=e468]: "13"
+                  - text: import * as ProgressPrimitive from '@radix-ui/react-progress';
+                  - generic [ref=e469]: "14"
+                  - text: import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
+                  - generic [ref=e470]: "15"
+                  - text: import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
+                  - generic [ref=e471]: "16"
+                  - text: import * as SelectPrimitive from '@radix-ui/react-select';
+                  - generic [ref=e472]: "17"
+                  - text: import * as SliderPrimitive from '@radix-ui/react-slider';
+                  - generic [ref=e473]: "18"
+                  - text: import * as SwitchPrimitive from '@radix-ui/react-switch';
+                  - generic [ref=e474]: "19"
+                  - text: import * as TabsPrimitive from '@radix-ui/react-tabs';
+                  - generic [ref=e475]: "20"
+                  - text: import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
+                  - generic [ref=e476]: "21"
+                  - text: import * as TogglePrimitive from '@radix-ui/react-toggle';
+                  - generic [ref=e477]: "22"
+                  - text: import * as TooltipPrimitive from '@radix-ui/react-tooltip';
+                  - generic [ref=e478]: "23"
+                  - text: import * as AccordionPrimitive from '@radix-ui/react-accordion';
+                  - generic [ref=e479]: "24"
+                  - text: import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog';
+                  - generic [ref=e480]: "25"
+                  - text: "import { DayPicker, DayButton } from 'react-day-picker';"
+                  - generic [ref=e481]: "26"
+                  - text: "import useEmblaCarousel, { UseEmblaCarouselType } from 'embla-carousel-react';"
+                  - generic [ref=e482]: "27"
+                  - text: import * as RechartsPrimitive from 'recharts';
+                  - generic [ref=e483]: "28"
+                  - text: import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
+                  - generic [ref=e484]: "29"
+                  - text: "import { Command as Command$1 } from 'cmdk';"
+                  - generic [ref=e485]: "30"
+                  - text: import * as DialogPrimitive from '@radix-ui/react-dialog';
+                  - generic [ref=e486]: "31"
+                  - text: import * as ContextMenuPrimitive from '@radix-ui/react-context-menu';
+                  - generic [ref=e487]: "32"
+                  - text: "import { Drawer as Drawer$1 } from 'vaul';"
+                  - generic [ref=e488]: "33"
+                  - text: import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
+                  - generic [ref=e489]: "34"
+                  - text: import * as react_hook_form from 'react-hook-form';
+                  - generic [ref=e490]: "35"
+                  - text: "import { FieldValues, FieldPath, ControllerProps } from 'react-hook-form';"
+                  - generic [ref=e491]: "36"
+                  - text: "import { Slot } from '@radix-ui/react-slot';"
+                  - generic [ref=e492]: "37"
+                  - text: import * as HoverCardPrimitive from '@radix-ui/react-hover-card';
+                  - generic [ref=e493]: "38"
+                  - text: import * as MenubarPrimitive from '@radix-ui/react-menubar';
+                  - generic [ref=e494]: "39"
+                  - text: import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
+                  - generic [ref=e495]: "40"
+                  - text: "import { ThemeProviderProps } from 'next-themes';"
+                  - generic [ref=e496]: "41"
+                  - text: import * as ResizablePrimitive from 'react-resizable-panels';
+                  - generic [ref=e497]: "42"
+                  - text: "import { ToasterProps } from 'sonner';"
+                  - generic [ref=e498]: "43"
+                  - generic [ref=e499]: "44"
+                  - text: "declare const alertVariants: (props?: ({"
+                  - generic [ref=e500]: "45"
+                  - text: "variant?: \"default\" | \"destructive\" | \"warning\" | \"info\" | \"success\" | null | undefined;"
+                  - generic [ref=e501]: "46"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e502]: "47"
+                  - text: /** Dismissible alert banner with semantic variants (info, success, warning, destructive). */
+                  - generic [ref=e503]: "48"
+                  - text: "declare function Alert({ className, variant, children, ...props }: React$1.ComponentProps<\"div\"> & VariantProps<typeof alertVariants>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e504]: "49"
+                  - text: /** Horizontal container for the alert icon, title, and close button. */
+                  - generic [ref=e505]: "50"
+                  - text: "declare function AlertHeader({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e506]: "51"
+                  - text: /** Container for the alert's leading icon, colored by variant. */
+                  - generic [ref=e507]: "52"
+                  - text: "declare function AlertIcon({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e508]: "53"
+                  - text: /** Title text for the alert. */
+                  - generic [ref=e509]: "54"
+                  - text: "declare function AlertTitle({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e510]: "55"
+                  - text: /** Descriptive body text for the alert. */
+                  - generic [ref=e511]: "56"
+                  - text: "declare function AlertDescription({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e512]: "57"
+                  - text: /** Close button (X icon) that dismisses the alert. */
+                  - generic [ref=e513]: "58"
+                  - text: "declare function AlertClose({ className, onClick, ...props }: React$1.ComponentProps<\"button\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e514]: "59"
+                  - text: /** Container for action buttons at the bottom of the alert. */
+                  - generic [ref=e515]: "60"
+                  - text: "declare function AlertActions({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e516]: "61"
+                  - text: /** Pill-shaped action button within the alert. Supports primary and secondary variants. */
+                  - generic [ref=e517]: "62"
+                  - text: "declare function AlertAction({ className, variant, ...props }: React$1.ComponentProps<\"button\"> & {"
+                  - generic [ref=e518]: "63"
+                  - text: "variant?: \"primary\" | \"secondary\";"
+                  - generic [ref=e519]: "64"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e520]: "65"
+                  - generic [ref=e521]: "66"
+                  - text: /** Constrains child content to a specific width-to-height ratio. */
+                  - generic [ref=e522]: "67"
+                  - text: "declare function AspectRatio({ ...props }: React.ComponentProps<typeof AspectRatioPrimitive.Root>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e523]: "68"
+                  - generic [ref=e524]: "69"
+                  - text: /** User avatar container with size variants (sm, default, lg). Wraps image and fallback sub-components. */
+                  - generic [ref=e525]: "70"
+                  - text: "declare function Avatar({ className, size, ...props }: React$1.ComponentProps<typeof AvatarPrimitive.Root> & {"
+                  - generic [ref=e526]: "71"
+                  - text: "size?: \"default\" | \"sm\" | \"lg\";"
+                  - generic [ref=e527]: "72"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e528]: "73"
+                  - text: /** Image displayed inside an Avatar. Falls back to AvatarFallback on load error. */
+                  - generic [ref=e529]: "74"
+                  - text: "declare function AvatarImage({ className, ...props }: React$1.ComponentProps<typeof AvatarPrimitive.Image>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e530]: "75"
+                  - text: /** Fallback content (initials or icon) shown when the avatar image is unavailable. Uses deterministic brand colors. */
+                  - generic [ref=e531]: "76"
+                  - text: "declare function AvatarFallback({ className, children, ...props }: React$1.ComponentProps<typeof AvatarPrimitive.Fallback>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e532]: "77"
+                  - text: /** Small status indicator positioned at the bottom-right corner of an Avatar. */
+                  - generic [ref=e533]: "78"
+                  - text: "declare function AvatarBadge({ className, ...props }: React$1.ComponentProps<\"span\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e534]: "79"
+                  - text: /** Container that stacks multiple avatars with overlapping layout. */
+                  - generic [ref=e535]: "80"
+                  - text: "declare function AvatarGroup({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e536]: "81"
+                  - text: /** Overflow counter displayed at the end of an AvatarGroup (e.g. "+3"). */
+                  - generic [ref=e537]: "82"
+                  - text: "declare function AvatarGroupCount({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e538]: "83"
+                  - generic [ref=e539]: "84"
+                  - text: "declare const badgeVariants: (props?: ({"
+                  - generic [ref=e540]: "85"
+                  - text: "variant?: \"default\" | \"destructive\" | \"warning\" | \"info\" | \"success\" | \"primary\" | \"secondary\" | \"outline\" | \"ghost\" | null | undefined;"
+                  - generic [ref=e541]: "86"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e542]: "87"
+                  - text: /** Inline status indicator with semantic color variants (default, primary, destructive, success, warning, info, outline). */
+                  - generic [ref=e543]: "88"
+                  - text: "declare function Badge({ className, variant, asChild, ...props }: React$1.ComponentProps<\"span\"> & VariantProps<typeof badgeVariants> & {"
+                  - generic [ref=e544]:
+                    - generic [ref=e545]: "89"
+                    - text: "asChild?: boolean;"
+                  - generic [ref=e546]: "90"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e547]: "91"
+                  - generic [ref=e548]: "92"
+                  - text: /** Visual divider line supporting horizontal and vertical orientations. */
+                  - generic [ref=e549]: "93"
+                  - text: "declare function Separator({ className, orientation, decorative, ...props }: React$1.ComponentProps<typeof SeparatorPrimitive.Root>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e550]: "94"
+                  - generic [ref=e551]: "95"
+                  - text: "declare const buttonGroupVariants: (props?: ({"
+                  - generic [ref=e552]: "96"
+                  - text: "orientation?: \"horizontal\" | \"vertical\" | null | undefined;"
+                  - generic [ref=e553]: "97"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e554]: "98"
+                  - text: /** Groups related buttons together with shared borders and horizontal/vertical orientation. */
+                  - generic [ref=e555]: "99"
+                  - text: "declare function ButtonGroup({ className, orientation, ...props }: React.ComponentProps<\"div\"> & VariantProps<typeof buttonGroupVariants>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e556]: "100"
+                  - text: /** Static text or label segment within a ButtonGroup. */
+                  - generic [ref=e557]: "101"
+                  - text: "declare function ButtonGroupText({ className, asChild, ...props }: React.ComponentProps<\"div\"> & {"
+                  - generic [ref=e558]:
+                    - generic [ref=e559]: "102"
+                    - text: "asChild?: boolean;"
+                  - generic [ref=e560]: "103"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e561]: "104"
+                  - text: /** Visual separator line between buttons in a ButtonGroup. */
+                  - generic [ref=e562]: "105"
+                  - text: "declare function ButtonGroupSeparator({ className, orientation, ...props }: React.ComponentProps<typeof Separator>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e563]: "106"
+                  - generic [ref=e564]: "107"
+                  - text: "declare const buttonVariants: (props?: ({"
+                  - generic [ref=e565]: "108"
+                  - text: "variant?: \"default\" | \"destructive\" | \"link\" | \"secondary\" | \"outline\" | \"ghost\" | \"inverted\" | \"inverted-outline\" | null | undefined;"
+                  - generic [ref=e566]: "109"
+                  - text: "size?: \"default\" | \"sm\" | \"lg\" | \"icon\" | \"icon-xs\" | null | undefined;"
+                  - generic [ref=e567]: "110"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e568]: "111"
+                  - text: /** Primary button component with multiple variants (default, destructive, outline, secondary, ghost, link) and sizes. */
+                  - generic [ref=e569]: "112"
+                  - text: "declare function Button({ className, variant, size, asChild, ...props }: React$1.ComponentProps<\"button\"> & VariantProps<typeof buttonVariants> & {"
+                  - generic [ref=e570]:
+                    - generic [ref=e571]: "113"
+                    - text: "asChild?: boolean;"
+                  - generic [ref=e572]: "114"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e573]: "115"
+                  - generic [ref=e574]: "116"
+                  - text: "declare const checkboxVariants: (props?: ({"
+                  - generic [ref=e575]: "117"
+                  - text: "size?: \"default\" | \"sm\" | \"lg\" | null | undefined;"
+                  - generic [ref=e576]: "118"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e577]: "119"
+                  - text: /** Checkbox form control with checked, unchecked, and indeterminate states. Supports multiple sizes. */
+                  - generic [ref=e578]: "120"
+                  - text: "declare function Checkbox({ className, size, ...props }: React$1.ComponentProps<typeof CheckboxPrimitive.Root> & VariantProps<typeof checkboxVariants>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e579]: "121"
+                  - generic [ref=e580]: "122"
+                  - text: /** Autocomplete combobox root with search filtering, single/multi-select, and chip input support. */
+                  - generic [ref=e581]: "123"
+                  - text: "declare function Combobox<Value = unknown, Multiple extends boolean | undefined = false>(props: Combobox$1.Root.Props<Value, Multiple>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e582]: "124"
+                  - text: /** Displays the current combobox selection as text. */
+                  - generic [ref=e583]: "125"
+                  - text: "declare function ComboboxValue({ ...props }: Combobox$1.Value.Props): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e584]: "126"
+                  - text: /** Button that toggles the combobox dropdown open/closed. */
+                  - generic [ref=e585]: "127"
+                  - text: "declare function ComboboxTrigger({ className, children, ...props }: Combobox$1.Trigger.Props): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e586]: "128"
+                  - text: /** Search input field for filtering combobox options. Wraps in an InputGroup with optional trigger/clear buttons. */
+                  - generic [ref=e587]: "129"
+                  - text: "declare function ComboboxInput({ className, children, disabled, showTrigger, showClear, ...props }: Combobox$1.Input.Props & {"
+                  - generic [ref=e588]:
+                    - generic [ref=e589]: "130"
+                    - text: "showTrigger?: boolean;"
+                  - generic [ref=e590]:
+                    - generic [ref=e591]: "131"
+                    - text: "showClear?: boolean;"
+                  - generic [ref=e592]: "132"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e593]: "133"
+                  - text: /** Floating dropdown panel containing the combobox option list. */
+                  - generic [ref=e594]: "134"
+                  - text: "declare function ComboboxContent({ className, side, sideOffset, align, alignOffset, anchor, ...props }: Combobox$1.Popup.Props & Pick<Combobox$1.Positioner.Props, \"side\" | \"align\" | \"sideOffset\" | \"alignOffset\" | \"anchor\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e595]: "135"
+                  - text: /** Scrollable list container for combobox options. */
+                  - generic [ref=e596]: "136"
+                  - text: "declare function ComboboxList({ className, children, ...props }: Combobox$1.List.Props): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e597]: "137"
+                  - text: /** Individual selectable option within the combobox dropdown. */
+                  - generic [ref=e598]: "138"
+                  - text: "declare function ComboboxItem({ className, children, ...props }: Combobox$1.Item.Props): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e599]: "139"
+                  - text: /** Groups related combobox options under a shared label. */
+                  - generic [ref=e600]: "140"
+                  - text: "declare function ComboboxGroup({ className, ...props }: Combobox$1.Group.Props): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e601]: "141"
+                  - text: /** Label for a group of combobox options. */
+                  - generic [ref=e602]: "142"
+                  - text: "declare function ComboboxLabel({ className, ...props }: Combobox$1.GroupLabel.Props): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e603]: "143"
+                  - text: /** Virtualized collection for large datasets in the combobox. */
+                  - generic [ref=e604]: "144"
+                  - text: "declare function ComboboxCollection({ ...props }: Combobox$1.Collection.Props): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e605]: "145"
+                  - text: /** Placeholder shown when no combobox options match the search query. */
+                  - generic [ref=e606]: "146"
+                  - text: "declare function ComboboxEmpty({ className, ...props }: Combobox$1.Empty.Props): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e607]: "147"
+                  - text: /** Visual divider between combobox option groups. */
+                  - generic [ref=e608]: "148"
+                  - text: "declare function ComboboxSeparator({ className, ...props }: Combobox$1.Separator.Props): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e609]: "149"
+                  - text: /** Multi-select chip container that acts as an anchor for the combobox dropdown. */
+                  - generic [ref=e610]: "150"
+                  - text: "declare function ComboboxChips({ className, ...props }: React$1.ComponentPropsWithRef<typeof Combobox$1.Chips> & Combobox$1.Chips.Props): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e611]: "151"
+                  - text: /** Individual removable chip representing a selected combobox value. Styled like the Tag component. */
+                  - generic [ref=e612]: "152"
+                  - text: "declare function ComboboxChip({ className, children, showRemove, ...props }: Combobox$1.Chip.Props & {"
+                  - generic [ref=e613]:
+                    - generic [ref=e614]: "153"
+                    - text: "showRemove?: boolean;"
+                  - generic [ref=e615]: "154"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e616]: "155"
+                  - text: /** Inline text input rendered inside the ComboboxChips container for search-as-you-type. */
+                  - generic [ref=e617]: "156"
+                  - text: "declare function ComboboxChipsInput({ className, children, ...props }: Combobox$1.Input.Props): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e618]: "157"
+                  - text: /** Creates a ref to use as a custom anchor element for the combobox dropdown positioning. */
+                  - generic [ref=e619]: "158"
+                  - text: "declare function useComboboxAnchor(): React$1.RefObject<HTMLDivElement | null>;"
+                  - generic [ref=e620]: "159"
+                  - generic [ref=e621]: "160"
+                  - text: /** Empty state container for displaying placeholder content when no data is available. */
+                  - generic [ref=e622]: "161"
+                  - text: "declare function Empty({ className, ...props }: React.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e623]: "162"
+                  - text: /** Header section of the empty state containing icon, title, and description. */
+                  - generic [ref=e624]: "163"
+                  - text: "declare function EmptyHeader({ className, ...props }: React.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e625]: "164"
+                  - text: "/** Icon or illustration slot for the empty state. Use `contained` for a muted background container. */"
+                  - generic [ref=e626]: "165"
+                  - text: "declare function EmptyMedia({ className, contained, ...props }: React.ComponentProps<\"div\"> & {"
+                  - generic [ref=e627]:
+                    - generic [ref=e628]: "166"
+                    - text: "contained?: boolean;"
+                  - generic [ref=e629]: "167"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e630]: "168"
+                  - text: /** Title text for the empty state message. */
+                  - generic [ref=e631]: "169"
+                  - text: "declare function EmptyTitle({ className, ...props }: React.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e632]: "170"
+                  - text: /** Descriptive text explaining the empty state. */
+                  - generic [ref=e633]: "171"
+                  - text: "declare function EmptyDescription({ className, ...props }: React.ComponentProps<\"p\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e634]: "172"
+                  - text: /** Action area below the empty state header for buttons or links. */
+                  - generic [ref=e635]: "173"
+                  - text: "declare function EmptyContent({ className, ...props }: React.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e636]: "174"
+                  - generic [ref=e637]: "175"
+                  - text: /** Accessible label component for form controls, built on Radix Label primitive. */
+                  - generic [ref=e638]: "176"
+                  - text: "declare function Label({ className, ...props }: React$1.ComponentProps<typeof LabelPrimitive.Root>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e639]: "177"
+                  - generic [ref=e640]: "178"
+                  - text: /** Semantic fieldset wrapper for grouping related form fields. */
+                  - generic [ref=e641]: "179"
+                  - text: "declare function FieldSet({ className, ...props }: React.ComponentProps<\"fieldset\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e642]: "180"
+                  - text: /** Legend element for a FieldSet, available in legend and label size variants. */
+                  - generic [ref=e643]: "181"
+                  - text: "declare function FieldLegend({ className, variant, ...props }: React.ComponentProps<\"legend\"> & {"
+                  - generic [ref=e644]: "182"
+                  - text: "variant?: \"legend\" | \"label\";"
+                  - generic [ref=e645]: "183"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e646]: "184"
+                  - text: /** Container for stacking multiple Field components vertically with consistent spacing. */
+                  - generic [ref=e647]: "185"
+                  - text: "declare function FieldGroup({ className, ...props }: React.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e648]: "186"
+                  - text: "declare const fieldVariants: (props?: ({"
+                  - generic [ref=e649]: "187"
+                  - text: "orientation?: \"horizontal\" | \"vertical\" | \"responsive\" | null | undefined;"
+                  - generic [ref=e650]: "188"
+                  - text: "adjust?: \"default\" | \"optical\" | null | undefined;"
+                  - generic [ref=e651]: "189"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e652]: "190"
+                  - text: /** Form field wrapper combining label, input, description, and error. Supports vertical, horizontal, and responsive orientations. */
+                  - generic [ref=e653]: "191"
+                  - text: "declare function Field({ className, orientation, adjust, ...props }: React.ComponentProps<\"div\"> & VariantProps<typeof fieldVariants>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e654]: "192"
+                  - text: /** Container for the label and description within a horizontal Field layout. */
+                  - generic [ref=e655]: "193"
+                  - text: "declare function FieldContent({ className, ...props }: React.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e656]: "194"
+                  - text: /** Label element for a Field, wrapping the base Label with field-aware styling. */
+                  - generic [ref=e657]: "195"
+                  - text: "declare function FieldLabel({ className, ...props }: React.ComponentProps<typeof Label>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e658]: "196"
+                  - text: /** Non-label title for a Field when a semantic label is not needed. */
+                  - generic [ref=e659]: "197"
+                  - text: "declare function FieldTitle({ className, ...props }: React.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e660]: "198"
+                  - text: /** Muted helper text displayed below a field label or input. */
+                  - generic [ref=e661]: "199"
+                  - text: "declare function FieldDescription({ className, ...props }: React.ComponentProps<\"p\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e662]: "200"
+                  - text: /** Horizontal rule between fields, optionally with centered text content. */
+                  - generic [ref=e663]: "201"
+                  - text: "declare function FieldSeparator({ children, className, ...props }: React.ComponentProps<\"div\"> & {"
+                  - generic [ref=e664]:
+                    - generic [ref=e665]: "202"
+                    - text: "children?: React.ReactNode;"
+                  - generic [ref=e666]: "203"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e667]: "204"
+                  - text: /** Validation error message displayed below a field. Supports a single message or an array of error objects. */
+                  - generic [ref=e668]: "205"
+                  - text: "declare function FieldError({ className, children, errors, ...props }: React.ComponentProps<\"div\"> & {"
+                  - generic [ref=e669]:
+                    - generic [ref=e670]: "206"
+                    - text: "errors?: Array<{"
+                  - generic [ref=e671]:
+                    - generic [ref=e672]: "207"
+                    - text: "message?: string;"
+                  - generic [ref=e673]:
+                    - generic [ref=e674]: "208"
+                    - text: "} | undefined>;"
+                  - generic [ref=e675]: "209"
+                  - text: "}): react_jsx_runtime.JSX.Element | null;"
+                  - generic [ref=e676]: "210"
+                  - generic [ref=e677]: "211"
+                  - text: /** Heading block — uppercase Outfit title with an optional Inter description beneath. */
+                  - generic [ref=e678]: "212"
+                  - text: "declare function Heading({ className, children, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e679]: "213"
+                  - text: "declare const headingTitleVariants: (props?: ({"
+                  - generic [ref=e680]: "214"
+                  - text: "size?: \"default\" | \"sm\" | \"lg\" | \"xl\" | null | undefined;"
+                  - generic [ref=e681]: "215"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e682]: "216"
+                  - text: /** Uppercase heading rendered in Outfit (font-heading). */
+                  - generic [ref=e683]: "217"
+                  - text: "declare function HeadingTitle({ className, size, ...props }: React$1.ComponentProps<\"h2\"> & VariantProps<typeof headingTitleVariants>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e684]: "218"
+                  - text: "declare const headingDescriptionVariants: (props?: ({"
+                  - generic [ref=e685]: "219"
+                  - text: "size?: \"default\" | \"sm\" | \"lg\" | null | undefined;"
+                  - generic [ref=e686]: "220"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e687]: "221"
+                  - text: /** Optional description beneath the title — Inter, surface-500. */
+                  - generic [ref=e688]: "222"
+                  - text: "declare function HeadingDescription({ className, size, ...props }: React$1.ComponentProps<\"p\"> & VariantProps<typeof headingDescriptionVariants>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e689]: "223"
+                  - generic [ref=e690]: "224"
+                  - text: "declare const inputGroupVariants: (props?: ({"
+                  - generic [ref=e691]: "225"
+                  - text: "size?: \"default\" | \"sm\" | \"md\" | \"lg\" | \"xs\" | null | undefined;"
+                  - generic [ref=e692]: "226"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e693]: "227"
+                  - text: /** Composite input container that combines an input/textarea with addon slots (icons, buttons, text). */
+                  - generic [ref=e694]: "228"
+                  - text: "declare function InputGroup({ className, size, ...props }: React$1.ComponentProps<\"div\"> & VariantProps<typeof inputGroupVariants>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e695]: "229"
+                  - text: "declare const inputGroupAddonVariants: (props?: ({"
+                  - generic [ref=e696]: "230"
+                  - text: "align?: \"inline-start\" | \"inline-end\" | \"block-start\" | \"block-end\" | null | undefined;"
+                  - generic [ref=e697]: "231"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e698]: "232"
+                  - text: /** Addon slot positioned at inline-start, inline-end, block-start, or block-end of the input. */
+                  - generic [ref=e699]: "233"
+                  - text: "declare function InputGroupAddon({ className, align, ...props }: React$1.ComponentProps<\"div\"> & VariantProps<typeof inputGroupAddonVariants>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e700]: "234"
+                  - text: "declare const inputGroupButtonVariants: (props?: ({"
+                  - generic [ref=e701]: "235"
+                  - text: "size?: \"sm\" | \"icon-xs\" | \"xs\" | \"icon-sm\" | null | undefined;"
+                  - generic [ref=e702]: "236"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e703]: "237"
+                  - text: /** Compact button sized for use inside an InputGroupAddon. */
+                  - generic [ref=e704]: "238"
+                  - text: "declare function InputGroupButton({ className, type, variant, size, ...props }: Omit<React$1.ComponentProps<typeof Button>, \"size\"> & VariantProps<typeof inputGroupButtonVariants>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e705]: "239"
+                  - text: /** Static text or icon content within an InputGroupAddon. */
+                  - generic [ref=e706]: "240"
+                  - text: "declare function InputGroupText({ className, ...props }: React$1.ComponentProps<\"span\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e707]: "241"
+                  - text: /** Input control styled to integrate seamlessly within an InputGroup. */
+                  - generic [ref=e708]: "242"
+                  - text: "declare function InputGroupInput({ className, ...props }: Omit<React$1.ComponentProps<\"input\">, \"size\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e709]: "243"
+                  - text: /** Textarea control styled to integrate seamlessly within an InputGroup. */
+                  - generic [ref=e710]: "244"
+                  - text: "declare function InputGroupTextarea({ className, ...props }: React$1.ComponentProps<\"textarea\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e711]: "245"
+                  - generic [ref=e712]: "246"
+                  - text: /** One-time password input with configurable slot count and pattern validation. */
+                  - generic [ref=e713]: "247"
+                  - text: "declare function InputOTP({ className, containerClassName, ...props }: React$1.ComponentProps<typeof OTPInput> & {"
+                  - generic [ref=e714]:
+                    - generic [ref=e715]: "248"
+                    - text: "containerClassName?: string;"
+                  - generic [ref=e716]: "249"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e717]: "250"
+                  - text: /** Groups adjacent OTP slots together visually. */
+                  - generic [ref=e718]: "251"
+                  - text: "declare function InputOTPGroup({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e719]: "252"
+                  - text: /** Individual character slot within the OTP input. */
+                  - generic [ref=e720]: "253"
+                  - text: "declare function InputOTPSlot({ index, className, ...props }: React$1.ComponentProps<\"div\"> & {"
+                  - generic [ref=e721]:
+                    - generic [ref=e722]: "254"
+                    - text: "index: number;"
+                  - generic [ref=e723]: "255"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e724]: "256"
+                  - text: /** Dash separator placed between OTP slot groups. */
+                  - generic [ref=e725]: "257"
+                  - text: "declare function InputOTPSeparator({ ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e726]: "258"
+                  - generic [ref=e727]: "259"
+                  - text: "declare const inputVariants: (props?: ({"
+                  - generic [ref=e728]: "260"
+                  - text: "size?: \"default\" | \"sm\" | \"md\" | \"lg\" | \"xs\" | null | undefined;"
+                  - generic [ref=e729]: "261"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e730]: "262"
+                  - text: /** Text input field with multiple size variants and consistent focus/hover styling. */
+                  - generic [ref=e731]: "263"
+                  - text: "declare function Input({ className, type, size, ...props }: Omit<React$1.ComponentProps<\"input\">, \"size\"> & VariantProps<typeof inputVariants>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e732]: "264"
+                  - generic [ref=e733]: "265"
+                  - text: /** Container that renders a vertical list of Item components. */
+                  - generic [ref=e734]: "266"
+                  - text: "declare function ItemGroup({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e735]: "267"
+                  - text: /** Horizontal divider between items in an ItemGroup. */
+                  - generic [ref=e736]: "268"
+                  - text: "declare function ItemSeparator({ className, ...props }: React$1.ComponentProps<typeof Separator>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e737]: "269"
+                  - text: "declare const itemVariants: (props?: ({"
+                  - generic [ref=e738]: "270"
+                  - text: "variant?: \"default\" | \"outline\" | \"muted\" | null | undefined;"
+                  - generic [ref=e739]: "271"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e740]: "272"
+                  - text: /** Versatile list item row with media, content, and action slots. Supports default, outline, and muted variants. */
+                  - generic [ref=e741]: "273"
+                  - text: "declare function Item({ className, variant, asChild, ...props }: React$1.ComponentProps<\"div\"> & VariantProps<typeof itemVariants> & {"
+                  - generic [ref=e742]:
+                    - generic [ref=e743]: "274"
+                    - text: "asChild?: boolean;"
+                  - generic [ref=e744]: "275"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e745]: "276"
+                  - text: "declare const itemMediaVariants: (props?: ({"
+                  - generic [ref=e746]: "277"
+                  - text: "variant?: \"default\" | \"image\" | \"icon\" | null | undefined;"
+                  - generic [ref=e747]: "278"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e748]: "279"
+                  - text: /** Media slot (icon, avatar, or image) on the leading side of an Item. */
+                  - generic [ref=e749]: "280"
+                  - text: "declare function ItemMedia({ className, variant, ...props }: React$1.ComponentProps<\"div\"> & VariantProps<typeof itemMediaVariants>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e750]: "281"
+                  - text: /** Primary content area of an Item containing title and description. */
+                  - generic [ref=e751]: "282"
+                  - text: "declare function ItemContent({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e752]: "283"
+                  - text: /** Title line within an ItemContent. */
+                  - generic [ref=e753]: "284"
+                  - text: "declare function ItemTitle({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e754]: "285"
+                  - text: /** Secondary description text within an ItemContent, displayed in muted color. */
+                  - generic [ref=e755]: "286"
+                  - text: "declare function ItemDescription({ className, ...props }: React$1.ComponentProps<\"p\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e756]: "287"
+                  - text: /** Trailing action buttons or controls on an Item. */
+                  - generic [ref=e757]: "288"
+                  - text: "declare function ItemActions({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e758]: "289"
+                  - text: /** Full-width header row spanning the entire Item width. */
+                  - generic [ref=e759]: "290"
+                  - text: "declare function ItemHeader({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e760]: "291"
+                  - text: /** Full-width footer row spanning the entire Item width. */
+                  - generic [ref=e761]: "292"
+                  - text: "declare function ItemFooter({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e762]: "293"
+                  - generic [ref=e763]: "294"
+                  - text: /** Keyboard shortcut indicator rendered as an inline key cap. */
+                  - generic [ref=e764]: "295"
+                  - text: "declare function Kbd({ className, ...props }: React.ComponentProps<\"kbd\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e765]: "296"
+                  - text: /** Container for grouping multiple Kbd elements together (e.g. Ctrl+K). */
+                  - generic [ref=e766]: "297"
+                  - text: "declare function KbdGroup({ className, ...props }: React.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e767]: "298"
+                  - generic [ref=e768]: "299"
+                  - text: "declare const nativeSelectVariants: (props?: ({"
+                  - generic [ref=e769]: "300"
+                  - text: "size?: \"default\" | \"sm\" | \"md\" | \"lg\" | \"xs\" | null | undefined;"
+                  - generic [ref=e770]: "301"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e771]: "302"
+                  - text: /** Browser-native select dropdown with custom styling and size variants. */
+                  - generic [ref=e772]: "303"
+                  - text: "declare function NativeSelect({ className, size, ...props }: Omit<React$1.ComponentProps<\"select\">, \"size\"> & VariantProps<typeof nativeSelectVariants>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e773]: "304"
+                  - text: /** Individual option within a NativeSelect. */
+                  - generic [ref=e774]: "305"
+                  - text: "declare function NativeSelectOption({ ...props }: React$1.ComponentProps<\"option\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e775]: "306"
+                  - text: /** Option group label for organizing NativeSelect options. */
+                  - generic [ref=e776]: "307"
+                  - text: "declare function NativeSelectOptGroup({ className, ...props }: React$1.ComponentProps<\"optgroup\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e777]: "308"
+                  - generic [ref=e778]: "309"
+                  - text: "declare const optionInputVariants: (props?: ({"
+                  - generic [ref=e779]: "310"
+                  - text: "size?: \"sm\" | \"md\" | \"lg\" | \"xs\" | \"xxs\" | null | undefined;"
+                  - generic [ref=e780]: "311"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e781]: "312"
+                  - text: "declare const optionBadgeVariants: (props?: ({"
+                  - generic [ref=e782]: "313"
+                  - text: "size?: \"sm\" | \"md\" | \"lg\" | \"xs\" | \"xxs\" | null | undefined;"
+                  - generic [ref=e783]: "314"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e784]: "315"
+                  - text: "type OptionInputProps = Omit<React$1.ComponentProps<\"button\">, \"value\"> & VariantProps<typeof optionInputVariants> & {"
+                  - generic [ref=e785]: "316"
+                  - text: "option: string;"
+                  - generic [ref=e786]: "317"
+                  - text: "selected?: boolean;"
+                  - generic [ref=e787]: "318"
+                  - text: "value?: string;"
+                  - generic [ref=e788]: "319"
+                  - text: "};"
+                  - generic [ref=e789]: "320"
+                  - text: /** Selectable option button with a leading badge label. Used for quiz-style or multiple-choice inputs. */
+                  - generic [ref=e790]: "321"
+                  - text: "declare function OptionInput({ className, size, option, selected: selectedProp, disabled, value, onClick, children, ...props }: OptionInputProps): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e791]: "322"
+                  - text: "type OptionGroupProps = React$1.ComponentProps<\"div\"> & {"
+                  - generic [ref=e792]: "323"
+                  - text: "value?: string | string[];"
+                  - generic [ref=e793]: "324"
+                  - text: "onValueChange?: (value: string) => void;"
+                  - generic [ref=e794]: "325"
+                  - text: "multiple?: boolean;"
+                  - generic [ref=e795]: "326"
+                  - text: "};"
+                  - generic [ref=e796]: "327"
+                  - text: /** Container that manages selection state for a group of OptionInput buttons. Supports single and multi-select. */
+                  - generic [ref=e797]: "328"
+                  - text: "declare function OptionGroup({ className, children, value, onValueChange, multiple, ...props }: OptionGroupProps): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e798]: "329"
+                  - generic [ref=e799]: "330"
+                  - text: /** Root popover component that manages open/close state for floating content panels. */
+                  - generic [ref=e800]: "331"
+                  - text: "declare function Popover({ ...props }: React$1.ComponentProps<typeof PopoverPrimitive.Root>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e801]: "332"
+                  - text: /**
+                  - generic [ref=e802]:
+                    - generic [ref=e803]: "333"
+                    - text: "* Element that opens the popover on click."
+                  - generic [ref=e804]:
+                    - generic [ref=e805]: "334"
+                    - text: "* Strips `aria-controls` when closed to avoid referencing a non-existent"
+                  - generic [ref=e806]:
+                    - generic [ref=e807]: "335"
+                    - text: "* portal ID (Radix sets `aria-controls` before the portal content mounts)."
+                  - generic [ref=e808]: "336"
+                  - text: "*/"
+                  - generic [ref=e809]: "337"
+                  - text: "declare function PopoverTrigger({ ref, ...props }: React$1.ComponentProps<typeof PopoverPrimitive.Trigger>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e810]: "338"
+                  - text: /** Floating panel that appears anchored to the trigger element. */
+                  - generic [ref=e811]: "339"
+                  - text: "declare function PopoverContent({ className, align, sideOffset, ...props }: React$1.ComponentProps<typeof PopoverPrimitive.Content>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e812]: "340"
+                  - text: /** Custom anchor point for positioning the popover content. */
+                  - generic [ref=e813]: "341"
+                  - text: "declare function PopoverAnchor({ ...props }: React$1.ComponentProps<typeof PopoverPrimitive.Anchor>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e814]: "342"
+                  - text: /** Header section within a popover for title and description. */
+                  - generic [ref=e815]: "343"
+                  - text: "declare function PopoverHeader({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e816]: "344"
+                  - text: /** Title text inside a PopoverHeader. */
+                  - generic [ref=e817]: "345"
+                  - text: "declare function PopoverTitle({ className, ...props }: React$1.ComponentProps<\"h2\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e818]: "346"
+                  - text: /** Muted description paragraph inside a PopoverHeader. */
+                  - generic [ref=e819]: "347"
+                  - text: "declare function PopoverDescription({ className, ...props }: React$1.ComponentProps<\"p\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e820]: "348"
+                  - generic [ref=e821]: "349"
+                  - text: /** Horizontal progress bar indicating completion percentage. */
+                  - generic [ref=e822]: "350"
+                  - text: "declare function Progress({ className, value, ...props }: React$1.ComponentProps<typeof ProgressPrimitive.Root>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e823]: "351"
+                  - generic [ref=e824]: "352"
+                  - text: /** Container for a set of mutually exclusive radio options. */
+                  - generic [ref=e825]: "353"
+                  - text: "declare function RadioGroup({ className, ...props }: React$1.ComponentProps<typeof RadioGroupPrimitive.Root>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e826]: "354"
+                  - text: "declare const radioItemVariants: (props?: ({"
+                  - generic [ref=e827]: "355"
+                  - text: "size?: \"default\" | \"sm\" | \"lg\" | null | undefined;"
+                  - generic [ref=e828]: "356"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e829]: "357"
+                  - text: /** Individual radio option within a RadioGroup. Supports multiple sizes. */
+                  - generic [ref=e830]: "358"
+                  - text: "declare function RadioGroupItem({ className, size, ...props }: React$1.ComponentProps<typeof RadioGroupPrimitive.Item> & VariantProps<typeof radioItemVariants>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e831]: "359"
+                  - generic [ref=e832]: "360"
+                  - text: /** Custom scrollable container with styled scrollbar overlays. */
+                  - generic [ref=e833]: "361"
+                  - text: "declare function ScrollArea({ className, children, ...props }: React$1.ComponentProps<typeof ScrollAreaPrimitive.Root>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e834]: "362"
+                  - text: /** Scrollbar track and thumb for vertical or horizontal scrolling. */
+                  - generic [ref=e835]: "363"
+                  - text: "declare function ScrollBar({ className, orientation, ...props }: React$1.ComponentProps<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e836]: "364"
+                  - generic [ref=e837]: "365"
+                  - text: /** Root component for a custom select dropdown, built on Radix Select primitive. */
+                  - generic [ref=e838]: "366"
+                  - text: "declare function Select({ ...props }: React$1.ComponentProps<typeof SelectPrimitive.Root>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e839]: "367"
+                  - text: /** Groups related select options together. */
+                  - generic [ref=e840]: "368"
+                  - text: "declare function SelectGroup({ ...props }: React$1.ComponentProps<typeof SelectPrimitive.Group>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e841]: "369"
+                  - text: /** Displays the currently selected value inside the trigger. */
+                  - generic [ref=e842]: "370"
+                  - text: "declare function SelectValue({ ...props }: React$1.ComponentProps<typeof SelectPrimitive.Value>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e843]: "371"
+                  - text: /** Button that toggles the select dropdown. Supports multiple size variants. */
+                  - generic [ref=e844]: "372"
+                  - text: "declare function SelectTrigger({ className, size, children, ...props }: React$1.ComponentProps<typeof SelectPrimitive.Trigger> & {"
+                  - generic [ref=e845]: "373"
+                  - text: "size?: \"lg\" | \"md\" | \"default\" | \"sm\" | \"xs\";"
+                  - generic [ref=e846]: "374"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e847]: "375"
+                  - text: /** Dropdown panel that contains select options. */
+                  - generic [ref=e848]: "376"
+                  - text: "declare function SelectContent({ className, children, position, side, sideOffset, ...props }: React$1.ComponentProps<typeof SelectPrimitive.Content> & {"
+                  - generic [ref=e849]: "377"
+                  - text: "side?: \"top\" | \"right\" | \"bottom\" | \"left\";"
+                  - generic [ref=e850]:
+                    - generic [ref=e851]: "378"
+                    - text: "sideOffset?: number;"
+                  - generic [ref=e852]: "379"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e853]: "380"
+                  - text: /** Label for a group of select options. */
+                  - generic [ref=e854]: "381"
+                  - text: "declare function SelectLabel({ className, ...props }: React$1.ComponentProps<typeof SelectPrimitive.Label>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e855]: "382"
+                  - text: /** Individual selectable option within the dropdown. */
+                  - generic [ref=e856]: "383"
+                  - text: "declare function SelectItem({ className, children, ...props }: React$1.ComponentProps<typeof SelectPrimitive.Item>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e857]: "384"
+                  - text: /** Visual divider between select option groups. */
+                  - generic [ref=e858]: "385"
+                  - text: "declare function SelectSeparator({ className, ...props }: React$1.ComponentProps<typeof SelectPrimitive.Separator>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e859]: "386"
+                  - text: /** Scroll indicator at the top of the select dropdown when content overflows. */
+                  - generic [ref=e860]: "387"
+                  - text: "declare function SelectScrollUpButton({ className, ...props }: React$1.ComponentProps<typeof SelectPrimitive.ScrollUpButton>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e861]: "388"
+                  - text: /** Scroll indicator at the bottom of the select dropdown when content overflows. */
+                  - generic [ref=e862]: "389"
+                  - text: "declare function SelectScrollDownButton({ className, ...props }: React$1.ComponentProps<typeof SelectPrimitive.ScrollDownButton>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e863]: "390"
+                  - generic [ref=e864]: "391"
+                  - text: "declare function Skeleton({ className, ...props }: React.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e865]: "392"
+                  - generic [ref=e866]: "393"
+                  - text: /** Range slider supporting single and multi-thumb configurations with horizontal/vertical orientations. */
+                  - generic [ref=e867]: "394"
+                  - text: "declare function Slider({ className, defaultValue, value, min, max, \"aria-label\": ariaLabel, ...props }: React$1.ComponentProps<typeof SliderPrimitive.Root>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e868]: "395"
+                  - generic [ref=e869]: "396"
+                  - text: /** Spinning loading indicator with accessible status role. */
+                  - generic [ref=e870]: "397"
+                  - text: "declare function Spinner({ className, ...props }: React.ComponentProps<\"span\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e871]: "398"
+                  - generic [ref=e872]: "399"
+                  - text: /** Toggle switch for binary on/off settings. Available in default and small sizes. */
+                  - generic [ref=e873]: "400"
+                  - text: "declare function Switch({ className, size, ...props }: React$1.ComponentProps<typeof SwitchPrimitive.Root> & {"
+                  - generic [ref=e874]: "401"
+                  - text: "size?: \"sm\" | \"default\";"
+                  - generic [ref=e875]: "402"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e876]: "403"
+                  - generic [ref=e877]: "404"
+                  - text: /** Tabbed navigation component supporting horizontal and vertical orientations. */
+                  - generic [ref=e878]: "405"
+                  - text: "declare function Tabs({ className, orientation, ...props }: React$1.ComponentProps<typeof TabsPrimitive.Root>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e879]: "406"
+                  - text: /** Container for tab triggers with default and underline variants. */
+                  - generic [ref=e880]: "407"
+                  - text: "declare function TabsList({ className, underline, ...props }: React$1.ComponentProps<typeof TabsPrimitive.List> & {"
+                  - generic [ref=e881]:
+                    - generic [ref=e882]: "408"
+                    - text: "underline?: boolean;"
+                  - generic [ref=e883]: "409"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e884]: "410"
+                  - text: /** Individual tab button that activates its associated content panel. */
+                  - generic [ref=e885]: "411"
+                  - text: "declare function TabsTrigger({ className, ...props }: React$1.ComponentProps<typeof TabsPrimitive.Trigger>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e886]: "412"
+                  - text: /** Content panel displayed when its corresponding tab trigger is active. */
+                  - generic [ref=e887]: "413"
+                  - text: "declare function TabsContent({ className, ...props }: React$1.ComponentProps<typeof TabsPrimitive.Content>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e888]: "414"
+                  - generic [ref=e889]: "415"
+                  - text: "declare const tagVariants: (props?: ({"
+                  - generic [ref=e890]: "416"
+                  - text: "size?: \"default\" | \"sm\" | null | undefined;"
+                  - generic [ref=e891]: "417"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e892]: "418"
+                  - text: /** Compact label chip with optional dismiss button. Useful for filters, categories, or multi-select values. */
+                  - generic [ref=e893]: "419"
+                  - text: "declare function Tag({ className, size, disabled, asChild, onDismiss, children, ...props }: Omit<React$1.ComponentProps<\"span\">, \"disabled\"> & VariantProps<typeof tagVariants> & {"
+                  - generic [ref=e894]:
+                    - generic [ref=e895]: "420"
+                    - text: "disabled?: boolean;"
+                  - generic [ref=e896]:
+                    - generic [ref=e897]: "421"
+                    - text: "asChild?: boolean;"
+                  - generic [ref=e898]: "422"
+                  - text: "onDismiss?: () => void;"
+                  - generic [ref=e899]: "423"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e900]: "424"
+                  - generic [ref=e901]: "425"
+                  - text: "declare const textareaVariants: (props?: ({"
+                  - generic [ref=e902]: "426"
+                  - text: "size?: \"default\" | \"sm\" | \"lg\" | null | undefined;"
+                  - generic [ref=e903]: "427"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e904]: "428"
+                  - text: /** Multi-line text input with auto-sizing content, custom resize handle, and size variants. */
+                  - generic [ref=e905]: "429"
+                  - text: "declare function Textarea({ className, size, ...props }: React$1.ComponentProps<\"textarea\"> & VariantProps<typeof textareaVariants>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e906]: "430"
+                  - generic [ref=e907]: "431"
+                  - text: "declare const toggleVariants: (props?: ({"
+                  - generic [ref=e908]: "432"
+                  - text: "size?: \"default\" | \"sm\" | \"lg\" | null | undefined;"
+                  - generic [ref=e909]: "433"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e910]: "434"
+                  - text: "/** Two-state toggle button. Use `outlined` for a bordered variant. */"
+                  - generic [ref=e911]: "435"
+                  - text: "declare function Toggle({ className, outlined, size, ...props }: React$1.ComponentProps<typeof TogglePrimitive.Root> & VariantProps<typeof toggleVariants> & {"
+                  - generic [ref=e912]:
+                    - generic [ref=e913]: "436"
+                    - text: "outlined?: boolean;"
+                  - generic [ref=e914]: "437"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e915]: "438"
+                  - generic [ref=e916]: "439"
+                  - text: /** Group of toggle buttons supporting single or multiple selection. */
+                  - generic [ref=e917]: "440"
+                  - text: "declare function ToggleGroup({ className, outlined, size, spacing, children, ...props }: React$1.ComponentProps<typeof ToggleGroupPrimitive.Root> & VariantProps<typeof toggleVariants> & {"
+                  - generic [ref=e918]:
+                    - generic [ref=e919]: "441"
+                    - text: "outlined?: boolean;"
+                  - generic [ref=e920]:
+                    - generic [ref=e921]: "442"
+                    - text: "spacing?: number;"
+                  - generic [ref=e922]: "443"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e923]: "444"
+                  - text: /** Individual toggle button within a ToggleGroup. Inherits variant and size from the group context. */
+                  - generic [ref=e924]: "445"
+                  - text: "declare function ToggleGroupItem({ className, children, outlined, size, ...props }: React$1.ComponentProps<typeof ToggleGroupPrimitive.Item> & VariantProps<typeof toggleVariants> & {"
+                  - generic [ref=e925]:
+                    - generic [ref=e926]: "446"
+                    - text: "outlined?: boolean;"
+                  - generic [ref=e927]: "447"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e928]: "448"
+                  - generic [ref=e929]: "449"
+                  - text: /** Provides shared delay and configuration for all nested tooltips. */
+                  - generic [ref=e930]: "450"
+                  - text: "declare function TooltipProvider({ delayDuration, ...props }: React$1.ComponentProps<typeof TooltipPrimitive.Provider>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e931]: "451"
+                  - text: /** Root tooltip wrapper that manages open/close state. */
+                  - generic [ref=e932]: "452"
+                  - text: "declare function Tooltip({ ...props }: React$1.ComponentProps<typeof TooltipPrimitive.Root>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e933]: "453"
+                  - text: /** Element that triggers the tooltip on hover/focus. */
+                  - generic [ref=e934]: "454"
+                  - text: "declare function TooltipTrigger({ ...props }: React$1.ComponentProps<typeof TooltipPrimitive.Trigger>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e935]: "455"
+                  - text: /** Floating tooltip panel with arrow indicator and entrance animations. */
+                  - generic [ref=e936]: "456"
+                  - text: "declare function TooltipContent({ className, sideOffset, children, ...props }: React$1.ComponentProps<typeof TooltipPrimitive.Content>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e937]: "457"
+                  - text: /** Keyboard shortcut badge displayed inside tooltip content. */
+                  - generic [ref=e938]: "458"
+                  - text: "declare function TooltipShortcut({ className, ...props }: React$1.ComponentProps<\"kbd\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e939]: "459"
+                  - generic [ref=e940]: "460"
+                  - text: /** Root container for the upload compound component. */
+                  - generic [ref=e941]: "461"
+                  - text: "declare function Upload({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e942]: "462"
+                  - text: /** Trigger that uses InputGroup with a hidden file input. */
+                  - generic [ref=e943]: "463"
+                  - text: "declare function UploadTrigger({ className, accept, multiple, onChange, children, ...props }: Omit<React$1.ComponentProps<\"div\">, \"onChange\"> & {"
+                  - generic [ref=e944]:
+                    - generic [ref=e945]: "464"
+                    - text: "accept?: string;"
+                  - generic [ref=e946]:
+                    - generic [ref=e947]: "465"
+                    - text: "multiple?: boolean;"
+                  - generic [ref=e948]: "466"
+                  - text: "onChange?: (files: FileList | null) => void;"
+                  - generic [ref=e949]: "467"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e950]: "468"
+                  - text: "declare const uploadMessageVariants: (props?: ({"
+                  - generic [ref=e951]: "469"
+                  - text: "variant?: \"warning\" | \"error\" | null | undefined;"
+                  - generic [ref=e952]: "470"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e953]: "471"
+                  - text: /** Status/error message displayed below the trigger. */
+                  - generic [ref=e954]: "472"
+                  - text: "declare function UploadMessage({ className, variant, children, ...props }: React$1.ComponentProps<\"div\"> & VariantProps<typeof uploadMessageVariants>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e955]: "473"
+                  - text: /** Single file row with doc icon, filename, and remove button. */
+                  - generic [ref=e956]: "474"
+                  - text: "declare function UploadFile({ className, name, onRemove, ...props }: Omit<React$1.ComponentProps<\"div\">, \"children\"> & {"
+                  - generic [ref=e957]:
+                    - generic [ref=e958]: "475"
+                    - text: "name: string;"
+                  - generic [ref=e959]: "476"
+                  - text: "onRemove?: () => void;"
+                  - generic [ref=e960]: "477"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e961]: "478"
+                  - text: /** Summary toggle that shows file count and expands/collapses the file list via Collapsible. */
+                  - generic [ref=e962]: "479"
+                  - text: "declare function UploadSummary({ className, count, defaultOpen, children, ...props }: Omit<React$1.ComponentProps<\"div\">, \"children\"> & {"
+                  - generic [ref=e963]:
+                    - generic [ref=e964]: "480"
+                    - text: "count: number;"
+                  - generic [ref=e965]:
+                    - generic [ref=e966]: "481"
+                    - text: "defaultOpen?: boolean;"
+                  - generic [ref=e967]:
+                    - generic [ref=e968]: "482"
+                    - text: "children?: React$1.ReactNode;"
+                  - generic [ref=e969]: "483"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e970]: "484"
+                  - text: /** Expanded list of uploaded files with a title header, inside a card-like container. Standalone usage. */
+                  - generic [ref=e971]: "485"
+                  - text: "declare function UploadFileList({ className, children, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e972]: "486"
+                  - generic [ref=e973]: "487"
+                  - text: /** Vertically stacked collapsible sections for organizing content. */
+                  - generic [ref=e974]: "488"
+                  - text: "declare function Accordion({ ...props }: React$1.ComponentProps<typeof AccordionPrimitive.Root>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e975]: "489"
+                  - text: /** Individual collapsible section within the accordion. */
+                  - generic [ref=e976]: "490"
+                  - text: "declare function AccordionItem({ className, ...props }: React$1.ComponentProps<typeof AccordionPrimitive.Item>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e977]: "491"
+                  - text: /** Clickable header that expands or collapses the accordion item. */
+                  - generic [ref=e978]: "492"
+                  - text: "declare function AccordionTrigger({ className, children, ...props }: React$1.ComponentProps<typeof AccordionPrimitive.Trigger>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e979]: "493"
+                  - text: /** Animated collapsible content area of an accordion item. */
+                  - generic [ref=e980]: "494"
+                  - text: "declare function AccordionContent({ className, children, ...props }: React$1.ComponentProps<typeof AccordionPrimitive.Content>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e981]: "495"
+                  - generic [ref=e982]: "496"
+                  - text: /** Modal dialog that requires explicit user confirmation before proceeding. */
+                  - generic [ref=e983]: "497"
+                  - text: "declare function AlertDialog({ ...props }: React$1.ComponentProps<typeof AlertDialogPrimitive.Root>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e984]: "498"
+                  - text: /** Element that opens the alert dialog when activated. */
+                  - generic [ref=e985]: "499"
+                  - text: "declare function AlertDialogTrigger({ ...props }: React$1.ComponentProps<typeof AlertDialogPrimitive.Trigger>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e986]: "500"
+                  - text: /** Portal that renders alert dialog content outside the DOM hierarchy. */
+                  - generic [ref=e987]: "501"
+                  - text: "declare function AlertDialogPortal({ ...props }: React$1.ComponentProps<typeof AlertDialogPrimitive.Portal>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e988]: "502"
+                  - text: /** Semi-transparent backdrop behind the alert dialog. */
+                  - generic [ref=e989]: "503"
+                  - text: "declare function AlertDialogOverlay({ className, ...props }: React$1.ComponentProps<typeof AlertDialogPrimitive.Overlay>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e990]: "504"
+                  - text: "/** Centered alert dialog panel. Supports `default` and `sm` sizes. */"
+                  - generic [ref=e991]: "505"
+                  - text: "declare function AlertDialogContent({ className, size, ...props }: React$1.ComponentProps<typeof AlertDialogPrimitive.Content> & {"
+                  - generic [ref=e992]: "506"
+                  - text: "size?: \"default\" | \"sm\";"
+                  - generic [ref=e993]: "507"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e994]: "508"
+                  - text: /** Container for alert dialog title, description, and media. */
+                  - generic [ref=e995]: "509"
+                  - text: "declare function AlertDialogHeader({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e996]: "510"
+                  - text: /** Horizontal row layout for title + close button in the alert dialog header. */
+                  - generic [ref=e997]: "511"
+                  - text: "declare function AlertDialogHeaderRow({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e998]: "512"
+                  - text: /** Footer area for alert dialog action and cancel buttons. */
+                  - generic [ref=e999]: "513"
+                  - text: "declare function AlertDialogFooter({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1000]: "514"
+                  - text: /** Accessible title for the alert dialog. */
+                  - generic [ref=e1001]: "515"
+                  - text: "declare function AlertDialogTitle({ className, ...props }: React$1.ComponentProps<typeof AlertDialogPrimitive.Title>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1002]: "516"
+                  - text: /** Descriptive text explaining the alert dialog purpose. */
+                  - generic [ref=e1003]: "517"
+                  - text: "declare function AlertDialogDescription({ className, ...props }: React$1.ComponentProps<typeof AlertDialogPrimitive.Description>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1004]: "518"
+                  - text: /** Optional icon or media slot displayed alongside the alert dialog content. */
+                  - generic [ref=e1005]: "519"
+                  - text: "declare function AlertDialogMedia({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1006]: "520"
+                  - text: /** Close button (X icon) that dismisses the alert dialog. */
+                  - generic [ref=e1007]: "521"
+                  - text: "declare function AlertDialogClose({ className, ...props }: React$1.ComponentProps<typeof AlertDialogPrimitive.Cancel>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1008]: "522"
+                  - text: /** Body container for the alert dialog main content area. */
+                  - generic [ref=e1009]: "523"
+                  - text: "declare function AlertDialogBody({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1010]: "524"
+                  - text: /** Primary action button that confirms the alert dialog. */
+                  - generic [ref=e1011]: "525"
+                  - text: "declare function AlertDialogAction({ className, variant, size, ...props }: React$1.ComponentProps<typeof AlertDialogPrimitive.Action> & Pick<React$1.ComponentProps<typeof Button>, \"variant\" | \"size\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1012]: "526"
+                  - text: /** Cancel button that dismisses the alert dialog without action. */
+                  - generic [ref=e1013]: "527"
+                  - text: "declare function AlertDialogCancel({ className, variant, size, ...props }: React$1.ComponentProps<typeof AlertDialogPrimitive.Cancel> & Pick<React$1.ComponentProps<typeof Button>, \"variant\" | \"size\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1014]: "528"
+                  - generic [ref=e1015]: "529"
+                  - text: "declare const bannerVariants: (props?: ({"
+                  - generic [ref=e1016]: "530"
+                  - text: "size?: \"sm\" | \"md\" | \"lg\" | null | undefined;"
+                  - generic [ref=e1017]: "531"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e1018]: "532"
+                  - text: /**
+                  - generic [ref=e1019]:
+                    - generic [ref=e1020]: "533"
+                    - text: "* Full-width banner."
+                  - generic [ref=e1021]:
+                    - generic [ref=e1022]: "534"
+                    - text: "* Mobile: two separate containers (image + content)."
+                  - generic [ref=e1023]:
+                    - generic [ref=e1024]: "535"
+                    - text: "* Desktop (md+): single container with overlay."
+                  - generic [ref=e1025]:
+                    - generic [ref=e1026]: "536"
+                    - text: "* Auto-detects light/dark backgrounds from color/gradient props."
+                  - generic [ref=e1027]: "537"
+                  - text: "*/"
+                  - generic [ref=e1028]: "538"
+                  - text: "declare function Banner({ className, size, mobileImage, children, ...props }: React$1.ComponentProps<\"div\"> & VariantProps<typeof bannerVariants> & {"
+                  - generic [ref=e1029]:
+                    - generic [ref=e1030]: "539"
+                    - text: "mobileImage?: boolean;"
+                  - generic [ref=e1031]: "540"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1032]: "541"
+                  - text: /** Background media for the banner — supports image, video, animated gradient, and solid color.
+                  - generic [ref=e1033]:
+                    - generic [ref=e1034]: "542"
+                    - text: "* Video: captures first frame as poster, fades in when ready to play."
+                  - generic [ref=e1035]:
+                    - generic [ref=e1036]: "543"
+                    - text: "* Gradient: animated CSS gradient background."
+                  - generic [ref=e1037]: "544"
+                  - text: "* Color: solid background color. */"
+                  - generic [ref=e1038]: "545"
+                  - text: "declare function BannerImage({ className, src, alt, poster, gradient, color, ...props }: React$1.ComponentProps<\"div\"> & {"
+                  - generic [ref=e1039]:
+                    - generic [ref=e1040]: "546"
+                    - text: "src?: string;"
+                  - generic [ref=e1041]:
+                    - generic [ref=e1042]: "547"
+                    - text: "alt?: string;"
+                  - generic [ref=e1043]:
+                    - generic [ref=e1044]: "548"
+                    - text: "poster?: string;"
+                  - generic [ref=e1045]:
+                    - generic [ref=e1046]: "549"
+                    - text: "gradient?: string;"
+                  - generic [ref=e1047]:
+                    - generic [ref=e1048]: "550"
+                    - text: "color?: string;"
+                  - generic [ref=e1049]: "551"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1050]: "552"
+                  - text: "declare namespace BannerImage {"
+                  - generic [ref=e1051]: "553"
+                  - text: "var displayName: string;"
+                  - generic [ref=e1052]: "554"
+                  - text: "}"
+                  - generic [ref=e1053]: "555"
+                  - text: /** Gradient overlay on top of the banner image. */
+                  - generic [ref=e1054]: "556"
+                  - text: "declare function BannerOverlay({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1055]: "557"
+                  - text: "declare namespace BannerOverlay {"
+                  - generic [ref=e1056]: "558"
+                  - text: "var displayName: string;"
+                  - generic [ref=e1057]: "559"
+                  - text: "}"
+                  - generic [ref=e1058]: "560"
+                  - text: /** Content area — flow in mobile, overlay with frosted glass in desktop.
+                  - generic [ref=e1059]: "561"
+                  - text: "* Text color adapts via --banner-fg CSS variable set by Banner. */"
+                  - generic [ref=e1060]: "562"
+                  - text: "declare function BannerContent({ className, children, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1061]: "563"
+                  - text: /** Banner heading — uppercase, font-heading (Outfit). */
+                  - generic [ref=e1062]: "564"
+                  - text: "declare function BannerTitle({ className, ...props }: React$1.ComponentProps<\"h1\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1063]: "565"
+                  - text: /** Banner description — smart text wrapping to avoid orphans, font-light. */
+                  - generic [ref=e1064]: "566"
+                  - text: "declare function BannerDescription({ className, children, ...props }: React$1.ComponentProps<\"h2\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1065]: "567"
+                  - text: /** Container for banner action buttons (CTA). */
+                  - generic [ref=e1066]: "568"
+                  - text: "declare function BannerActions({ className, children, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1067]: "569"
+                  - generic [ref=e1068]: "570"
+                  - text: /** Navigation breadcrumb trail showing the current page hierarchy. */
+                  - generic [ref=e1069]: "571"
+                  - text: "declare function Breadcrumb({ ...props }: React$1.ComponentProps<\"nav\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1070]: "572"
+                  - text: /** Ordered list of breadcrumb items with separator spacing. */
+                  - generic [ref=e1071]: "573"
+                  - text: "declare function BreadcrumbList({ className, collapsible, ...props }: React$1.ComponentProps<\"ol\"> & {"
+                  - generic [ref=e1072]: "574"
+                  - text: "/** On mobile, collapse to `… > Current Page`. Tap `…` to expand via popover. */"
+                  - generic [ref=e1073]:
+                    - generic [ref=e1074]: "575"
+                    - text: "collapsible?: boolean;"
+                  - generic [ref=e1075]: "576"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1076]: "577"
+                  - text: /** Individual breadcrumb item in the trail. */
+                  - generic [ref=e1077]: "578"
+                  - text: "declare function BreadcrumbItem({ className, ...props }: React$1.ComponentProps<\"li\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1078]: "579"
+                  - text: /** Clickable link within a breadcrumb item. */
+                  - generic [ref=e1079]: "580"
+                  - text: "declare function BreadcrumbLink({ asChild, className, ...props }: React$1.ComponentProps<\"a\"> & {"
+                  - generic [ref=e1080]:
+                    - generic [ref=e1081]: "581"
+                    - text: "asChild?: boolean;"
+                  - generic [ref=e1082]: "582"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1083]: "583"
+                  - text: /** Current page indicator in the breadcrumb trail (non-interactive). */
+                  - generic [ref=e1084]: "584"
+                  - text: "declare function BreadcrumbPage({ className, ...props }: React$1.ComponentProps<\"span\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1085]: "585"
+                  - text: /** Arrow separator between breadcrumb items. */
+                  - generic [ref=e1086]: "586"
+                  - text: "declare function BreadcrumbSeparator({ children, className, ...props }: React$1.ComponentProps<\"li\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1087]: "587"
+                  - text: /** Ellipsis indicator for collapsed breadcrumb items. */
+                  - generic [ref=e1088]: "588"
+                  - text: "declare function BreadcrumbEllipsis({ className, ...props }: React$1.ComponentProps<\"span\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1089]: "589"
+                  - generic [ref=e1090]: "590"
+                  - text: /** Date picker calendar with month/year navigation, range selection, and locale support. */
+                  - generic [ref=e1091]: "591"
+                  - text: "declare function Calendar({ className, classNames, showOutsideDays, captionLayout, buttonVariant, formatters, components, ...props }: React$1.ComponentProps<typeof DayPicker> & {"
+                  - generic [ref=e1092]: "592"
+                  - text: "buttonVariant?: React$1.ComponentProps<typeof Button>[\"variant\"];"
+                  - generic [ref=e1093]: "593"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1094]: "594"
+                  - text: /** Interactive day button with selection, range, and today state styling. */
+                  - generic [ref=e1095]: "595"
+                  - text: "declare function CalendarDayButton({ className, day, modifiers, ...props }: React$1.ComponentProps<typeof DayButton>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1096]: "596"
+                  - generic [ref=e1097]: "597"
+                  - text: /**
+                  - generic [ref=e1098]:
+                    - generic [ref=e1099]: "598"
+                    - text: "* 3D card with background media support (color, gradient, image, video)."
+                  - generic [ref=e1100]:
+                    - generic [ref=e1101]: "599"
+                    - text: "* Text-only — no action buttons. Designed for grid layouts."
+                  - generic [ref=e1102]:
+                    - generic [ref=e1103]: "600"
+                    - text: "* Auto-detects light/dark backgrounds from color/gradient props."
+                  - generic [ref=e1104]:
+                    - generic [ref=e1105]: "601"
+                    - text: "* 3D tilt effect on hover — card reacts to mouse position like a playing card."
+                  - generic [ref=e1106]: "602"
+                  - text: "*/"
+                  - generic [ref=e1107]: "603"
+                  - text: "declare function Card3D({ className, children, type, ...props }: React$1.ComponentProps<\"button\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1108]: "604"
+                  - text: /** Background media — supports image, video, animated gradient, and solid color. */
+                  - generic [ref=e1109]: "605"
+                  - text: "declare function Card3DImage({ className, src, alt, poster, gradient, color, ...props }: React$1.ComponentProps<\"div\"> & {"
+                  - generic [ref=e1110]:
+                    - generic [ref=e1111]: "606"
+                    - text: "src?: string;"
+                  - generic [ref=e1112]:
+                    - generic [ref=e1113]: "607"
+                    - text: "alt?: string;"
+                  - generic [ref=e1114]:
+                    - generic [ref=e1115]: "608"
+                    - text: "poster?: string;"
+                  - generic [ref=e1116]:
+                    - generic [ref=e1117]: "609"
+                    - text: "gradient?: string;"
+                  - generic [ref=e1118]:
+                    - generic [ref=e1119]: "610"
+                    - text: "color?: string;"
+                  - generic [ref=e1120]: "611"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1121]: "612"
+                  - text: "declare namespace Card3DImage {"
+                  - generic [ref=e1122]: "613"
+                  - text: "var displayName: string;"
+                  - generic [ref=e1123]: "614"
+                  - text: "}"
+                  - generic [ref=e1124]: "615"
+                  - text: /** Gradient overlay on top of the background. */
+                  - generic [ref=e1125]: "616"
+                  - text: "declare function Card3DOverlay({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1126]: "617"
+                  - text: "declare namespace Card3DOverlay {"
+                  - generic [ref=e1127]: "618"
+                  - text: "var displayName: string;"
+                  - generic [ref=e1128]: "619"
+                  - text: "}"
+                  - generic [ref=e1129]: "620"
+                  - text: /** Content area — positioned over the background. Uses flex column with justify-between by default
+                  - generic [ref=e1130]: "621"
+                  - text: "* (header at top, footer at bottom). Set `inverted` to flip the order (badges top, header bottom). */"
+                  - generic [ref=e1131]: "622"
+                  - text: "declare function Card3DContent({ className, children, inverted, ...props }: React$1.ComponentProps<\"div\"> & {"
+                  - generic [ref=e1132]:
+                    - generic [ref=e1133]: "623"
+                    - text: "inverted?: boolean;"
+                  - generic [ref=e1134]: "624"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1135]: "625"
+                  - text: /** Card heading — uppercase, font-heading (Outfit). */
+                  - generic [ref=e1136]: "626"
+                  - text: "declare function Card3DTitle({ className, ...props }: React$1.ComponentProps<\"h3\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1137]: "627"
+                  - text: /** Card description text. */
+                  - generic [ref=e1138]: "628"
+                  - text: "declare function Card3DDescription({ className, ...props }: React$1.ComponentProps<\"p\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1139]: "629"
+                  - text: /** Badge — always white background with black text for consistent readability over any card background. */
+                  - generic [ref=e1140]: "630"
+                  - text: "declare function Card3DBadge({ className, style, ...props }: Omit<React$1.ComponentProps<typeof Badge>, \"variant\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1141]: "631"
+                  - generic [ref=e1142]: "632"
+                  - text: /** Container component for grouping related content with consistent styling. */
+                  - generic [ref=e1143]: "633"
+                  - text: "declare function Card({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1144]: "634"
+                  - text: /** Header section of the card containing title and description. */
+                  - generic [ref=e1145]: "635"
+                  - text: "declare function CardHeader({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1146]: "636"
+                  - text: /** Title text for the card header. */
+                  - generic [ref=e1147]: "637"
+                  - text: "declare function CardTitle({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1148]: "638"
+                  - text: /** Muted description text below the card title. */
+                  - generic [ref=e1149]: "639"
+                  - text: "declare function CardDescription({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1150]: "640"
+                  - text: /** Main content area of the card. */
+                  - generic [ref=e1151]: "641"
+                  - text: "declare function CardContent({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1152]: "642"
+                  - text: /** Footer area of the card for secondary actions. */
+                  - generic [ref=e1153]: "643"
+                  - text: "declare function CardFooter({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1154]: "644"
+                  - generic [ref=e1155]: "645"
+                  - text: type CarouselApi = UseEmblaCarouselType[1];
+                  - generic [ref=e1156]: "646"
+                  - text: type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
+                  - generic [ref=e1157]: "647"
+                  - text: type CarouselOptions = UseCarouselParameters[0];
+                  - generic [ref=e1158]: "648"
+                  - text: type CarouselPlugin = UseCarouselParameters[1];
+                  - generic [ref=e1159]: "649"
+                  - text: type CarouselOrientation = "horizontal" | "vertical";
+                  - generic [ref=e1160]: "650"
+                  - text: "type CarouselContextValue = {"
+                  - generic [ref=e1161]: "651"
+                  - text: "emblaRef: ReturnType<typeof useEmblaCarousel>[0];"
+                  - generic [ref=e1162]: "652"
+                  - text: "viewportWrapperRef: React$1.RefCallback<HTMLDivElement>;"
+                  - generic [ref=e1163]: "653"
+                  - text: "viewportWrapper: HTMLDivElement | null;"
+                  - generic [ref=e1164]: "654"
+                  - text: "api: CarouselApi;"
+                  - generic [ref=e1165]: "655"
+                  - text: "opts: CarouselOptions;"
+                  - generic [ref=e1166]: "656"
+                  - text: "orientation: CarouselOrientation;"
+                  - generic [ref=e1167]: "657"
+                  - text: "canScrollPrev: boolean;"
+                  - generic [ref=e1168]: "658"
+                  - text: "canScrollNext: boolean;"
+                  - generic [ref=e1169]: "659"
+                  - text: "scrollPrev: () => void;"
+                  - generic [ref=e1170]: "660"
+                  - text: "scrollNext: () => void;"
+                  - generic [ref=e1171]: "661"
+                  - text: "selectedIndex: number;"
+                  - generic [ref=e1172]: "662"
+                  - text: "scrollSnaps: number[];"
+                  - generic [ref=e1173]: "663"
+                  - text: "scrollTo: (index: number) => void;"
+                  - generic [ref=e1174]: "664"
+                  - text: "};"
+                  - generic [ref=e1175]: "665"
+                  - text: "declare function useCarousel(): CarouselContextValue;"
+                  - generic [ref=e1176]: "666"
+                  - text: "type CarouselProps = React$1.ComponentProps<\"div\"> & {"
+                  - generic [ref=e1177]: "667"
+                  - text: "opts?: CarouselOptions;"
+                  - generic [ref=e1178]: "668"
+                  - text: "plugins?: CarouselPlugin;"
+                  - generic [ref=e1179]: "669"
+                  - text: "orientation?: CarouselOrientation;"
+                  - generic [ref=e1180]: "670"
+                  - text: "setApi?: (api: CarouselApi) => void;"
+                  - generic [ref=e1181]: "671"
+                  - text: "title?: string;"
+                  - generic [ref=e1182]: "672"
+                  - text: "subtitle?: string;"
+                  - generic [ref=e1183]: "673"
+                  - text: "};"
+                  - generic [ref=e1184]: "674"
+                  - text: "declare function Carousel({ orientation, opts, setApi, plugins, title, subtitle, className, children, ...props }: CarouselProps): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1185]: "675"
+                  - text: "declare function CarouselContent({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1186]: "676"
+                  - text: "declare function CarouselItem({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1187]: "677"
+                  - text: "declare function CarouselPrevious({ className, ...props }: React$1.ComponentProps<\"button\">): React$1.ReactPortal | null;"
+                  - generic [ref=e1188]: "678"
+                  - text: "declare function CarouselNext({ className, ...props }: React$1.ComponentProps<\"button\">): React$1.ReactPortal | null;"
+                  - generic [ref=e1189]: "679"
+                  - text: "declare function CarouselDots({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element | null;"
+                  - generic [ref=e1190]: "680"
+                  - generic [ref=e1191]: "681"
+                  - text: "declare const THEMES: {"
+                  - generic [ref=e1192]: "682"
+                  - text: "readonly light: \"\";"
+                  - generic [ref=e1193]: "683"
+                  - text: "readonly dark: \".dark\";"
+                  - generic [ref=e1194]: "684"
+                  - text: "};"
+                  - generic [ref=e1195]: "685"
+                  - text: /** Configuration object mapping data keys to labels, icons, and colors for charts. */
+                  - generic [ref=e1196]: "686"
+                  - text: "type ChartConfig = {"
+                  - generic [ref=e1197]: "687"
+                  - text: "[k in string]: {"
+                  - generic [ref=e1198]: "688"
+                  - text: "label?: React$1.ReactNode;"
+                  - generic [ref=e1199]: "689"
+                  - text: "icon?: React$1.ComponentType;"
+                  - generic [ref=e1200]: "690"
+                  - text: "} & ({"
+                  - generic [ref=e1201]: "691"
+                  - text: "color?: string;"
+                  - generic [ref=e1202]: "692"
+                  - text: "theme?: never;"
+                  - generic [ref=e1203]: "693"
+                  - text: "} | {"
+                  - generic [ref=e1204]: "694"
+                  - text: "color?: never;"
+                  - generic [ref=e1205]: "695"
+                  - text: "theme: Record<keyof typeof THEMES, string>;"
+                  - generic [ref=e1206]: "696"
+                  - text: "});"
+                  - generic [ref=e1207]: "697"
+                  - text: "};"
+                  - generic [ref=e1208]: "698"
+                  - text: /** Responsive chart wrapper that provides configuration context and CSS variables. */
+                  - generic [ref=e1209]: "699"
+                  - text: "declare function ChartContainer({ id, className, children, config, ...props }: React$1.ComponentProps<\"div\"> & {"
+                  - generic [ref=e1210]:
+                    - generic [ref=e1211]: "700"
+                    - text: "config: ChartConfig;"
+                  - generic [ref=e1212]: "701"
+                  - text: "children: React$1.ComponentProps<typeof RechartsPrimitive.ResponsiveContainer>[\"children\"];"
+                  - generic [ref=e1213]: "702"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1214]: "703"
+                  - text: /** Injects CSS custom properties for chart colors based on theme. */
+                  - generic [ref=e1215]: "704"
+                  - text: "declare const ChartStyle: ({ id, config }: {"
+                  - generic [ref=e1216]: "705"
+                  - text: "id: string;"
+                  - generic [ref=e1217]: "706"
+                  - text: "config: ChartConfig;"
+                  - generic [ref=e1218]: "707"
+                  - text: "}) => react_jsx_runtime.JSX.Element | null;"
+                  - generic [ref=e1219]: "708"
+                  - text: /** Recharts Tooltip component for displaying data on hover. */
+                  - generic [ref=e1220]: "709"
+                  - text: "declare const ChartTooltip: typeof RechartsPrimitive.Tooltip;"
+                  - generic [ref=e1221]: "710"
+                  - text: /** Styled tooltip content renderer with color indicators and labels. */
+                  - generic [ref=e1222]: "711"
+                  - text: "declare function ChartTooltipContent({ active, payload, className, indicator, hideLabel, hideIndicator, label, labelFormatter, labelClassName, formatter, color, nameKey, labelKey, }: React$1.ComponentProps<typeof RechartsPrimitive.Tooltip> & React$1.ComponentProps<\"div\"> & {"
+                  - generic [ref=e1223]:
+                    - generic [ref=e1224]: "712"
+                    - text: "hideLabel?: boolean;"
+                  - generic [ref=e1225]:
+                    - generic [ref=e1226]: "713"
+                    - text: "hideIndicator?: boolean;"
+                  - generic [ref=e1227]: "714"
+                  - text: "indicator?: \"line\" | \"dot\";"
+                  - generic [ref=e1228]:
+                    - generic [ref=e1229]: "715"
+                    - text: "nameKey?: string;"
+                  - generic [ref=e1230]:
+                    - generic [ref=e1231]: "716"
+                    - text: "labelKey?: string;"
+                  - generic [ref=e1232]: "717"
+                  - text: "}): react_jsx_runtime.JSX.Element | null;"
+                  - generic [ref=e1233]: "718"
+                  - text: /** Recharts Legend component for labeling chart data series. */
+                  - generic [ref=e1234]: "719"
+                  - text: "declare const ChartLegend: typeof RechartsPrimitive.Legend;"
+                  - generic [ref=e1235]: "720"
+                  - text: /** Styled legend content renderer with color swatches and labels. */
+                  - generic [ref=e1236]: "721"
+                  - text: "declare function ChartLegendContent({ className, hideIcon, payload, verticalAlign, nameKey, }: React$1.ComponentProps<\"div\"> & Pick<RechartsPrimitive.LegendProps, \"payload\" | \"verticalAlign\"> & {"
+                  - generic [ref=e1237]:
+                    - generic [ref=e1238]: "722"
+                    - text: "hideIcon?: boolean;"
+                  - generic [ref=e1239]:
+                    - generic [ref=e1240]: "723"
+                    - text: "nameKey?: string;"
+                  - generic [ref=e1241]: "724"
+                  - text: "}): react_jsx_runtime.JSX.Element | null;"
+                  - generic [ref=e1242]: "725"
+                  - generic [ref=e1243]: "726"
+                  - text: /** Interactive component that expands and collapses a section of content. */
+                  - generic [ref=e1244]: "727"
+                  - text: "declare function Collapsible({ className, ...props }: React.ComponentProps<typeof CollapsiblePrimitive.Root>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1245]: "728"
+                  - text: /** Button that toggles the collapsible content visibility. */
+                  - generic [ref=e1246]: "729"
+                  - text: "declare function CollapsibleTrigger({ ...props }: React.ComponentProps<typeof CollapsiblePrimitive.CollapsibleTrigger>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1247]: "730"
+                  - text: /** Content area that is shown or hidden by the collapsible trigger. */
+                  - generic [ref=e1248]: "731"
+                  - text: "declare function CollapsibleContent({ className, ...props }: React.ComponentProps<typeof CollapsiblePrimitive.CollapsibleContent>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1249]: "732"
+                  - generic [ref=e1250]: "733"
+                  - text: /** Modal dialog that overlays content and requires user interaction. */
+                  - generic [ref=e1251]: "734"
+                  - text: "declare function Dialog({ ...props }: React$1.ComponentProps<typeof DialogPrimitive.Root>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1252]: "735"
+                  - text: /** Button or element that opens the dialog when clicked. */
+                  - generic [ref=e1253]: "736"
+                  - text: "declare function DialogTrigger({ ...props }: React$1.ComponentProps<typeof DialogPrimitive.Trigger>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1254]: "737"
+                  - text: /** Portal that renders dialog content outside the DOM hierarchy. */
+                  - generic [ref=e1255]: "738"
+                  - text: "declare function DialogPortal({ ...props }: React$1.ComponentProps<typeof DialogPrimitive.Portal>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1256]: "739"
+                  - text: /** Button that closes the dialog. */
+                  - generic [ref=e1257]: "740"
+                  - text: "declare function DialogClose({ ...props }: React$1.ComponentProps<typeof DialogPrimitive.Close>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1258]: "741"
+                  - text: /** Semi-transparent backdrop behind the dialog content. */
+                  - generic [ref=e1259]: "742"
+                  - text: "declare function DialogOverlay({ className, ...props }: React$1.ComponentProps<typeof DialogPrimitive.Overlay>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1260]: "743"
+                  - text: /** Centered dialog panel with overlay, close button, and animated transitions. */
+                  - generic [ref=e1261]: "744"
+                  - text: "declare function DialogContent({ className, children, showCloseButton, ...props }: React$1.ComponentProps<typeof DialogPrimitive.Content> & {"
+                  - generic [ref=e1262]:
+                    - generic [ref=e1263]: "745"
+                    - text: "showCloseButton?: boolean;"
+                  - generic [ref=e1264]: "746"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1265]: "747"
+                  - text: /** Container for the dialog title and description. */
+                  - generic [ref=e1266]: "748"
+                  - text: "declare function DialogHeader({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1267]: "749"
+                  - text: /** Footer area for dialog action buttons. Optionally includes a close button. */
+                  - generic [ref=e1268]: "750"
+                  - text: "declare function DialogFooter({ className, showCloseButton, children, ...props }: React$1.ComponentProps<\"div\"> & {"
+                  - generic [ref=e1269]:
+                    - generic [ref=e1270]: "751"
+                    - text: "showCloseButton?: boolean;"
+                  - generic [ref=e1271]: "752"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1272]: "753"
+                  - text: /** Accessible title for the dialog. */
+                  - generic [ref=e1273]: "754"
+                  - text: "declare function DialogTitle({ className, ...props }: React$1.ComponentProps<typeof DialogPrimitive.Title>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1274]: "755"
+                  - text: /** Accessible description text below the dialog title. */
+                  - generic [ref=e1275]: "756"
+                  - text: "declare function DialogDescription({ className, ...props }: React$1.ComponentProps<typeof DialogPrimitive.Description>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1276]: "757"
+                  - generic [ref=e1277]: "758"
+                  - text: /**
+                  - generic [ref=e1278]:
+                    - generic [ref=e1279]: "759"
+                    - text: "* Internal search command with pill shape, animated results list, and submit button."
+                  - generic [ref=e1280]:
+                    - generic [ref=e1281]: "760"
+                    - text: "* Always used inside `CommandDialog` — not meant to be rendered standalone."
+                  - generic [ref=e1282]: "761"
+                  - text: "*/"
+                  - generic [ref=e1283]: "762"
+                  - text: "declare function Command({ className, children, suggestions, placeholder, ...props }: React$1.ComponentProps<typeof Command$1> & {"
+                  - generic [ref=e1284]:
+                    - generic [ref=e1285]: "763"
+                    - text: "placeholder?: string;"
+                  - generic [ref=e1286]:
+                    - generic [ref=e1287]: "764"
+                    - text: "suggestions?: React$1.ReactNode;"
+                  - generic [ref=e1288]: "765"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1289]: "766"
+                  - text: /**
+                  - generic [ref=e1290]:
+                    - generic [ref=e1291]: "767"
+                    - text: "* Command palette — renders inside a Drawer on mobile, Dialog on desktop."
+                  - generic [ref=e1292]:
+                    - generic [ref=e1293]: "768"
+                    - text: "* This is the primary entry point — all Command usage goes through this component."
+                  - generic [ref=e1294]: "769"
+                  - text: "*/"
+                  - generic [ref=e1295]: "770"
+                  - text: "declare function CommandDialog({ title, description, children, className, showCloseButton, placeholder, ...props }: React$1.ComponentProps<typeof Dialog> & {"
+                  - generic [ref=e1296]:
+                    - generic [ref=e1297]: "771"
+                    - text: "title?: string;"
+                  - generic [ref=e1298]:
+                    - generic [ref=e1299]: "772"
+                    - text: "description?: string;"
+                  - generic [ref=e1300]:
+                    - generic [ref=e1301]: "773"
+                    - text: "className?: string;"
+                  - generic [ref=e1302]:
+                    - generic [ref=e1303]: "774"
+                    - text: "showCloseButton?: boolean;"
+                  - generic [ref=e1304]:
+                    - generic [ref=e1305]: "775"
+                    - text: "placeholder?: string;"
+                  - generic [ref=e1306]: "776"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1307]: "777"
+                  - text: /** Search input field with icon and submit button. */
+                  - generic [ref=e1308]: "778"
+                  - text: "declare const CommandInput: React$1.ForwardRefExoticComponent<Omit<Omit<Pick<Pick<React$1.DetailedHTMLProps<React$1.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, \"key\" | keyof React$1.InputHTMLAttributes<HTMLInputElement>> & {"
+                  - generic [ref=e1309]: "779"
+                  - text: "ref?: React$1.Ref<HTMLInputElement>;"
+                  - generic [ref=e1310]: "780"
+                  - text: "} & {"
+                  - generic [ref=e1311]: "781"
+                  - text: "asChild?: boolean;"
+                  - generic [ref=e1312]: "782"
+                  - text: "}, \"key\" | \"asChild\" | keyof React$1.InputHTMLAttributes<HTMLInputElement>>, \"onChange\" | \"type\" | \"value\"> & {"
+                  - generic [ref=e1313]: "783"
+                  - text: "value?: string;"
+                  - generic [ref=e1314]: "784"
+                  - text: "onValueChange?: (search: string) => void;"
+                  - generic [ref=e1315]: "785"
+                  - text: "} & React$1.RefAttributes<HTMLInputElement> & {"
+                  - generic [ref=e1316]: "786"
+                  - text: "placeholder?: string;"
+                  - generic [ref=e1317]: "787"
+                  - text: "hasQuery?: boolean;"
+                  - generic [ref=e1318]: "788"
+                  - text: "}, \"ref\"> & React$1.RefAttributes<HTMLDivElement>>;"
+                  - generic [ref=e1319]: "789"
+                  - text: /** Scrollable list container for command items and groups. */
+                  - generic [ref=e1320]: "790"
+                  - text: "declare function CommandList({ className, ...props }: React$1.ComponentProps<typeof Command$1.List>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1321]: "791"
+                  - text: /** Empty state displayed when no command items match the search query. */
+                  - generic [ref=e1322]: "792"
+                  - text: "declare function CommandEmpty({ ...props }: React$1.ComponentProps<typeof Command$1.Empty>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1323]: "793"
+                  - text: /** Named group of related command items with a heading. */
+                  - generic [ref=e1324]: "794"
+                  - text: "declare function CommandGroup({ className, ...props }: React$1.ComponentProps<typeof Command$1.Group>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1325]: "795"
+                  - text: /** Visual divider between command groups. */
+                  - generic [ref=e1326]: "796"
+                  - text: "declare function CommandSeparator({ className, ...props }: React$1.ComponentProps<typeof Command$1.Separator>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1327]: "797"
+                  - text: /** Selectable item within the command palette. */
+                  - generic [ref=e1328]: "798"
+                  - text: "declare function CommandItem({ className, ...props }: React$1.ComponentProps<typeof Command$1.Item>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1329]: "799"
+                  - text: /** Keyboard shortcut hint displayed alongside a command item. */
+                  - generic [ref=e1330]: "800"
+                  - text: "declare function CommandShortcut({ className, ...props }: React$1.ComponentProps<\"span\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1331]: "801"
+                  - generic [ref=e1332]: "802"
+                  - text: /** File attachment metadata for the comment area. */
+                  - generic [ref=e1333]: "803"
+                  - text: "type CommentAreaFile = {"
+                  - generic [ref=e1334]: "804"
+                  - text: "id: string;"
+                  - generic [ref=e1335]: "805"
+                  - text: "name: string;"
+                  - generic [ref=e1336]: "806"
+                  - text: "};"
+                  - generic [ref=e1337]: "807"
+                  - text: "type CommentAreaProps = {"
+                  - generic [ref=e1338]: "808"
+                  - text: "placeholder?: string;"
+                  - generic [ref=e1339]: "809"
+                  - text: "value?: string;"
+                  - generic [ref=e1340]: "810"
+                  - text: "defaultValue?: string;"
+                  - generic [ref=e1341]: "811"
+                  - text: "disabled?: boolean;"
+                  - generic [ref=e1342]: "812"
+                  - text: "maxLength?: number;"
+                  - generic [ref=e1343]: "813"
+                  - text: "files?: CommentAreaFile[];"
+                  - generic [ref=e1344]: "814"
+                  - text: "onValueChange?: (value: string) => void;"
+                  - generic [ref=e1345]: "815"
+                  - text: "onSubmit?: (value: string) => void;"
+                  - generic [ref=e1346]: "816"
+                  - text: "onUpload?: () => void;"
+                  - generic [ref=e1347]: "817"
+                  - text: "onAIHelp?: () => void;"
+                  - generic [ref=e1348]: "818"
+                  - text: "onFileRemove?: (id: string) => void;"
+                  - generic [ref=e1349]: "819"
+                  - text: "actions?: React$1.ReactNode;"
+                  - generic [ref=e1350]: "820"
+                  - text: "className?: string;"
+                  - generic [ref=e1351]: "821"
+                  - text: "};"
+                  - generic [ref=e1352]: "822"
+                  - text: /** Rich text comment input with file attachments, emoji, AI help, and submit via Cmd+Enter. */
+                  - generic [ref=e1353]: "823"
+                  - text: "declare function CommentArea({ placeholder, value: controlledValue, defaultValue, disabled, maxLength, onValueChange, onSubmit, onUpload, onAIHelp, onFileRemove, files, actions, className, }: CommentAreaProps): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1354]: "824"
+                  - text: /** Circular icon button for toolbar actions in the comment area. */
+                  - generic [ref=e1355]: "825"
+                  - text: "declare function CommentAreaAction({ className, children, ...props }: React$1.ComponentProps<\"button\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1356]: "826"
+                  - generic [ref=e1357]: "827"
+                  - text: /** Right-click context menu with keyboard navigation support. */
+                  - generic [ref=e1358]: "828"
+                  - text: "declare function ContextMenu({ ...props }: React$1.ComponentProps<typeof ContextMenuPrimitive.Root>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1359]: "829"
+                  - text: /** Area that activates the context menu on right-click. */
+                  - generic [ref=e1360]: "830"
+                  - text: "declare function ContextMenuTrigger({ ...props }: React$1.ComponentProps<typeof ContextMenuPrimitive.Trigger>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1361]: "831"
+                  - text: /** Groups related context menu items together. */
+                  - generic [ref=e1362]: "832"
+                  - text: "declare function ContextMenuGroup({ ...props }: React$1.ComponentProps<typeof ContextMenuPrimitive.Group>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1363]: "833"
+                  - text: /** Portal for rendering context menu content outside the DOM hierarchy. */
+                  - generic [ref=e1364]: "834"
+                  - text: "declare function ContextMenuPortal({ ...props }: React$1.ComponentProps<typeof ContextMenuPrimitive.Portal>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1365]: "835"
+                  - text: /** Container for a nested sub-menu within a context menu. */
+                  - generic [ref=e1366]: "836"
+                  - text: "declare function ContextMenuSub({ ...props }: React$1.ComponentProps<typeof ContextMenuPrimitive.Sub>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1367]: "837"
+                  - text: /** Group of mutually exclusive radio items in a context menu. */
+                  - generic [ref=e1368]: "838"
+                  - text: "declare function ContextMenuRadioGroup({ ...props }: React$1.ComponentProps<typeof ContextMenuPrimitive.RadioGroup>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1369]: "839"
+                  - text: /** Item that opens a nested sub-menu within the context menu. */
+                  - generic [ref=e1370]: "840"
+                  - text: "declare function ContextMenuSubTrigger({ className, inset, children, ...props }: React$1.ComponentProps<typeof ContextMenuPrimitive.SubTrigger> & {"
+                  - generic [ref=e1371]:
+                    - generic [ref=e1372]: "841"
+                    - text: "inset?: boolean;"
+                  - generic [ref=e1373]: "842"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1374]: "843"
+                  - text: /** Content panel for a nested context sub-menu. */
+                  - generic [ref=e1375]: "844"
+                  - text: "declare function ContextMenuSubContent({ className, ...props }: React$1.ComponentProps<typeof ContextMenuPrimitive.SubContent>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1376]: "845"
+                  - text: /** Floating container for context menu items with animations. */
+                  - generic [ref=e1377]: "846"
+                  - text: "declare function ContextMenuContent({ className, ...props }: React$1.ComponentProps<typeof ContextMenuPrimitive.Content>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1378]: "847"
+                  - text: /** Selectable item within a context menu. Supports destructive variant. */
+                  - generic [ref=e1379]: "848"
+                  - text: "declare function ContextMenuItem({ className, inset, variant, ...props }: React$1.ComponentProps<typeof ContextMenuPrimitive.Item> & {"
+                  - generic [ref=e1380]:
+                    - generic [ref=e1381]: "849"
+                    - text: "inset?: boolean;"
+                  - generic [ref=e1382]: "850"
+                  - text: "variant?: \"default\" | \"destructive\";"
+                  - generic [ref=e1383]: "851"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1384]: "852"
+                  - text: /** Context menu item with a checkbox indicator. */
+                  - generic [ref=e1385]: "853"
+                  - text: "declare function ContextMenuCheckboxItem({ className, children, checked, ...props }: React$1.ComponentProps<typeof ContextMenuPrimitive.CheckboxItem>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1386]: "854"
+                  - text: /** Context menu item with a radio indicator for single selection. */
+                  - generic [ref=e1387]: "855"
+                  - text: "declare function ContextMenuRadioItem({ className, children, ...props }: React$1.ComponentProps<typeof ContextMenuPrimitive.RadioItem>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1388]: "856"
+                  - text: /** Non-interactive label for a group of context menu items. */
+                  - generic [ref=e1389]: "857"
+                  - text: "declare function ContextMenuLabel({ className, inset, ...props }: React$1.ComponentProps<typeof ContextMenuPrimitive.Label> & {"
+                  - generic [ref=e1390]:
+                    - generic [ref=e1391]: "858"
+                    - text: "inset?: boolean;"
+                  - generic [ref=e1392]: "859"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1393]: "860"
+                  - text: /** Visual divider between context menu item groups. */
+                  - generic [ref=e1394]: "861"
+                  - text: "declare function ContextMenuSeparator({ className, ...props }: React$1.ComponentProps<typeof ContextMenuPrimitive.Separator>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1395]: "862"
+                  - text: /** Keyboard shortcut hint displayed alongside a context menu item. */
+                  - generic [ref=e1396]: "863"
+                  - text: "declare function ContextMenuShortcut({ className, ...props }: React$1.ComponentProps<\"span\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1397]: "864"
+                  - generic [ref=e1398]: "865"
+                  - text: /** Swipeable drawer panel powered by Vaul, slides from any direction. */
+                  - generic [ref=e1399]: "866"
+                  - text: "declare function Drawer({ ...props }: React$1.ComponentProps<typeof Drawer$1.Root>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1400]: "867"
+                  - text: /** Element that opens the drawer when activated. */
+                  - generic [ref=e1401]: "868"
+                  - text: "declare function DrawerTrigger({ ...props }: React$1.ComponentProps<typeof Drawer$1.Trigger>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1402]: "869"
+                  - text: /** Portal that renders drawer content outside the DOM hierarchy. */
+                  - generic [ref=e1403]: "870"
+                  - text: "declare function DrawerPortal({ ...props }: React$1.ComponentProps<typeof Drawer$1.Portal>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1404]: "871"
+                  - text: /** Button that closes the drawer. */
+                  - generic [ref=e1405]: "872"
+                  - text: "declare function DrawerClose({ ...props }: React$1.ComponentProps<typeof Drawer$1.Close>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1406]: "873"
+                  - text: /** Semi-transparent backdrop behind the drawer. */
+                  - generic [ref=e1407]: "874"
+                  - text: "declare function DrawerOverlay({ className, ...props }: React$1.ComponentProps<typeof Drawer$1.Overlay>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1408]: "875"
+                  - text: /** Drawer panel with direction-aware borders and a drag handle for bottom drawers. */
+                  - generic [ref=e1409]: "876"
+                  - text: "declare function DrawerContent({ className, children, ...props }: React$1.ComponentProps<typeof Drawer$1.Content>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1410]: "877"
+                  - text: /** Container for the drawer title and description. */
+                  - generic [ref=e1411]: "878"
+                  - text: "declare function DrawerHeader({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1412]: "879"
+                  - text: /** Footer area for drawer action buttons. */
+                  - generic [ref=e1413]: "880"
+                  - text: "declare function DrawerFooter({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1414]: "881"
+                  - text: /** Accessible title for the drawer. */
+                  - generic [ref=e1415]: "882"
+                  - text: "declare function DrawerTitle({ className, ...props }: React$1.ComponentProps<typeof Drawer$1.Title>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1416]: "883"
+                  - text: /** Accessible description text for the drawer. */
+                  - generic [ref=e1417]: "884"
+                  - text: "declare function DrawerDescription({ className, ...props }: React$1.ComponentProps<typeof Drawer$1.Description>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1418]: "885"
+                  - text: /** Container for a group of menu items inside the drawer. */
+                  - generic [ref=e1419]: "886"
+                  - text: "declare function DrawerMenuGroup({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1420]: "887"
+                  - text: /** Non-interactive label for a group of drawer menu items. */
+                  - generic [ref=e1421]: "888"
+                  - text: "declare function DrawerMenuLabel({ className, ...props }: React$1.ComponentProps<\"span\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1422]: "889"
+                  - text: /** Selectable menu item inside the drawer. Follows sidebar menu-button styling. Supports destructive variant. */
+                  - generic [ref=e1423]: "890"
+                  - text: "declare function DrawerMenuItem({ className, isActive, variant, ...props }: React$1.ComponentProps<\"button\"> & {"
+                  - generic [ref=e1424]:
+                    - generic [ref=e1425]: "891"
+                    - text: "isActive?: boolean;"
+                  - generic [ref=e1426]: "892"
+                  - text: "variant?: \"default\" | \"destructive\";"
+                  - generic [ref=e1427]: "893"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1428]: "894"
+                  - text: /** Visual divider between drawer menu item groups. */
+                  - generic [ref=e1429]: "895"
+                  - text: "declare function DrawerMenuSeparator({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1430]: "896"
+                  - generic [ref=e1431]: "897"
+                  - text: /** Popover menu triggered by a button click, with keyboard navigation. */
+                  - generic [ref=e1432]: "898"
+                  - text: "declare function DropdownMenu({ ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.Root>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1433]: "899"
+                  - text: /** Portal for rendering dropdown menu content outside the DOM hierarchy. */
+                  - generic [ref=e1434]: "900"
+                  - text: "declare function DropdownMenuPortal({ ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.Portal>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1435]: "901"
+                  - text: /** Element that toggles the dropdown menu open state. */
+                  - generic [ref=e1436]: "902"
+                  - text: "declare function DropdownMenuTrigger({ ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.Trigger>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1437]: "903"
+                  - text: /** Floating container for dropdown menu items with animations. */
+                  - generic [ref=e1438]: "904"
+                  - text: "declare function DropdownMenuContent({ className, sideOffset, ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.Content>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1439]: "905"
+                  - text: /** Groups related dropdown menu items together. */
+                  - generic [ref=e1440]: "906"
+                  - text: "declare function DropdownMenuGroup({ ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.Group>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1441]: "907"
+                  - text: /** Selectable item within a dropdown menu. Supports destructive variant. */
+                  - generic [ref=e1442]: "908"
+                  - text: "declare function DropdownMenuItem({ className, inset, variant, ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.Item> & {"
+                  - generic [ref=e1443]:
+                    - generic [ref=e1444]: "909"
+                    - text: "inset?: boolean;"
+                  - generic [ref=e1445]: "910"
+                  - text: "variant?: \"default\" | \"destructive\";"
+                  - generic [ref=e1446]: "911"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1447]: "912"
+                  - text: /** Dropdown menu item with a checkbox indicator. */
+                  - generic [ref=e1448]: "913"
+                  - text: "declare function DropdownMenuCheckboxItem({ className, children, checked, ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.CheckboxItem>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1449]: "914"
+                  - text: /** Group of mutually exclusive radio items in a dropdown menu. */
+                  - generic [ref=e1450]: "915"
+                  - text: "declare function DropdownMenuRadioGroup({ ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.RadioGroup>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1451]: "916"
+                  - text: /** Dropdown menu item with a radio indicator for single selection. */
+                  - generic [ref=e1452]: "917"
+                  - text: "declare function DropdownMenuRadioItem({ className, children, ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.RadioItem>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1453]: "918"
+                  - text: /** Non-interactive label for a group of dropdown menu items. */
+                  - generic [ref=e1454]: "919"
+                  - text: "declare function DropdownMenuLabel({ className, inset, ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.Label> & {"
+                  - generic [ref=e1455]:
+                    - generic [ref=e1456]: "920"
+                    - text: "inset?: boolean;"
+                  - generic [ref=e1457]: "921"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1458]: "922"
+                  - text: /** Visual divider between dropdown menu item groups. */
+                  - generic [ref=e1459]: "923"
+                  - text: "declare function DropdownMenuSeparator({ className, ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.Separator>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1460]: "924"
+                  - text: /** Keyboard shortcut hint displayed alongside a dropdown menu item. */
+                  - generic [ref=e1461]: "925"
+                  - text: "declare function DropdownMenuShortcut({ className, ...props }: React$1.ComponentProps<\"span\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1462]: "926"
+                  - text: /** Container for a nested sub-menu within a dropdown menu. */
+                  - generic [ref=e1463]: "927"
+                  - text: "declare function DropdownMenuSub({ ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.Sub>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1464]: "928"
+                  - text: /** Item that opens a nested sub-menu on hover or click. */
+                  - generic [ref=e1465]: "929"
+                  - text: "declare function DropdownMenuSubTrigger({ className, inset, children, ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.SubTrigger> & {"
+                  - generic [ref=e1466]:
+                    - generic [ref=e1467]: "930"
+                    - text: "inset?: boolean;"
+                  - generic [ref=e1468]: "931"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1469]: "932"
+                  - text: /** Content panel for a nested dropdown sub-menu. */
+                  - generic [ref=e1470]: "933"
+                  - text: "declare function DropdownMenuSubContent({ className, ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.SubContent>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1471]: "934"
+                  - generic [ref=e1472]: "935"
+                  - text: /** Form context provider from react-hook-form for managing form state. */
+                  - generic [ref=e1473]: "936"
+                  - text: "declare const Form: <TFieldValues extends FieldValues, TContext = any, TTransformedValues = TFieldValues>(props: react_hook_form.FormProviderProps<TFieldValues, TContext, TTransformedValues>) => React$1.JSX.Element;"
+                  - generic [ref=e1474]: "937"
+                  - text: /** Controlled form field that connects react-hook-form to input components. */
+                  - generic [ref=e1475]: "938"
+                  - text: "declare const FormField: <TFieldValues extends FieldValues = FieldValues, TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>>({ ...props }: ControllerProps<TFieldValues, TName>) => react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1476]: "939"
+                  - text: /** Hook that provides form field context including validation state and IDs. */
+                  - generic [ref=e1477]: "940"
+                  - text: "declare const useFormField: () => {"
+                  - generic [ref=e1478]: "941"
+                  - text: "invalid: boolean;"
+                  - generic [ref=e1479]: "942"
+                  - text: "isDirty: boolean;"
+                  - generic [ref=e1480]: "943"
+                  - text: "isTouched: boolean;"
+                  - generic [ref=e1481]: "944"
+                  - text: "isValidating: boolean;"
+                  - generic [ref=e1482]: "945"
+                  - text: "error?: react_hook_form.FieldError;"
+                  - generic [ref=e1483]: "946"
+                  - text: "id: string;"
+                  - generic [ref=e1484]: "947"
+                  - text: "name: string;"
+                  - generic [ref=e1485]: "948"
+                  - text: "formItemId: string;"
+                  - generic [ref=e1486]: "949"
+                  - text: "formDescriptionId: string;"
+                  - generic [ref=e1487]: "950"
+                  - text: "formMessageId: string;"
+                  - generic [ref=e1488]: "951"
+                  - text: "};"
+                  - generic [ref=e1489]: "952"
+                  - text: /** Container for a form field, label, description, and validation message. */
+                  - generic [ref=e1490]: "953"
+                  - text: "declare function FormItem({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1491]: "954"
+                  - text: /** Label element for a form field, turns red on validation error. */
+                  - generic [ref=e1492]: "955"
+                  - text: "declare function FormLabel({ className, ...props }: React$1.ComponentProps<typeof LabelPrimitive.Root>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1493]: "956"
+                  - text: /** Slot that passes aria attributes and IDs to the form input element. */
+                  - generic [ref=e1494]: "957"
+                  - text: "declare function FormControl({ ...props }: React$1.ComponentProps<typeof Slot>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1495]: "958"
+                  - text: /** Helper text displayed below the form control. Hidden when field has a validation error. */
+                  - generic [ref=e1496]: "959"
+                  - text: "declare function FormDescription({ className, ...props }: React$1.ComponentProps<\"p\">): react_jsx_runtime.JSX.Element | null;"
+                  - generic [ref=e1497]: "960"
+                  - text: /** Validation error message displayed below the form control. */
+                  - generic [ref=e1498]: "961"
+                  - text: "declare function FormMessage({ className, ...props }: React$1.ComponentProps<\"p\">): react_jsx_runtime.JSX.Element | null;"
+                  - generic [ref=e1499]: "962"
+                  - generic [ref=e1500]: "963"
+                  - text: /** Card that appears on hover to display supplementary content. */
+                  - generic [ref=e1501]: "964"
+                  - text: "declare function HoverCard({ ...props }: React$1.ComponentProps<typeof HoverCardPrimitive.Root>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1502]: "965"
+                  - text: /** Element that displays the hover card on mouse hover. */
+                  - generic [ref=e1503]: "966"
+                  - text: "declare function HoverCardTrigger({ ...props }: React$1.ComponentProps<typeof HoverCardPrimitive.Trigger>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1504]: "967"
+                  - text: /** Floating content panel for the hover card. */
+                  - generic [ref=e1505]: "968"
+                  - text: "declare function HoverCardContent({ className, align, sideOffset, ...props }: React$1.ComponentProps<typeof HoverCardPrimitive.Content>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1506]: "969"
+                  - generic [ref=e1507]: "970"
+                  - text: "declare const logoVariants: (props?: ({"
+                  - generic [ref=e1508]: "971"
+                  - text: "variant?: \"black\" | \"white\" | null | undefined;"
+                  - generic [ref=e1509]: "972"
+                  - text: "size?: \"sm\" | \"md\" | \"lg\" | null | undefined;"
+                  - generic [ref=e1510]: "973"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e1511]: "974"
+                  - text: type LogoName = "overlens-symbol" | "overlens" | "vanguarda" | "protocolo" | "atlas";
+                  - generic [ref=e1512]: "975"
+                  - text: "interface LogoProps extends Omit<React$1.ComponentProps<\"svg\">, \"name\">, VariantProps<typeof logoVariants> {"
+                  - generic [ref=e1513]: "976"
+                  - text: "name: LogoName;"
+                  - generic [ref=e1514]: "977"
+                  - text: "}"
+                  - generic [ref=e1515]: "978"
+                  - text: "/** Brand logo marks for Overlens and sub-brands (Vanguarda, Protocolo, Atlas). Renders inline SVG with `currentColor` for full color control. */"
+                  - generic [ref=e1516]: "979"
+                  - text: "declare function Logo({ name, variant, size, className, ...props }: LogoProps): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1517]: "980"
+                  - generic [ref=e1518]: "981"
+                  - text: "declare const mediaCardVariants: (props?: ({"
+                  - generic [ref=e1519]: "982"
+                  - text: "variant?: \"default\" | \"compact\" | null | undefined;"
+                  - generic [ref=e1520]: "983"
+                  - text: "orientation?: \"horizontal\" | \"vertical\" | null | undefined;"
+                  - generic [ref=e1521]: "984"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e1522]: "985"
+                  - text: /**
+                  - generic [ref=e1523]:
+                    - generic [ref=e1524]: "986"
+                    - text: "* Media card — image separated from title/metadata."
+                  - generic [ref=e1525]:
+                    - generic [ref=e1526]: "987"
+                    - text: "* Variant controls image aspect ratio and text scale."
+                  - generic [ref=e1527]:
+                    - generic [ref=e1528]: "988"
+                    - text: "* Width is determined by the parent container / grid."
+                  - generic [ref=e1529]:
+                    - generic [ref=e1530]: "989"
+                    - text: "*"
+                  - generic [ref=e1531]:
+                    - generic [ref=e1532]: "990"
+                    - text: "* `orientation=\"horizontal\"` renders image left / text right (lesson lists)."
+                  - generic [ref=e1533]:
+                    - generic [ref=e1534]: "991"
+                    - text: "* `active` adds a ring border to indicate the current item."
+                  - generic [ref=e1535]: "992"
+                  - text: "*/"
+                  - generic [ref=e1536]: "993"
+                  - text: "declare function MediaCard({ className, variant, orientation, active, children, ...props }: React$1.ComponentProps<\"article\"> & VariantProps<typeof mediaCardVariants> & {"
+                  - generic [ref=e1537]:
+                    - generic [ref=e1538]: "994"
+                    - text: "active?: boolean;"
+                  - generic [ref=e1539]: "995"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1540]: "996"
+                  - text: /** Image area — aspect ratio driven by card variant.
+                  - generic [ref=e1541]:
+                    - generic [ref=e1542]: "997"
+                    - text: "* Supports image, video, animated gradient, and solid color (same API as Banner/Card3D)."
+                  - generic [ref=e1543]: "998"
+                  - text: "* Renders bg-neutral-950 fallback when no media is provided. */"
+                  - generic [ref=e1544]: "999"
+                  - text: "declare function MediaCardImage({ className, src, alt, poster, gradient, color, children, ...props }: React$1.ComponentProps<\"div\"> & {"
+                  - generic [ref=e1545]:
+                    - generic [ref=e1546]: "1000"
+                    - text: "src?: string;"
+                  - generic [ref=e1547]:
+                    - generic [ref=e1548]: "1001"
+                    - text: "alt?: string;"
+                  - generic [ref=e1549]:
+                    - generic [ref=e1550]: "1002"
+                    - text: "poster?: string;"
+                  - generic [ref=e1551]:
+                    - generic [ref=e1552]: "1003"
+                    - text: "gradient?: string;"
+                  - generic [ref=e1553]:
+                    - generic [ref=e1554]: "1004"
+                    - text: "color?: string;"
+                  - generic [ref=e1555]: "1005"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1556]: "1006"
+                  - text: /** Badge positioned over the image area. */
+                  - generic [ref=e1557]: "1007"
+                  - text: "declare function MediaCardBadge({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1558]: "1008"
+                  - text: /** Text content area below (vertical) or beside (horizontal) the image. */
+                  - generic [ref=e1559]: "1009"
+                  - text: "declare function MediaCardContent({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1560]: "1010"
+                  - text: /** Title — single line with ellipsis (two lines when horizontal without description). Rendered as button. */
+                  - generic [ref=e1561]: "1011"
+                  - text: "declare function MediaCardTitle({ className, children, ...props }: React$1.ComponentProps<\"button\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1562]: "1012"
+                  - text: /** Metadata line — category, author, date, read time, etc.
+                  - generic [ref=e1563]: "1013"
+                  - text: "* Renders children inline with a dot separator between them. */"
+                  - generic [ref=e1564]: "1014"
+                  - text: "declare function MediaCardMeta({ className, children, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1565]: "1015"
+                  - text: /** Non-interactive metadata item — date, read time, etc. Rendered as span, gray. */
+                  - generic [ref=e1566]: "1016"
+                  - text: "declare function MediaCardMetaItem({ className, ...props }: React$1.ComponentProps<\"span\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1567]: "1017"
+                  - text: /** Author / person name — surface-500 by default (secondary). Rendered as button. */
+                  - generic [ref=e1568]: "1018"
+                  - text: "declare function MediaCardMetaAuthor({ className, ...props }: React$1.ComponentProps<\"button\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1569]: "1019"
+                  - text: /** Interactive metadata item — category, author, etc. Rendered as button, surface-500. */
+                  - generic [ref=e1570]: "1020"
+                  - text: "declare function MediaCardMetaAction({ className, ...props }: React$1.ComponentProps<\"button\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1571]: "1021"
+                  - text: /** Circular check toggle overlaid on the image area (top-left).
+                  - generic [ref=e1572]: "1022"
+                  - text: "* Must be rendered as a child of MediaCardImage. */"
+                  - generic [ref=e1573]: "1023"
+                  - text: "declare function MediaCardCheck({ className, checked, onCheckedChange, ...props }: Omit<React$1.ComponentProps<\"div\">, \"onChange\"> & {"
+                  - generic [ref=e1574]:
+                    - generic [ref=e1575]: "1024"
+                    - text: "checked?: boolean;"
+                  - generic [ref=e1576]: "1025"
+                  - text: "onCheckedChange?: (checked: boolean) => void;"
+                  - generic [ref=e1577]: "1026"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1578]: "1027"
+                  - text: /** Description — secondary text below the title. Clamped to 1 line. */
+                  - generic [ref=e1579]: "1028"
+                  - text: "declare function MediaCardDescription({ className, ...props }: React$1.ComponentProps<\"p\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1580]: "1029"
+                  - text: /**
+                  - generic [ref=e1581]:
+                    - generic [ref=e1582]: "1030"
+                    - text: "* Responsive grid container for MediaCards."
+                  - generic [ref=e1583]:
+                    - generic [ref=e1584]: "1031"
+                    - text: "* Uses CSS Grid `auto-fill` + `minmax` so cards grow to share"
+                  - generic [ref=e1585]:
+                    - generic [ref=e1586]: "1032"
+                    - text: "* available space and automatically wrap into more/fewer columns."
+                  - generic [ref=e1587]:
+                    - generic [ref=e1588]: "1033"
+                    - text: "*"
+                  - generic [ref=e1589]:
+                    - generic [ref=e1590]: "1034"
+                    - text: "* The `--media-card-grid-min` CSS variable (default 280px) sets"
+                  - generic [ref=e1591]:
+                    - generic [ref=e1592]: "1035"
+                    - text: "* the minimum card width before wrapping. Override via `style`"
+                  - generic [ref=e1593]:
+                    - generic [ref=e1594]: "1036"
+                    - text: "* or `className` to tune density:"
+                  - generic [ref=e1595]:
+                    - generic [ref=e1596]: "1037"
+                    - text: "*"
+                  - generic [ref=e1597]:
+                    - generic [ref=e1598]: "1038"
+                    - text: "* ```tsx"
+                  - generic [ref=e1599]:
+                    - generic [ref=e1600]: "1039"
+                    - text: "* // Default — wraps at 280px per card"
+                  - generic [ref=e1601]:
+                    - generic [ref=e1602]: "1040"
+                    - text: "* <MediaCardGrid>…</MediaCardGrid>"
+                  - generic [ref=e1603]:
+                    - generic [ref=e1604]: "1041"
+                    - text: "*"
+                  - generic [ref=e1605]:
+                    - generic [ref=e1606]: "1042"
+                    - text: "* // Narrower cards (portrait/books) — wraps at 180px"
+                  - generic [ref=e1607]:
+                    - generic [ref=e1608]: "1043"
+                    - text: "* <MediaCardGrid style={{ \"--media-card-grid-min\": \"180px\" } as React.CSSProperties}>"
+                  - generic [ref=e1609]:
+                    - generic [ref=e1610]: "1044"
+                    - text: "*"
+                  - generic [ref=e1611]:
+                    - generic [ref=e1612]: "1045"
+                    - text: "* // Override gap"
+                  - generic [ref=e1613]:
+                    - generic [ref=e1614]: "1046"
+                    - text: "* <MediaCardGrid className=\"gap-6\">…</MediaCardGrid>"
+                  - generic [ref=e1615]:
+                    - generic [ref=e1616]: "1047"
+                    - text: "* ```"
+                  - generic [ref=e1617]: "1048"
+                  - text: "*/"
+                  - generic [ref=e1618]: "1049"
+                  - text: "declare function MediaCardGrid({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1619]: "1050"
+                  - generic [ref=e1620]: "1051"
+                  - text: /** Horizontal menu bar with dropdown menus, similar to desktop application menus. */
+                  - generic [ref=e1621]: "1052"
+                  - text: "declare function Menubar({ className, ...props }: React$1.ComponentProps<typeof MenubarPrimitive.Root>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1622]: "1053"
+                  - text: /** Individual menu within the menubar. */
+                  - generic [ref=e1623]: "1054"
+                  - text: "declare function MenubarMenu({ ...props }: React$1.ComponentProps<typeof MenubarPrimitive.Menu>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1624]: "1055"
+                  - text: /** Groups related menubar items together. */
+                  - generic [ref=e1625]: "1056"
+                  - text: "declare function MenubarGroup({ ...props }: React$1.ComponentProps<typeof MenubarPrimitive.Group>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1626]: "1057"
+                  - text: /** Portal for rendering menubar content outside the DOM hierarchy. */
+                  - generic [ref=e1627]: "1058"
+                  - text: "declare function MenubarPortal({ ...props }: React$1.ComponentProps<typeof MenubarPrimitive.Portal>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1628]: "1059"
+                  - text: /** Group of mutually exclusive radio items in a menubar menu. */
+                  - generic [ref=e1629]: "1060"
+                  - text: "declare function MenubarRadioGroup({ ...props }: React$1.ComponentProps<typeof MenubarPrimitive.RadioGroup>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1630]: "1061"
+                  - text: /** Button that opens a menubar dropdown when clicked. */
+                  - generic [ref=e1631]: "1062"
+                  - text: "declare function MenubarTrigger({ className, ...props }: React$1.ComponentProps<typeof MenubarPrimitive.Trigger>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1632]: "1063"
+                  - text: /** Dropdown content panel for a menubar menu. */
+                  - generic [ref=e1633]: "1064"
+                  - text: "declare function MenubarContent({ className, align, alignOffset, sideOffset, ...props }: React$1.ComponentProps<typeof MenubarPrimitive.Content>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1634]: "1065"
+                  - text: /** Selectable item within a menubar menu. Supports destructive variant. */
+                  - generic [ref=e1635]: "1066"
+                  - text: "declare function MenubarItem({ className, inset, variant, ...props }: React$1.ComponentProps<typeof MenubarPrimitive.Item> & {"
+                  - generic [ref=e1636]:
+                    - generic [ref=e1637]: "1067"
+                    - text: "inset?: boolean;"
+                  - generic [ref=e1638]: "1068"
+                  - text: "variant?: \"default\" | \"destructive\";"
+                  - generic [ref=e1639]: "1069"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1640]: "1070"
+                  - text: /** Menubar item with a checkbox indicator. */
+                  - generic [ref=e1641]: "1071"
+                  - text: "declare function MenubarCheckboxItem({ className, children, checked, ...props }: React$1.ComponentProps<typeof MenubarPrimitive.CheckboxItem>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1642]: "1072"
+                  - text: /** Menubar item with a radio indicator for single selection. */
+                  - generic [ref=e1643]: "1073"
+                  - text: "declare function MenubarRadioItem({ className, children, ...props }: React$1.ComponentProps<typeof MenubarPrimitive.RadioItem>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1644]: "1074"
+                  - text: /** Non-interactive label for a group of menubar items. */
+                  - generic [ref=e1645]: "1075"
+                  - text: "declare function MenubarLabel({ className, inset, ...props }: React$1.ComponentProps<typeof MenubarPrimitive.Label> & {"
+                  - generic [ref=e1646]:
+                    - generic [ref=e1647]: "1076"
+                    - text: "inset?: boolean;"
+                  - generic [ref=e1648]: "1077"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1649]: "1078"
+                  - text: /** Visual divider between menubar item groups. */
+                  - generic [ref=e1650]: "1079"
+                  - text: "declare function MenubarSeparator({ className, ...props }: React$1.ComponentProps<typeof MenubarPrimitive.Separator>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1651]: "1080"
+                  - text: /** Keyboard shortcut hint displayed alongside a menubar item. */
+                  - generic [ref=e1652]: "1081"
+                  - text: "declare function MenubarShortcut({ className, ...props }: React$1.ComponentProps<\"span\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1653]: "1082"
+                  - text: /** Container for a nested sub-menu within a menubar. */
+                  - generic [ref=e1654]: "1083"
+                  - text: "declare function MenubarSub({ ...props }: React$1.ComponentProps<typeof MenubarPrimitive.Sub>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1655]: "1084"
+                  - text: /** Item that opens a nested sub-menu within the menubar. */
+                  - generic [ref=e1656]: "1085"
+                  - text: "declare function MenubarSubTrigger({ className, inset, children, ...props }: React$1.ComponentProps<typeof MenubarPrimitive.SubTrigger> & {"
+                  - generic [ref=e1657]:
+                    - generic [ref=e1658]: "1086"
+                    - text: "inset?: boolean;"
+                  - generic [ref=e1659]: "1087"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1660]: "1088"
+                  - text: /** Content panel for a nested menubar sub-menu. */
+                  - generic [ref=e1661]: "1089"
+                  - text: "declare function MenubarSubContent({ className, ...props }: React$1.ComponentProps<typeof MenubarPrimitive.SubContent>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1662]: "1090"
+                  - generic [ref=e1663]: "1091"
+                  - text: /** Horizontal navigation menu with dropdown content panels for site navigation. */
+                  - generic [ref=e1664]: "1092"
+                  - text: "declare function NavigationMenu({ className, children, viewport, ...props }: React$1.ComponentProps<typeof NavigationMenuPrimitive.Root> & {"
+                  - generic [ref=e1665]:
+                    - generic [ref=e1666]: "1093"
+                    - text: "viewport?: boolean;"
+                  - generic [ref=e1667]: "1094"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1668]: "1095"
+                  - text: /** Horizontal list of navigation menu items. */
+                  - generic [ref=e1669]: "1096"
+                  - text: "declare function NavigationMenuList({ className, ...props }: React$1.ComponentProps<typeof NavigationMenuPrimitive.List>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1670]: "1097"
+                  - text: /** Individual item in the navigation menu list. */
+                  - generic [ref=e1671]: "1098"
+                  - text: "declare function NavigationMenuItem({ className, ...props }: React$1.ComponentProps<typeof NavigationMenuPrimitive.Item>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1672]: "1099"
+                  - text: /** Shared trigger button styles for navigation menu items. */
+                  - generic [ref=e1673]: "1100"
+                  - text: "declare const navigationMenuTriggerStyle: (props?: class_variance_authority_types.ClassProp | undefined) => string;"
+                  - generic [ref=e1674]: "1101"
+                  - text: /** Button that toggles the navigation menu content panel. */
+                  - generic [ref=e1675]: "1102"
+                  - text: "declare function NavigationMenuTrigger({ className, children, ...props }: React$1.ComponentProps<typeof NavigationMenuPrimitive.Trigger>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1676]: "1103"
+                  - text: /** Dropdown content panel revealed when a navigation menu trigger is active. */
+                  - generic [ref=e1677]: "1104"
+                  - text: "declare function NavigationMenuContent({ className, ...props }: React$1.ComponentProps<typeof NavigationMenuPrimitive.Content>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1678]: "1105"
+                  - text: /** Animated viewport container for navigation menu content. */
+                  - generic [ref=e1679]: "1106"
+                  - text: "declare function NavigationMenuViewport({ className, ...props }: React$1.ComponentProps<typeof NavigationMenuPrimitive.Viewport>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1680]: "1107"
+                  - text: /** Anchor link within a navigation menu content panel. */
+                  - generic [ref=e1681]: "1108"
+                  - text: "declare function NavigationMenuLink({ className, ...props }: React$1.ComponentProps<typeof NavigationMenuPrimitive.Link>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1682]: "1109"
+                  - text: /** Arrow indicator that follows the active navigation menu trigger. */
+                  - generic [ref=e1683]: "1110"
+                  - text: "declare function NavigationMenuIndicator({ className, ...props }: React$1.ComponentProps<typeof NavigationMenuPrimitive.Indicator>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1684]: "1111"
+                  - generic [ref=e1685]: "1112"
+                  - text: /** Hook that provides notification bar open state and toggle controls. */
+                  - generic [ref=e1686]: "1113"
+                  - text: "declare function useNotificationBar(): {"
+                  - generic [ref=e1687]: "1114"
+                  - text: "open: boolean;"
+                  - generic [ref=e1688]: "1115"
+                  - text: "onOpenChange: (open: boolean) => void;"
+                  - generic [ref=e1689]: "1116"
+                  - text: "allRead: boolean;"
+                  - generic [ref=e1690]: "1117"
+                  - text: "markAllAsRead: () => void;"
+                  - generic [ref=e1691]: "1118"
+                  - text: "cleared: boolean;"
+                  - generic [ref=e1692]: "1119"
+                  - text: "clearAll: () => void;"
+                  - generic [ref=e1693]: "1120"
+                  - text: "unreadCount: number;"
+                  - generic [ref=e1694]: "1121"
+                  - text: "registerUnread: (id: string) => void;"
+                  - generic [ref=e1695]: "1122"
+                  - text: "markAsRead: (id: string) => void;"
+                  - generic [ref=e1696]: "1123"
+                  - text: "titleId: string;"
+                  - generic [ref=e1697]: "1124"
+                  - text: "};"
+                  - generic [ref=e1698]: "1125"
+                  - text: /** Popover dropdown for displaying notifications, anchored to the trigger element. */
+                  - generic [ref=e1699]: "1126"
+                  - text: "declare function NotificationBar({ children, defaultOpen, open: openProp, onOpenChange: onOpenChangeProp, ...props }: React$1.ComponentProps<typeof PopoverPrimitive.Root>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1700]: "1127"
+                  - text: /** Element that opens the notification bar when activated. */
+                  - generic [ref=e1701]: "1128"
+                  - text: "declare function NotificationBarTrigger({ ...props }: React$1.ComponentProps<typeof PopoverPrimitive.Trigger>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1702]: "1129"
+                  - text: /** Popover content panel for the notification bar. Full-screen overlay on mobile. */
+                  - generic [ref=e1703]: "1130"
+                  - text: "declare function NotificationBarContent({ className, children, ...props }: React$1.ComponentProps<typeof PopoverPrimitive.Content>): react_jsx_runtime.JSX.Element | null;"
+                  - generic [ref=e1704]: "1131"
+                  - text: /** Header area with title and resolve-all button for the notification bar. */
+                  - generic [ref=e1705]: "1132"
+                  - text: "declare function NotificationBarHeader({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1706]: "1133"
+                  - text: /** Title text for the notification bar header. On mobile, renders with a back arrow. */
+                  - generic [ref=e1707]: "1134"
+                  - text: "declare function NotificationBarTitle({ className, children, ...props }: React$1.ComponentProps<\"h2\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1708]: "1135"
+                  - text: /** Button that marks all notifications as read. */
+                  - generic [ref=e1709]: "1136"
+                  - text: "declare function NotificationBarResolveAll({ className, ...props }: React$1.ComponentProps<typeof Button>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1710]: "1137"
+                  - text: /** Button that clears all notifications. */
+                  - generic [ref=e1711]: "1138"
+                  - text: "declare function NotificationBarClearAll({ className, ...props }: React$1.ComponentProps<typeof Button>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1712]: "1139"
+                  - text: /** Scrollable body area containing notification cards. Hidden when all notifications are cleared. */
+                  - generic [ref=e1713]: "1140"
+                  - text: "declare function NotificationBarBody({ className, children, emptyState, ...props }: React$1.ComponentProps<\"div\"> & {"
+                  - generic [ref=e1714]:
+                    - generic [ref=e1715]: "1141"
+                    - text: "emptyState?: React$1.ReactNode;"
+                  - generic [ref=e1716]: "1142"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1717]: "1143"
+                  - text: /** Tabbed navigation for notification categories (e.g. Inbox / General). */
+                  - generic [ref=e1718]: "1144"
+                  - text: "declare function NotificationBarTabs({ className, children, ...props }: React$1.ComponentProps<typeof Tabs>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1719]: "1145"
+                  - text: /** Footer with "Ver tudo" link. Hidden on mobile (full-screen already shows all). */
+                  - generic [ref=e1720]: "1146"
+                  - text: "declare function NotificationBarFooter({ className, children, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element | null;"
+                  - generic [ref=e1721]: "1147"
+                  - text: /** Content panel for a notification bar tab. */
+                  - generic [ref=e1722]: "1148"
+                  - text: "declare function NotificationBarTabContent({ className, ...props }: React$1.ComponentProps<typeof TabsContent>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1723]: "1149"
+                  - generic [ref=e1724]: "1150"
+                  - text: type NotificationCardVariant = "follow" | "comment" | "post" | "like" | "mention" | "achievement" | "system";
+                  - generic [ref=e1725]: "1151"
+                  - text: /**
+                  - generic [ref=e1726]:
+                    - generic [ref=e1727]: "1152"
+                    - text: "* NotificationCard — Card de notificacao do sistema."
+                  - generic [ref=e1728]:
+                    - generic [ref=e1729]: "1153"
+                    - text: "*"
+                  - generic [ref=e1730]:
+                    - generic [ref=e1731]: "1154"
+                    - text: "* Conteudo configuravel pelo usuario ou sistema:"
+                  - generic [ref=e1732]:
+                    - generic [ref=e1733]: "1155"
+                    - text: "* - **cover**: imagem de capa (opcional) — definida pelo criador da notificacao"
+                  - generic [ref=e1734]:
+                    - generic [ref=e1735]: "1156"
+                    - text: "* - **title**: titulo da notificacao — definido pelo sistema ou criador"
+                  - generic [ref=e1736]:
+                    - generic [ref=e1737]: "1157"
+                    - text: "* - **description**: texto descritivo — definido pelo sistema ou criador"
+                  - generic [ref=e1738]:
+                    - generic [ref=e1739]: "1158"
+                    - text: "* - **time**: timestamp relativo calculado automaticamente pelo sistema:"
+                  - generic [ref=e1740]:
+                    - generic [ref=e1741]: "1159"
+                    - text: "* - Hoje: exibe hora (ex: \"08:32\")"
+                  - generic [ref=e1742]:
+                    - generic [ref=e1743]: "1160"
+                    - text: "* - Ontem: \"Ontem\""
+                  - generic [ref=e1744]:
+                    - generic [ref=e1745]: "1161"
+                    - text: "* - Esta semana: dia da semana (ex: \"Segunda-feira\")"
+                  - generic [ref=e1746]:
+                    - generic [ref=e1747]: "1162"
+                    - text: "* - Mais antigo: data curta (ex: \"03/02/26\")"
+                  - generic [ref=e1748]:
+                    - generic [ref=e1749]: "1163"
+                    - text: "* - **actions**: botoes de acao contextuais (ex: Aceitar/Recusar)"
+                  - generic [ref=e1750]: "1164"
+                  - text: "*/"
+                  - generic [ref=e1751]: "1165"
+                  - text: "declare function NotificationCard({ className, unread, variant, id, children, ...props }: React$1.ComponentProps<\"div\"> & {"
+                  - generic [ref=e1752]:
+                    - generic [ref=e1753]: "1166"
+                    - text: "unread?: boolean;"
+                  - generic [ref=e1754]:
+                    - generic [ref=e1755]: "1167"
+                    - text: "variant?: NotificationCardVariant;"
+                  - generic [ref=e1756]:
+                    - generic [ref=e1757]: "1168"
+                    - text: "id?: string;"
+                  - generic [ref=e1758]: "1169"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1759]: "1170"
+                  - text: /**
+                  - generic [ref=e1760]:
+                    - generic [ref=e1761]: "1171"
+                    - text: "* Imagem de capa da notificacao (opcional)."
+                  - generic [ref=e1762]:
+                    - generic [ref=e1763]: "1172"
+                    - text: "* Aceita `src` para exibir uma imagem ou pode ser usado como div com bg customizado."
+                  - generic [ref=e1764]:
+                    - generic [ref=e1765]: "1173"
+                    - text: "* Definida pelo criador da notificacao ou pelo sistema."
+                  - generic [ref=e1766]: "1174"
+                  - text: "*/"
+                  - generic [ref=e1767]: "1175"
+                  - text: "declare function NotificationCardCover({ className, src, alt, ...props }: React$1.ComponentProps<\"div\"> & {"
+                  - generic [ref=e1768]:
+                    - generic [ref=e1769]: "1176"
+                    - text: "src?: string;"
+                  - generic [ref=e1770]:
+                    - generic [ref=e1771]: "1177"
+                    - text: "alt?: string;"
+                  - generic [ref=e1772]: "1178"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1773]: "1179"
+                  - text: /** Header row containing the title and timestamp of a notification card. */
+                  - generic [ref=e1774]: "1180"
+                  - text: "declare function NotificationCardHeader({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1775]: "1181"
+                  - text: /**
+                  - generic [ref=e1776]:
+                    - generic [ref=e1777]: "1182"
+                    - text: "* Titulo da notificacao. Definido pelo criador ou sistema."
+                  - generic [ref=e1778]:
+                    - generic [ref=e1779]: "1183"
+                    - text: "* Aceita icon como children junto ao texto."
+                  - generic [ref=e1780]:
+                    - generic [ref=e1781]: "1184"
+                    - text: "* Textos longos são truncados com ellipsis; hover exibe o texto completo via title nativo."
+                  - generic [ref=e1782]: "1185"
+                  - text: "*/"
+                  - generic [ref=e1783]: "1186"
+                  - text: "declare function NotificationCardTitle({ className, children, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1784]: "1187"
+                  - text: /**
+                  - generic [ref=e1785]:
+                    - generic [ref=e1786]: "1188"
+                    - text: "* Timestamp relativo da notificacao. Calculado pelo sistema:"
+                  - generic [ref=e1787]:
+                    - generic [ref=e1788]: "1189"
+                    - text: "* - Hoje -> hora (ex: \"08:32\")"
+                  - generic [ref=e1789]:
+                    - generic [ref=e1790]: "1190"
+                    - text: "* - Ontem -> \"Ontem\""
+                  - generic [ref=e1791]:
+                    - generic [ref=e1792]: "1191"
+                    - text: "* - Esta semana -> dia da semana (ex: \"Segunda-feira\")"
+                  - generic [ref=e1793]:
+                    - generic [ref=e1794]: "1192"
+                    - text: "* - Mais antigo -> data curta (ex: \"03/02/26\")"
+                  - generic [ref=e1795]:
+                    - generic [ref=e1796]: "1193"
+                    - text: "*"
+                  - generic [ref=e1797]:
+                    - generic [ref=e1798]: "1194"
+                    - text: "* Aceita `date` para calculo automatico ou `children` para texto manual."
+                  - generic [ref=e1799]: "1195"
+                  - text: "*/"
+                  - generic [ref=e1800]: "1196"
+                  - text: "declare function NotificationCardTime({ className, date, children, ...props }: React$1.ComponentProps<\"span\"> & {"
+                  - generic [ref=e1801]:
+                    - generic [ref=e1802]: "1197"
+                    - text: "date?: Date;"
+                  - generic [ref=e1803]: "1198"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1804]: "1199"
+                  - text: /** Read status badge or date for the notification card. */
+                  - generic [ref=e1805]: "1200"
+                  - text: "declare function NotificationCardStatus({ className, date, ...props }: React$1.ComponentProps<\"span\"> & {"
+                  - generic [ref=e1806]:
+                    - generic [ref=e1807]: "1201"
+                    - text: "date?: Date;"
+                  - generic [ref=e1808]: "1202"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1809]: "1203"
+                  - text: /**
+                  - generic [ref=e1810]:
+                    - generic [ref=e1811]: "1204"
+                    - text: "* Descricao da notificacao com data inline."
+                  - generic [ref=e1812]:
+                    - generic [ref=e1813]: "1205"
+                    - text: "* Trunca em 2 linhas por padrão; hover expande para ler completamente."
+                  - generic [ref=e1814]: "1206"
+                  - text: "*/"
+                  - generic [ref=e1815]: "1207"
+                  - text: "declare function NotificationCardDescription({ className, children, ...props }: React$1.ComponentProps<\"p\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1816]: "1208"
+                  - text: /** Container for contextual action buttons on a notification card. */
+                  - generic [ref=e1817]: "1209"
+                  - text: "declare function NotificationCardActions({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1818]: "1210"
+                  - text: /** Layout slot for an avatar image. Place inside NotificationCardHeader before the title. */
+                  - generic [ref=e1819]: "1211"
+                  - text: "declare function NotificationCardAvatar({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1820]: "1212"
+                  - text: /** Renders the variant icon from context. Place inside NotificationCardTitle. */
+                  - generic [ref=e1821]: "1213"
+                  - text: "declare function NotificationCardIcon({ className, ...props }: React$1.ComponentProps<\"svg\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1822]: "1214"
+                  - generic [ref=e1823]: "1215"
+                  - text: /** Navigation component for paginating through content. */
+                  - generic [ref=e1824]: "1216"
+                  - text: "declare function Pagination({ className, ...props }: React$1.ComponentProps<\"nav\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1825]: "1217"
+                  - text: /** Horizontal list of pagination items. */
+                  - generic [ref=e1826]: "1218"
+                  - text: "declare function PaginationContent({ className, ...props }: React$1.ComponentProps<\"ul\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1827]: "1219"
+                  - text: /** List item wrapper for a single pagination element. */
+                  - generic [ref=e1828]: "1220"
+                  - text: "declare function PaginationItem({ ...props }: React$1.ComponentProps<\"li\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1829]: "1221"
+                  - text: "type PaginationLinkProps = {"
+                  - generic [ref=e1830]: "1222"
+                  - text: "isActive?: boolean;"
+                  - generic [ref=e1831]: "1223"
+                  - text: "} & Pick<React$1.ComponentProps<typeof Button>, \"size\"> & React$1.ComponentProps<\"a\">;"
+                  - generic [ref=e1832]: "1224"
+                  - text: /** Styled pagination page link with active state. */
+                  - generic [ref=e1833]: "1225"
+                  - text: "declare function PaginationLink({ className, isActive, size, ...props }: PaginationLinkProps): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1834]: "1226"
+                  - text: /** Link to navigate to the previous page. */
+                  - generic [ref=e1835]: "1227"
+                  - text: "declare function PaginationPrevious({ className, ...props }: React$1.ComponentProps<typeof PaginationLink>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1836]: "1228"
+                  - text: /** Link to navigate to the next page. */
+                  - generic [ref=e1837]: "1229"
+                  - text: "declare function PaginationNext({ className, ...props }: React$1.ComponentProps<typeof PaginationLink>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1838]: "1230"
+                  - text: /** Ellipsis indicator for skipped page numbers. */
+                  - generic [ref=e1839]: "1231"
+                  - text: "declare function PaginationEllipsis({ className, ...props }: React$1.ComponentProps<\"span\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1840]: "1232"
+                  - text: /** Mobile-friendly page indicator — "3 / 10". Hidden on sm+ by default. */
+                  - generic [ref=e1841]: "1233"
+                  - text: "declare function PaginationStatus({ current, total, className, ...props }: React$1.ComponentProps<\"span\"> & {"
+                  - generic [ref=e1842]:
+                    - generic [ref=e1843]: "1234"
+                    - text: "current: number;"
+                  - generic [ref=e1844]:
+                    - generic [ref=e1845]: "1235"
+                    - text: "total: number;"
+                  - generic [ref=e1846]: "1236"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1847]: "1237"
+                  - generic [ref=e1848]: "1238"
+                  - text: "interface ComponentsProviderProps {"
+                  - generic [ref=e1849]: "1239"
+                  - text: "children: React.ReactNode;"
+                  - generic [ref=e1850]: "1240"
+                  - text: "themeProviderProps?: Omit<ThemeProviderProps, \"children\">;"
+                  - generic [ref=e1851]: "1241"
+                  - text: "}"
+                  - generic [ref=e1852]: "1242"
+                  - text: /** Root provider for the Overlens Design System. Sets up theming and mounts the toast notification system. */
+                  - generic [ref=e1853]: "1243"
+                  - text: "declare const ComponentsProvider: ({ children, themeProviderProps, }: ComponentsProviderProps) => react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1854]: "1244"
+                  - generic [ref=e1855]: "1245"
+                  - text: /** Container that manages a group of resizable panels with drag handles. */
+                  - generic [ref=e1856]: "1246"
+                  - text: "declare function ResizablePanelGroup({ className, ...props }: ResizablePrimitive.GroupProps): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1857]: "1247"
+                  - text: /** Individual resizable panel within a panel group. */
+                  - generic [ref=e1858]: "1248"
+                  - text: "declare function ResizablePanel({ ...props }: ResizablePrimitive.PanelProps): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1859]: "1249"
+                  - text: /** Drag handle between resizable panels. Optionally displays a grip icon. */
+                  - generic [ref=e1860]: "1250"
+                  - text: "declare function ResizableHandle({ withHandle, className, ...props }: ResizablePrimitive.SeparatorProps & {"
+                  - generic [ref=e1861]:
+                    - generic [ref=e1862]: "1251"
+                    - text: "withHandle?: boolean;"
+                  - generic [ref=e1863]: "1252"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1864]: "1253"
+                  - generic [ref=e1865]: "1254"
+                  - text: /** Slide-over panel that overlays page content from any edge. */
+                  - generic [ref=e1866]: "1255"
+                  - text: "declare function Sheet({ ...props }: React$1.ComponentProps<typeof DialogPrimitive.Root>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1867]: "1256"
+                  - text: /** Element that opens the sheet when activated. */
+                  - generic [ref=e1868]: "1257"
+                  - text: "declare function SheetTrigger({ ...props }: React$1.ComponentProps<typeof DialogPrimitive.Trigger>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1869]: "1258"
+                  - text: /** Button that closes the sheet. */
+                  - generic [ref=e1870]: "1259"
+                  - text: "declare function SheetClose({ ...props }: React$1.ComponentProps<typeof DialogPrimitive.Close>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1871]: "1260"
+                  - text: /** Sheet panel that slides in from a specified side (top, right, bottom, left). */
+                  - generic [ref=e1872]: "1261"
+                  - text: "declare function SheetContent({ className, children, side, showCloseButton, ...props }: React$1.ComponentProps<typeof DialogPrimitive.Content> & {"
+                  - generic [ref=e1873]: "1262"
+                  - text: "side?: \"top\" | \"right\" | \"bottom\" | \"left\";"
+                  - generic [ref=e1874]:
+                    - generic [ref=e1875]: "1263"
+                    - text: "showCloseButton?: boolean;"
+                  - generic [ref=e1876]: "1264"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1877]: "1265"
+                  - text: /** Container for the sheet title and description. */
+                  - generic [ref=e1878]: "1266"
+                  - text: "declare function SheetHeader({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1879]: "1267"
+                  - text: /** Footer area for sheet action buttons. */
+                  - generic [ref=e1880]: "1268"
+                  - text: "declare function SheetFooter({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1881]: "1269"
+                  - text: /** Accessible title for the sheet. */
+                  - generic [ref=e1882]: "1270"
+                  - text: "declare function SheetTitle({ className, ...props }: React$1.ComponentProps<typeof DialogPrimitive.Title>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1883]: "1271"
+                  - text: /** Accessible description text for the sheet. */
+                  - generic [ref=e1884]: "1272"
+                  - text: "declare function SheetDescription({ className, ...props }: React$1.ComponentProps<typeof DialogPrimitive.Description>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1885]: "1273"
+                  - generic [ref=e1886]: "1274"
+                  - text: "type SidebarContextProps = {"
+                  - generic [ref=e1887]: "1275"
+                  - text: "state: \"expanded\" | \"collapsed\";"
+                  - generic [ref=e1888]: "1276"
+                  - text: "open: boolean;"
+                  - generic [ref=e1889]: "1277"
+                  - text: "setOpen: (open: boolean) => void;"
+                  - generic [ref=e1890]: "1278"
+                  - text: "openMobile: boolean;"
+                  - generic [ref=e1891]: "1279"
+                  - text: "setOpenMobile: (open: boolean) => void;"
+                  - generic [ref=e1892]: "1280"
+                  - text: "isMobile: boolean;"
+                  - generic [ref=e1893]: "1281"
+                  - text: "toggleSidebar: () => void;"
+                  - generic [ref=e1894]: "1282"
+                  - text: "};"
+                  - generic [ref=e1895]: "1283"
+                  - text: /** Hook that provides sidebar state and toggle controls. */
+                  - generic [ref=e1896]: "1284"
+                  - text: "declare function useSidebar(): SidebarContextProps;"
+                  - generic [ref=e1897]: "1285"
+                  - text: /** Context provider that manages sidebar open/collapsed state and keyboard shortcuts. */
+                  - generic [ref=e1898]: "1286"
+                  - text: "declare function SidebarProvider({ defaultOpen, open: openProp, onOpenChange: setOpenProp, className, style, children, ...props }: React$1.ComponentProps<\"div\"> & {"
+                  - generic [ref=e1899]:
+                    - generic [ref=e1900]: "1287"
+                    - text: "defaultOpen?: boolean;"
+                  - generic [ref=e1901]:
+                    - generic [ref=e1902]: "1288"
+                    - text: "open?: boolean;"
+                  - generic [ref=e1903]: "1289"
+                  - text: "onOpenChange?: (open: boolean) => void;"
+                  - generic [ref=e1904]: "1290"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1905]: "1291"
+                  - text: /**
+                  - generic [ref=e1906]:
+                    - generic [ref=e1907]: "1292"
+                    - text: "* Collapsible sidebar panel with responsive mobile sheet fallback."
+                  - generic [ref=e1908]:
+                    - generic [ref=e1909]: "1293"
+                    - text: "* This sidebar is left-only by design — there is no right-side variant."
+                  - generic [ref=e1910]: "1294"
+                  - text: "*/"
+                  - generic [ref=e1911]: "1295"
+                  - text: "declare function Sidebar({ variant, collapsible, className, children, mobileHeader, ...props }: React$1.ComponentProps<\"div\"> & {"
+                  - generic [ref=e1912]: "1296"
+                  - text: "variant?: \"sidebar\" | \"floating\" | \"inset\";"
+                  - generic [ref=e1913]: "1297"
+                  - text: "collapsible?: \"offcanvas\" | \"icon\" | \"none\";"
+                  - generic [ref=e1914]: "1298"
+                  - text: /** Content rendered at the top of the mobile drawer (e.g. stats, counters). */
+                  - generic [ref=e1915]:
+                    - generic [ref=e1916]: "1299"
+                    - text: "mobileHeader?: React$1.ReactNode;"
+                  - generic [ref=e1917]: "1300"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1918]: "1301"
+                  - text: /** Icon button that toggles the sidebar open/collapsed state. */
+                  - generic [ref=e1919]: "1302"
+                  - text: "declare function SidebarTrigger({ className, onClick, ...props }: React$1.ComponentProps<typeof Button>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1920]: "1303"
+                  - text: /** Search button in the sidebar that opens a command dialog with keyboard shortcut. */
+                  - generic [ref=e1921]: "1304"
+                  - text: "declare function SidebarSearch({ className, shortcut, children, ...props }: React$1.ComponentProps<\"button\"> & {"
+                  - generic [ref=e1922]:
+                    - generic [ref=e1923]: "1305"
+                    - text: "shortcut?: string;"
+                  - generic [ref=e1924]: "1306"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1925]: "1307"
+                  - text: /** Thin rail along the sidebar edge for click-to-toggle interaction. */
+                  - generic [ref=e1926]: "1308"
+                  - text: "declare function SidebarRail({ className, ...props }: React$1.ComponentProps<\"button\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1927]: "1309"
+                  - text: /** Main content area that adjusts layout when paired with a sidebar. */
+                  - generic [ref=e1928]: "1310"
+                  - text: "declare function SidebarInset({ className, ...props }: React$1.ComponentProps<\"main\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1929]: "1311"
+                  - text: /** Text input styled for use inside the sidebar. */
+                  - generic [ref=e1930]: "1312"
+                  - text: "declare function SidebarInput({ className, ...props }: React$1.ComponentProps<typeof Input>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1931]: "1313"
+                  - text: /** Header area at the top of the sidebar. */
+                  - generic [ref=e1932]: "1314"
+                  - text: "declare function SidebarHeader({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1933]: "1315"
+                  - text: /** Footer area at the bottom of the sidebar. */
+                  - generic [ref=e1934]: "1316"
+                  - text: "declare function SidebarFooter({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1935]: "1317"
+                  - text: /** Horizontal divider line within the sidebar. */
+                  - generic [ref=e1936]: "1318"
+                  - text: "declare function SidebarSeparator({ className, ...props }: React$1.ComponentProps<typeof Separator>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1937]: "1319"
+                  - text: /** Scrollable main content area of the sidebar. */
+                  - generic [ref=e1938]: "1320"
+                  - text: "declare function SidebarContent({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1939]: "1321"
+                  - text: /** Section group within the sidebar content. */
+                  - generic [ref=e1940]: "1322"
+                  - text: "declare function SidebarGroup({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1941]: "1323"
+                  - text: /** Label heading for a sidebar group section. */
+                  - generic [ref=e1942]: "1324"
+                  - text: "declare function SidebarGroupLabel({ className, asChild, ...props }: React$1.ComponentProps<\"div\"> & {"
+                  - generic [ref=e1943]:
+                    - generic [ref=e1944]: "1325"
+                    - text: "asChild?: boolean;"
+                  - generic [ref=e1945]: "1326"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1946]: "1327"
+                  - text: /** Action button positioned at the top-right of a sidebar group. Uses Button icon variant for consistent sizing and hover. */
+                  - generic [ref=e1947]: "1328"
+                  - text: "declare function SidebarGroupAction({ className, asChild, ...props }: React$1.ComponentProps<typeof Button> & {"
+                  - generic [ref=e1948]:
+                    - generic [ref=e1949]: "1329"
+                    - text: "asChild?: boolean;"
+                  - generic [ref=e1950]: "1330"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1951]: "1331"
+                  - text: /** Content container within a sidebar group. */
+                  - generic [ref=e1952]: "1332"
+                  - text: "declare function SidebarGroupContent({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1953]: "1333"
+                  - text: /** Navigation menu list within the sidebar. */
+                  - generic [ref=e1954]: "1334"
+                  - text: "declare function SidebarMenu({ className, ...props }: React$1.ComponentProps<\"ul\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1955]: "1335"
+                  - text: /** Individual menu item in the sidebar navigation. */
+                  - generic [ref=e1956]: "1336"
+                  - text: "declare function SidebarMenuItem({ className, ...props }: React$1.ComponentProps<\"li\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1957]: "1337"
+                  - text: "declare const sidebarMenuButtonVariants: (props?: ({"
+                  - generic [ref=e1958]: "1338"
+                  - text: "size?: \"default\" | \"sm\" | \"lg\" | null | undefined;"
+                  - generic [ref=e1959]: "1339"
+                  - text: "} & class_variance_authority_types.ClassProp) | undefined) => string;"
+                  - generic [ref=e1960]: "1340"
+                  - text: /** Interactive button for a sidebar menu item with tooltip support when collapsed. */
+                  - generic [ref=e1961]: "1341"
+                  - text: "declare function SidebarMenuButton({ asChild, isActive, outlined, size, tooltip, className, ...props }: React$1.ComponentProps<\"button\"> & {"
+                  - generic [ref=e1962]:
+                    - generic [ref=e1963]: "1342"
+                    - text: "asChild?: boolean;"
+                  - generic [ref=e1964]:
+                    - generic [ref=e1965]: "1343"
+                    - text: "isActive?: boolean;"
+                  - generic [ref=e1966]:
+                    - generic [ref=e1967]: "1344"
+                    - text: "outlined?: boolean;"
+                  - generic [ref=e1968]:
+                    - generic [ref=e1969]: "1345"
+                    - text: "tooltip?: string | React$1.ComponentProps<typeof TooltipContent>;"
+                  - generic [ref=e1970]: "1346"
+                  - text: "} & VariantProps<typeof sidebarMenuButtonVariants>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1971]: "1347"
+                  - text: /** Secondary action button overlaid on a sidebar menu item. Uses Button icon variant for consistent sizing and hover. */
+                  - generic [ref=e1972]: "1348"
+                  - text: "declare function SidebarMenuAction({ className, asChild, showOnHover, ...props }: React$1.ComponentProps<typeof Button> & {"
+                  - generic [ref=e1973]:
+                    - generic [ref=e1974]: "1349"
+                    - text: "asChild?: boolean;"
+                  - generic [ref=e1975]:
+                    - generic [ref=e1976]: "1350"
+                    - text: "showOnHover?: boolean;"
+                  - generic [ref=e1977]: "1351"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1978]: "1352"
+                  - text: /** Badge indicator displayed on a sidebar menu item. */
+                  - generic [ref=e1979]: "1353"
+                  - text: "declare function SidebarMenuBadge({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1980]: "1354"
+                  - text: /** Skeleton loading placeholder for a sidebar menu item. */
+                  - generic [ref=e1981]: "1355"
+                  - text: "declare function SidebarMenuSkeleton({ className, showIcon, ...props }: React$1.ComponentProps<\"div\"> & {"
+                  - generic [ref=e1982]:
+                    - generic [ref=e1983]: "1356"
+                    - text: "showIcon?: boolean;"
+                  - generic [ref=e1984]: "1357"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1985]: "1358"
+                  - text: /** Nested sub-menu list within a sidebar menu item. */
+                  - generic [ref=e1986]: "1359"
+                  - text: "declare function SidebarMenuSub({ className, ...props }: React$1.ComponentProps<\"ul\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1987]: "1360"
+                  - text: /** Individual item within a sidebar sub-menu. */
+                  - generic [ref=e1988]: "1361"
+                  - text: "declare function SidebarMenuSubItem({ className, ...props }: React$1.ComponentProps<\"li\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1989]: "1362"
+                  - text: /** Button or link for a sidebar sub-menu item. Renders a chevron indicator for hierarchy. */
+                  - generic [ref=e1990]: "1363"
+                  - text: "declare function SidebarMenuSubButton({ asChild, size, isActive, className, children, ...props }: React$1.ComponentProps<\"button\"> & {"
+                  - generic [ref=e1991]:
+                    - generic [ref=e1992]: "1364"
+                    - text: "asChild?: boolean;"
+                  - generic [ref=e1993]: "1365"
+                  - text: "size?: \"sm\" | \"md\";"
+                  - generic [ref=e1994]:
+                    - generic [ref=e1995]: "1366"
+                    - text: "isActive?: boolean;"
+                  - generic [ref=e1996]: "1367"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e1997]: "1368"
+                  - generic [ref=e1998]: "1369"
+                  - text: /** Toast notification provider with themed styling and semantic icon variants. */
+                  - generic [ref=e1999]: "1370"
+                  - text: "declare const Toaster: ({ className, ...props }: ToasterProps) => react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e2000]: "1371"
+                  - generic [ref=e2001]: "1372"
+                  - text: type TableSize = "sm" | "md" | "lg";
+                  - generic [ref=e2002]: "1373"
+                  - text: /** Responsive data table with hover states and rounded row corners. */
+                  - generic [ref=e2003]: "1374"
+                  - text: "declare function Table({ className, size, ...props }: React$1.ComponentProps<\"table\"> & {"
+                  - generic [ref=e2004]:
+                    - generic [ref=e2005]: "1375"
+                    - text: "size?: TableSize;"
+                  - generic [ref=e2006]: "1376"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e2007]: "1377"
+                  - text: /** Table header row group. */
+                  - generic [ref=e2008]: "1378"
+                  - text: "declare function TableHeader({ className, ...props }: React$1.ComponentProps<\"thead\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e2009]: "1379"
+                  - text: /** Table body containing data rows. */
+                  - generic [ref=e2010]: "1380"
+                  - text: "declare function TableBody({ className, ...props }: React$1.ComponentProps<\"tbody\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e2011]: "1381"
+                  - text: /** Table footer row group for summary data. */
+                  - generic [ref=e2012]: "1382"
+                  - text: "declare function TableFooter({ className, ...props }: React$1.ComponentProps<\"tfoot\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e2013]: "1383"
+                  - text: /** Table row with hover highlight and selection state. */
+                  - generic [ref=e2014]: "1384"
+                  - text: "declare function TableRow({ className, ...props }: React$1.ComponentProps<\"tr\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e2015]: "1385"
+                  - text: /** Table header cell. */
+                  - generic [ref=e2016]: "1386"
+                  - text: "declare function TableHead({ className, ...props }: React$1.ComponentProps<\"th\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e2017]: "1387"
+                  - text: /** Table data cell. */
+                  - generic [ref=e2018]: "1388"
+                  - text: "declare function TableCell({ className, ...props }: React$1.ComponentProps<\"td\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e2019]: "1389"
+                  - text: /** Caption element providing a description of the table contents. */
+                  - generic [ref=e2020]: "1390"
+                  - text: "declare function TableCaption({ className, ...props }: React$1.ComponentProps<\"caption\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e2021]: "1391"
+                  - generic [ref=e2022]: "1392"
+                  - text: /** Full-width top navigation bar with breadcrumb on the left and actions on the right. */
+                  - generic [ref=e2023]: "1393"
+                  - text: "declare function Topbar({ className, ...props }: React$1.ComponentProps<\"header\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e2024]: "1394"
+                  - text: /** Left-aligned breadcrumb area within the topbar. */
+                  - generic [ref=e2025]: "1395"
+                  - text: "declare function TopbarBreadcrumb({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e2026]: "1396"
+                  - text: /** Container for action buttons within the topbar. */
+                  - generic [ref=e2027]: "1397"
+                  - text: "declare function TopbarActions({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e2028]: "1398"
+                  - text: /** Fractals counter button displaying a numeric value with an asterisk icon. */
+                  - generic [ref=e2029]: "1399"
+                  - text: "declare function TopbarFractals({ count, className, ...props }: React$1.ComponentProps<\"button\"> & {"
+                  - generic [ref=e2030]:
+                    - generic [ref=e2031]: "1400"
+                    - text: "count: number;"
+                  - generic [ref=e2032]: "1401"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e2033]: "1402"
+                  - text: /** Streak (Ofensiva) counter button displaying a numeric value with a bolt icon. */
+                  - generic [ref=e2034]: "1403"
+                  - text: "declare function TopbarStreak({ count, className, ...props }: React$1.ComponentProps<\"button\"> & {"
+                  - generic [ref=e2035]:
+                    - generic [ref=e2036]: "1404"
+                    - text: "count: number;"
+                  - generic [ref=e2037]: "1405"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e2038]: "1406"
+                  - text: /**
+                  - generic [ref=e2039]:
+                    - generic [ref=e2040]: "1407"
+                    - text: "* Bell icon button that integrates NotificationBar."
+                  - generic [ref=e2041]:
+                    - generic [ref=e2042]: "1408"
+                    - text: "* Wraps the notification popover provider and trigger internally."
+                  - generic [ref=e2043]:
+                    - generic [ref=e2044]: "1409"
+                    - text: "* Pass NotificationBarContent as children to render the popover dropdown."
+                  - generic [ref=e2045]:
+                    - generic [ref=e2046]: "1410"
+                    - text: "*"
+                  - generic [ref=e2047]:
+                    - generic [ref=e2048]: "1411"
+                    - text: "* ```tsx"
+                  - generic [ref=e2049]:
+                    - generic [ref=e2050]: "1412"
+                    - text: "* <TopbarNotifications>"
+                  - generic [ref=e2051]:
+                    - generic [ref=e2052]: "1413"
+                    - text: "* <NotificationBarContent>"
+                  - generic [ref=e2053]:
+                    - generic [ref=e2054]: "1414"
+                    - text: "* <NotificationBarHeader>...</NotificationBarHeader>"
+                  - generic [ref=e2055]:
+                    - generic [ref=e2056]: "1415"
+                    - text: "* <NotificationBarTabs>"
+                  - generic [ref=e2057]:
+                    - generic [ref=e2058]: "1416"
+                    - text: "* <NotificationBarTabContent value=\"inbox\">"
+                  - generic [ref=e2059]:
+                    - generic [ref=e2060]: "1417"
+                    - text: "* <NotificationBarBody>...</NotificationBarBody>"
+                  - generic [ref=e2061]:
+                    - generic [ref=e2062]: "1418"
+                    - text: "* </NotificationBarTabContent>"
+                  - generic [ref=e2063]:
+                    - generic [ref=e2064]: "1419"
+                    - text: "* </NotificationBarTabs>"
+                  - generic [ref=e2065]:
+                    - generic [ref=e2066]: "1420"
+                    - text: "* </NotificationBarContent>"
+                  - generic [ref=e2067]:
+                    - generic [ref=e2068]: "1421"
+                    - text: "* </TopbarNotifications>"
+                  - generic [ref=e2069]:
+                    - generic [ref=e2070]: "1422"
+                    - text: "* ```"
+                  - generic [ref=e2071]: "1423"
+                  - text: "*/"
+                  - generic [ref=e2072]: "1424"
+                  - text: "declare function TopbarNotifications({ className, children, ...props }: Omit<React$1.ComponentProps<typeof Button>, \"children\"> & {"
+                  - generic [ref=e2073]:
+                    - generic [ref=e2074]: "1425"
+                    - text: "children?: React$1.ReactNode;"
+                  - generic [ref=e2075]: "1426"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e2076]: "1427"
+                  - text: /** Ranking position counter button displaying a numeric position with a crown icon. Hidden on desktop by default (used in mobile drawer). */
+                  - generic [ref=e2077]: "1428"
+                  - text: "declare function TopbarRankPosition({ position, className, ...props }: React$1.ComponentProps<\"button\"> & {"
+                  - generic [ref=e2078]:
+                    - generic [ref=e2079]: "1429"
+                    - text: "position: number;"
+                  - generic [ref=e2080]: "1430"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e2081]: "1431"
+                  - text: /** Crown icon button for accessing the ranking/leaderboard. */
+                  - generic [ref=e2082]: "1432"
+                  - text: "declare function TopbarRanking({ className, ...props }: React$1.ComponentProps<typeof Button>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e2083]: "1433"
+                  - text: /** Search icon button visible only on mobile. */
+                  - generic [ref=e2084]: "1434"
+                  - text: "declare function TopbarSearch({ className, ...props }: React$1.ComponentProps<typeof Button>): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e2085]: "1435"
+                  - text: /**
+                  - generic [ref=e2086]:
+                    - generic [ref=e2087]: "1436"
+                    - text: "* Grid icon button that opens the apps launcher popover."
+                  - generic [ref=e2088]:
+                    - generic [ref=e2089]: "1437"
+                    - text: "* Pass TopbarAppsContent with TopbarAppsItem children to populate the grid."
+                  - generic [ref=e2090]:
+                    - generic [ref=e2091]: "1438"
+                    - text: "*"
+                  - generic [ref=e2092]:
+                    - generic [ref=e2093]: "1439"
+                    - text: "* ```tsx"
+                  - generic [ref=e2094]:
+                    - generic [ref=e2095]: "1440"
+                    - text: "* <TopbarApps>"
+                  - generic [ref=e2096]:
+                    - generic [ref=e2097]: "1441"
+                    - text: "* <TopbarAppsContent>"
+                  - generic [ref=e2098]:
+                    - generic [ref=e2099]: "1442"
+                    - text: "* <TopbarAppsItem icon={<MdHomeSolidIcon />} label=\"Inicio\" />"
+                  - generic [ref=e2100]:
+                    - generic [ref=e2101]: "1443"
+                    - text: "* <TopbarAppsItem icon={<MdShopSolidIcon />} label=\"Loja\" />"
+                  - generic [ref=e2102]:
+                    - generic [ref=e2103]: "1444"
+                    - text: "* </TopbarAppsContent>"
+                  - generic [ref=e2104]:
+                    - generic [ref=e2105]: "1445"
+                    - text: "* </TopbarApps>"
+                  - generic [ref=e2106]:
+                    - generic [ref=e2107]: "1446"
+                    - text: "* ```"
+                  - generic [ref=e2108]: "1447"
+                  - text: "*/"
+                  - generic [ref=e2109]: "1448"
+                  - text: "declare function TopbarApps({ className, children, ...props }: React$1.ComponentProps<\"button\"> & {"
+                  - generic [ref=e2110]:
+                    - generic [ref=e2111]: "1449"
+                    - text: "children?: React$1.ReactNode;"
+                  - generic [ref=e2112]: "1450"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e2113]: "1451"
+                  - text: /** Popover content panel that renders a 3-column grid of app items. */
+                  - generic [ref=e2114]: "1452"
+                  - text: "declare function TopbarAppsContent({ className, ...props }: React$1.ComponentProps<\"div\">): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e2115]: "1453"
+                  - text: /** Single app item inside TopbarAppsContent — large icon with label underneath. */
+                  - generic [ref=e2116]: "1454"
+                  - text: "declare function TopbarAppsItem({ icon, label, className, ...props }: React$1.ComponentProps<\"button\"> & {"
+                  - generic [ref=e2117]:
+                    - generic [ref=e2118]: "1455"
+                    - text: "icon: React$1.ReactNode;"
+                  - generic [ref=e2119]:
+                    - generic [ref=e2120]: "1456"
+                    - text: "label: string;"
+                  - generic [ref=e2121]: "1457"
+                  - text: "}): react_jsx_runtime.JSX.Element;"
+                  - generic [ref=e2122]: "1458"
+                  - generic [ref=e2123]: "1459"
+                  - text: "export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Alert, AlertAction, AlertActions, AlertClose, AlertDescription, AlertDialog, AlertDialogAction, AlertDialogBody, AlertDialogCancel, AlertDialogClose, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogHeaderRow, AlertDialogMedia, AlertDialogOverlay, AlertDialogPortal, AlertDialogTitle, AlertDialogTrigger, AlertHeader, AlertIcon, AlertTitle, AspectRatio, Avatar, AvatarBadge, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage, Badge, Banner, BannerActions, BannerContent, BannerDescription, BannerImage, BannerOverlay, BannerTitle, Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator, Button, ButtonGroup, ButtonGroupSeparator, ButtonGroupText, Calendar, CalendarDayButton, Card, Card3D, Card3DBadge, Card3DContent, Card3DDescription, Card3DImage, Card3DOverlay, Card3DTitle, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Carousel, type CarouselApi, CarouselContent, CarouselDots, CarouselItem, CarouselNext, type CarouselOptions, type CarouselPlugin, CarouselPrevious, type ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartStyle, ChartTooltip, ChartTooltipContent, Checkbox, Collapsible, CollapsibleContent, CollapsibleTrigger, Combobox, ComboboxChip, ComboboxChips, ComboboxChipsInput, ComboboxCollection, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxLabel, ComboboxList, ComboboxSeparator, ComboboxTrigger, ComboboxValue, Command, CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut, CommentArea, CommentAreaAction, type CommentAreaFile, ComponentsProvider, type ComponentsProviderProps, ContextMenu, ContextMenuCheckboxItem, ContextMenuContent, ContextMenuGroup, ContextMenuItem, ContextMenuLabel, ContextMenuPortal, ContextMenuRadioGroup, ContextMenuRadioItem, ContextMenuSeparator, ContextMenuShortcut, ContextMenuSub, ContextMenuSubContent, ContextMenuSubTrigger, ContextMenuTrigger, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerMenuGroup, DrawerMenuItem, DrawerMenuLabel, DrawerMenuSeparator, DrawerOverlay, DrawerPortal, DrawerTitle, DrawerTrigger, DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle, Field, FieldContent, FieldDescription, FieldError, FieldGroup, FieldLabel, FieldLegend, FieldSeparator, FieldSet, FieldTitle, Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Heading, HeadingDescription, HeadingTitle, HoverCard, HoverCardContent, HoverCardTrigger, Input, InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput, InputGroupText, InputGroupTextarea, InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot, Item, ItemActions, ItemContent, ItemDescription, ItemFooter, ItemGroup, ItemHeader, ItemMedia, ItemSeparator, ItemTitle, Kbd, KbdGroup, Label, Logo, type LogoName, type LogoProps, MediaCard, MediaCardBadge, MediaCardCheck, MediaCardContent, MediaCardDescription, MediaCardGrid, MediaCardImage, MediaCardMeta, MediaCardMetaAction, MediaCardMetaAuthor, MediaCardMetaItem, MediaCardTitle, Menubar, MenubarCheckboxItem, MenubarContent, MenubarGroup, MenubarItem, MenubarLabel, MenubarMenu, MenubarPortal, MenubarRadioGroup, MenubarRadioItem, MenubarSeparator, MenubarShortcut, MenubarSub, MenubarSubContent, MenubarSubTrigger, MenubarTrigger, NativeSelect, NativeSelectOptGroup, NativeSelectOption, NavigationMenu, NavigationMenuContent, NavigationMenuIndicator, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, NavigationMenuViewport, NotificationBar, NotificationBarBody, NotificationBarClearAll, NotificationBarContent, NotificationBarFooter, NotificationBarHeader, NotificationBarResolveAll, NotificationBarTabContent, NotificationBarTabs, NotificationBarTitle, NotificationBarTrigger, NotificationCard, NotificationCardActions, NotificationCardAvatar, NotificationCardCover, NotificationCardDescription, NotificationCardHeader, NotificationCardIcon, NotificationCardStatus, NotificationCardTime, NotificationCardTitle, type NotificationCardVariant, OptionGroup, OptionInput, Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, PaginationStatus, Popover, PopoverAnchor, PopoverContent, PopoverDescription, PopoverHeader, PopoverTitle, PopoverTrigger, Progress, RadioGroup, RadioGroupItem, ResizableHandle, ResizablePanel, ResizablePanelGroup, ScrollArea, ScrollBar, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuAction, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarRail, SidebarSearch, SidebarSeparator, SidebarTrigger, Skeleton, Slider, Spinner, Switch, Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger, Tag, Textarea, Toaster, Toggle, ToggleGroup, ToggleGroupItem, Tooltip, TooltipContent, TooltipProvider, TooltipShortcut, TooltipTrigger, Topbar, TopbarActions, TopbarApps, TopbarAppsContent, TopbarAppsItem, TopbarBreadcrumb, TopbarFractals, TopbarNotifications, TopbarRankPosition, TopbarRanking, TopbarSearch, TopbarStreak, Upload, UploadFile, UploadFileList, UploadMessage, UploadSummary, UploadTrigger, badgeVariants, bannerVariants, buttonGroupVariants, buttonVariants, checkboxVariants, headingDescriptionVariants, headingTitleVariants, inputGroupVariants, inputVariants, logoVariants, mediaCardVariants, nativeSelectVariants, navigationMenuTriggerStyle, optionBadgeVariants, optionInputVariants, radioItemVariants, tagVariants, textareaVariants, toggleVariants, uploadMessageVariants, useCarousel, useComboboxAnchor, useFormField, useNotificationBar, useSidebar };"
+                  - generic [ref=e2124]: "1460"
+          - tabpanel
+          - tabpanel "42 Dependencies"
+          - tabpanel "0 Dependents"
+          - tabpanel "5 Versions"
+        - complementary "Package sidebar" [ref=e92]:
+          - heading "Package Sidebar" [level=2] [ref=e93]
+          - heading "Install" [level=3] [ref=e94]
+          - generic [ref=e95]:
+            - img
+            - paragraph [ref=e96]:
+              - generic [ref=e97]:
+                - code [ref=e98]: npm i @overlens/legacy-components
+                - button "Copy install command line" [ref=e99] [cursor=pointer]:
+                  - img
+          - button "Showing weekly downloads" [ref=e100]:
+            - heading "Weekly Downloads" [level=3] [ref=e101]:
+              - img [ref=e102]
+              - text: Weekly Downloads
+            - generic [ref=e106]:
+              - img [ref=e107]
+              - paragraph [ref=e112]: "428"
+          - generic [ref=e113]:
+            - heading "Version" [level=3] [ref=e114]
+            - paragraph [ref=e116]: 1.1.3
+          - generic [ref=e117]:
+            - heading "License" [level=3] [ref=e118]
+            - paragraph [ref=e119]: none
+          - generic [ref=e120]:
+            - heading "Unpacked Size" [level=3] [ref=e121]
+            - paragraph [ref=e122]: 1.44 MB
+          - generic [ref=e123]:
+            - heading "Total Files" [level=3] [ref=e124]
+            - paragraph [ref=e125]: "10"
+          - generic [ref=e126]:
+            - heading "Last publish" [level=3] [ref=e127]
+            - paragraph [ref=e128]:
+              - time [ref=e129]: 3 days ago
+          - generic [ref=e130]:
+            - heading "Collaborators" [level=3] [ref=e131]
+            - list "Collaborators" [ref=e132]:
+              - listitem [ref=e133]:
+                - link "rafaelbraz" [ref=e135] [cursor=pointer]:
+                  - /url: /~rafaelbraz
+                  - img "rafaelbraz" [ref=e136]
+          - generic [ref=e137]:
+            - link "Analyze security with Socket" [ref=e138] [cursor=pointer]:
+              - /url: https://socket.dev/npm/package/%40overlens%2Flegacy-components
+              - img [ref=e139]
+              - strong [ref=e141]: Analyze security
+              - text: with Socket
+            - link "Check bundle size" [ref=e142] [cursor=pointer]:
+              - /url: https://bundlephobia.com/package/%40overlens%2Flegacy-components
+              - img [ref=e143]
+              - strong [ref=e145]: Check bundle size
+            - link "View package health" [ref=e146] [cursor=pointer]:
+              - /url: https://snyk.io/advisor/npm-package/%40overlens%2Flegacy-components
+              - img [ref=e147]
+              - strong [ref=e149]: View package health
+            - link "Explore dependencies" [ref=e150] [cursor=pointer]:
+              - /url: https://npmgraph.js.org/?q=%40overlens%2Flegacy-components
+              - img [ref=e151]
+              - strong [ref=e153]: Explore dependencies
+          - link "Report malware" [ref=e155] [cursor=pointer]:
+            - /url: /support?inquire=security&security-inquire=malware&package=%40overlens%2Flegacy-components&version=1.1.3
+            - img [ref=e156]
+            - strong [ref=e158]: Report
+            - text: malware
+    - contentinfo [ref=e159]:
+      - heading "Footer" [level=2] [ref=e160]
+      - generic [ref=e161]:
+        - generic [ref=e162]:
+          - link "Visit npm GitHub page" [ref=e164] [cursor=pointer]:
+            - /url: https://github.com/npm
+            - img [ref=e165]
+          - link "GitHub" [ref=e169] [cursor=pointer]:
+            - /url: https://github.com
+            - img [ref=e170]
+        - generic [ref=e172]:
+          - heading "Support" [level=3] [ref=e173]
+          - list "Support" [ref=e174]:
+            - listitem [ref=e175]:
+              - link "Help" [ref=e176] [cursor=pointer]:
+                - /url: https://docs.npmjs.com
+            - listitem [ref=e177]:
+              - link "Advisories" [ref=e178] [cursor=pointer]:
+                - /url: https://github.com/advisories
+            - listitem [ref=e179]:
+              - link "Status" [ref=e180] [cursor=pointer]:
+                - /url: http://status.npmjs.org/
+            - listitem [ref=e181]:
+              - link "Contact npm" [ref=e182] [cursor=pointer]:
+                - /url: /support
+        - generic [ref=e183]:
+          - heading "Company" [level=3] [ref=e184]
+          - list "Company" [ref=e185]:
+            - listitem [ref=e186]:
+              - link "About" [ref=e187] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e188]:
+              - link "Blog" [ref=e189] [cursor=pointer]:
+                - /url: https://github.blog/tag/npm/
+            - listitem [ref=e190]:
+              - link "Press" [ref=e191] [cursor=pointer]:
+                - /url: /press
+        - generic [ref=e192]:
+          - heading "Terms & Policies" [level=3] [ref=e193]
+          - list "Terms & Policies" [ref=e194]:
+            - listitem [ref=e195]:
+              - link "Policies" [ref=e196] [cursor=pointer]:
+                - /url: /policies/
+            - listitem [ref=e197]:
+              - link "Terms of Use" [ref=e198] [cursor=pointer]:
+                - /url: /policies/terms
+            - listitem [ref=e199]:
+              - link "Code of Conduct" [ref=e200] [cursor=pointer]:
+                - /url: /policies/conduct
+            - listitem [ref=e201]:
+              - link "Privacy" [ref=e202] [cursor=pointer]:
+                - /url: /policies/privacy
+  - generic [ref=e204]: Viewing @overlens/legacy-components version 1.1.3

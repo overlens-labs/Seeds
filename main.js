@@ -1,28 +1,16 @@
-// ─── Storage Keys ──────────────────────────────────────────
+// ─── Local-only Keys (favorites & seen stay in browser) ───
 const SL_KEYS = {
-    SEEDS:      'seedlibrary_custom',
-    CATEGORIES: 'sl_categories',
-    TAGS:       'sl_tags',
-    LOGO:       'sl_logo',
-    FAVS:       'sl_favorites',
-    SEEN:       'sl_seen_counts',
-    MIGRATION:  'sl_migration_v2',
+    FAVS:  'sl_favorites',
+    SEEN:  'sl_seen_counts',
 };
 
-// ─── Defaults ──────────────────────────────────────────────
+// ─── Defaults (fallback if Supabase is empty) ─────────────
 const DEFAULT_CATEGORIES = [
-    { slug: 'ilustracao',      label: 'Ilustração' },
-    { slug: 'pintura',         label: 'Pintura' },
-    { slug: 'cinematografico', label: 'Cinematográfico' },
-    { slug: 'fotografia',      label: 'Fotografia' },
+    { slug: 'ilustracao',      label: 'Ilustração', sort_order: 0 },
+    { slug: 'pintura',         label: 'Pintura',    sort_order: 1 },
+    { slug: 'cinematografico', label: 'Cinematográfico', sort_order: 2 },
+    { slug: 'fotografia',      label: 'Fotografia', sort_order: 3 },
 ];
-
-const DEFAULT_TAGS = {
-    'ilustracao':      ['Anime', 'Fantasia', 'Sci-Fi', 'Retrato'],
-    'pintura':         ['Aquarela', 'Óleo', 'Digital', 'Acrílico'],
-    'cinematografico': ['Noir', 'Sci-Fi', 'Drama', 'Terror'],
-    'fotografia':      ['3D', 'Abstrata', 'Rêtro', 'Estilizada'],
-};
 
 const DEFAULT_LOGO = { title: 'Seed Library', subtitle: 'Descubra e copie prompts incríveis.' };
 
@@ -34,20 +22,38 @@ const FOTO_TAG_MAP = {
     'estilizada':'fotografia-estilizada',
 };
 
-// ─── Storage Helpers ───────────────────────────────────────
-function getCategories() {
-    const stored = localStorage.getItem(SL_KEYS.CATEGORIES);
-    return stored ? JSON.parse(stored) : DEFAULT_CATEGORIES;
+// ─── Supabase Data Helpers ────────────────────────────────
+async function getCategories() {
+    const { data, error } = await sb
+        .from('categories')
+        .select('*')
+        .order('sort_order');
+    if (error || !data || data.length === 0) return DEFAULT_CATEGORIES;
+    return data;
 }
 
-function getAllTags() {
-    const stored = localStorage.getItem(SL_KEYS.TAGS);
-    return stored ? JSON.parse(stored) : DEFAULT_TAGS;
+async function getAllTags() {
+    const { data, error } = await sb
+        .from('tags')
+        .select('*');
+    if (error || !data) return {};
+    // Group by category_slug → array of labels
+    const map = {};
+    data.forEach(t => {
+        if (!map[t.category_slug]) map[t.category_slug] = [];
+        map[t.category_slug].push(t.label);
+    });
+    return map;
 }
 
-function getLogo() {
-    const stored = localStorage.getItem(SL_KEYS.LOGO);
-    return stored ? JSON.parse(stored) : DEFAULT_LOGO;
+async function getLogo() {
+    const { data, error } = await sb
+        .from('settings')
+        .select('value')
+        .eq('key', 'logo')
+        .single();
+    if (error || !data) return DEFAULT_LOGO;
+    return data.value;
 }
 
 function shuffle(arr) {
@@ -61,26 +67,39 @@ function shuffle(arr) {
 
 // ─── Seeds cache (shuffled once, preserved across filters) ─
 let _seedsCache = null;
+let _categoriesCache = null;
+let _tagsCache = null;
 
 function resetSeedsCache() { _seedsCache = null; }
 
-function loadAllSeeds() {
+async function loadAllSeeds() {
     if (!_seedsCache) {
-        const stored = localStorage.getItem(SL_KEYS.SEEDS);
-        const custom = stored ? JSON.parse(stored) : [];
-        _seedsCache = shuffle([...custom]);
+        const { data, error } = await sb
+            .from('seeds')
+            .select('*');
+        const seeds = (!error && data) ? data : [];
+        _seedsCache = shuffle([...seeds]);
     }
     return _seedsCache;
 }
 
-// ─── Seen Counts (new-content badge) ──────────────────────
+async function getCategoriesCached() {
+    if (!_categoriesCache) _categoriesCache = await getCategories();
+    return _categoriesCache;
+}
+
+async function getTagsCached() {
+    if (!_tagsCache) _tagsCache = await getAllTags();
+    return _tagsCache;
+}
+
+// ─── Seen Counts (new-content badge) — local only ────────
 function getSeenCounts() {
     const stored = localStorage.getItem(SL_KEYS.SEEN);
     return stored ? JSON.parse(stored) : {};
 }
 
-function markCategoryAsSeen(slug) {
-    const all   = loadAllSeeds();
+function markCategoryAsSeen(slug, all) {
     const seen  = getSeenCounts();
     seen[slug]  = countForCategory(all, slug);
     localStorage.setItem(SL_KEYS.SEEN, JSON.stringify(seen));
@@ -90,11 +109,11 @@ function getNewCount(all, slug) {
     const seen  = getSeenCounts();
     const current = countForCategory(all, slug);
     const prev    = seen[slug];
-    if (prev === undefined) return 0; // first visit: no badge
+    if (prev === undefined) return 0;
     return Math.max(0, current - prev);
 }
 
-// ─── Favorites ─────────────────────────────────────────────
+// ─── Favorites — local only ──────────────────────────────
 function getFavorites() {
     const stored = localStorage.getItem(SL_KEYS.FAVS);
     return stored ? JSON.parse(stored) : [];
@@ -110,10 +129,10 @@ function toggleFavorite(id) {
     if (idx === -1) favs.push(id);
     else favs.splice(idx, 1);
     localStorage.setItem(SL_KEYS.FAVS, JSON.stringify(favs));
-    return idx === -1; // true = added
+    return idx === -1;
 }
 
-// ─── Seed Param Parser ─────────────────────────────────────
+// ─── Seed Param Parser ────────────────────────────────────
 function parseSeedParams(seed) {
     const patterns = [
         { regex: /--v\s+([\d.]+)/i,        label: 'v' },
@@ -136,7 +155,7 @@ function parseSeedParams(seed) {
     }, []);
 }
 
-// ─── DOM refs ─────────────────────────────────────────────
+// ─── DOM refs ────────────────────────────────────────────
 const galleryContainer    = document.getElementById('gallery');
 const toast               = document.getElementById('toast');
 const lightbox            = document.getElementById('lightbox');
@@ -162,7 +181,7 @@ let currentData    = [];
 let currentIndex   = 0;
 let searchQuery    = '';
 
-// ─── Filter Buttons (dynamic) ─────────────────────────────
+// ─── Filter Buttons (dynamic) ────────────────────────────
 function countForCategory(all, slug) {
     if (slug === 'all') return all.length;
     if (slug === 'favorites') return all.filter(s => isFavorite(s.id)).length;
@@ -171,12 +190,12 @@ function countForCategory(all, slug) {
     ).length;
 }
 
-function renderFilterButtons() {
+async function renderFilterButtons() {
     const nav = document.getElementById('sidebar-nav');
     nav.innerHTML = '';
 
-    const categories = getCategories();
-    const all = loadAllSeeds();
+    const categories = await getCategoriesCached();
+    const all = await loadAllSeeds();
     const allItems = [
         { slug: 'all',       label: 'Todos' },
         { slug: 'favorites', label: 'Favoritos' },
@@ -200,27 +219,28 @@ function renderFilterButtons() {
             btn.appendChild(badge);
         }
 
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', async () => {
             nav.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             activeTag = null;
             activeFilter = slug;
-            markCategoryAsSeen(slug);
+            const allSeeds = await loadAllSeeds();
+            markCategoryAsSeen(slug, allSeeds);
             if (slug !== 'all' && slug !== 'favorites') {
-                renderTags(slug);
+                await renderTags(slug);
             } else {
                 sidebarTags.innerHTML = '';
             }
-            renderGallery(slug);
-            renderFilterButtons(); // refresh badges
+            await renderGallery(slug);
+            await renderFilterButtons();
         });
         nav.appendChild(btn);
     });
 }
 
-// ─── Tags ─────────────────────────────────────────────────
-function renderTags(category) {
-    const allTags = getAllTags();
+// ─── Tags ────────────────────────────────────────────────
+async function renderTags(category) {
+    const allTags = await getTagsCached();
     const tags = allTags[category];
     if (!tags || tags.length === 0) { sidebarTags.innerHTML = ''; return; }
 
@@ -232,22 +252,22 @@ function renderTags(category) {
     ).join('');
 
     sidebarTags.querySelectorAll('.tag-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
+        btn.addEventListener('click', async (e) => {
             e.stopPropagation();
             const tag = btn.getAttribute('data-tag');
             activeTag = activeTag === tag ? null : tag;
-            renderTags(category);
-            renderGallery(category, activeTag);
+            await renderTags(category);
+            await renderGallery(category, activeTag);
         });
     });
 }
 
-// ─── Render Gallery ───────────────────────────────────────
-function renderGallery(filter = 'all', tag = null) {
+// ─── Render Gallery ──────────────────────────────────────
+async function renderGallery(filter = 'all', tag = null) {
     activeFilter = filter;
     galleryContainer.innerHTML = '';
 
-    const all = loadAllSeeds();
+    const all = await loadAllSeeds();
     const favs = getFavorites();
     let data;
 
@@ -273,7 +293,6 @@ function renderGallery(filter = 'all', tag = null) {
         }
     }
 
-    // Apply search filter
     if (searchQuery) {
         const q = searchQuery.toLowerCase();
         data = data.filter(item => item.seed.toLowerCase().includes(q));
@@ -296,7 +315,7 @@ function renderGallery(filter = 'all', tag = null) {
         card.dataset.id = item.id;
         card.innerHTML = `
             <span class="card-heart"><span class="material-symbols-rounded">favorite</span></span>
-            <img src="${item.url}" alt="${item.title}" loading="lazy">
+            <img src="${item.url}" alt="${item.title || ''}" loading="lazy">
             <div class="card-overlay">
                 <button class="copy-btn">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -318,18 +337,18 @@ function renderGallery(filter = 'all', tag = null) {
     });
 }
 
-// ─── Category Label ────────────────────────────────────────
-function getCategoryLabel(slug) {
-    const cats = getCategories();
+// ─── Category Label ───────────────────────────────────────
+async function getCategoryLabel(slug) {
+    const cats = await getCategoriesCached();
     const cat = cats.find(c => slug === c.slug || slug.startsWith(c.slug + '-'));
     return cat ? cat.label : slug.replace(/-/g, ' ');
 }
 
-// ─── Lightbox ─────────────────────────────────────────────
-function showLightboxItem(item) {
+// ─── Lightbox ────────────────────────────────────────────
+async function showLightboxItem(item) {
     lightboxImg.src              = item.url;
-    lightboxImg.alt              = item.title;
-    lightboxCategory.textContent = getCategoryLabel(item.category);
+    lightboxImg.alt              = item.title || '';
+    lightboxCategory.textContent = await getCategoryLabel(item.category);
     lightboxPrompt.textContent   = item.seed;
     lightboxDownloadBtn.dataset.url      = item.url;
     lightboxDownloadBtn.dataset.filename = item.title || 'seed';
@@ -338,18 +357,15 @@ function showLightboxItem(item) {
     lightbox.style.setProperty('--lb-bg', `url("${item.url.replace(/"/g, '\\"')}")`);
     resetCopyBtn(lightboxCopyBtn);
 
-    // Param badges
     const params = parseSeedParams(item.seed);
     lightboxParams.innerHTML = params
         .map(p => `<span class="param-badge">${p.label}<b>${p.value}</b></span>`)
         .join('');
 
-    // Fav button state
     const faved = isFavorite(item.id);
     lightboxFavBtn.classList.toggle('active', faved);
     lightboxFavBtn.querySelector('.fav-btn-text').textContent = faved ? 'Favoritado' : 'Favoritar';
 
-    // Update URL hash
     history.replaceState(null, '', '#seed-' + item.id);
 }
 
@@ -388,7 +404,6 @@ lightboxDownloadBtn.addEventListener('click', async () => {
     const url      = lightboxDownloadBtn.dataset.url;
     const filename = (lightboxDownloadBtn.dataset.filename || 'seed');
 
-    // Base64 data URL (seeds customizadas) — download direto
     if (url.startsWith('data:')) {
         const a = document.createElement('a');
         a.href = url;
@@ -397,7 +412,6 @@ lightboxDownloadBtn.addEventListener('click', async () => {
         return;
     }
 
-    // URL normal — fetch como blob e força download
     try {
         const res  = await fetch(url);
         const blob = await res.blob();
@@ -409,7 +423,6 @@ lightboxDownloadBtn.addEventListener('click', async () => {
         a.click();
         setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
     } catch {
-        // Fallback: canvas
         try {
             const canvas = document.createElement('canvas');
             canvas.width  = lightboxImg.naturalWidth;
@@ -435,7 +448,7 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight') navigateLightbox(1);
 });
 
-// ─── Swipe mobile ──────────────────────────────────────────
+// ─── Swipe mobile ─────────────────────────────────────────
 let _touchX = 0, _touchY = 0;
 lightbox.addEventListener('touchstart', (e) => {
     _touchX = e.touches[0].clientX;
@@ -450,21 +463,19 @@ lightbox.addEventListener('touchend', (e) => {
     }
 }, { passive: true });
 
-// ─── Favorite ──────────────────────────────────────────────
-lightboxFavBtn.addEventListener('click', () => {
+// ─── Favorite ─────────────────────────────────────────────
+lightboxFavBtn.addEventListener('click', async () => {
     if (currentItemId === null) return;
     const added = toggleFavorite(currentItemId);
     lightboxFavBtn.classList.toggle('active', added);
     lightboxFavBtn.querySelector('.fav-btn-text').textContent = added ? 'Favoritado' : 'Favoritar';
-    // Update card heart in gallery
     const card = galleryContainer.querySelector(`.card[data-id="${currentItemId}"]`);
     if (card) card.classList.toggle('favorited', added);
-    // Update sidebar counts
-    renderFilterButtons();
+    await renderFilterButtons();
     showToast(added ? 'Adicionado aos favoritos!' : 'Removido dos favoritos!');
 });
 
-// ─── Share ─────────────────────────────────────────────────
+// ─── Share ────────────────────────────────────────────────
 lightboxShareBtn.addEventListener('click', () => {
     const url = location.origin + location.pathname + '#seed-' + currentItemId;
     navigator.clipboard.writeText(url).then(() => showToast('Link copiado!')).catch(() => {
@@ -472,17 +483,17 @@ lightboxShareBtn.addEventListener('click', () => {
     });
 });
 
-// ─── Gallery Search ────────────────────────────────────────
+// ─── Gallery Search ───────────────────────────────────────
 let _searchDebounce;
 document.getElementById('gallery-search').addEventListener('input', (e) => {
     clearTimeout(_searchDebounce);
-    _searchDebounce = setTimeout(() => {
+    _searchDebounce = setTimeout(async () => {
         searchQuery = e.target.value.trim().toLowerCase();
-        renderGallery(activeFilter, activeTag);
+        await renderGallery(activeFilter, activeTag);
     }, 220);
 });
 
-// ─── Copy to clipboard ────────────────────────────────────
+// ─── Copy to clipboard ───────────────────────────────────
 async function copyToClipboard(text, btn, isLightbox = false) {
     try {
         await navigator.clipboard.writeText(text);
@@ -511,7 +522,7 @@ function resetCopyBtn(btn, isLightbox = false) {
     if (!isLightbox) btn.style.background = '';
 }
 
-// ─── Toast ────────────────────────────────────────────────
+// ─── Toast ───────────────────────────────────────────────
 function showToast(msg = 'Seed copied!') {
     toast.querySelector('.toast-message').textContent = msg;
     if (toastTimeout) {
@@ -530,7 +541,7 @@ function showToast(msg = 'Seed copied!') {
     }, 2000);
 }
 
-// ─── Sidebar Toggle ───────────────────────────────────────
+// ─── Sidebar Toggle ──────────────────────────────────────
 (function () {
     const btn = document.getElementById('sidebar-toggle');
     if (!btn) return;
@@ -541,7 +552,9 @@ function showToast(msg = 'Seed copied!') {
         btn.textContent = collapsed ? '›' : '‹';
     };
 
-    apply(localStorage.getItem(STORAGE_KEY) === '1');
+    // Default: collapsed (sidebar recolhido para dar destaque às imagens)
+    const saved = localStorage.getItem(STORAGE_KEY);
+    apply(saved === null ? true : saved === '1');
 
     btn.addEventListener('click', () => {
         const collapsed = !document.body.classList.contains('sidebar-collapsed');
@@ -550,56 +563,45 @@ function showToast(msg = 'Seed copied!') {
     });
 })();
 
-// ─── Real-time sync between tabs ──────────────────────────
-window.addEventListener('storage', (e) => {
-    if (e.key === SL_KEYS.LOGO) {
-        const logo = JSON.parse(e.newValue || JSON.stringify(DEFAULT_LOGO));
-        document.getElementById('logo-title').textContent = logo.title;
-        document.getElementById('logo-subtitle').textContent = logo.subtitle;
-    } else if (e.key === SL_KEYS.CATEGORIES) {
-        renderFilterButtons();
-        renderGallery(activeFilter, activeTag);
-    } else if (e.key === SL_KEYS.SEEDS) {
+// ─── Real-time sync via Supabase Realtime ─────────────────
+sb
+    .channel('public:seeds')
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'seeds' }, () => {
         resetSeedsCache();
         renderFilterButtons();
         renderGallery(activeFilter, activeTag);
-    } else if (e.key === SL_KEYS.TAGS) {
-        renderGallery(activeFilter, activeTag);
-    } else if (e.key === SL_KEYS.FAVS) {
+    })
+    .subscribe();
+
+sb
+    .channel('public:categories')
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'categories' }, () => {
+        _categoriesCache = null;
         renderFilterButtons();
         renderGallery(activeFilter, activeTag);
-    }
-});
+    })
+    .subscribe();
 
-// ─── Hash Navigation ───────────────────────────────────────
-function checkHashNavigation() {
+// ─── Hash Navigation ──────────────────────────────────────
+async function checkHashNavigation() {
     const hash = location.hash;
     if (!hash.startsWith('#seed-')) return;
     const rawId = hash.replace('#seed-', '');
     const numId = Number(rawId);
-    const all = loadAllSeeds();
+    const all = await loadAllSeeds();
     const item = all.find(s => s.id === numId || String(s.id) === rawId);
     if (item) setTimeout(() => openLightbox(item), 80);
 }
 
-// ─── Migration: limpa seeds antigos, mantém apenas legacy ─
-function applyMigrations() {
-    if (!localStorage.getItem(SL_KEYS.MIGRATION)) {
-        localStorage.removeItem(SL_KEYS.SEEDS);
-        localStorage.removeItem(SL_KEYS.SEEN);
-        localStorage.setItem(SL_KEYS.MIGRATION, '1');
-    }
-}
-
-// ─── Init ─────────────────────────────────────────────────
-function init() {
-    applyMigrations();
-    const logo = getLogo();
-    document.getElementById('logo-title').textContent = logo.title;
+// ─── Init ────────────────────────────────────────────────
+async function init() {
+    const logo = await getLogo();
+    // Logo is now an SVG image — only update subtitle and page title
     document.getElementById('logo-subtitle').textContent = logo.subtitle;
-    renderFilterButtons();
-    renderGallery('all');
-    checkHashNavigation();
+    document.title = logo.title;
+    await renderFilterButtons();
+    await renderGallery('all');
+    await checkHashNavigation();
 
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js').catch(() => {});

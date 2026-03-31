@@ -1,19 +1,16 @@
-// ─── Storage Keys ─────────────────────────────────────────
+// ─── Local-only Keys ──────────────────────────────────────
 const GL_KEYS = {
-    SEEDS:      'seedlibrary_custom',
-    CATEGORIES: 'sl_categories',
-    TAGS:       'sl_tags',
-    FAVS:       'sl_favorites',
+    FAVS: 'sl_favorites',
 };
 
 const GL_DEFAULT_CATEGORIES = [
-    { slug: 'ilustracao',      label: 'Ilustração' },
-    { slug: 'pintura',         label: 'Pintura' },
-    { slug: 'cinematografico', label: 'Cinematográfico' },
-    { slug: 'fotografia',      label: 'Fotografia' },
+    { slug: 'ilustracao',      label: 'Ilustração', sort_order: 0 },
+    { slug: 'pintura',         label: 'Pintura',    sort_order: 1 },
+    { slug: 'cinematografico', label: 'Cinematográfico', sort_order: 2 },
+    { slug: 'fotografia',      label: 'Fotografia', sort_order: 3 },
 ];
 
-// ─── SVG Icon Library ──────────────────────────────────────
+// ─── SVG Icon Library ─────────────────────────────────────
 const ICON = {
     copy:     `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`,
     check:    `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
@@ -24,7 +21,7 @@ const ICON = {
     search:   `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>`,
 };
 
-// ─── State ────────────────────────────────────────────────
+// ─── State ───────────────────────────────────────────────
 let activeCategory = 'all';
 let searchQuery    = '';
 let allSeeds       = [];
@@ -33,15 +30,19 @@ let lightboxImages = [];
 let lightboxIndex  = 0;
 let toastTimeout   = null;
 
-// ─── Data helpers ─────────────────────────────────────────
-function getCategories() {
-    const stored = localStorage.getItem(GL_KEYS.CATEGORIES);
-    return stored ? JSON.parse(stored) : GL_DEFAULT_CATEGORIES;
+// ─── Supabase Data helpers ───────────────────────────────
+async function getCategories() {
+    const { data, error } = await sb
+        .from('categories')
+        .select('*')
+        .order('sort_order');
+    if (error || !data || data.length === 0) return GL_DEFAULT_CATEGORIES;
+    return data;
 }
 
-function loadSeeds() {
-    const stored = localStorage.getItem(GL_KEYS.SEEDS);
-    return stored ? JSON.parse(stored) : [];
+async function loadSeeds() {
+    const { data, error } = await sb.from('seeds').select('*');
+    return (!error && data) ? data : [];
 }
 
 function loadFavs() {
@@ -52,7 +53,7 @@ function saveFavs() {
     localStorage.setItem(GL_KEYS.FAVS, JSON.stringify(favs));
 }
 
-// ─── Param parser ─────────────────────────────────────────
+// ─── Param parser ────────────────────────────────────────
 function parseSeedParams(seed) {
     const patterns = [
         { regex: /--v\s+([\d.]+)/i,       label: 'v' },
@@ -74,7 +75,7 @@ function parseSeedParams(seed) {
     }, []);
 }
 
-// ─── Escape HTML ──────────────────────────────────────────
+// ─── Escape HTML ─────────────────────────────────────────
 function escHtml(str) {
     return String(str)
         .replace(/&/g, '&amp;')
@@ -83,7 +84,7 @@ function escHtml(str) {
         .replace(/>/g, '&gt;');
 }
 
-// ─── Group seeds by prompt ────────────────────────────────
+// ─── Group seeds by prompt ───────────────────────────────
 function groupByPrompt(seeds) {
     const map = new Map();
     seeds.forEach(seed => {
@@ -103,7 +104,7 @@ function groupByPrompt(seeds) {
     return Array.from(map.values());
 }
 
-// ─── Filter seeds ─────────────────────────────────────────
+// ─── Filter seeds ────────────────────────────────────────
 function getFilteredSeeds() {
     let filtered = allSeeds;
 
@@ -127,28 +128,9 @@ function getFilteredSeeds() {
     return filtered;
 }
 
-// ─── Storage Progress Component ───────────────────────────
-function updateStorageBar() {
-    try {
-        let total = 0;
-        for (const key in localStorage) {
-            if (Object.prototype.hasOwnProperty.call(localStorage, key)) {
-                total += (localStorage.getItem(key) || '').length * 2;
-            }
-        }
-        const maxBytes = 5 * 1024 * 1024;
-        const pct      = Math.min(100, (total / maxBytes) * 100);
-        const kb       = (total / 1024).toFixed(0);
-        const fill     = document.getElementById('storage-bar-fill');
-        const label    = document.getElementById('storage-label');
-        if (fill)  fill.style.width  = pct.toFixed(1) + '%';
-        if (label) label.textContent = `Storage: ${kb}KB / 5MB`;
-    } catch (_) { /* ignore */ }
-}
-
-// ─── Render sidebar ───────────────────────────────────────
-function renderSidebar() {
-    const categories = getCategories();
+// ─── Render sidebar ──────────────────────────────────────
+async function renderSidebar() {
+    const categories = await getCategories();
     const list = document.getElementById('category-list');
 
     const items = [
@@ -184,13 +166,11 @@ function renderSidebar() {
             renderSidebar();
         });
     });
-
-    updateStorageBar();
 }
 
-// ─── Update header ────────────────────────────────────────
-function updateCategoryTitle() {
-    const categories = getCategories();
+// ─── Update header ───────────────────────────────────────
+async function updateCategoryTitle() {
+    const categories = await getCategories();
     const titleEl    = document.getElementById('category-title');
     const subEl      = document.getElementById('category-subtitle');
 
@@ -208,7 +188,7 @@ function updateCategoryTitle() {
     }
 }
 
-// ─── Render feed ──────────────────────────────────────────
+// ─── Render feed ─────────────────────────────────────────
 function renderFeed() {
     const skeletonEl = document.getElementById('skeleton-feed');
     const feed       = document.getElementById('seed-feed');
@@ -254,7 +234,6 @@ function renderFeed() {
         const isFaved       = group.ids.some(id => favs.includes(id));
         const isCarousel    = group.images.length > 2;
 
-        // Build images section
         let imagesHTML;
 
         if (isCarousel) {
@@ -282,7 +261,6 @@ function renderFeed() {
             imagesHTML = `<div class="seed-images">${imgWraps}</div>`;
         }
 
-        // Download button only for single images
         const dlBtn = group.images.length === 1
             ? `<button class="ghost-btn dl-btn" data-url="${escHtml(group.images[0].url)}" data-prompt="${escHtml(group.prompt)}">
                 ${ICON.download} Download
@@ -313,9 +291,8 @@ function renderFeed() {
     attachFeedListeners(feed);
 }
 
-// ─── Feed event listeners ─────────────────────────────────
+// ─── Feed event listeners ────────────────────────────────
 function attachFeedListeners(feed) {
-    // Copy
     feed.querySelectorAll('.copy-seed-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             navigator.clipboard.writeText(btn.dataset.prompt).then(() => {
@@ -330,7 +307,6 @@ function attachFeedListeners(feed) {
         });
     });
 
-    // Favorites
     feed.querySelectorAll('.fav-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const ids     = btn.dataset.ids.split(',');
@@ -351,7 +327,6 @@ function attachFeedListeners(feed) {
         });
     });
 
-    // Download
     feed.querySelectorAll('.dl-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const a    = document.createElement('a');
@@ -363,7 +338,6 @@ function attachFeedListeners(feed) {
         });
     });
 
-    // Carousel nav buttons
     feed.querySelectorAll('.carousel-nav-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -371,14 +345,12 @@ function attachFeedListeners(feed) {
         });
     });
 
-    // Carousel dots
     feed.querySelectorAll('.carousel-dot').forEach(dot => {
         dot.addEventListener('click', () => {
             setCarouselIndex(dot.dataset.carousel, parseInt(dot.dataset.dot));
         });
     });
 
-    // Lightbox — regular images
     feed.querySelectorAll('.seed-img-wrap:not(.carousel-img-wrap)').forEach(wrap => {
         wrap.addEventListener('click', () => {
             const grp = window._glGroups[parseInt(wrap.dataset.group)];
@@ -386,7 +358,6 @@ function attachFeedListeners(feed) {
         });
     });
 
-    // Lightbox — carousel images
     feed.querySelectorAll('.carousel-img-wrap').forEach(wrap => {
         wrap.addEventListener('click', () => {
             const grp = window._glGroups[parseInt(wrap.dataset.group)];
@@ -395,7 +366,7 @@ function attachFeedListeners(feed) {
     });
 }
 
-// ─── Carousel Component ───────────────────────────────────
+// ─── Carousel Component ──────────────────────────────────
 function navigateCarousel(carouselId, dir) {
     const el = document.querySelector(`.seed-images--carousel[data-carousel="${carouselId}"]`);
     if (!el) return;
@@ -415,7 +386,7 @@ function setCarouselIndex(carouselId, index) {
     el.dataset.current = index;
 }
 
-// ─── Lightbox ─────────────────────────────────────────────
+// ─── Lightbox ────────────────────────────────────────────
 function openLightbox(images, index) {
     lightboxImages = images;
     lightboxIndex  = index;
@@ -457,7 +428,7 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight') navigateLightbox(1);
 });
 
-// ─── Toast Component ──────────────────────────────────────
+// ─── Toast Component ─────────────────────────────────────
 function showToast(msg = 'Seed copied!') {
     const toast = document.getElementById('gl-toast');
     const msgEl = document.getElementById('gl-toast-msg');
@@ -469,29 +440,28 @@ function showToast(msg = 'Seed copied!') {
     }, 20);
 }
 
-// ─── Search Component ─────────────────────────────────────
+// ─── Search Component ────────────────────────────────────
 document.getElementById('gl-search').addEventListener('input', (e) => {
     searchQuery = e.target.value.trim();
     renderFeed();
 });
 
-// ─── Cross-tab sync ───────────────────────────────────────
-window.addEventListener('storage', (e) => {
-    if ([GL_KEYS.SEEDS, GL_KEYS.CATEGORIES, GL_KEYS.FAVS].includes(e.key)) {
-        allSeeds = loadSeeds();
-        favs     = loadFavs();
-        renderSidebar();
+// ─── Real-time sync via Supabase Realtime ────────────────
+sb
+    .channel('gallery:seeds')
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'seeds' }, async () => {
+        allSeeds = await loadSeeds();
+        await renderSidebar();
         renderFeed();
-    }
-});
+    })
+    .subscribe();
 
-// ─── Init ─────────────────────────────────────────────────
-function init() {
-    allSeeds = loadSeeds();
+// ─── Init ────────────────────────────────────────────────
+async function init() {
+    allSeeds = await loadSeeds();
     favs     = loadFavs();
-    renderSidebar();
-    updateCategoryTitle();
-    // Show skeleton briefly, then render feed
+    await renderSidebar();
+    await updateCategoryTitle();
     setTimeout(renderFeed, 280);
 }
 

@@ -8,7 +8,7 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,13 +17,13 @@
     <div id="login-overlay">
         <div class="login-box">
             <div class="login-logo">
-                <h1>Seed Library</h1>
+                <img src="logo-dark.svg" alt="Overlens" class="login-logo-img">
                 <p>Acesso restrito</p>
             </div>
             <form id="admin-login-form" class="login-form">
                 <div class="form-group">
-                    <label for="admin-login-user">Usuário</label>
-                    <input type="text" id="admin-login-user" placeholder="admin" autocomplete="username" required>
+                    <label for="admin-login-email">Email</label>
+                    <input type="email" id="admin-login-email" placeholder="admin@email.com" autocomplete="email" required>
                 </div>
                 <div class="form-group">
                     <label for="admin-login-pass">Senha</label>
@@ -41,7 +41,7 @@
         <!-- Admin Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-logo">
-                <h1>Seed Library</h1>
+                <img src="logo-dark.svg" alt="Overlens" class="sidebar-logo-img">
                 <p>Painel Admin</p>
             </div>
             <nav class="admin-nav">
@@ -58,15 +58,7 @@
         <!-- Admin Content -->
         <main class="admin-content">
 
-            <!-- Storage Bar (full width) -->
-            <div class="admin-storage-bar">
-                <div class="admin-storage-bar-inner">
-                    <div class="admin-storage-bar-fill" id="storage-bar-fill"></div>
-                </div>
-                <span class="admin-storage-bar-label">
-                    Storage <strong id="storage-bar-pct">–</strong>
-                </span>
-            </div>
+            <!-- Storage info removed — images now on Supabase Storage -->
 
             <!-- Categorias -->
             <section class="admin-section active" id="section-categories">
@@ -227,6 +219,8 @@
         <span class="toast-message">Salvo!</span>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
     <script src="admin.js"></script>
 </body>
 </html>
