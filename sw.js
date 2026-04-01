@@ -1,4 +1,4 @@
-const CACHE_NAME = 'seed-library-v2';
+const CACHE_NAME = 'seed-library-v3';
 const PRECACHE = [
     './index.html',
     './style.css',
@@ -7,6 +7,7 @@ const PRECACHE = [
     './favicon.svg',
     './logo-dark.svg',
     './manifest.json',
+    './admin.js',
 ];
 
 self.addEventListener('install', (e) => {
