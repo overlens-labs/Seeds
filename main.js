@@ -340,6 +340,13 @@ async function renderGallery(filter = 'all', tag = null) {
             e.stopPropagation();
             copyToClipboard(item.seed, e.currentTarget);
         });
+        card.querySelector('.card-heart').addEventListener('click', async (e) => {
+            e.stopPropagation();
+            const added = toggleFavorite(item.id);
+            card.classList.toggle('favorited', added);
+            showToast(added ? 'Adicionado aos favoritos!' : 'Removido dos favoritos!');
+            await renderFilterButtons();
+        });
 
         galleryContainer.appendChild(card);
     });

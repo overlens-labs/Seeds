@@ -304,22 +304,40 @@ body.sidebar-collapsed .sidebar-toggle {
     position: absolute;
     top: 0.55rem;
     right: 0.6rem;
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     z-index: 3;
-    pointer-events: none;
+    pointer-events: auto;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.25s ease, transform 0.2s ease;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.5));
+}
+
+.card:hover .card-heart {
+    opacity: 0.7;
+}
+
+.card:hover .card-heart:hover {
+    opacity: 1;
+    transform: scale(1.15);
 }
 
 .card.favorited .card-heart {
-    display: flex;
+    opacity: 1;
 }
 
 .card-heart .material-symbols-rounded {
     font-size: 1.35rem;
     color: #fff;
-    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
     line-height: 1;
+}
+
+.card.favorited .card-heart .material-symbols-rounded {
+    color: #ff4d6a;
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
 /* ─── Card Overlay ───────────────────────────────────────── */
