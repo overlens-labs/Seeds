@@ -96,9 +96,11 @@ const adminFab     = document.getElementById('admin-fab');
 const adminApp     = document.getElementById('admin-app');
 const loginOverlay = document.getElementById('login-overlay');
 
-function openAdminPanel() {
+function openAdminPanel(section = 'seeds') {
     adminApp.style.display = 'flex';
     adminFab.classList.add('is-open');
+    // Navigate to the requested section (default: seeds for saving images)
+    showSection(section);
 }
 
 function closeAdminPanel() {
