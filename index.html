@@ -41,12 +41,12 @@
             <nav id="sidebar-nav" class="sidebar-nav"></nav>
             <div id="sidebar-tags" class="sidebar-tags"></div>
             <div class="sidebar-admin-access">
-                <a href="admin.html" id="admin-fab" class="admin-sidebar-btn" title="Painel Administrador">
+                <button id="admin-fab" class="admin-sidebar-btn">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="3"></circle>
                         <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
                     </svg>
-                </a>
+                </button>
             </div>
         </aside>
 
@@ -116,10 +116,215 @@
         <span class="toast-message">Seed copied!</span>
     </div>
 
-    <!-- Admin is now on admin.html -->
+    <!-- ═══════════════ ADMIN ZONE ═══════════════ -->
+
+    <!-- Login Overlay -->
+    <div id="login-overlay" class="hidden">
+        <div class="login-box">
+            <div class="login-logo">
+                <img src="logo-dark.svg" alt="Overlens" class="login-logo-img">
+                <p>Acesso restrito</p>
+            </div>
+            <form id="admin-login-form" class="login-form">
+                <div class="form-group">
+                    <label for="admin-login-email">Email</label>
+                    <input type="email" id="admin-login-email" placeholder="admin@email.com" autocomplete="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="admin-login-pass">Senha</label>
+                    <input type="password" id="admin-login-pass" placeholder="••••••••" autocomplete="current-password" required>
+                </div>
+                <p class="login-error" id="admin-login-error"></p>
+                <button type="submit" class="btn-primary login-submit">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Panel (overlay) -->
+    <div class="admin-layout" id="admin-app" style="display:none">
+
+        <!-- Admin Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="logo-dark.svg" alt="Overlens" class="sidebar-logo-img">
+                <p>Painel Admin</p>
+            </div>
+            <nav class="admin-nav">
+                <button class="admin-nav-btn active" data-section="categories">Categorias</button>
+                <button class="admin-nav-btn" data-section="appearance">Aparência</button>
+                <button class="admin-nav-btn" data-section="seeds">Seeds</button>
+            </nav>
+            <div class="admin-sidebar-footer">
+                <a href="#" id="admin-back-link" class="admin-back-link">← Ver Galeria</a>
+                <button class="admin-logout-btn" id="admin-logout-btn">Sair</button>
+            </div>
+        </aside>
+
+        <!-- Admin Content -->
+        <main class="admin-content">
+
+            <!-- Categorias -->
+            <section class="admin-section active" id="section-categories">
+                <div class="section-header">
+                    <h2 class="section-title">Categorias</h2>
+                </div>
+                <div id="categories-list"></div>
+                <div class="add-category-form">
+                    <input type="text" id="new-category-input" placeholder="Nome da nova categoria...">
+                    <button class="btn-primary" id="add-category-btn">+ Categoria</button>
+                </div>
+            </section>
+
+            <!-- Aparência -->
+            <section class="admin-section" id="section-appearance">
+                <div class="section-header">
+                    <h2 class="section-title">Aparência</h2>
+                </div>
+                <div class="form-group">
+                    <label for="appearance-title">Título da galeria</label>
+                    <input type="text" id="appearance-title" placeholder="Seed Library">
+                </div>
+                <div class="form-group" style="margin-top:1rem">
+                    <label for="appearance-subtitle">Subtítulo</label>
+                    <input type="text" id="appearance-subtitle" placeholder="Descubra e copie prompts incríveis.">
+                </div>
+                <div class="appearance-preview">
+                    <div class="prev-title" id="preview-title">Seed Library</div>
+                    <div class="prev-subtitle" id="preview-subtitle">Descubra e copie prompts incríveis.</div>
+                </div>
+                <button class="btn-primary" id="save-appearance-btn">Salvar</button>
+            </section>
+
+            <!-- Seeds -->
+            <section class="admin-section" id="section-seeds">
+                <div class="section-header">
+                    <h2 class="section-title">Seeds Customizadas</h2>
+                    <div class="section-header-actions">
+                        <button class="btn-secondary" id="import-seeds-btn">↑ Importar</button>
+                        <button class="btn-secondary" id="export-seeds-btn">↓ Exportar</button>
+                        <button class="btn-secondary" id="restore-backup-btn">↺ Restaurar</button>
+                        <button class="btn-primary" id="open-admin-add-modal">+ Adicionar Seed</button>
+                    </div>
+                </div>
+                <div class="seeds-search-bar">
+                    <input type="text" id="seeds-search" placeholder="Buscar por prompt...">
+                </div>
+                <div id="admin-seeds-grid" class="admin-gallery"></div>
+                <input type="file" id="import-file-input" accept="image/*" multiple style="display:none">
+                <input type="file" id="restore-file-input" accept=".json" style="display:none">
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Modal: Adicionar Seed -->
+    <div id="admin-add-modal" class="modal" aria-hidden="true">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2>Adicionar Seed</h2>
+                <button class="modal-close" id="close-admin-add-modal">✕</button>
+            </div>
+            <form id="admin-add-seed-form" class="modal-form">
+                <div class="form-group">
+                    <label for="admin-form-category">Categoria</label>
+                    <select id="admin-form-category" required>
+                        <option value="" disabled selected>Selecione...</option>
+                    </select>
+                </div>
+                <div class="form-group" id="admin-form-tag-group" style="display:none">
+                    <label for="admin-form-tag">Tag (opcional)</label>
+                    <select id="admin-form-tag">
+                        <option value="">Sem tag</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="admin-form-image">Imagem</label>
+                    <input type="file" id="admin-form-image" accept="image/*" required>
+                    <div class="img-preview" id="admin-img-preview"></div>
+                </div>
+                <div class="form-group">
+                    <label for="admin-form-seed">Prompt / Seed</label>
+                    <textarea id="admin-form-seed" rows="3" placeholder="--v 6.1 --ar 2:3 --stylize 500 --seed 12345678" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="cancel-admin-add-modal">Cancelar</button>
+                    <button type="submit" class="btn-primary">Adicionar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Editar Seed -->
+    <div id="admin-edit-modal" class="modal" aria-hidden="true">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2>Editar Seed</h2>
+                <button class="modal-close" id="close-admin-edit-modal">✕</button>
+            </div>
+            <form id="admin-edit-seed-form" class="modal-form">
+                <input type="hidden" id="edit-form-id">
+                <div class="form-group">
+                    <label for="edit-form-category">Categoria</label>
+                    <select id="edit-form-category" required>
+                        <option value="" disabled selected>Selecione...</option>
+                    </select>
+                </div>
+                <div class="form-group" id="edit-form-tag-group" style="display:none">
+                    <label for="edit-form-tag">Tag (opcional)</label>
+                    <select id="edit-form-tag">
+                        <option value="">Sem tag</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="edit-form-seed">Prompt / Seed</label>
+                    <textarea id="edit-form-seed" rows="3" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="cancel-admin-edit-modal">Cancelar</button>
+                    <button type="submit" class="btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Importar Imagens -->
+    <div id="admin-import-modal" class="modal" aria-hidden="true">
+        <div class="modal-box modal-box--import">
+            <div class="modal-header">
+                <h2>Importar Imagens</h2>
+                <button class="modal-close" id="close-import-modal">✕</button>
+            </div>
+            <div id="import-images-list" class="import-images-list"></div>
+            <div class="form-actions" style="margin-top:1.5rem">
+                <button type="button" class="btn-secondary" id="cancel-import-modal">Cancelar</button>
+                <button type="button" class="btn-primary" id="save-import-btn">Salvar tudo</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Preview de Seed -->
+    <div id="admin-preview-modal" class="modal" aria-hidden="true">
+        <div class="modal-box modal-box--preview">
+            <div class="modal-header">
+                <h2 id="preview-modal-title"></h2>
+                <button class="modal-close" id="close-admin-preview-modal">✕</button>
+            </div>
+            <img id="preview-modal-img" src="" alt="" class="preview-modal-img">
+            <div class="preview-modal-meta" id="preview-modal-meta"></div>
+            <div class="preview-modal-prompt" id="preview-modal-prompt"></div>
+            <button class="btn-primary" id="preview-modal-copy">Copiar Prompt</button>
+        </div>
+    </div>
+
+    <!-- Admin Toast -->
+    <div id="admin-toast" class="toast">
+        <span class="toast-icon">✓</span>
+        <span class="toast-message">Salvo!</span>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase-config.js"></script>
     <script src="main.js"></script>
+    <script src="admin.js"></script>
 </body>
 </html>

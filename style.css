@@ -948,7 +948,6 @@ body.sidebar-collapsed .sidebar-toggle {
     transition: color 0.2s, background 0.2s;
     padding: 0;
     opacity: 0.5;
-    text-decoration: none;
 }
 .admin-sidebar-btn:hover {
     color: var(--color-text);
