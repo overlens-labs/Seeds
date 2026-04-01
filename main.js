@@ -1,3 +1,11 @@
+// ─── Unregister old Service Worker ────────────────────────
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(regs => {
+        regs.forEach(r => r.unregister());
+    });
+    caches.keys().then(names => names.forEach(n => caches.delete(n)));
+}
+
 // ─── Local-only Keys (favorites & seen stay in browser) ───
 const SL_KEYS = {
     FAVS:  'sl_favorites',

@@ -928,29 +928,32 @@ body.sidebar-collapsed .sidebar-toggle {
 
 .card:hover .delete-btn { opacity: 1; }
 
-/* ─── Admin FAB ──────────────────────────────────────────── */
-#admin-fab {
-    position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    width: 2.75rem;
-    height: 2.75rem;
-    border-radius: var(--radius-max);
-    background: oklch(0.14 0 0);
-    border: 1px solid oklch(1 0 0 / 20%);
-    color: oklch(0.65 0 0);
-    cursor: pointer;
-    z-index: 1500;
+/* ─── Admin Button in Sidebar ────────────────────────────── */
+.sidebar-admin-access {
+    margin-top: auto;
+    padding: 1rem 0 0.5rem;
+}
+
+.admin-sidebar-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: color 0.2s, background 0.2s, border-color 0.2s;
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--radius-max);
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: color 0.2s, background 0.2s;
     padding: 0;
-    box-shadow: 0 2px 12px oklch(0 0 0 / 60%);
+    opacity: 0.5;
 }
-#admin-fab.is-logged-in { color: var(--color-text); }
-#admin-fab.is-open      { color: var(--color-text); background: oklch(0.2 0 0); border-color: oklch(1 0 0 / 35%); }
-#admin-fab:hover        { color: var(--color-text); background: oklch(0.2 0 0); border-color: oklch(1 0 0 / 35%); }
+.admin-sidebar-btn:hover {
+    color: var(--color-text);
+    background: var(--color-muted-bg);
+    opacity: 1;
+}
 
 /* ─── Admin Panel — full-screen overlay ──────────────────── */
 #admin-app {
