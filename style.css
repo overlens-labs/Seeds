@@ -933,23 +933,24 @@ body.sidebar-collapsed .sidebar-toggle {
     position: fixed;
     bottom: 1.5rem;
     right: 1.5rem;
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2.75rem;
+    height: 2.75rem;
     border-radius: var(--radius-max);
-    background: oklch(0.1 0 0);
-    border: 1px solid var(--color-border);
-    color: var(--color-text-muted);
+    background: oklch(0.14 0 0);
+    border: 1px solid oklch(1 0 0 / 20%);
+    color: oklch(0.65 0 0);
     cursor: pointer;
-    z-index: 190;
+    z-index: 1500;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: color 0.2s, background 0.2s;
+    transition: color 0.2s, background 0.2s, border-color 0.2s;
     padding: 0;
+    box-shadow: 0 2px 12px oklch(0 0 0 / 60%);
 }
-#admin-fab.is-logged-in { color: var(--color-text-muted); }
-#admin-fab.is-open      { color: var(--color-text); background: oklch(0.18 0 0); }
-#admin-fab:hover        { color: var(--color-text); background: oklch(0.15 0 0); }
+#admin-fab.is-logged-in { color: var(--color-text); }
+#admin-fab.is-open      { color: var(--color-text); background: oklch(0.2 0 0); border-color: oklch(1 0 0 / 35%); }
+#admin-fab:hover        { color: var(--color-text); background: oklch(0.2 0 0); border-color: oklch(1 0 0 / 35%); }
 
 /* ─── Admin Panel — full-screen overlay ──────────────────── */
 #admin-app {
