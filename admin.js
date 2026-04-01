@@ -1,3 +1,9 @@
+// ─── Admin Storage Client (service role — admin only) ────────
+const SUPABASE_SERVICE_KEY = 'sb_secret_JjvPrwWzeVg1SnM6kpyTDQ_LL3GPnZU';
+const sbAdmin = window.supabase.createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY, {
+    auth: { persistSession: false, autoRefreshToken: false },
+});
+
 // ─── Defaults ──────────────────────────────────────────────
 const DEFAULT_CATEGORIES = [
     { slug: 'ilustracao',      label: 'Ilustração', sort_order: 0 },
@@ -29,7 +35,7 @@ async function saveCategories(cats) {
     // Upsert all categories with sort_order
     for (let i = 0; i < cats.length; i++) {
         const cat = cats[i];
-        await sb.from('categories').upsert({
+        await sbAdmin.from('categories').upsert({
             slug: cat.slug,
             label: cat.label,
             sort_order: i,
@@ -38,7 +44,7 @@ async function saveCategories(cats) {
 }
 
 async function getAllTags() {
-    const { data, error } = await sb.from('tags').select('*');
+    const { data, error } = await sbAdmin.from('tags').select('*');
     if (error || !data) return {};
     const map = {};
     data.forEach(t => {
@@ -59,27 +65,27 @@ async function getLogo() {
 }
 
 async function saveLogo(logo) {
-    await sb.from('settings').upsert({ key: 'logo', value: logo }, { onConflict: 'key' });
+    await sbAdmin.from('settings').upsert({ key: 'logo', value: logo }, { onConflict: 'key' });
 }
 
 async function getCustomSeeds() {
-    const { data, error } = await sb.from('seeds').select('*').order('created_at', { ascending: false });
+    const { data, error } = await sbAdmin.from('seeds').select('*').order('created_at', { ascending: false });
     return (!error && data) ? data : [];
 }
 
 async function saveNewSeed(seed) {
-    const { data, error } = await sb.from('seeds').insert(seed).select().single();
+    const { data, error } = await sbAdmin.from('seeds').insert(seed).select().single();
     if (error) throw error;
     return data;
 }
 
 async function updateSeed(id, updates) {
-    const { error } = await sb.from('seeds').update(updates).eq('id', id);
+    const { error } = await sbAdmin.from('seeds').update(updates).eq('id', id);
     if (error) throw error;
 }
 
 async function deleteSeed(id) {
-    const { error } = await sb.from('seeds').delete().eq('id', id);
+    const { error } = await sbAdmin.from('seeds').delete().eq('id', id);
     if (error) throw error;
 }
 
@@ -310,7 +316,7 @@ async function addCategory(label) {
         showToast('Categoria já existe!');
         return;
     }
-    const { error } = await sb.from('categories').insert({
+    const { error } = await sbAdmin.from('categories').insert({
         slug, label, sort_order: cats.length,
     });
     if (error) { showToast('Erro ao criar categoria.'); return; }
@@ -319,7 +325,7 @@ async function addCategory(label) {
 }
 
 async function deleteCategory(slug) {
-    await sb.from('categories').delete().eq('slug', slug);
+    await sbAdmin.from('categories').delete().eq('slug', slug);
     // Tags are deleted via CASCADE
     await renderCategories();
     showToast('Categoria deletada!');
@@ -329,7 +335,7 @@ async function renameCategory(index, newLabel) {
     const cats = await getCategories();
     const cat = cats[index];
     if (!cat) return;
-    await sb.from('categories').update({ label: newLabel }).eq('slug', cat.slug);
+    await sbAdmin.from('categories').update({ label: newLabel }).eq('slug', cat.slug);
     await renderCategories();
     showToast('Categoria renomeada!');
 }
@@ -345,7 +351,7 @@ async function moveCategory(fromIndex, toIndex) {
 }
 
 async function addTag(categorySlug, label) {
-    const { error } = await sb.from('tags').insert({
+    const { error } = await sbAdmin.from('tags').insert({
         category_slug: categorySlug,
         label: label,
     });
@@ -365,7 +371,7 @@ async function addTag(categorySlug, label) {
 }
 
 async function deleteTag(categorySlug, label) {
-    await sb.from('tags').delete()
+    await sbAdmin.from('tags').delete()
         .eq('category_slug', categorySlug)
         .eq('label', label);
     await renderCategories();
@@ -531,7 +537,7 @@ async function deleteCustomSeed(id) {
     const seed = seeds.find(s => s.id === id);
     if (seed && seed.url && seed.url.includes('sb.co/storage')) {
         const path = seed.url.split('/seed-images/')[1];
-        if (path) await sb.storage.from('seed-images').remove([path]);
+        if (path) await sbAdmin.storage.from('seed-images').remove([path]);
     }
     await deleteSeed(id);
     await renderCustomSeeds(document.getElementById('seeds-search').value);
@@ -694,7 +700,7 @@ document.getElementById('restore-file-input').addEventListener('change', async (
     if (backup.tags && typeof backup.tags === 'object') {
         for (const [catSlug, tagList] of Object.entries(backup.tags)) {
             for (const label of tagList) {
-                await sb.from('tags').upsert(
+                await sbAdmin.from('tags').upsert(
                     { category_slug: catSlug, label },
                     { onConflict: 'category_slug,label' }
                 );
@@ -710,7 +716,7 @@ document.getElementById('restore-file-input').addEventListener('change', async (
     // Restore seeds
     if (Array.isArray(backup.seeds)) {
         for (const seed of backup.seeds) {
-            await sb.from('seeds').upsert({
+            await sbAdmin.from('seeds').upsert({
                 seed: seed.seed,
                 url: seed.url,
                 title: seed.title || '',
@@ -916,7 +922,7 @@ async function uploadImageToStorage(file) {
     const filename = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
     const path     = `seeds/${filename}`;
 
-    const { error } = await sb.storage
+    const { error } = await sbAdmin.storage
         .from('seed-images')
         .upload(path, file, {
             cacheControl: '31536000',
@@ -928,7 +934,7 @@ async function uploadImageToStorage(file) {
         return null;
     }
 
-    const { data: { publicUrl } } = sb.storage
+    const { data: { publicUrl } } = sbAdmin.storage
         .from('seed-images')
         .getPublicUrl(path);
 
