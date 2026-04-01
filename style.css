@@ -928,11 +928,44 @@ body.sidebar-collapsed .sidebar-toggle {
 
 .card:hover .delete-btn { opacity: 1; }
 
+/* ─── Admin FAB ──────────────────────────────────────────── */
+#admin-fab {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: var(--radius-max);
+    background: oklch(0.1 0 0);
+    border: 1px solid var(--color-border);
+    color: oklch(1 0 0 / 18%);
+    cursor: pointer;
+    z-index: 190;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s, background 0.2s;
+    padding: 0;
+}
+#admin-fab.is-logged-in { color: var(--color-text-muted); }
+#admin-fab.is-open      { color: var(--color-text); background: oklch(0.18 0 0); }
+#admin-fab:hover        { color: var(--color-text); background: oklch(0.15 0 0); }
+
+/* ─── Admin Panel — full-screen overlay ──────────────────── */
+#admin-app {
+    position: fixed !important;
+    inset: 0;
+    z-index: 200;
+    background: var(--color-bg);
+}
+
 /* ─── Login Overlay ──────────────────────────────────────── */
 #login-overlay {
     position: fixed;
     inset: 0;
-    background: var(--color-bg);
+    background: oklch(0 0 0 / 80%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     z-index: 2100;
     display: flex;
     align-items: center;

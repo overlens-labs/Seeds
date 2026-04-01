@@ -90,14 +90,52 @@ async function deleteSeed(id) {
 }
 
 // ─── Auth (Supabase Auth) ─────────────────────────────────
+let adminInitialized = false;
+
+const adminFab     = document.getElementById('admin-fab');
+const adminApp     = document.getElementById('admin-app');
+const loginOverlay = document.getElementById('login-overlay');
+
+function openAdminPanel() {
+    adminApp.style.display = 'flex';
+    adminFab.classList.add('is-open');
+}
+
+function closeAdminPanel() {
+    adminApp.style.display = 'none';
+    adminFab.classList.remove('is-open');
+}
+
 async function checkAuth() {
     const { data: { session } } = await sb.auth.getSession();
     if (session) {
-        document.getElementById('login-overlay').classList.add('hidden');
-        document.getElementById('admin-app').style.display = 'flex';
-        await initAdmin();
+        adminFab.classList.add('is-logged-in');
     }
 }
+
+// FAB click: show login if not logged in, toggle panel if logged in
+adminFab.addEventListener('click', async () => {
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) {
+        loginOverlay.classList.remove('hidden');
+        return;
+    }
+    if (adminApp.style.display === 'flex') {
+        closeAdminPanel();
+    } else {
+        openAdminPanel();
+        if (!adminInitialized) {
+            await initAdmin();
+            adminInitialized = true;
+        }
+    }
+});
+
+// Close panel when clicking "← Ver Galeria"
+document.getElementById('admin-back-link').addEventListener('click', (e) => {
+    e.preventDefault();
+    closeAdminPanel();
+});
 
 document.getElementById('admin-login-form').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -120,17 +158,22 @@ document.getElementById('admin-login-form').addEventListener('submit', async (e)
     if (error) {
         errEl.textContent = 'Email ou senha incorretos.';
     } else {
-        document.getElementById('login-overlay').classList.add('hidden');
-        document.getElementById('admin-app').style.display = 'flex';
+        loginOverlay.classList.add('hidden');
         errEl.textContent = '';
-        await initAdmin();
+        adminFab.classList.add('is-logged-in');
+        openAdminPanel();
+        if (!adminInitialized) {
+            await initAdmin();
+            adminInitialized = true;
+        }
     }
 });
 
 document.getElementById('admin-logout-btn').addEventListener('click', async () => {
     await sb.auth.signOut();
-    document.getElementById('admin-app').style.display = 'none';
-    document.getElementById('login-overlay').classList.remove('hidden');
+    closeAdminPanel();
+    adminFab.classList.remove('is-logged-in');
+    adminInitialized = false;
     document.getElementById('admin-login-form').reset();
     document.getElementById('admin-login-error').textContent = '';
 });
