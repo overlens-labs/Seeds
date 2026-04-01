@@ -123,7 +123,7 @@ body.sidebar-collapsed .gallery-container {
 }
 
 body.sidebar-collapsed .sidebar-toggle {
-    left: 16px;
+    left: 24px;
     top: 50%;
     transform: translateY(-50%);
     width: 36px;
