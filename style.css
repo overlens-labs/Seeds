@@ -610,11 +610,8 @@ body.sidebar-collapsed .sidebar-toggle {
     border-radius: var(--border-radius-sm);
     padding: 1rem 1.1rem;
     word-break: break-word;
-    max-height: 24.75em; /* ~15 lines at 1.65 line-height */
+    max-height: 24.75em; /* ~15 lines */
     overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 15;
-    -webkit-box-orient: vertical;
 }
 
 .lightbox-actions {

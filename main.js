@@ -364,7 +364,10 @@ async function showLightboxItem(item) {
     lightboxImg.src              = item.url;
     lightboxImg.alt              = item.title || '';
     lightboxCategory.textContent = await getCategoryLabel(item.category);
-    lightboxPrompt.textContent   = item.seed;
+    const MAX_PROMPT_LENGTH = 350;
+    lightboxPrompt.textContent   = item.seed.length > MAX_PROMPT_LENGTH
+        ? item.seed.slice(0, MAX_PROMPT_LENGTH).trimEnd() + '...'
+        : item.seed;
     lightboxDownloadBtn.dataset.url      = item.url;
     lightboxDownloadBtn.dataset.filename = item.title || 'seed';
     currentSeed   = item.seed;
