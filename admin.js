@@ -1,3 +1,4 @@
+(function() {
 // ─── Admin Storage Client (service role — admin only) ────────
 const SUPABASE_SERVICE_KEY = 'sb_secret_JjvPrwWzeVg1SnM6kpyTDQ_LL3GPnZU';
 const sbAdmin = window.supabase.createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY, {
@@ -1066,3 +1067,4 @@ function showToast(msg = 'Salvo!') {
 
 // ─── Init ─────────────────────────────────────────────────
 checkAuth();
+})();
