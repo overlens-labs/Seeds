@@ -208,18 +208,19 @@ body.sidebar-collapsed .sidebar-toggle {
 
 /* Badge de novidades */
 .filter-new-badge {
-    font-size: 0.6rem;
-    color: var(--color-bg);
-    background: var(--color-accent);
+    font-size: 0.55rem;
+    color: var(--color-text-muted);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-max);
-    padding: 0.05em 0.45em;
+    padding: 0.1em 0.5em;
     font-family: var(--font-body);
-    font-weight: 600;
+    font-weight: 500;
     text-transform: none;
     letter-spacing: 0;
     margin-left: auto;
     flex-shrink: 0;
-    line-height: 1.5;
+    line-height: 1.4;
 }
 
 .filter-btn:hover {
