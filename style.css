@@ -592,6 +592,11 @@ body.sidebar-collapsed .sidebar-toggle {
     border-radius: var(--border-radius-sm);
     padding: 0.85rem 1rem;
     word-break: break-word;
+    max-height: 7.2em; /* ~4.5 lines at 1.6 line-height */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
 }
 
 .lightbox-actions {
@@ -1826,6 +1831,11 @@ body.sidebar-collapsed .sidebar-toggle {
     line-height: 1.5;
     word-break: break-word;
     margin-bottom: 1rem;
+    max-height: 6em; /* ~4 lines at 1.5 line-height */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
 }
 
 /* ─── Empty State ────────────────────────────────────────── */
