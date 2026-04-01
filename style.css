@@ -524,7 +524,7 @@ body.sidebar-collapsed .sidebar-toggle {
 }
 
 .lightbox-nav--prev { left: 1.25rem; }
-.lightbox-nav--next { right: calc(340px + 1.25rem); }
+.lightbox-nav--next { right: calc(360px + 2.5rem); }
 
 .lightbox-nav:hover {
     background: oklch(1 0 0 / 18%);
