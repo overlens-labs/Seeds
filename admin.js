@@ -92,50 +92,33 @@ async function deleteSeed(id) {
 // ─── Auth (Supabase Auth) ─────────────────────────────────
 let adminInitialized = false;
 
-const adminFab     = document.getElementById('admin-fab');
 const adminApp     = document.getElementById('admin-app');
 const loginOverlay = document.getElementById('login-overlay');
 
 function openAdminPanel() {
     adminApp.style.display = 'flex';
-    adminFab.classList.add('is-open');
+    loginOverlay.style.display = 'none';
 }
 
 function closeAdminPanel() {
     adminApp.style.display = 'none';
-    adminFab.classList.remove('is-open');
 }
 
+// On page load: check if already logged in
 async function checkAuth() {
     const { data: { session } } = await sb.auth.getSession();
     if (session) {
-        adminFab.classList.add('is-logged-in');
-    }
-}
-
-// FAB click: show login if not logged in, toggle panel if logged in
-adminFab.addEventListener('click', async () => {
-    const { data: { session } } = await sb.auth.getSession();
-    if (!session) {
-        loginOverlay.classList.remove('hidden');
-        return;
-    }
-    if (adminApp.style.display === 'flex') {
-        closeAdminPanel();
-    } else {
         openAdminPanel();
         if (!adminInitialized) {
             await initAdmin();
             adminInitialized = true;
         }
+    } else {
+        loginOverlay.style.display = '';
     }
-});
+}
 
-// Close panel when clicking "← Ver Galeria"
-document.getElementById('admin-back-link').addEventListener('click', (e) => {
-    e.preventDefault();
-    closeAdminPanel();
-});
+checkAuth();
 
 document.getElementById('admin-login-form').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -158,9 +141,7 @@ document.getElementById('admin-login-form').addEventListener('submit', async (e)
     if (error) {
         errEl.textContent = 'Email ou senha incorretos.';
     } else {
-        loginOverlay.classList.add('hidden');
         errEl.textContent = '';
-        adminFab.classList.add('is-logged-in');
         openAdminPanel();
         if (!adminInitialized) {
             await initAdmin();
@@ -171,11 +152,9 @@ document.getElementById('admin-login-form').addEventListener('submit', async (e)
 
 document.getElementById('admin-logout-btn').addEventListener('click', async () => {
     await sb.auth.signOut();
-    closeAdminPanel();
-    adminFab.classList.remove('is-logged-in');
     adminInitialized = false;
-    document.getElementById('admin-login-form').reset();
-    document.getElementById('admin-login-error').textContent = '';
+    // Redirect back to gallery after logout
+    window.location.href = 'index.html';
 });
 
 // ─── Init Admin ───────────────────────────────────────────
