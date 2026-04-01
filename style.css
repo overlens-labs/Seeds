@@ -564,13 +564,13 @@ body.sidebar-collapsed .sidebar-toggle {
 
 /* ─── Lightbox info panel (direita) ─────────────────────── */
 .lightbox-info {
-    width: 340px;
+    width: 360px;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 1.5rem;
-    padding: 3rem 2.5rem;
+    gap: 1.1rem;
+    padding: 2.5rem 2rem;
     background: rgba(8, 8, 12, 0.6);
     backdrop-filter: blur(40px) saturate(1.6);
     -webkit-backdrop-filter: blur(40px) saturate(1.6);
@@ -602,18 +602,18 @@ body.sidebar-collapsed .sidebar-toggle {
 
 .lightbox-prompt {
     font-family: var(--font-body);
-    font-size: 0.9rem;
-    color: #888;
-    line-height: 1.6;
+    font-size: 0.85rem;
+    color: #999;
+    line-height: 1.65;
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: var(--border-radius-sm);
-    padding: 0.85rem 1rem;
+    padding: 1rem 1.1rem;
     word-break: break-word;
-    max-height: 7.2em; /* ~4.5 lines at 1.6 line-height */
+    max-height: 13.2em; /* ~8 lines at 1.65 line-height */
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 8;
     -webkit-box-orient: vertical;
 }
 
@@ -1842,17 +1842,17 @@ body.sidebar-collapsed .sidebar-toggle {
     background: rgba(255,255,255,0.04);
     border: 1px solid var(--color-border-solid);
     border-radius: var(--border-radius-sm);
-    padding: 0.75rem 1rem;
-    font-size: 0.8rem;
+    padding: 1rem 1.1rem;
+    font-size: 0.82rem;
     font-family: var(--font-body);
     color: var(--color-text);
-    line-height: 1.5;
+    line-height: 1.55;
     word-break: break-word;
     margin-bottom: 1rem;
-    max-height: 6em; /* ~4 lines at 1.5 line-height */
+    max-height: 12.4em; /* ~8 lines at 1.55 line-height */
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 8;
     -webkit-box-orient: vertical;
 }
 
