@@ -611,9 +611,7 @@ async function init() {
     await renderGallery('all');
     await checkHashNavigation();
 
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js').catch(() => {});
-    }
+    // Service Worker disabled — Supabase data is always fresh
 }
 
 init();
