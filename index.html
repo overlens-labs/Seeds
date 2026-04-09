@@ -17,7 +17,7 @@
     <meta name="theme-color" content="#000000">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script>
@@ -33,15 +33,16 @@
     </script>
     <div id="password-gate">
         <div class="gate-card">
-            <img src="logo-dark.svg" alt="Seed Library" class="gate-logo">
-            <p class="gate-subtitle">Acesso restrito</p>
-            <div class="gate-field-wrap">
-                <input type="password" id="gate-input" placeholder="Senha" autocomplete="current-password">
-                <button id="gate-submit" aria-label="Entrar">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </button>
+            <div class="gate-brand">
+                <img src="logo-light.svg" alt="Overlens" class="gate-logo">
+                <p class="gate-subtitle">Acesso restrito</p>
             </div>
-            <p id="gate-error">Senha incorreta. Tente novamente.</p>
+            <div class="gate-form">
+                <label class="gate-label" for="gate-input">SENHA</label>
+                <input type="password" id="gate-input" autocomplete="current-password">
+                <p class="gate-error" id="gate-error">Senha incorreta</p>
+                <button id="gate-submit" class="gate-btn">ENTRAR</button>
+            </div>
         </div>
     </div>
 

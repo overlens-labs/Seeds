@@ -27,7 +27,8 @@
     --transition: 0.3s ease;
 
     /* Overlens typography tokens */
-    --font-title: 'Inter', sans-serif;
+    --font-heading: 'Outfit', sans-serif;
+    --font-title: 'Outfit', sans-serif;
     --font-body:  'Inter', sans-serif;
 }
 
@@ -1965,88 +1966,135 @@ body.sidebar-collapsed .sidebar-toggle {
     position: fixed;
     inset: 0;
     z-index: 9999;
-    background: var(--color-bg);
     align-items: center;
     justify-content: center;
+    padding: 1.5rem;
+    background: oklch(0 0 0 / 75%);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    overflow: hidden;
 }
 
 html.gate-active #password-gate {
     display: flex;
 }
 
+/* Card — pure black bg */
 .gate-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.25rem;
+    position: relative;
+    z-index: 1;
+    background: oklch(0 0 0);
+    border-radius: 1.5rem;
+    padding: 3rem 2.5rem 2.5rem;
     width: 100%;
-    max-width: 320px;
-    padding: 2.5rem 2rem;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
+    max-width: 420px;
+    box-shadow: 0 0 80px oklch(0 0 0 / 50%);
+}
+
+/* Brand */
+.gate-brand {
+    text-align: center;
+    margin-bottom: 2.5rem;
 }
 
 .gate-logo {
-    height: 28px;
-    width: auto;
+    display: block;
+    width: 200px;
+    height: auto;
+    margin: 0 auto 0.5rem;
 }
 
 .gate-subtitle {
-    font-size: 0.8125rem;
-    color: var(--color-text-muted);
-    margin: 0;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: oklch(0.475 0 0);  /* DS --neutral-600 */
+    margin-top: 0.4rem;
+    letter-spacing: 0.02em;
 }
 
-.gate-field-wrap {
+/* Form */
+.gate-form {
     display: flex;
+    flex-direction: column;
+}
+
+/* DS label: uppercase, small, muted-foreground (.719) */
+.gate-label {
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: oklch(0.719 0 0);  /* DS --neutral-500 / --muted-foreground */
+    margin-bottom: 0.5rem;
+}
+
+/* DS Input: bg-accent/50 → .309 neutral at 50%, border-2 transparent, focus: border-input (white/15%), rounded-sm (.75rem), h-12 */
+#gate-input {
     width: 100%;
-    gap: 0.5rem;
-}
-
-.gate-field-wrap input {
-    flex: 1;
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xs);
-    color: var(--color-text);
-    font-size: 0.875rem;
-    font-family: inherit;
-    padding: 0.625rem 0.875rem;
+    height: 3rem;           /* DS h-12 */
+    padding: 0 1rem;
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background: oklch(0.309 0 0 / 50%);  /* DS bg-accent/50 */
+    color: oklch(0.961 0 0);
+    font-family: var(--font-body);
+    font-size: 1rem;
     outline: none;
-    transition: border-color 0.15s;
+    transition: border-color 0.2s, background-color 0.2s;
 }
 
-.gate-field-wrap input:focus {
-    border-color: oklch(1 0 0 / 30%);
+#gate-input:focus {
+    border-color: oklch(1 0 0 / 15%);  /* DS --input: white/15% */
+    background: transparent;
 }
 
-.gate-field-wrap input::placeholder {
-    color: var(--color-text-muted);
+#gate-input::placeholder {
+    color: oklch(0.475 0 0);  /* DS --muted-foreground */
 }
 
-#gate-submit {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--color-accent);
-    color: var(--color-bg);
-    border: none;
-    border-radius: var(--radius-xs);
-    width: 2.5rem;
-    height: 2.5rem;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: opacity 0.15s;
-}
-
-#gate-submit:hover { opacity: 0.85; }
-
-#gate-error {
-    display: none;
+.gate-error {
+    font-family: var(--font-body);
     font-size: 0.75rem;
-    color: oklch(0.7 0.2 25);
-    margin: 0;
+    color: oklch(0.586 0.154 24.476);  /* DS --destructive */
+    min-height: 1.2rem;
+    margin: 0.5rem 0 0;
+    display: none;
+    text-align: center;
+}
+
+/* DS Button primary: bg-primary (white), text-primary-foreground (.173 dark), rounded pill, h-12 */
+.gate-btn {
+    width: 100%;
+    margin-top: 1.25rem;
+    height: 3rem;           /* DS h-12 */
+    padding: 0 1.5rem;
+    border-radius: var(--radius-max);
+    border: none;
+    background: oklch(1 0 0);           /* DS --primary: white */
+    color: oklch(0.173 0 0);            /* DS --primary-foreground */
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.gate-btn:hover {
+    opacity: 0.90;  /* DS hover:bg-primary/90 */
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .gate-card {
+        padding: 2.5rem 1.5rem 2rem;
+        border-radius: 1rem;
+    }
+    .gate-logo {
+        width: 140px;
+    }
 }
 
 /* ─── Admin Mobile ───────────────────────────────────────── */
